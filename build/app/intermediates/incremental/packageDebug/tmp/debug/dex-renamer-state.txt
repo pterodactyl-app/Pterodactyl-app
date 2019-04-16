@@ -1,0 +1,4 @@
+#Mon Apr 15 11:39:31 ADT 2019
+base.0=E\:\\Pterodactly\\app v1\\app\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
