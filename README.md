@@ -1,6 +1,6 @@
-# app
+# Pterodactyl Panel APP for Mobile devices
 
-A new Flutter project.
+A new Pterodactyl project.
 
 ## Getting Started
 
