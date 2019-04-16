@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage> {
-  final String url = "https://mijn.xenocontrol.nl/api/application/servers";
+  final String url = "https://YOUR_URL_PANEL/api/application/servers";
   List data;
 
   @override
@@ -29,7 +29,7 @@ class HomePageState extends State<HomePage> {
       //Encode the url
       Uri.encodeFull(url),
       //only accept json response
-      headers: {"Accept": "Application/vnd.pterodactyl.v1+json","Authorization": "Bearer HMP9cfikXllaSBtxTAIAN24VbUhSJG8CBqtq87Lp5mFUSw3v"}
+      headers: {"Accept": "Application/vnd.pterodactyl.v1+json","Authorization": "Bearer ADMIN/USER_PANEL_API"}
     );
 
     print(response.body);
