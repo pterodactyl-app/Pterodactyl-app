@@ -1,72 +1,73 @@
-import 'dart:async';
-import 'dart:convert' show jsonDecode;
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
-void main() => runApp (new MaterialApp(
-  home: new HomePage(),
-));
-
-class HomePage extends StatefulWidget{
-  @override
-  HomePageState createState()=> new HomePageState();
-
+void main() {
+  runApp(MaterialApp(
+    home: HomePage(),
+  ));
 }
 
-class HomePageState extends State<HomePage> {
-  final String url = "https://YOUR_URL_PANEL/api/application/servers";
-  List data;
-
+class HomePage extends StatefulWidget {
   @override
-  void initState(){
-    super.initState();
-    this.getJsonData();
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  Map data;
+  List userData;
+
+  Future getData() async {
+    http.Response response = await http.get("https://YOUR_PANEL_URL/api/application/servers",
+    headers: {"Accept": "Application/vnd.pterodactyl.v1+json", "Authorization": "Bearer Admin/CLIENT_API_CODE"},
+    );
+    data = json.decode(response.body);
+    setState(() {
+      userData = data["data"];
+    });
   }
 
-  Future<String> getJsonData() async{
-    var response = await http.get(
-      //Encode the url
-      Uri.encodeFull(url),
-      //only accept json response
-      headers: {"Accept": "Application/vnd.pterodactyl.v1+json","Authorization": "Bearer ADMIN/USER_PANEL_API"}
-    );
-
-    print(response.body);
-
-    setState(() {
-     var convertDataToJson = jsonDecode(response.body);
-     data = convertDataToJson['data'];
-    });
-
-    return "Success";
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Ptero Panel"),  
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Pterodactly Panel"),
+        backgroundColor: Colors.lightBlue,
       ),
-      body: new ListView.builder(
-        itemCount: data == null ? 0 : data.length,
-        itemBuilder: (BuildContext context, int index){
-          return new Container(
-            child: new Center(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  new Card(
-                    child: new Container(
-                      child: new Text(data[index]['name']),
-                      padding: const EdgeInsets.all(20.0)),
-                  )
-                ],
+      body: ListView.builder(
+          itemCount: userData == null ? 0 : userData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: <Widget>[
+                   // CircleAvatar(
+                      //backgroundImage: NetworkImage(userData[index]["avatar"]),
+                    //),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text("${userData[index]["attributes"]["name"]} - ${userData[index]["attributes"]["description"]}",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w700,
+                      ),),
+                    )             
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
       ),
     );
   }
 }
+
