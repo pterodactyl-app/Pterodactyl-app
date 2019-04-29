@@ -10,7 +10,6 @@ import 'servers.dart';
 import 'settings.dart';
 import 'about.dart';
 
-
 class DemoLocalizations {
   DemoLocalizations(this.locale);
 
@@ -23,7 +22,8 @@ class DemoLocalizations {
   Map<String, String> _sentences;
 
   Future<bool> load() async {
-    String data = await rootBundle.loadString('assets/lang/${this.locale.languageCode}.json');
+    String data = await rootBundle
+        .loadString('assets/lang/${this.locale.languageCode}.json');
     Map<String, dynamic> _result = json.decode(data);
 
     this._sentences = new Map();
@@ -39,11 +39,13 @@ class DemoLocalizations {
   }
 }
 
-class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations> {
+class DemoLocalizationsDelegate
+    extends LocalizationsDelegate<DemoLocalizations> {
   const DemoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'fr', 'nl', 'de'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      ['en', 'fr', 'nl', 'de'].contains(locale.languageCode);
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
@@ -63,35 +65,36 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('fr', 'FR'),
-        const Locale('nl', 'NL')
-      ],
-      localizationsDelegates: [
-        const DemoLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
-      ],
-      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
-        for (Locale supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
-            return supportedLocale;
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('fr', 'FR'),
+          const Locale('nl', 'NL')
+        ],
+        localizationsDelegates: [
+          const DemoLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
+        localeResolutionCallback:
+            (Locale locale, Iterable<Locale> supportedLocales) {
+          for (Locale supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode ||
+                supportedLocale.countryCode == locale.countryCode) {
+              return supportedLocale;
+            }
           }
-        }
 
-        return supportedLocales.first;
-      },
-      title: 'PTERODACTYL APP',
-      home: new LoginPage(),
-      routes: <String, WidgetBuilder>{
-        '/login': (BuildContext context) => new LoginPage(),
-        '/home': (BuildContext context) => new MyHomePage(),
-        '/servers': (BuildContext context) => new ServerListPage(),
-        '/about': (BuildContext context) => new AboutPage(),
-        '/settings': (BuildContext context) => new SettingsList(),
-      }
-    );
+          return supportedLocales.first;
+        },
+        title: 'PTERODACTYL APP',
+        home: new LoginPage(),
+        routes: <String, WidgetBuilder>{
+          '/login': (BuildContext context) => new LoginPage(),
+          '/home': (BuildContext context) => new MyHomePage(),
+          '/servers': (BuildContext context) => new ServerListPage(),
+          '/about': (BuildContext context) => new AboutPage(),
+          '/settings': (BuildContext context) => new SettingsList(),
+        });
   }
 }
 
