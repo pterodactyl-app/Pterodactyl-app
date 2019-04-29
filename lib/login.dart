@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _read(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getString('key') ?? "";
+    final value = prefs.getString(key) ?? "";
     return value;
   }
 }
