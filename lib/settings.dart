@@ -10,7 +10,6 @@ class SettingsList extends StatefulWidget {
 }
 
 class SettingsListPageState extends State<SettingsList> {
-
   double _slider = 0.5;
   bool _switch = false;
   int _index = 0;
@@ -19,15 +18,15 @@ class SettingsListPageState extends State<SettingsList> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-      elevation: 0.0,
+        elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: IconButton
-        (
+        leading: IconButton(
           color: Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: Text('Settings', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+        title: Text('Settings',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container
@@ -47,7 +46,7 @@ class SettingsListPageState extends State<SettingsList> {
         // ],
       ),
       body: CupertinoSettings(
-        items: <Widget>[         
+        items: <Widget>[
           CSHeader('Selection'),
           CSSelection(
             ['Day mode', 'Night mode'],
