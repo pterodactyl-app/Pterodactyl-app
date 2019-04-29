@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 import 'main.dart';
 
@@ -84,10 +85,14 @@ class _LoginPageState extends State<LoginPage> {
                     var route = new MaterialPageRoute(
                       builder: (BuildContext context) => new MyHomePage(
                           value: User(
+                              //api: _read("apikey"),
+                              //url: _read("panelurl"))),
                               api: _apiController.text,
                               url: _urlController.text)),
                     );
                     Navigator.of(context).push(route);
+                    _save("apikey", _apiController.text);
+                    _save("panelurl", _apiController.text);
                   },
                 ),
               ],
@@ -96,6 +101,17 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  _save(String key, String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
+  _read(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final value = prefs.getString('key') ?? "";
+    return value;
   }
 }
 
