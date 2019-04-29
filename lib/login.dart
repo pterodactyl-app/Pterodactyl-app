@@ -85,10 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                     var route = new MaterialPageRoute(
                       builder: (BuildContext context) => new MyHomePage(
                           value: User(
-                              //api: _read("apikey"),
-                              //url: _read("panelurl"))),
-                              api: _apiController.text,
-                              url: _urlController.text)),
+                              api: _read("apikey"), url: _read("panelurl"))),
                     );
                     Navigator.of(context).push(route);
                     _save("apikey", _apiController.text);
@@ -104,14 +101,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _save(String key, String value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.setString(key, value);
   }
 
   _read(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    final value = prefs.getString(key) ?? "";
-    return value;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.getString(key) ?? '';
   }
 }
 
