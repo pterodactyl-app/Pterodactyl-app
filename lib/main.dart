@@ -43,7 +43,7 @@ class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations>
   const DemoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'fr', 'tr', 'nl', 'de'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'fr', 'nl', 'de'].contains(locale.languageCode);
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('en', 'US'),
         const Locale('fr', 'FR'),
-        const Locale('tr', 'TR'),
         const Locale('nl', 'NL')
       ],
       localizationsDelegates: [
