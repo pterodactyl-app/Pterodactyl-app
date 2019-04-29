@@ -20,15 +20,15 @@ MyHomePage({Key key, this.value}) : super(key: key);
 class _MyHomePageState extends State<MyHomePage> {
 
   Map data;
-  List userData;
+  int userTotalServers;
 
   Future getData() async {
-    http.Response response = await http.get("https://${widget.value.api}/api/application/servers",
+    http.Response response = await http.get("https://${widget.value.url}/api/application/servers",
     headers: {"Accept": "Application/vnd.pterodactyl.v1+json", "Authorization": "Bearer ${widget.value.api}"},
     );
     data = json.decode(response.body);
     setState(() {
-      userData = data["meta"]["pagination"]["total"];
+      userTotalServers = data["meta"]["pagination"]["total"];
     });
   }  
 
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>
                         [
                           Text(DemoLocalizations.of(context).trans('total_servers'), style: TextStyle(color: Colors.blueAccent)),
-                          Text('$userData', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 34.0))
+                          Text('$userTotalServers', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 34.0))
                     ],
                   ),
                   Material
