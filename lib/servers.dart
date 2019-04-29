@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'main.dart';
 
 class ServerListPage extends StatefulWidget
 {
@@ -53,7 +54,7 @@ class _ServerListPageState extends State<ServerListPage>
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: Text('Server List', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+        title: Text(DemoLocalizations.of(context).trans('server_list'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container
@@ -127,7 +128,7 @@ class _ServerListPageState extends State<ServerListPage>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>
                                 [
-                                  Text('Total Disk:', style: TextStyle()),
+                                  Text(DemoLocalizations.of(context).trans('total_disk'), style: TextStyle()),
 
                                   Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 4.0),
@@ -142,7 +143,7 @@ class _ServerListPageState extends State<ServerListPage>
                                       ),
                                     ),
                                   ),
-                                  Text('Total Ram:', style: TextStyle()),
+                                  Text(DemoLocalizations.of(context).trans('total_ram'), style: TextStyle()),
 
                                   Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 4.0),

@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>
                         [
-                          Text('Total Servers', style: TextStyle(color: Colors.blueAccent)),
+                          Text(DemoLocalizations.of(context).trans('total_servers'), style: TextStyle(color: Colors.blueAccent)),
                           Text('$userData', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 34.0))
                     ],
                   ),
@@ -148,8 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                  Text('Settings', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
-                  Text('Data, API', style: TextStyle(color: Colors.black45)),
+                  Text(DemoLocalizations.of(context).trans('settings'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
+                  Text(DemoLocalizations.of(context).trans('settings_sub'), style: TextStyle(color: Colors.black45)),
                 ]
               ),
             ),
@@ -176,8 +176,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                  Text('Alerts', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
-                  Text('All ', style: TextStyle(color: Colors.black45)),
+                  Text(DemoLocalizations.of(context).trans('alerts'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24.0)),
+                  Text(DemoLocalizations.of(context).trans('alerts_sub'), style: TextStyle(color: Colors.black45)),
                 ]
               ),
             ),
@@ -202,8 +202,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>
                     [
-                      Text('Coming soon', style: TextStyle(color: Colors.redAccent)),
-                      Text('Coming soon', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 34.0))
+                      Text(DemoLocalizations.of(context).trans('comming_soon'), style: TextStyle(color: Colors.redAccent)),
+                      Text(DemoLocalizations.of(context).trans('comming_soon_sub'), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 34.0))
                     ],
                   ),
                   Material

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'main.dart';
 
 class User {
   final String api, url;
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: _apiController,
                 decoration: InputDecoration(
-                  labelText: 'API KEY',
+                  labelText: DemoLocalizations.of(context).trans('api_key_login'),
                 ),
               ),
             ),
@@ -52,14 +53,14 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: _urlController,
                 decoration: InputDecoration(
-                  labelText: 'URL (example panel.pterodactyl.app',
+                  labelText: DemoLocalizations.of(context).trans('url_login'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('CLEAR'),
+                  child: Text(DemoLocalizations.of(context).trans('clear_login'),),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -69,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('NEXT'),
+                  child: Text(DemoLocalizations.of(context).trans('next_login'),),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
