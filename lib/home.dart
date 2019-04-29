@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int userTotalServers;
 
   Future getData() async {
-    http.Response response = await http.get("https://${widget.value.url}/api/application/servers",
+    http.Response response = await http.get("https://${widget.value.url}/api/client",
     headers: {"Accept": "Application/vnd.pterodactyl.v1+json", "Authorization": "Bearer ${widget.value.api}"},
     );
     data = json.decode(response.body);
