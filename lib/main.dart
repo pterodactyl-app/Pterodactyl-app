@@ -43,7 +43,7 @@ class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations>
   const DemoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['tr', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'fr', 'tr', 'nl', 'de'].contains(locale.languageCode);
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
@@ -64,8 +64,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('fr', 'FR'),
         const Locale('tr', 'TR'),
-        const Locale('en', 'US')
+        const Locale('nl', 'NL')
       ],
       localizationsDelegates: [
         const DemoLocalizationsDelegate(),
