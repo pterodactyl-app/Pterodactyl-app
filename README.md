@@ -1,6 +1,6 @@
-# app
+# PTERODACTYL APP
 
-A new Flutter project.
+A app for Pterodactyl panel
 
 ## Getting Started
 
