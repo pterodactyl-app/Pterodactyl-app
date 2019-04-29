@@ -23,7 +23,7 @@ class _ServerListPageState extends State<ServerListPage>
   List userData;
 
   Future getData() async {
-    http.Response response = await http.get("https://${widget.url}/api/application/servers",
+    http.Response response = await http.get("https://${widget.url}/api/client",
     headers: {"Accept": "Application/vnd.pterodactyl.v1+json", "Authorization": "Bearer ${widget.api}"},
     );
     data = json.decode(response.body);
