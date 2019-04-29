@@ -1,5 +1,5 @@
 name: app
-description: A new Flutter project.
+description: A Pterodactyl APP.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -12,6 +12,8 @@ description: A new Flutter project.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
+authors:
+  - Ruben talstra <rubentalstra1211@outlook.com>
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -20,12 +22,26 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   http: any
   convert: ^2.1.1
+  flutter_sparkline: any
+  flutter_staggered_grid_view: any
+  shared_preferences: any
+  flutter_cupertino_settings: any
+  font_awesome_flutter: any
+  dynamic_theme: any
 
+
+
+  dbutils:
+    git:
+      url: git://github.com/AndriousSolutions/dbutils.git
 
 dev_dependencies:
   flutter_test:
@@ -43,9 +59,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+   - assets/images/pterodactyl_icon.png
+   - assets/lang/en.json
+   - assets/lang/fr.json
+   - assets/lang/nl.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

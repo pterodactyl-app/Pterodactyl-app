@@ -1,168 +1,99 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'dart:async';
 import 'dart:convert';
 
-class User {
-  final String api, url, id;
-  const User({
-     this.api,
-     this.url,
-     this.id,
-  });
-}
+import 'login.dart';
+import 'home.dart';
+import 'servers.dart';
+import 'settings.dart';
+import 'about.dart';
 
 
-class Home extends StatefulWidget {
+class DemoLocalizations {
+  DemoLocalizations(this.locale);
 
-@override
-_HomeState createState() => _HomeState();
-}
+  final Locale locale;
 
-class _HomeState extends State<Home> {
-//TextEditingController is controller for editable text fields.
-//It's role is to update itself and notify listeners whenever it's associated
-//textfield changes.
-var _apiController = new TextEditingController();
-var _urlController = new TextEditingController();
-
-@override
-Widget build(BuildContext context) {
-return new Scaffold(
-resizeToAvoidBottomPadding: false,
-appBar: new AppBar(
-title: new Text('Pterodactly Panel Login'),
-),
-body: new Container(
-child: new Center(
-child: Column(
-children: <Widget>[
-Padding(
-child: new Text(
-'Type and Pass Data',
-style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),
-textAlign: TextAlign.center,
-),
-padding: EdgeInsets.only(bottom: 20.0),
-),
-TextFormField(
-decoration: InputDecoration(labelText: 'api'),
-controller: _apiController,
-),
-
-TextFormField(
-controller: _urlController,
-decoration: InputDecoration(labelText: 'url'),
-),
-
-new RaisedButton(
-
-onPressed: () {
-// A MaterialPageRoute is a  modal route that replaces the entire screen
-// with a platform-adaptive transition.
-var route = new MaterialPageRoute(
-builder: (BuildContext context) =>
-new SecondPage(
-value: User(
-api: _apiController.text,
-url: _urlController.text
-)
-),
-);
-Navigator.of(context).push(route);
-},
-
-child: new Text('Click to login'),
-),
-
-],
-),
-),
-),
-);
-}
-}
-
-
-class SecondPage extends StatefulWidget {
-
-
-final User value;
-SecondPage({Key key, this.value}) : super(key: key);
-@override
-_SecondPageState createState() => _SecondPageState();
-}
-
-class _SecondPageState extends State<SecondPage> {
-  
-  Map data;
-  List userData;
-
-  Future getData() async {
-    http.Response response = await http.get("https://${widget.value.url}/api/application/servers",
-    headers: {"Accept": "Application/vnd.pterodactyl.v1+json", "Authorization": "Bearer ${widget.value.api}"},
-    );
-    data = json.decode(response.body);
-    setState(() {
-      userData = data["data"];
-    });
-  }  
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
+  static DemoLocalizations of(BuildContext context) {
+    return Localizations.of<DemoLocalizations>(context, DemoLocalizations);
   }
 
-@override
-Widget build(BuildContext context) {
-return new Scaffold(
-appBar: new AppBar(
-  title: new Text('Server List')
-  ),
-      body: ListView.builder(
-          itemCount: userData == null ? 0 : userData.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(          
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(                
-                  children: <Widget>[                    
-                    new Padding(
-                      padding: new EdgeInsets.all(7.0),
-                      child: new Icon(Icons.device_hub),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text("${userData[index]["attributes"]["name"]} - ${userData[index]["attributes"]["description"]}",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w700,
-                      ),),
-                    )             
-                  ],
-                ),
-              ),
-                       
-            );
-          },
-      ),
-);
-}
+  Map<String, String> _sentences;
+
+  Future<bool> load() async {
+    String data = await rootBundle.loadString('assets/lang/${this.locale.languageCode}.json');
+    Map<String, dynamic> _result = json.decode(data);
+
+    this._sentences = new Map();
+    _result.forEach((String key, dynamic value) {
+      this._sentences[key] = value.toString();
+    });
+
+    return true;
+  }
+
+  String trans(String key) {
+    return this._sentences[key];
+  }
 }
 
+class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations> {
+  const DemoLocalizationsDelegate();
 
+  @override
+  bool isSupported(Locale locale) => ['tr', 'en'].contains(locale.languageCode);
 
-//dont touch this//
+  @override
+  Future<DemoLocalizations> load(Locale locale) async {
+    DemoLocalizations localizations = new DemoLocalizations(locale);
+    await localizations.load();
+
+    print("Load ${locale.languageCode}");
+
+    return localizations;
+  }
+
+  @override
+  bool shouldReload(DemoLocalizationsDelegate old) => false;
+}
+
 class MyApp extends StatelessWidget {
-Widget build(BuildContext context) {
-return new MaterialApp(
-debugShowCheckedModeBanner: false,
-home: new Scaffold(
-body: new Home(),
-),
-);
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      supportedLocales: [
+        const Locale('tr', 'TR'),
+        const Locale('en', 'US')
+      ],
+      localizationsDelegates: [
+        const DemoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+        for (Locale supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+
+        return supportedLocales.first;
+      },
+      title: 'PTERODACTYL APP',
+      home: new LoginPage(),
+      routes: <String, WidgetBuilder>{
+        '/login': (BuildContext context) => new LoginPage(),
+        '/home': (BuildContext context) => new MyHomePage(),
+        '/servers': (BuildContext context) => new ServerListPage(),
+        '/about': (BuildContext context) => new AboutPage(),
+        '/settings': (BuildContext context) => new SettingsList(),
+      }
+    );
+  }
 }
+
+void main() {
+  runApp(new MyApp());
 }
-void main() => runApp(new MyApp());
-//-------------//
