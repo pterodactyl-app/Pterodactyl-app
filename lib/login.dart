@@ -5,8 +5,8 @@ import 'main.dart';
 class User {
   final String api, url;
   const User({
-     this.api,
-     this.url,     
+    this.api,
+    this.url,
   });
 }
 
@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: _apiController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context).trans('api_key_login'),
+                  labelText:
+                      DemoLocalizations.of(context).trans('api_key_login'),
                 ),
               ),
             ),
@@ -60,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text(DemoLocalizations.of(context).trans('clear_login'),),
+                  child: Text(
+                    DemoLocalizations.of(context).trans('clear_login'),
+                  ),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -70,23 +73,22 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text(DemoLocalizations.of(context).trans('next_login'),),
+                  child: Text(
+                    DemoLocalizations.of(context).trans('next_login'),
+                  ),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-					var route = new MaterialPageRoute(
-					builder: (BuildContext context) =>
-						new MyHomePage(
-							value: User(
-								api: _apiController.text,
-								url: _urlController.text
-							)
-						),
-					);
-					Navigator.of(context).push(route);
-				  },
+                    var route = new MaterialPageRoute(
+                      builder: (BuildContext context) => new MyHomePage(
+                          value: User(
+                              api: _apiController.text,
+                              url: _urlController.text)),
+                    );
+                    Navigator.of(context).push(route);
+                  },
                 ),
               ],
             ),
