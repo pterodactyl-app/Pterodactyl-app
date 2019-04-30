@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'main.dart';
 
 class SettingsList extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class SettingsListPageState extends State<SettingsList> {
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
-        title: Text('Settings',
+        title: Text(DemoLocalizations.of(context).trans('settings'),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
