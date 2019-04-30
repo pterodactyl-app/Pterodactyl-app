@@ -125,7 +125,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Start',
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('action_start'),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -147,7 +149,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Stop',
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('action_stop'),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -187,13 +191,15 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Restart',
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('action_restart'),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 22.0))
                         ],
-                      )    
+                      )
                     ]),
               ),
               //: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
@@ -209,7 +215,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Kill',
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('action_kill'),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -246,7 +254,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                             children: <Widget>[
                               Text('CPU',
                                   style: TextStyle(color: Colors.green)),
-                              Text('cores',
+                              Text('Cores',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
@@ -282,7 +290,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ],
                   )),
             ),
-          _buildTile(
+            _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Row(
@@ -293,8 +301,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('',
-                              style: TextStyle(color: Colors.redAccent)),
+                          Text('', style: TextStyle(color: Colors.redAccent)),
                           Text('Send console command',
                               style: TextStyle(
                                   color: Colors.black,
@@ -323,7 +330,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(2, 220.0),
             StaggeredTile.extent(2, 110.0),
-
           ],
         ));
   }
