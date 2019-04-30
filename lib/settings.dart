@@ -78,10 +78,10 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Get notifications in the Main Menu',
               ),
-              trailing: Switch(
+              //trailing: Switch(
                   //onChanged: ,
                   //value: ,
-                  ),
+                  //),
             ),
             Divider(
               height: 20.0,
@@ -97,10 +97,10 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Logout from the Main Menu',
               ),
-              trailing: Switch(
+              //trailing: Switch(
                   //onChanged: ,
                   //value: ,
-                  ),
+                  //),
             ),
             Divider(
               height: 20.0,
