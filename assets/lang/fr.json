@@ -21,5 +21,6 @@
   "action_kill":"Arrêt forcé",
   "day_mode":"Mode jour",
   "night_mode":"Mode nuit",
-  "cores":"Cœurs"
+  "cores":"Cœurs",
+  "send_command":"Envoyer une commande"
 }
