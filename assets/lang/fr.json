@@ -18,7 +18,7 @@
   "action_start": "Démarrer",
   "action_stop": "Arrêter",
   "action_restart": "Redémarrer",
-  "action_kill": "Arrêt forcé"
+  "action_kill": "Arrêt forcé",
   "day_mode": "Mode jour",
   "night_mode": "Mode nuit"
 }
