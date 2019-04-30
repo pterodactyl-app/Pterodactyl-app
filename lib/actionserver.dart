@@ -12,8 +12,8 @@ import 'servers.dart';
 class Send {
   final String id, name;
   const Send({
-     this.id,
-     this.name,     
+    this.id,
+    this.name,
   });
 }
 
@@ -355,7 +355,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                             children: <Widget>[
                               Text('CPU',
                                   style: TextStyle(color: Colors.green)),
-                              Text('Cores',
+                              Text(DemoLocalizations.of(context).trans('cores'),
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
@@ -420,19 +420,15 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           )))
                     ]),
               ),
-onTap: () {
-              var route = new MaterialPageRoute(
-builder: (BuildContext context) =>
-new SendPage(
-server: Send(
-id: widget.server.id,
-name: widget.server.name
-)
-),
-
-);
-Navigator.of(context).push(route);
-            },            ),
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new SendPage(
+                      server:
+                          Send(id: widget.server.id, name: widget.server.name)),
+                );
+                Navigator.of(context).push(route);
+              },
+            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(1, 110.0),
