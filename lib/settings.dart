@@ -75,10 +75,6 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Get notifications in the Main Menu',
               ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
-              //),
             ),
             Divider(
               height: 20.0,
@@ -94,10 +90,6 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Logout from the Main Menu',
               ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
-              //),
             ),
             Divider(
               height: 20.0,
@@ -132,10 +124,6 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Delete data from APP',
               ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
-              //),
             ),
           ],
         ),
