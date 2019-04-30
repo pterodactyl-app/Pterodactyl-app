@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import './shared_preferences_helper.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'main.dart';
 
@@ -50,7 +51,10 @@ class SettingsListPageState extends State<SettingsList> {
         items: <Widget>[
           CSHeader('Selection'),
           CSSelection(
-            [DemoLocalizations.of(context).trans('day_mode'), DemoLocalizations.of(context).trans('night_mode')],
+            [
+              DemoLocalizations.of(context).trans('day_mode'),
+              DemoLocalizations.of(context).trans('night_mode')
+            ],
             (int value) {
               setState(() {
                 _index = value;
@@ -64,7 +68,10 @@ class SettingsListPageState extends State<SettingsList> {
             print("It works!");
           }),
           CSHeader(""),
-          CSButton(CSButtonType.DESTRUCTIVE, "Delete all data", () {}),
+          CSButton(CSButtonType.DESTRUCTIVE, "Delete all data", () {
+            SharedPreferencesHelper.remove("apiKey");
+            SharedPreferencesHelper.remove("panelUrl");
+          }),
         ],
       ),
     );
