@@ -36,9 +36,6 @@ dependencies:
   flutter_cupertino_settings: any
   font_awesome_flutter: any
   dynamic_theme: any
-  splashscreen: any
-
-
 
   dbutils:
     git:
