@@ -75,6 +75,10 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Get notifications in the Main Menu',
               ),
+              //trailing: Switch(
+                //onChanged: handelTheme,
+                //value: globals.isDarkTheme,
+              //),
             ),
             Divider(
               height: 20.0,
@@ -90,13 +94,17 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: Text(
                 'Logout from the Main Menu',
               ),
+              //trailing: Switch(
+                //onChanged: handelTheme,
+                //value: globals.isDarkTheme,
+              //),
             ),
             Divider(
               height: 20.0,
             ),
             ListTile(
               leading: Icon(
-                Icons.sd_storage,
+                Icons.color_lens,
                 color: globals.isDarkTheme ? Colors.white : Color(0xFF00567E),
               ),
               title: Text(
@@ -108,21 +116,6 @@ class SettingsListPageState extends State<SettingsList> {
               trailing: Switch(
                 onChanged: handelTheme,
                 value: globals.isDarkTheme,
-              ),
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.color_lens,
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
-              ),
-              title: Text(
-                DemoLocalizations.of(context).trans('settings_data'),
-              ),
-              subtitle: Text(
-                'Delete data from APP',
               ),
             ),
           ],
