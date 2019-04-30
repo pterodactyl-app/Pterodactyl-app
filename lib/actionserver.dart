@@ -417,9 +417,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                              (DemoLocalizations.of(context)
-                                  .trans('send_command')),
+                          Text((DemoLocalizations.of(context).trans('console')),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -429,12 +427,12 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         ],
                       ),
                       Material(
-                          color: Colors.red,
+                          color: Colors.black,
                           borderRadius: BorderRadius.circular(24.0),
                           child: Center(
                               child: Padding(
                             padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.send,
+                            child: Icon(Icons.code,
                                 color: Colors.white, size: 30.0),
                           )))
                     ]),
