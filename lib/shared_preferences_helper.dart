@@ -13,7 +13,7 @@ class SharedPreferencesHelper {
     return prefs.getString(key) ?? '';
   }
 
-  remove(String key) async {
+  static remove(String key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.remove(key);
