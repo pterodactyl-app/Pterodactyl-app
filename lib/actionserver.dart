@@ -170,11 +170,15 @@ class _ActionServerPageState extends State<ActionServerPage> {
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back, color: globals.isDarkTheme ? Colors.white : Colors.black,),
+            icon: Icon(
+              Icons.arrow_back,
+              color: globals.isDarkTheme ? Colors.white : Colors.black,
+            ),
           ),
           title: Text('${widget.server.name}',
-              style:
-                  TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black, fontWeight: FontWeight.w700)),
+              style: TextStyle(
+                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.w700)),
           // actions: <Widget>
           // [
           //   Container
@@ -223,7 +227,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_start'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -249,7 +255,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_stop'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -293,7 +301,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_restart'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -319,7 +329,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_kill'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -330,7 +342,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.timeline,
+                            child: Icon(Icons.offline_bolt,
                                 color: Colors.white, size: 30.0),
                           )))
                     ]),
@@ -358,7 +370,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                   style: TextStyle(color: Colors.green)),
                               Text(DemoLocalizations.of(context).trans('cores'),
                                   style: TextStyle(
-                                      color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                      color: globals.isDarkTheme
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20.0)),
                             ],
@@ -407,7 +421,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               (DemoLocalizations.of(context)
                                   .trans('send_command')),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
