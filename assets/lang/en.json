@@ -21,5 +21,6 @@
     "action_kill":"Kill",
     "day_mode":"Day mode",
     "night_mode":"Night mode",
-    "cores":"Cores"
+    "cores":"Cores",
+    "send_command":"Send a command"
 }
