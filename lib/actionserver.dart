@@ -2,6 +2,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'globals.dart' as globals;
 import './shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -13,7 +14,7 @@ class Send {
   final String id, name;
   const Send({
      this.id,
-     this.name,     
+     this.name,
   });
 }
 
@@ -165,15 +166,15 @@ class _ActionServerPageState extends State<ActionServerPage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
-            color: Colors.black,
+            color: globals.isDarkTheme ? Colors.white : Colors.black,
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back, color: globals.isDarkTheme ? Colors.white : Colors.black,),
           ),
           title: Text('${widget.server.name}',
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+                  TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black, fontWeight: FontWeight.w700)),
           // actions: <Widget>
           // [
           //   Container
@@ -222,7 +223,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_start'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -248,7 +249,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_stop'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -292,7 +293,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_restart'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -318,7 +319,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_kill'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
@@ -355,11 +356,11 @@ class _ActionServerPageState extends State<ActionServerPage> {
                             children: <Widget>[
                               Text('CPU',
                                   style: TextStyle(color: Colors.green)),
-                              Text('Cores',
+                              Text(DemoLocalizations.of(context).trans('cores'),
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: globals.isDarkTheme ? Colors.white : Colors.black,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 34.0)),
+                                      fontSize: 20.0)),
                             ],
                           ),
                           DropdownButton(
@@ -402,11 +403,11 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(('Send a command'),
+                          Text(('Console'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 34.0))
+                                  fontSize: 20.0))
                         ],
                       ),
                       Material(
@@ -449,7 +450,7 @@ Navigator.of(context).push(route);
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: Color(0x802196F3),
+        shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 
@@ -64,6 +66,16 @@ class DemoLocalizationsDelegate
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+return DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) => ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColorBrightness:
+                globals.isDarkTheme ? Brightness.dark : Brightness.light,
+            brightness: brightness,
+          ),
+  themedWidgetBuilder: (context, theme) {
     return new MaterialApp(
         supportedLocales: [
           const Locale('en', 'US'),
@@ -88,6 +100,7 @@ class MyApp extends StatelessWidget {
           return supportedLocales.first;
         },
         title: 'PTERODACTYL APP',
+        theme: theme,
         home: new LoginPage(),
         routes: <String, WidgetBuilder>{
           '/login': (BuildContext context) => new LoginPage(),
@@ -95,7 +108,8 @@ class MyApp extends StatelessWidget {
           '/servers': (BuildContext context) => new ServerListPage(),
           '/about': (BuildContext context) => new AboutPage(),
           '/settings': (BuildContext context) => new SettingsList(),
-        });
+        },);
+      });
   }
 }
 

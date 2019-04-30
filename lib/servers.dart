@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import './shared_preferences_helper.dart';
+import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'main.dart';
@@ -54,12 +55,12 @@ class _ServerListPageState extends State<ServerListPage> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          color: Colors.black,
+          color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('server_list'),
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+            style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black, fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container
@@ -91,8 +92,8 @@ class _ServerListPageState extends State<ServerListPage> {
                     child: Material(
                       elevation: 14.0,
                       borderRadius: BorderRadius.circular(12.0),
-                      shadowColor: Color(0x802196F3),
-                      color: Colors.white,
+                      shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
+                      color: globals.isDarkTheme ? Colors.black : Colors.white,
                       child: InkWell(
                         //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemReviewsPage())),
                         child: Padding(
@@ -118,7 +119,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                       Text(
                                           '${userData[index]["attributes"]["name"]}',
                                           style: TextStyle(
-                                              color: Colors.black,
+                                              color: globals.isDarkTheme ? Colors.white : Colors.black,
                                               fontWeight: FontWeight.w700,
                                               fontSize: 18.0)),
                                     ],
@@ -134,7 +135,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                   Text(
                                       DemoLocalizations.of(context)
                                           .trans('total_ram'),
-                                      style: TextStyle()),
+                                      style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black,)),
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 4.0),
@@ -154,7 +155,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                   Text(
                                       DemoLocalizations.of(context)
                                           .trans('total_disk'),
-                                      style: TextStyle()),
+                                      style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black,)),
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 4.0),

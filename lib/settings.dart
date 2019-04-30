@@ -1,8 +1,8 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
+import 'globals.dart' as globals;
+import './shared_preferences_helper.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'main.dart';
 
 class SettingsList extends StatefulWidget {
@@ -11,23 +11,34 @@ class SettingsList extends StatefulWidget {
 }
 
 class SettingsListPageState extends State<SettingsList> {
-  double _slider = 0.5;
-  bool _switch = false;
-  int _index = 0;
+  void handelTheme(bool value) {
+    setState(() {
+      globals.isDarkTheme = value;
+      globals.isDarkTheme = globals.isDarkTheme;
+      if (globals.isDarkTheme) {
+        DynamicTheme.of(context).setBrightness(Brightness.dark);
+      } else {
+        DynamicTheme.of(context).setBrightness(Brightness.light);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: Colors.black,
+          color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back,
+              color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('settings'),
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+            style: TextStyle(
+                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container
@@ -46,27 +57,70 @@ class SettingsListPageState extends State<SettingsList> {
         //   )
         // ],
       ),
-      body: CupertinoSettings(
-        items: <Widget>[
-          CSHeader('Selection'),
-          CSSelection(
-            [DemoLocalizations.of(context).trans('day_mode'), DemoLocalizations.of(context).trans('night_mode')],
-            (int value) {
-              setState(() {
-                _index = value;
-              });
-            },
-            currentSelection: _index,
-          ),
-          CSHeader(""),
-          CSControl('Loading...', CupertinoActivityIndicator()),
-          CSButton(CSButtonType.DEFAULT, "Licenses", () {
-            print("It works!");
-          }),
-          CSHeader(""),
-          CSButton(CSButtonType.DESTRUCTIVE, "Delete all data", () {}),
-        ],
-      ),
+      body: SingleChildScrollView(
+          child: SafeArea(
+        child: ListBody(
+          children: <Widget>[
+            Container(
+              height: 10.0,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.notifications,
+                color: globals.isDarkTheme ? Colors.white : Colors.black,
+              ),
+              title: Text(
+                'Enable notifications',
+              ),
+              subtitle: Text(
+                'Get notifications in the Main Menu',
+              ),
+              trailing: Switch(
+                  //onChanged: ,
+                  //value: ,
+                  ),
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.account_box,
+                color: globals.isDarkTheme ? Colors.white : Colors.black,
+              ),
+              title: Text(
+                'Stay Logged In',
+              ),
+              subtitle: Text(
+                'Logout from the Main Menu',
+              ),
+              trailing: Switch(
+                  //onChanged: ,
+                  //value: ,
+                  ),
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.color_lens,
+                color: globals.isDarkTheme ? Colors.white : Color(0xFF00567E),
+              ),
+              title: Text(
+                DemoLocalizations.of(context).trans('night_mode'),
+              ),
+              subtitle: Text(
+                'Black and Grey Theme',
+              ),
+              trailing: Switch(
+                onChanged: handelTheme,
+                value: globals.isDarkTheme,
+              ),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

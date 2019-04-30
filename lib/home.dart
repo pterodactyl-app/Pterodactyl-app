@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
+import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
@@ -45,10 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 2.0,
-          backgroundColor: Colors.white,
+          backgroundColor: globals.isDarkTheme ? null : Colors.white,
           title: Text(DemoLocalizations.of(context).trans('dashboard'),
               style: TextStyle(
-                  color: Colors.black,
+                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
           actions: <Widget>[
@@ -60,10 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Text(DemoLocalizations.of(context).trans('logout'),
                       style: TextStyle(
-                          color: Colors.blue,
+                          color: globals.isDarkTheme ? Colors.white : Colors.blue,
                           fontWeight: FontWeight.w700,
                           fontSize: 14.0)),
-                  Icon(Icons.subdirectory_arrow_left, color: Colors.black54)
+                  Icon(Icons.subdirectory_arrow_left, color: globals.isDarkTheme ? Colors.white : Colors.black,)
                 ],
               ),
             )
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$userTotalServers',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
@@ -129,11 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
                       Text(DemoLocalizations.of(context).trans('settings'),
                           style: TextStyle(
-                              color: Colors.black,
+                              color: globals.isDarkTheme ? Colors.white : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('settings_sub'),
-                          style: TextStyle(color: Colors.black45)),
+                          style: TextStyle(color: globals.isDarkTheme ? Colors.white70 : Colors.black45,)),
                     ]),
               ),
               onTap: () => Navigator.of(context)
@@ -157,11 +158,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
                       Text(DemoLocalizations.of(context).trans('alerts'),
                           style: TextStyle(
-                              color: Colors.black,
+                              color: globals.isDarkTheme ? Colors.white : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('alerts_sub'),
-                          style: TextStyle(color: Colors.black45)),
+                          style: TextStyle(color: globals.isDarkTheme ? Colors.white70 : Colors.black45,)),
                     ]),
               ),
               //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
@@ -188,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               DemoLocalizations.of(context)
                                   .trans('comming_soon_sub'),
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
@@ -220,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: Color(0x802196F3),
+        shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null
