@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart' as globals;
-import './shared_preferences_helper.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './shared_preferences_helper.dart';
-import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'main.dart';
 
 class SettingsList extends StatefulWidget {
@@ -79,9 +76,9 @@ class SettingsListPageState extends State<SettingsList> {
                 'Get notifications in the Main Menu',
               ),
               //trailing: Switch(
-                  //onChanged: ,
-                  //value: ,
-                  //),
+              //onChanged: handelTheme,
+              //value: globals.isDarkTheme,
+              //),
             ),
             Divider(
               height: 20.0,
@@ -98,16 +95,16 @@ class SettingsListPageState extends State<SettingsList> {
                 'Logout from the Main Menu',
               ),
               //trailing: Switch(
-                  //onChanged: ,
-                  //value: ,
-                  //),
+              //onChanged: handelTheme,
+              //value: globals.isDarkTheme,
+              //),
             ),
             Divider(
               height: 20.0,
             ),
             ListTile(
               leading: Icon(
-                Icons.color_lens,
+                Icons.sd_storage,
                 color: globals.isDarkTheme ? Colors.white : Color(0xFF00567E),
               ),
               title: Text(
@@ -120,6 +117,25 @@ class SettingsListPageState extends State<SettingsList> {
                 onChanged: handelTheme,
                 value: globals.isDarkTheme,
               ),
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.color_lens,
+                color: globals.isDarkTheme ? Colors.white : Colors.black,
+              ),
+              title: Text(
+                DemoLocalizations.of(context).trans('settings_data'),
+              ),
+              subtitle: Text(
+                'Delete data from APP',
+              ),
+              //trailing: Switch(
+              //onChanged: handelTheme,
+              //value: globals.isDarkTheme,
+              //),
             ),
           ],
         ),
