@@ -402,7 +402,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(('Send a command'),
+                          Text(
+                              (DemoLocalizations.of(context)
+                                  .trans('send_command')),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
