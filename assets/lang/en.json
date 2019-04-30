@@ -22,5 +22,6 @@
     "day_mode":"Day mode",
     "night_mode":"Night mode",
     "cores":"Cores",
-    "send_command":"Send a command"
+    "send_command":"Send a command",
+    "console": "Console"
 }

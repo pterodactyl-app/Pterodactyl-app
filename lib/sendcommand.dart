@@ -3,6 +3,7 @@ import './shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'main.dart';
 import 'actionserver.dart';
 
 class SendPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class SendPage extends StatefulWidget {
 
 class _SendPageState extends State<SendPage> {
   final _sendController = TextEditingController();
-
 
   Future postSend() async {
     String _send = await SharedPreferencesHelper.getApiUrlString("send");
@@ -42,35 +42,34 @@ class _SendPageState extends State<SendPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-              appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            color: Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-          ),
-          title: Text('Send Command',
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
-          // actions: <Widget>
-          // [
-          //   Container
-          //   (
-          //     margin: EdgeInsets.only(right: 8.0),
-          //     child: Row
-          //     (
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: <Widget>
-          //       [
-          //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-          //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-          //       ],
-          //     ),
-          //   )
-          // ],
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
+        title: Text(DemoLocalizations.of(context).trans('console'),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+        // actions: <Widget>
+        // [
+        //   Container
+        //   (
+        //     margin: EdgeInsets.only(right: 8.0),
+        //     child: Row
+        //     (
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: <Widget>
+        //       [
+        //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
+        //         Icon(Icons.arrow_drop_down, color: Colors.black54)
+        //       ],
+        //     ),
+        //   )
+        // ],
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -90,16 +89,14 @@ class _SendPageState extends State<SendPage> {
               child: TextField(
                 controller: _sendController,
                 decoration: InputDecoration(
-                  labelText:
-                      ('Type Command Here'),
+                  labelText: ('Type Command Here'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear Field'
-                  ),
+                  child: Text('Clear Field'),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -108,8 +105,8 @@ class _SendPageState extends State<SendPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Send Command'
-                  ),
+                  child:
+                      Text(DemoLocalizations.of(context).trans('send_command')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
@@ -117,7 +114,7 @@ class _SendPageState extends State<SendPage> {
                   onPressed: () async {
                     await SharedPreferencesHelper.setApiUrlString(
                         "send", _sendController.text);
-                        postSend();
+                    postSend();
                   },
                 ),
               ],

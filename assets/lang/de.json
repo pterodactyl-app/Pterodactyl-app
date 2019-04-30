@@ -18,5 +18,10 @@
     "action_start": "Start",
     "action_stop": "Stop",
     "action_restart": "Restart",
-    "action_kill": "Kill"
+    "action_kill": "Kill",
+    "day_mode":"Day mode",
+    "night_mode":"Night mode",
+    "cores":"Cores",
+    "send_command":"Send a command",
+    "console": "Console"
 }
