@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import './shared_preferences_helper.dart';
-import 'home.dart';
 import 'main.dart';
 
 class User {
@@ -87,9 +85,8 @@ class _LoginPageState extends State<LoginPage> {
                         "apiKey", _apiController.text);
                     await SharedPreferencesHelper.setApiUrlString(
                         "panelUrl", _urlController.text);
-                    var route = MaterialPageRoute(
-                        builder: (BuildContext context) => MyHomePage());
-                    Navigator.of(context).push(route);
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed('/home');
                   },
                 ),
               ],

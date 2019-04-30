@@ -18,7 +18,7 @@ class ActionServerPage extends StatefulWidget {
 
 class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
-  List userData;
+  int cpu;
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
@@ -32,7 +32,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userData = data["attributes"]["cpu"]["cores"];
+      cpu = data["attributes"]["cpu"]["cores"];
     });
   }
 
@@ -41,6 +41,31 @@ class _ActionServerPageState extends State<ActionServerPage> {
     super.initState();
     getData();
   }
+
+  final List<List<double>> charts = [
+    [
+      0.033,
+      0.048,
+      0.04,
+      0,
+      0.031,
+      0,
+      0.021,
+      0.024,
+      0.249,
+      0.042,
+      0.007,
+      0,
+      0.293,
+      0.003,
+      0.6,
+      0.131
+    ]
+  ];
+
+  static final List<String> chartDropdownItems = ['live (not working yet)'];
+  String actualDropdown = chartDropdownItems[0];
+  int actualChart = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -118,15 +143,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Material(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.stop,
-                                color: Colors.white, size: 30.0),
-                          ))),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +153,16 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                   fontWeight: FontWeight.w700,
                                   fontSize: 24.0))
                         ],
-                      )
+                      ),
+                      Material(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.stop,
+                                color: Colors.white, size: 30.0),
+                          )))
                     ]),
               ),
               //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
@@ -166,9 +191,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 24.0))
+                                  fontSize: 22.0))
                         ],
-                      )
+                      )    
                     ]),
               ),
               //: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
@@ -180,15 +205,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Material(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.timeline,
-                                color: Colors.white, size: 30.0),
-                          ))),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +215,16 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                   fontWeight: FontWeight.w700,
                                   fontSize: 24.0))
                         ],
-                      )
+                      ),
+                      Material(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.timeline,
+                                color: Colors.white, size: 30.0),
+                          )))
                     ]),
               ),
               //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
@@ -228,16 +253,67 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       fontSize: 34.0)),
                             ],
                           ),
+                          DropdownButton(
+                              isDense: true,
+                              value: actualDropdown,
+                              onChanged: (String value) => setState(() {
+                                    actualDropdown = value;
+                                    actualChart = chartDropdownItems
+                                        .indexOf(value); // Refresh the chart
+                                  }),
+                              items: chartDropdownItems.map((String title) {
+                                return DropdownMenuItem(
+                                  value: title,
+                                  child: Text(title,
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0)),
+                                );
+                              }).toList())
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: userData,
+                        data: charts[actualChart],
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
                     ],
                   )),
+            ),
+          _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('',
+                              style: TextStyle(color: Colors.redAccent)),
+                          Text('Send console command',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 34.0))
+                        ],
+                      ),
+                      Material(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Icon(Icons.send,
+                                color: Colors.white, size: 30.0),
+                          )))
+                    ]),
+              ),
+              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
             ),
           ],
           staggeredTiles: [
@@ -246,6 +322,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(2, 220.0),
+            StaggeredTile.extent(2, 110.0),
+
           ],
         ));
   }
