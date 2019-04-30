@@ -10,8 +10,8 @@
     "settings_sub":"Data, Night Mode",
     "alerts":"Alerts",
     "alerts_sub":"All ",
-    "coming_soon":"Coming Soon",
-    "coming_soon_sub":"Coming Soon",
+    "comming_soon":"Comming Soon",
+    "comming_soon_sub":"Comming Soon",
     "server_list":"Server List",
     "total_disk":"Total Disk:",
     "total_ram":"Total Ram:",
@@ -22,5 +22,6 @@
     "day_mode":"Day mode",
     "night_mode":"Night mode",
     "cores":"Cores",
-    "send_command":"Send a command"
+    "send_command":"Send a command",
+    "console": "Console"
 }
