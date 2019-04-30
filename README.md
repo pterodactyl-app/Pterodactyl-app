@@ -1,5 +1,7 @@
 # PTERODACTYL APP
 
+[![Build Status](https://travis-ci.org/rubentalstra/Pterodactyl-app.svg?branch=master)](https://travis-ci.org/rubentalstra/Pterodactyl-app)
+
 A app for Pterodactyl panel
 
 ## Getting Started

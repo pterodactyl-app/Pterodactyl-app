@@ -13,8 +13,8 @@ import 'servers.dart';
 class Send {
   final String id, name;
   const Send({
-     this.id,
-     this.name,
+    this.id,
+    this.name,
   });
 }
 
@@ -404,6 +404,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(('Console'),
+                          Text(
+                              (DemoLocalizations.of(context)
+                                  .trans('send_command')),
                               style: TextStyle(
                                   color: globals.isDarkTheme ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -421,19 +424,15 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           )))
                     ]),
               ),
-onTap: () {
-              var route = new MaterialPageRoute(
-builder: (BuildContext context) =>
-new SendPage(
-server: Send(
-id: widget.server.id,
-name: widget.server.name
-)
-),
-
-);
-Navigator.of(context).push(route);
-            },            ),
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new SendPage(
+                      server:
+                          Send(id: widget.server.id, name: widget.server.name)),
+                );
+                Navigator.of(context).push(route);
+              },
+            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(1, 110.0),
