@@ -22,5 +22,6 @@
   "day_mode":"Mode jour",
   "night_mode":"Mode nuit",
   "cores":"Cœurs",
-  "send_command":"Envoyer une commande"
+  "send_command":"Envoyer une commande",
+  "console": "Console"
 }
