@@ -14,5 +14,9 @@
     "comming_soon_sub": "Comming Soon",
     "server_list": "Server List",
     "total_disk": "Total Disk:",
-    "total_ram": "Total Ram:"
+    "total_ram": "Total Ram:",
+    "action_start": "Start",
+    "action_stop": "Stop",
+    "action_restart": "Restart",
+    "action_kill": "Kill"
   }
