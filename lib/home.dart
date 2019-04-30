@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import './shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
 import 'settings.dart';
-import 'login.dart';
 import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
-  final User value;
-  MyHomePage({Key key, this.value}) : super(key: key);
+  MyHomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers;
-
   Future getData() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
     http.Response response = await http.get(
-      "https://${widget.value.url}/api/client",
+      "https://$_url/api/client",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
-        "Authorization": "Bearer ${widget.value.api}"
+        "Authorization": "Bearer $_api"
       },
     );
     data = json.decode(response.body);
@@ -39,221 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     getData();
   }
-
-  final List<List<double>> charts = [
-    [
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4
-    ],
-    [
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4,
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4,
-    ],
-    [
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4,
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4,
-      0.0,
-      0.3,
-      0.7,
-      0.6,
-      0.55,
-      0.8,
-      1.2,
-      1.3,
-      1.35,
-      0.9,
-      1.5,
-      1.7,
-      1.8,
-      1.7,
-      1.2,
-      0.8,
-      1.9,
-      2.0,
-      2.2,
-      1.9,
-      2.2,
-      2.1,
-      2.0,
-      2.3,
-      2.4,
-      2.45,
-      2.6,
-      3.6,
-      2.6,
-      2.7,
-      2.9,
-      2.8,
-      3.4
-    ]
-  ];
-
-  static final List<String> chartDropdownItems = [
-    'Last 7 days',
-    'Last month',
-    'Last year'
-  ];
-  String actualDropdown = chartDropdownItems[0];
-  int actualChart = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -323,13 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           )))
                     ]),
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ServerListPage(
-                            url: widget.value.url, api: widget.value.api)));
-              },
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -425,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ]),
               ),
               //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
-            )
+            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),

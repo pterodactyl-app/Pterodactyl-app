@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import './shared_preferences_helper.dart';
 import 'home.dart';
 import 'main.dart';
 
@@ -81,15 +82,14 @@ class _LoginPageState extends State<LoginPage> {
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
-                  onPressed: () {
-                    var route = new MaterialPageRoute(
-                      builder: (BuildContext context) => new MyHomePage(
-                          value: User(
-                              api: _read("apikey"), url: _read("panelurl"))),
-                    );
+                  onPressed: () async {
+                    await SharedPreferencesHelper.setApiUrlString(
+                        "apiKey", _apiController.text);
+                    await SharedPreferencesHelper.setApiUrlString(
+                        "panelUrl", _urlController.text);
+                    var route = MaterialPageRoute(
+                        builder: (BuildContext context) => MyHomePage());
                     Navigator.of(context).push(route);
-                    _save("apikey", _apiController.text);
-                    _save("panelurl", _apiController.text);
                   },
                 ),
               ],
@@ -98,18 +98,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  _save(String key, String value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    return prefs.setString(key, value);
-  }
-
-  _read(String key) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    return prefs.getString(key) ?? '';
   }
 }
 

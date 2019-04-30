@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import './shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'main.dart';
+import 'actionserver.dart';
+
+class User {
+  final String id, name;
+  const User({
+     this.id,
+     this.name,     
+  });
+}
 
 class ServerListPage extends StatefulWidget {
-  ServerListPage({@required this.api, this.url});
-  final api, url;
+ ServerListPage({Key key}) : super(key: key);
 
   @override
   _ServerListPageState createState() => _ServerListPageState();
@@ -17,11 +26,13 @@ class _ServerListPageState extends State<ServerListPage> {
   List userData;
 
   Future getData() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
     http.Response response = await http.get(
-      "https://${widget.url}/api/client",
+      "https://$_url/api/client",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
-        "Authorization": "Bearer ${widget.api}"
+        "Authorization": "Bearer $_api"
       },
     );
     data = json.decode(response.body);
@@ -172,14 +183,17 @@ class _ServerListPageState extends State<ServerListPage> {
               ),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => SecondPage(
-                          url: widget.url,
-                          api: widget.api,
-                          id: userData[index]["attributes"]["identifier"],
-                          name: userData[index]["attributes"]["name"])));
+              var route = new MaterialPageRoute(
+builder: (BuildContext context) =>
+new ActionServerPage(
+server: User(
+id: userData[index]["attributes"]["identifier"],
+name: userData[index]["attributes"]["name"]
+)
+),
+
+);
+Navigator.of(context).push(route);
             },
           );
         },
@@ -187,6 +201,8 @@ class _ServerListPageState extends State<ServerListPage> {
     );
   }
 }
+
+
 
 class SecondPage extends StatelessWidget {
   SecondPage({@required this.id, this.name, this.api, this.url});
