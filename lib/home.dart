@@ -202,11 +202,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('comming_soon'),
+                                  .trans('coming_soon'),
                               style: TextStyle(color: Colors.redAccent)),
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('comming_soon_sub'),
+                                  .trans('coming_soon_sub'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
