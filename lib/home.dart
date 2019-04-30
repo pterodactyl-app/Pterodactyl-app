@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.isDarkTheme ? null : Colors.white,
           title: Text(DemoLocalizations.of(context).trans('dashboard'),
@@ -61,10 +62,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Text(DemoLocalizations.of(context).trans('logout'),
                       style: TextStyle(
-                          color: globals.isDarkTheme ? Colors.white : Colors.blue,
+                          color:
+                              globals.isDarkTheme ? Colors.white : Colors.blue,
                           fontWeight: FontWeight.w700,
                           fontSize: 14.0)),
-                  Icon(Icons.subdirectory_arrow_left, color: globals.isDarkTheme ? Colors.white : Colors.black,)
+                  Icon(
+                    Icons.subdirectory_arrow_left,
+                    color: globals.isDarkTheme ? Colors.white : Colors.black,
+                  )
                 ],
               ),
             )
@@ -93,7 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$userTotalServers',
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
@@ -130,11 +137,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
                       Text(DemoLocalizations.of(context).trans('settings'),
                           style: TextStyle(
-                              color: globals.isDarkTheme ? Colors.white : Colors.black,
+                              color: globals.isDarkTheme
+                                  ? Colors.white
+                                  : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('settings_sub'),
-                          style: TextStyle(color: globals.isDarkTheme ? Colors.white70 : Colors.black45,)),
+                          style: TextStyle(
+                            color: globals.isDarkTheme
+                                ? Colors.white70
+                                : Colors.black45,
+                          )),
                     ]),
               ),
               onTap: () => Navigator.of(context)
@@ -158,11 +171,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 16.0)),
                       Text(DemoLocalizations.of(context).trans('alerts'),
                           style: TextStyle(
-                              color: globals.isDarkTheme ? Colors.white : Colors.black,
+                              color: globals.isDarkTheme
+                                  ? Colors.white
+                                  : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('alerts_sub'),
-                          style: TextStyle(color: globals.isDarkTheme ? Colors.white70 : Colors.black45,)),
+                          style: TextStyle(
+                            color: globals.isDarkTheme
+                                ? Colors.white70
+                                : Colors.black45,
+                          )),
                     ]),
               ),
               //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
@@ -189,7 +208,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               DemoLocalizations.of(context)
                                   .trans('comming_soon_sub'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
