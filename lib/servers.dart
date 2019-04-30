@@ -10,13 +10,13 @@ import 'actionserver.dart';
 class User {
   final String id, name;
   const User({
-     this.id,
-     this.name,     
+    this.id,
+    this.name,
   });
 }
 
 class ServerListPage extends StatefulWidget {
- ServerListPage({Key key}) : super(key: key);
+  ServerListPage({Key key}) : super(key: key);
 
   @override
   _ServerListPageState createState() => _ServerListPageState();
@@ -60,7 +60,9 @@ class _ServerListPageState extends State<ServerListPage> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('server_list'),
-            style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black, fontWeight: FontWeight.w700)),
+            style: TextStyle(
+                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container
@@ -92,7 +94,9 @@ class _ServerListPageState extends State<ServerListPage> {
                     child: Material(
                       elevation: 14.0,
                       borderRadius: BorderRadius.circular(12.0),
-                      shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
+                      shadowColor: globals.isDarkTheme
+                          ? Colors.grey[700]
+                          : Color(0x802196F3),
                       color: globals.isDarkTheme ? Colors.black : Colors.white,
                       child: InkWell(
                         //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemReviewsPage())),
@@ -119,7 +123,9 @@ class _ServerListPageState extends State<ServerListPage> {
                                       Text(
                                           '${userData[index]["attributes"]["name"]}',
                                           style: TextStyle(
-                                              color: globals.isDarkTheme ? Colors.white : Colors.black,
+                                              color: globals.isDarkTheme
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.w700,
                                               fontSize: 18.0)),
                                     ],
@@ -135,7 +141,11 @@ class _ServerListPageState extends State<ServerListPage> {
                                   Text(
                                       DemoLocalizations.of(context)
                                           .trans('total_ram'),
-                                      style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black,)),
+                                      style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                      )),
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 4.0),
@@ -155,7 +165,11 @@ class _ServerListPageState extends State<ServerListPage> {
                                   Text(
                                       DemoLocalizations.of(context)
                                           .trans('total_disk'),
-                                      style: TextStyle(color: globals.isDarkTheme ? Colors.white : Colors.black,)),
+                                      style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                      )),
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 4.0),
@@ -185,16 +199,12 @@ class _ServerListPageState extends State<ServerListPage> {
             ),
             onTap: () {
               var route = new MaterialPageRoute(
-builder: (BuildContext context) =>
-new ActionServerPage(
-server: User(
-id: userData[index]["attributes"]["identifier"],
-name: userData[index]["attributes"]["name"]
-)
-),
-
-);
-Navigator.of(context).push(route);
+                builder: (BuildContext context) => new ActionServerPage(
+                    server: User(
+                        id: userData[index]["attributes"]["identifier"],
+                        name: userData[index]["attributes"]["name"])),
+              );
+              Navigator.of(context).push(route);
             },
           );
         },
@@ -202,6 +212,3 @@ Navigator.of(context).push(route);
     );
   }
 }
-
-
-
