@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart' as globals;
+import 'package:flutter/services.dart';
+import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import './shared_preferences_helper.dart';
 import 'main.dart';
@@ -11,6 +13,37 @@ class SettingsList extends StatefulWidget {
 }
 
 class SettingsListPageState extends State<SettingsList> {
+
+  String _projectVersion = '';
+
+  @override
+  initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  initPlatformState() async {
+
+    String projectVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      projectVersion = await GetVersion.projectVersion;
+    } on PlatformException {
+      projectVersion = 'Failed to get project version.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _projectVersion = projectVersion;
+    });
+  }
+
+
+
+
+
   void handelTheme(bool value) {
     setState(() {
       globals.isDarkTheme = value;
@@ -118,6 +151,14 @@ class SettingsListPageState extends State<SettingsList> {
                 value: globals.isDarkTheme,
               ),
             ),
+            new ListTile(
+                leading: new Icon(Icons.info),
+                title: const Text('Version Name'),
+                subtitle: new Text(_projectVersion),
+              ),
+              new Divider(
+                height: 20.0,
+              ),
           ],
         ),
       )),
