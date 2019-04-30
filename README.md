@@ -1,8 +1,13 @@
-# PTERODACTYL APP
+# Pterodactyl App 🚀
+
+A unofficial app for the Pterodactyl Panel
+<img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
+Features :
+- Start/Stop/Restart/Kill your server
+- Send commands to your server
+- See the CPU that you are using
 
 [![Build Status](https://travis-ci.org/rubentalstra/Pterodactyl-app.svg?branch=master)](https://travis-ci.org/rubentalstra/Pterodactyl-app)
-
-A app for Pterodactyl panel
 
 ## Getting Started
 
