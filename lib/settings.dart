@@ -50,7 +50,7 @@ class SettingsListPageState extends State<SettingsList> {
         items: <Widget>[
           CSHeader('Selection'),
           CSSelection(
-            ['Day mode', 'Night mode'],
+            [DemoLocalizations.of(context).trans('day_mode'), DemoLocalizations.of(context).trans('night_mode')],
             (int value) {
               setState(() {
                 _index = value;
