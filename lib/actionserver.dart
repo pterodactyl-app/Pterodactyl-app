@@ -6,7 +6,16 @@ import './shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'main.dart';
+import 'sendcommand.dart';
 import 'servers.dart';
+
+class Send {
+  final String id, name;
+  const Send({
+     this.id,
+     this.name,     
+  });
+}
 
 class ActionServerPage extends StatefulWidget {
   ActionServerPage({Key key, this.server}) : super(key: key);
@@ -18,7 +27,7 @@ class ActionServerPage extends StatefulWidget {
 
 class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
-  int cpu;
+  List cpu;
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
@@ -34,6 +43,90 @@ class _ActionServerPageState extends State<ActionServerPage> {
     setState(() {
       cpu = data["attributes"]["cpu"]["cores"];
     });
+  }
+
+  Future postStart() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'start'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postStop() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'stop'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postRestart() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'restart'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postKill() async {
+    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
+    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'kill'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
   }
 
   @override
@@ -131,12 +224,14 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 24.0))
+                                  fontSize: 20.0))
                         ],
                       )
                     ]),
               ),
-              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
+              onTap: () {
+                postStart();
+              },
             ),
             _buildTile(
               Padding(
@@ -155,7 +250,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 24.0))
+                                  fontSize: 20.0))
                         ],
                       ),
                       Material(
@@ -169,7 +264,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           )))
                     ]),
               ),
-              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
+              onTap: () {
+                postStop();
+              },
             ),
             _buildTile(
               Padding(
@@ -197,12 +294,14 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 22.0))
+                                  fontSize: 20.0))
                         ],
                       )
                     ]),
               ),
-              //: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
+              onTap: () {
+                postRestart();
+              },
             ),
             _buildTile(
               Padding(
@@ -221,7 +320,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 24.0))
+                                  fontSize: 20.0))
                         ],
                       ),
                       Material(
@@ -235,7 +334,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           )))
                     ]),
               ),
-              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ServerListPage())),
+              onTap: () {
+                postKill();
+              },
             ),
             _buildTile(
               Padding(
@@ -301,8 +402,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('', style: TextStyle(color: Colors.redAccent)),
-                          Text('Send console command',
+                          Text(('Send a command'),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -320,8 +420,19 @@ class _ActionServerPageState extends State<ActionServerPage> {
                           )))
                     ]),
               ),
-              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
-            ),
+onTap: () {
+              var route = new MaterialPageRoute(
+builder: (BuildContext context) =>
+new SendPage(
+server: Send(
+id: widget.server.id,
+name: widget.server.name
+)
+),
+
+);
+Navigator.of(context).push(route);
+            },            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(1, 110.0),
