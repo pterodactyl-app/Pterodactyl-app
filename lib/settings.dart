@@ -112,24 +112,6 @@ class SettingsListPageState extends State<SettingsList> {
             ),
             ListTile(
               leading: Icon(
-                Icons.account_box,
-              ),
-              title: Text(
-                DemoLocalizations.of(context).trans('stay_logged_in'),
-              ),
-              subtitle: Text(
-                DemoLocalizations.of(context).trans('stay_logged_in_sub'),
-              ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
-              //),
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            ListTile(
-              leading: Icon(
                 Icons.color_lens,
               ),
               title: Text(
