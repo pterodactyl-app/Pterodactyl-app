@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map data;
-  int userTotalServers;
+  int userTotalServers = 0;
   Future getData() async {
     String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
     String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
