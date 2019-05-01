@@ -1,8 +1,9 @@
 {
   "url_login": "URL (exemple: panel.pterodactyl.app)",
   "api_key_login": "CLÉ API",
+  "remember_me": "Se souvenir de moi",
   "clear": "EFFACER",
-  "next_login": "SUIVANT",
+  "next": "SUIVANT",
   "dashboard": "Tableau de bord",
   "logout": "Se déconnecter",
   "logout_sub": "Déconnecter",
