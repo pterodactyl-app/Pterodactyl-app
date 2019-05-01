@@ -139,7 +139,7 @@ class SettingsListPageState extends State<SettingsList> {
                 DemoLocalizations.of(context).trans('night_mode'),
               ),
               subtitle: Text(
-                'Black and Grey Theme',
+                DemoLocalizations.of(context).trans('night_mode_sub'),
               ),
               trailing: Switch(
                 onChanged: handelTheme,
@@ -152,7 +152,8 @@ class SettingsListPageState extends State<SettingsList> {
             new ListTile(
               leading: Icon(Icons.subdirectory_arrow_left),
               title: Text(DemoLocalizations.of(context).trans('logout')),
-              subtitle: new Text('Sub text is comming XD'),
+              subtitle:
+                  new Text(DemoLocalizations.of(context).trans('logout_sub')),
               onTap: () {
                 Navigator.of(context).pushAndRemoveUntil(
                     new MaterialPageRoute(
@@ -165,11 +166,12 @@ class SettingsListPageState extends State<SettingsList> {
             ),
             new ListTile(
               leading: Icon(Icons.insert_drive_file),
-              title: Text('Licence'),
-              subtitle: new Text('Sub text is comming soon'),
+              title: Text(DemoLocalizations.of(context).trans('license')),
+              subtitle:
+                  new Text(DemoLocalizations.of(context).trans('license_sub')),
               //onTap: () {
-                //Navigator.of(context)
-                  //.push(MaterialPageRoute(builder: (_) => LicencePage()));
+              //Navigator.of(context)
+              //.push(MaterialPageRoute(builder: (_) => LicencePage()));
               //},
             ),
             Divider(
