@@ -57,7 +57,7 @@ class _ServerListPageState extends State<ServerListPage> {
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('server_list'),
             style: TextStyle(
@@ -97,7 +97,7 @@ class _ServerListPageState extends State<ServerListPage> {
                       shadowColor: globals.isDarkTheme
                           ? Colors.grey[700]
                           : Color(0x802196F3),
-                      color: globals.isDarkTheme ? Colors.black : Colors.white,
+                      color: globals.isDarkTheme ? Colors.grey[850] : Colors.white,
                       child: InkWell(
                         //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemReviewsPage())),
                         child: Padding(

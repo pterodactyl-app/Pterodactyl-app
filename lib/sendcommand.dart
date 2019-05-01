@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
+import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'main.dart';
@@ -46,9 +47,9 @@ class _SendPageState extends State<SendPage> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          color: Colors.black,
+          color: globals.isDarkTheme ? Colors.black : Colors.white,
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: globals.isDarkTheme ? Colors.black : Colors.white),
         ),
         title: Text(DemoLocalizations.of(context).trans('console'),
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
@@ -85,7 +86,7 @@ class _SendPageState extends State<SendPage> {
             ),
             SizedBox(height: 80.0),
             AccentColorOverride(
-              color: Color(0xFF442B2D),
+              color: Colors.red,
               child: TextField(
                 controller: _sendController,
                 decoration: InputDecoration(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import './shared_preferences_helper.dart';
+import 'package:pterodactyl_app/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
 
 class User {
@@ -18,6 +21,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _apiController = TextEditingController();
   final _urlController = TextEditingController();
+
+  bool checkValue = false;
+
+  SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    getCredential();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +71,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            new CheckboxListTile(
+            value: checkValue,
+            onChanged: _onChanged,
+            title: new Text("Remember me"),
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
@@ -85,8 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                         "apiKey", _apiController.text);
                     await SharedPreferencesHelper.setApiUrlString(
                         "panelUrl", _urlController.text);
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed('/home');
+                    _navigator();
                   },
                 ),
               ],
@@ -96,7 +114,65 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  _onChanged(bool value) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = value;
+      sharedPreferences.setBool("check", checkValue);
+      sharedPreferences.setString("apiKey", _apiController.text);
+      sharedPreferences.setString("panelUrl", _urlController.text);
+      sharedPreferences.commit();
+      getCredential();
+    });
+  }
+
+  getCredential() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      checkValue = sharedPreferences.getBool("check");
+      if (checkValue != null) {
+        if (checkValue) {
+          _apiController.text = sharedPreferences.getString("apiKey");
+          _urlController.text = sharedPreferences.getString("panelUrl");
+        } else {
+          _apiController.clear();
+          _urlController.clear();
+          sharedPreferences.clear();
+        }
+      } else {
+        checkValue = false;
+      }
+    });
+  }
+
+  _navigator() {
+    if (_apiController.text.length != 0 || _urlController.text.length != 0) {
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new MyHomePage()),
+          (Route<dynamic> route) => false);
+    } else {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          child: new CupertinoAlertDialog(
+            content: new Text(
+              "username or password \ncan't be empty",
+              style: new TextStyle(fontSize: 16.0),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text("OK"))
+            ],
+          ));
+    }
+  }
 }
+
 
 class AccentColorOverride extends StatelessWidget {
   const AccentColorOverride({Key key, this.color, this.child})
