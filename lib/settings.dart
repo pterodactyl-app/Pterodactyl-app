@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import './shared_preferences_helper.dart';
-import 'package:ThunderHosting/login.dart';
+import 'package:pterodactyl_app/login.dart';
 import 'main.dart';
 
 class SettingsList extends StatefulWidget {
