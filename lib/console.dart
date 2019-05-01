@@ -19,9 +19,9 @@ class _SendPageState extends State<SendPage> {
   final _sendController = TextEditingController();
 
   Future postSend() async {
-    String _send = await SharedPreferencesHelper.getApiUrlString("send");
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _send = await SharedPreferencesHelper.getString("send");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     var url = 'https://$_url/api/client/servers/${widget.server.id}/command';
 
     Map data = {'command': '$_send'};
@@ -117,7 +117,7 @@ class _SendPageState extends State<SendPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setApiUrlString(
+                    await SharedPreferencesHelper.setString(
                         "send", _sendController.text);
                     postSend();
                   },
