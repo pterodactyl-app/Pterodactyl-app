@@ -74,14 +74,14 @@ class _LoginPageState extends State<LoginPage> {
             new CheckboxListTile(
               value: checkValue,
               onChanged: _onChanged,
-              title: new Text("Remember me"),
+              title: new Text(DemoLocalizations.of(context).trans('remember_me')),
               controlAffinity: ListTileControlAffinity.leading,
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
                   child: Text(
-                    DemoLocalizations.of(context).trans('clear_login'),
+                    DemoLocalizations.of(context).trans('clear'),
                   ),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 RaisedButton(
                   child: Text(
-                    DemoLocalizations.of(context).trans('next_login'),
+                    DemoLocalizations.of(context).trans('next'),
                   ),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
