@@ -32,8 +32,6 @@
   "app_version": "Version de l'application",
   "notifications": "Activer les notifications",
   "notifications_sub": "Recevoir les notifications dans le menu principal",
-  "stay_logged_in": "Rester connecté",
-  "stay_logged_in_sub": "Mémorise automatiquement vos informations d'identification",
   "delete_data": "Effacer toutes les données",
   "delete_data_sub": "Ce bouton efface toutes les données de l'application !"
 }
