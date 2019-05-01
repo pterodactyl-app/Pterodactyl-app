@@ -37,6 +37,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
       "https://$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
         "Authorization": "Bearer $_api"
       },
     );
@@ -136,33 +137,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
     getData();
   }
 
-  final List<List<double>> charts = [
-    [
-      0.033,
-      0.048,
-      0.04,
-      0,
-      0.031,
-      0,
-      0.021,
-      0.024,
-      0.249,
-      0.042,
-      0.007,
-      0,
-      0.293,
-      0.003,
-      0.6,
-      0.131
-    ]
-  ];
-
-  static final List<String> chartDropdownItems = ['live (not working yet)'];
-  String actualDropdown = chartDropdownItems[0];
-  int actualChart = 0;
-
   @override
   Widget build(BuildContext context) {
+    var data = cpu;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -377,29 +354,11 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       fontSize: 20.0)),
                             ],
                           ),
-                          DropdownButton(
-                              isDense: true,
-                              value: actualDropdown,
-                              onChanged: (String value) => setState(() {
-                                    actualDropdown = value;
-                                    actualChart = chartDropdownItems
-                                        .indexOf(value); // Refresh the chart
-                                  }),
-                              items: chartDropdownItems.map((String title) {
-                                return DropdownMenuItem(
-                                  value: title,
-                                  child: Text(title,
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0)),
-                                );
-                              }).toList())
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: charts[actualChart],
+                        data: data,
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )

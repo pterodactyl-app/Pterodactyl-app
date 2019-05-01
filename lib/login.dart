@@ -72,11 +72,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             new CheckboxListTile(
-            value: checkValue,
-            onChanged: _onChanged,
-            title: new Text("Remember me"),
-            controlAffinity: ListTileControlAffinity.leading,
-          ),
+              value: checkValue,
+              onChanged: _onChanged,
+              title: new Text("Remember me"),
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
@@ -172,7 +172,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 }
-
 
 class AccentColorOverride extends StatelessWidget {
   const AccentColorOverride({Key key, this.color, this.child})

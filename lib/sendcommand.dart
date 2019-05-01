@@ -45,14 +45,18 @@ class _SendPageState extends State<SendPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor:
+            globals.isDarkTheme ? Colors.black : Colors.transparent,
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.black : Colors.white,
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back, color: globals.isDarkTheme ? Colors.black : Colors.white),
+          icon: Icon(Icons.arrow_back,
+              color: globals.isDarkTheme ? Colors.black : Colors.white),
         ),
         title: Text(DemoLocalizations.of(context).trans('console'),
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
+            style: TextStyle(
+                color: globals.isDarkTheme ? Colors.black : Colors.white,
+                fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [
         //   Container

@@ -13,7 +13,6 @@ class SettingsList extends StatefulWidget {
 }
 
 class SettingsListPageState extends State<SettingsList> {
-
   String _projectVersion = '';
 
   @override
@@ -24,7 +23,6 @@ class SettingsListPageState extends State<SettingsList> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   initPlatformState() async {
-
     String projectVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -39,10 +37,6 @@ class SettingsListPageState extends State<SettingsList> {
       _projectVersion = projectVersion;
     });
   }
-
-
-
-
 
   void handelTheme(bool value) {
     setState(() {
@@ -109,8 +103,8 @@ class SettingsListPageState extends State<SettingsList> {
                 'Get notifications in the Main Menu',
               ),
               //trailing: Switch(
-                //onChanged: handelTheme,
-                //value: globals.isDarkTheme,
+              //onChanged: handelTheme,
+              //value: globals.isDarkTheme,
               //),
             ),
             Divider(
@@ -128,8 +122,8 @@ class SettingsListPageState extends State<SettingsList> {
                 'Logout from the Main Menu',
               ),
               //trailing: Switch(
-                //onChanged: handelTheme,
-                //value: globals.isDarkTheme,
+              //onChanged: handelTheme,
+              //value: globals.isDarkTheme,
               //),
             ),
             Divider(
@@ -152,13 +146,13 @@ class SettingsListPageState extends State<SettingsList> {
               ),
             ),
             new ListTile(
-                leading: new Icon(Icons.info),
-                title: const Text('Version Name'),
-                subtitle: new Text(_projectVersion),
-              ),
-              new Divider(
-                height: 20.0,
-              ),
+              leading: new Icon(Icons.info),
+              title: const Text('Version Name'),
+              subtitle: new Text(_projectVersion),
+            ),
+            new Divider(
+              height: 20.0,
+            ),
           ],
         ),
       )),
