@@ -164,6 +164,18 @@ class SettingsListPageState extends State<SettingsList> {
               height: 20.0,
             ),
             new ListTile(
+              leading: Icon(Icons.insert_drive_file),
+              title: Text('Licence'),
+              subtitle: new Text('Sub text is comming soon'),
+              //onTap: () {
+                //Navigator.of(context)
+                  //.push(MaterialPageRoute(builder: (_) => LicencePage()));
+              //},
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            new ListTile(
               leading: new Icon(Icons.info),
               title: const Text('Pterodactyl app version'),
               subtitle: new Text(_projectVersion),

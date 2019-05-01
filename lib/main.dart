@@ -100,6 +100,7 @@ return DynamicTheme(
           return supportedLocales.first;
         },
         title: 'PTERODACTYL APP',
+        debugShowCheckedModeBanner: false,
         theme: theme,
         home: new LoginPage(),
         routes: <String, WidgetBuilder>{
