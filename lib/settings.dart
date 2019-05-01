@@ -98,10 +98,10 @@ class SettingsListPageState extends State<SettingsList> {
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
               ),
               title: Text(
-                'Enable notifications',
+                DemoLocalizations.of(context).trans('notifications'),
               ),
               subtitle: Text(
-                'Get notifications in the Main Menu',
+                DemoLocalizations.of(context).trans('notifications_sub'),
               ),
               //trailing: Switch(
               //onChanged: handelTheme,
@@ -117,10 +117,10 @@ class SettingsListPageState extends State<SettingsList> {
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
               ),
               title: Text(
-                'Stay Logged In',
+                DemoLocalizations.of(context).trans('stay_logged_in'),
               ),
               subtitle: Text(
-                'Logout from the Main Menu',
+                DemoLocalizations.of(context).trans('stay_logged_in_sub'),
               ),
               //trailing: Switch(
               //onChanged: handelTheme,
