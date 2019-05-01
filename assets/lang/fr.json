@@ -28,5 +28,6 @@
   "cores": "Cœurs",
   "console": "Console",
   "type_command_here": "Tapez la commande ici...",
-  "send_command": "Envoyer une commande"
+  "send_command": "Envoyer une commande",
+  "app_version": "Version de l'application"
 }
