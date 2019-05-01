@@ -5,9 +5,12 @@
     "next_login": "NÄCHSTER",
     "dashboard": "Instrumententafel",
     "logout": "Ausloggen",
+    "logout_sub": "Disconnect",
     "total_servers": "Server insgesamt",
     "settings": "Einstellungen",
     "settings_sub": "Daten, Nachtmodus",
+    "license": "Licenses",
+    "license_sub": "Get informations about the licenses",
     "alerts": "Alarme",
     "alerts_sub": "Alles",
     "coming_soon": "Demnächst",
@@ -19,9 +22,10 @@
     "action_stop": "Stop",
     "action_restart": "Restart",
     "action_kill": "Kill",
-    "day_mode":"Day mode",
-    "night_mode":"Night mode",
-    "cores":"Cores",
-    "send_command":"Send a command",
-    "console": "Console"
+    "night_mode": "Night mode",
+    "night_mode_sub": "Black and Grey Theme",
+    "cores": "Cores",
+    "console": "Console",
+    "type_command_here": "Type command here...",
+    "send_command": "Send a command"
 }
