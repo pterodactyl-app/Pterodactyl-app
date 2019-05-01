@@ -28,5 +28,6 @@
     "cores": "Cores",
     "console": "Console",
     "type_command_here": "Type command here...",
-    "send_command": "Send a command"
+    "send_command": "Send a command",
+    "app_version": "App Version"
 }
