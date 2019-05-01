@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import './shared_preferences_helper.dart';
-import 'package:pterodactyl_app/login.dart';
+import 'package:ThunderHosting/login.dart';
 import 'main.dart';
 
 class SettingsList extends StatefulWidget {
@@ -95,7 +95,6 @@ class SettingsListPageState extends State<SettingsList> {
             ListTile(
               leading: Icon(
                 Icons.notifications,
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
               ),
               title: Text(
                 DemoLocalizations.of(context).trans('notifications'),
@@ -114,7 +113,6 @@ class SettingsListPageState extends State<SettingsList> {
             ListTile(
               leading: Icon(
                 Icons.account_box,
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
               ),
               title: Text(
                 DemoLocalizations.of(context).trans('stay_logged_in'),
@@ -133,7 +131,6 @@ class SettingsListPageState extends State<SettingsList> {
             ListTile(
               leading: Icon(
                 Icons.color_lens,
-                color: globals.isDarkTheme ? Colors.white : Color(0xFF00567E),
               ),
               title: Text(
                 DemoLocalizations.of(context).trans('dark_mode'),
@@ -145,6 +142,27 @@ class SettingsListPageState extends State<SettingsList> {
                 onChanged: handelTheme,
                 value: globals.isDarkTheme,
               ),
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            new ListTile(
+              leading: Icon(Icons.insert_drive_file),
+              title: Text(DemoLocalizations.of(context).trans('license')),
+              subtitle:
+                  new Text(DemoLocalizations.of(context).trans('license_sub')),
+              //onTap: () {
+              //Navigator.of(context)
+              //.push(MaterialPageRoute(builder: (_) => LicencePage()));
+              //},
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            new ListTile(
+              leading: new Icon(Icons.info),
+              title: Text(DemoLocalizations.of(context).trans('app_version')),
+              subtitle: new Text(_projectVersion),
             ),
             Divider(
               height: 20.0,
@@ -165,43 +183,18 @@ class SettingsListPageState extends State<SettingsList> {
               height: 20.0,
             ),
             new ListTile(
-              leading: Icon(Icons.insert_drive_file),
-              title: Text(DemoLocalizations.of(context).trans('license')),
-              subtitle:
-                  new Text(DemoLocalizations.of(context).trans('license_sub')),
-              //onTap: () {
-              //Navigator.of(context)
-              //.push(MaterialPageRoute(builder: (_) => LicencePage()));
-              //},
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: Icon(Icons.delete_forever,
-                  color: globals.isDarkTheme ? Colors.white : Colors.red),
-              title: Text("Delete all data"),
+              leading: Icon(Icons.delete_forever, color: Colors.red),
+              title: Text(DemoLocalizations.of(context).trans('delete_data')),
               subtitle: new Text(
-                  "This button delete all the data of the app!"),
+                  DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
                 Navigator.of(context).pushAndRemoveUntil(
                     new MaterialPageRoute(
                         builder: (BuildContext context) => new LoginPage()),
-                        (Route<dynamic> route) => false);
+                    (Route<dynamic> route) => false);
               },
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: new Icon(Icons.info),
-              title: Text(DemoLocalizations.of(context).trans('app_version')),
-              subtitle: new Text(_projectVersion),
-            ),
-            new Divider(
-              height: 20.0,
             ),
           ],
         ),
