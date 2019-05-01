@@ -29,5 +29,9 @@
     "console": "Console",
     "type_command_here": "Type command here...",
     "send_command": "Send a command",
-    "app_version": "App Version"
+    "app_version": "App Version",
+    "notifications": "Enable notifications",
+    "notifications_sub": "Get notifications in the main menu",
+    "stay_logged_in": "Stay Logged In",
+    "stay_logged_in_sub": "Remember your credentials"
 }
