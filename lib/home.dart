@@ -20,8 +20,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers = 0;
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     http.Response response = await http.get(
       "https://$_url/api/client",
       headers: {
