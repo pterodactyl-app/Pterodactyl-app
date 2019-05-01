@@ -4,6 +4,7 @@
 
 #import "GeneratedPluginRegistrant.h"
 #import <package_info/PackageInfoPlugin.h>
+#import <package_info/PackageInfoPlugin.h>
 #import <path_provider/PathProviderPlugin.h>
 #import <shared_preferences/SharedPreferencesPlugin.h>
 #import <sqflite/SqflitePlugin.h>
