@@ -100,9 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setApiUrlString(
+                    await SharedPreferencesHelper.setString(
                         "apiKey", _apiController.text);
-                    await SharedPreferencesHelper.setApiUrlString(
+                    await SharedPreferencesHelper.setString(
                         "panelUrl", _urlController.text);
                     _navigator();
                   },
