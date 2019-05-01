@@ -45,6 +45,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
     setState(() {
       cpu = data["attributes"]["cpu"]["cores"];
     });
+    print(data["attributes"]["cpu"]["cores"].length);
+    return response;
   }
 
   Future postStart() async {
@@ -139,7 +141,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   @override
   Widget build(BuildContext context) {
-    var data = cpu;
+   var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];   
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,

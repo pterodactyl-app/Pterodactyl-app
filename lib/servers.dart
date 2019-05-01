@@ -53,7 +53,7 @@ class _ServerListPageState extends State<ServerListPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),

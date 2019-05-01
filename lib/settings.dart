@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import './shared_preferences_helper.dart';
+import 'package:pterodactyl_app/login.dart';
 import 'main.dart';
 
 class SettingsList extends StatefulWidget {
@@ -145,9 +146,26 @@ class SettingsListPageState extends State<SettingsList> {
                 value: globals.isDarkTheme,
               ),
             ),
+            Divider(
+              height: 20.0,
+            ),
+            new ListTile(
+              leading: Icon(Icons.subdirectory_arrow_left),
+              title: Text(DemoLocalizations.of(context).trans('logout')),
+              subtitle: new Text('Sub text is comming XD'),
+              onTap: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => new LoginPage()),
+                    (Route<dynamic> route) => false);
+              },
+            ),
+            Divider(
+              height: 20.0,
+            ),
             new ListTile(
               leading: new Icon(Icons.info),
-              title: const Text('Version Name'),
+              title: const Text('Pterodactyl app version'),
               subtitle: new Text(_projectVersion),
             ),
             new Divider(
