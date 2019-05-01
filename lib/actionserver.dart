@@ -34,7 +34,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     http.Response response = await http.get(
-      "https://$_url/api/client/servers/${widget.server.id}/utilization",
+      "$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+    var url = '$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -73,7 +73,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStop() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+    var url = '$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -94,7 +94,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postRestart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+    var url = '$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -115,7 +115,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postKill() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
+    var url = '$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON

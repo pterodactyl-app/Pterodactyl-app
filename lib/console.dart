@@ -22,7 +22,7 @@ class _SendPageState extends State<SendPage> {
     String _send = await SharedPreferencesHelper.getString("send");
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = 'https://$_url/api/client/servers/${widget.server.id}/command';
+    var url = '$_url/api/client/servers/${widget.server.id}/command';
 
     Map data = {'command': '$_send'};
     //encode Map to JSON
