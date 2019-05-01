@@ -242,7 +242,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         ],
                       ),
                       Material(
-                          color: Colors.black,
+                          color: Colors.red,
                           borderRadius: BorderRadius.circular(24.0),
                           child: Center(
                               child: Padding(
@@ -264,9 +264,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Material(
-                          color: Colors.black,
+                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
+                          child: Center( 
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.refresh,
