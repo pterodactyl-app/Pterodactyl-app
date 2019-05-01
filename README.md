@@ -1,6 +1,6 @@
-# Pterodactyl App 🚀
+# Pterodactyl Mobile App 🚀
 
-A unofficial app for the Pterodactyl Panel
+A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
 
 Features :
