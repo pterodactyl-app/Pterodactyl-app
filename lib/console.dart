@@ -82,7 +82,7 @@ class _SendPageState extends State<SendPage> {
             Column(
               children: <Widget>[
                 Text(
-                  '???????',
+                  DemoLocalizations.of(context).trans('coming_soon'),
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
@@ -93,14 +93,15 @@ class _SendPageState extends State<SendPage> {
               child: TextField(
                 controller: _sendController,
                 decoration: InputDecoration(
-                  labelText: ('Type Command Here'),
+                  labelText: (DemoLocalizations.of(context)
+                      .trans('type_command_here')),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear Field'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
