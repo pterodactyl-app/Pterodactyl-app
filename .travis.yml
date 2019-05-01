@@ -1,4 +1,5 @@
 deploy:
+  language: Github
   provider: pages
   skip_cleanup: true
   github_token: bb9e68445c0360716c5146d97ed527e0cae80152  # Set in the settings page of your repository, as a secure variable
