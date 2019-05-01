@@ -7,7 +7,7 @@ import './shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'main.dart';
-import 'sendcommand.dart';
+import 'console.dart';
 import 'servers.dart';
 
 class Send {
@@ -141,7 +141,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   @override
   Widget build(BuildContext context) {
-   var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];   
+    var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
