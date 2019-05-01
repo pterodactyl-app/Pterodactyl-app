@@ -3,7 +3,6 @@
 //
 
 #import "GeneratedPluginRegistrant.h"
-#import <get_version/GetVersionPlugin.h>
 #import <package_info/PackageInfoPlugin.h>
 #import <path_provider/PathProviderPlugin.h>
 #import <shared_preferences/SharedPreferencesPlugin.h>
