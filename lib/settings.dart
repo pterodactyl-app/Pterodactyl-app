@@ -179,7 +179,7 @@ class SettingsListPageState extends State<SettingsList> {
             ),
             new ListTile(
               leading: new Icon(Icons.info),
-              title: const Text('Pterodactyl app version'),
+              title: Text(DemoLocalizations.of(context).trans('app_version')),
               subtitle: new Text(_projectVersion),
             ),
             new Divider(
