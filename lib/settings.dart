@@ -178,6 +178,24 @@ class SettingsListPageState extends State<SettingsList> {
               height: 20.0,
             ),
             new ListTile(
+              leading: Icon(Icons.delete_forever,
+                  color: globals.isDarkTheme ? Colors.white : Colors.red),
+              title: Text("Delete all data"),
+              subtitle: new Text(
+                  "This button delete all the data of the app!"),
+              onTap: () {
+                SharedPreferencesHelper.remove("panelUrl");
+                SharedPreferencesHelper.remove("apiKey");
+                Navigator.of(context).pushAndRemoveUntil(
+                    new MaterialPageRoute(
+                        builder: (BuildContext context) => new LoginPage()),
+                        (Route<dynamic> route) => false);
+              },
+            ),
+            Divider(
+              height: 20.0,
+            ),
+            new ListTile(
               leading: new Icon(Icons.info),
               title: Text(DemoLocalizations.of(context).trans('app_version')),
               subtitle: new Text(_projectVersion),
