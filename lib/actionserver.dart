@@ -31,8 +31,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   List cpu;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     http.Response response = await http.get(
       "https://$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
@@ -50,8 +50,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
@@ -71,8 +71,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
@@ -92,8 +92,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
@@ -113,8 +113,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getApiUrlString("apiKey");
-    String _url = await SharedPreferencesHelper.getApiUrlString("panelUrl");
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
     var url = 'https://$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
