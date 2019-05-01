@@ -136,10 +136,10 @@ class SettingsListPageState extends State<SettingsList> {
                 color: globals.isDarkTheme ? Colors.white : Color(0xFF00567E),
               ),
               title: Text(
-                DemoLocalizations.of(context).trans('night_mode'),
+                DemoLocalizations.of(context).trans('dark_mode'),
               ),
               subtitle: Text(
-                DemoLocalizations.of(context).trans('night_mode_sub'),
+                DemoLocalizations.of(context).trans('dark_mode_sub'),
               ),
               trailing: Switch(
                 onChanged: handelTheme,
