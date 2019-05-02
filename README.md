@@ -8,7 +8,7 @@ Features :
 - Send commands to your server
 - See the CPU that you are using
 
-[![Build Status](https://travis-ci.org/rubentalstra/Pterodactyl-app.svg?branch=master)](https://travis-ci.org/rubentalstra/Pterodactyl-app)
+[![Codemagic build status](https://api.codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/status_badge.svg)](https://codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/latest_build)
 
 ## Getting Started
 
