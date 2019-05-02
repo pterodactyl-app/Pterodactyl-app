@@ -39,7 +39,6 @@ dependencies:
   font_awesome_flutter: any
   dynamic_theme: any
   get_version: any
-  onesignal: ^1.1.0
 
   dbutils:
     git:
