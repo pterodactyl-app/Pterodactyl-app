@@ -166,7 +166,8 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: new Text("OK"))
+                  child: new Text("OK", style: TextStyle(
+                color: Colors.black)),)
             ],
           ));
     }

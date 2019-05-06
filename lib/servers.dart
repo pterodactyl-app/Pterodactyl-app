@@ -101,7 +101,19 @@ class _ServerListPageState extends State<ServerListPage> {
                       color:
                           globals.isDarkTheme ? Colors.grey[850] : Colors.white,
                       child: InkWell(
-                        //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ItemReviewsPage())),
+                        onTap: () {
+                          var route = new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                new ActionServerPage(
+                                    server: User(
+                                        id:
+                                            userData[index]["attributes"]
+                                                ["identifier"],
+                                        name: userData[index]["attributes"]
+                                            ["name"])),
+                          );
+                          Navigator.of(context).push(route);
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(30.0),
                           child: Column(
@@ -199,15 +211,6 @@ class _ServerListPageState extends State<ServerListPage> {
                 ],
               ),
             ),
-            onTap: () {
-              var route = new MaterialPageRoute(
-                builder: (BuildContext context) => new ActionServerPage(
-                    server: User(
-                        id: userData[index]["attributes"]["identifier"],
-                        name: userData[index]["attributes"]["name"])),
-              );
-              Navigator.of(context).push(route);
-            },
           );
         },
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'globals.dart' as globals;
@@ -9,12 +8,20 @@ import 'dart:convert';
 import 'main.dart';
 import 'console.dart';
 import 'servers.dart';
+import 'package:pterodactyl_app/utilization.dart';
 
 class Send {
   final String id, name;
   const Send({
     this.id,
     this.name,
+  });
+}
+
+class Stats {
+  final String id;
+  const Stats({
+    this.id,
   });
 }
 
@@ -28,26 +35,6 @@ class ActionServerPage extends StatefulWidget {
 
 class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
-  List cpu;
-
-  Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    http.Response response = await http.get(
-      "$_url/api/client/servers/${widget.server.id}/utilization",
-      headers: {
-        "Accept": "Application/vnd.pterodactyl.v1+json",
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $_api"
-      },
-    );
-    data = json.decode(response.body);
-    setState(() {
-      cpu = data["attributes"]["cpu"]["cores"];
-    });
-    print(data["attributes"]["cpu"]["cores"].length);
-    return response;
-  }
 
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
@@ -134,14 +121,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -266,7 +246,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                       Material(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(24.0),
-                          child: Center( 
+                          child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.refresh,
@@ -332,40 +312,74 @@ class _ActionServerPageState extends State<ActionServerPage> {
             ),
             _buildTile(
               Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('CPU',
-                                  style: TextStyle(color: Colors.green)),
-                              Text(DemoLocalizations.of(context).trans('cores'),
-                                  style: TextStyle(
-                                      color: globals.isDarkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0)),
-                            ],
-                          ),
+                          Text(('Stats'),
+                              style: TextStyle(
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0))
                         ],
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                      Sparkline(
-                        data: data,
-                        lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
-                      )
-                    ],
-                  )),
+                      Material(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Icon(Icons.show_chart,
+                                color: Colors.white, size: 30.0),
+                          )))
+                    ]),
+              ),
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      new StatePage(info: Stats(id: widget.server.id)),
+                );
+                Navigator.of(context).push(route);
+              },
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(('File List (coming panel 0.8)'),
+                              style: TextStyle(
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20.0))
+                        ],
+                      ),
+                      Material(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Icon(Icons.folder_open,
+                                color: Colors.white, size: 30.0),
+                          )))
+                    ]),
+              ),
             ),
             _buildTile(
               Padding(
@@ -413,7 +427,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(2, 220.0),
+            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ));
