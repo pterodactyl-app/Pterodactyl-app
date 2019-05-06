@@ -9,6 +9,8 @@ Features :
 - See the CPU that you are using
 
 
+https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
