@@ -23,4 +23,4 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-//flutter build apk --release --target-platform=android-arm64
+//flutter build apk --release --target-platform=android-arm64 --release --target-platform=android-arm
