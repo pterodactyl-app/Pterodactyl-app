@@ -49,7 +49,7 @@ signingConfigs {
                 keyAlias System.getenv()["FCI_KEY_ALIAS"]
                 keyPassword System.getenv()["FCI_KEY_PASSWORD"]
             } else {
-                storeFile file("/android/app/keystore_name.keystore")
+                storeFile file("/Users/builder/environment_files/keystore_name.keystore")
                 storePassword "Nebur1211"
                 keyAlias "key"
                 keyPassword "Nebur1211"
