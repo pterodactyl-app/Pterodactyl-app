@@ -51,7 +51,7 @@ signingConfigs {
             } else {
                 storeFile file("assets/keystore_name.keystore")
                 storePassword "Nebur1211"
-                keyAlias "Pterodactyl"
+                keyAlias "alias_name"
                 keyPassword "Nebur1211"
             }
         }
