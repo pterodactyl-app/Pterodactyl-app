@@ -8,6 +8,8 @@ for all the poeple how worked with me on this amazing project.
 
 > - Danish Language: `@Noah 101#0001`
 
+> - German Language: `@Jan#6705`
+
 
 
 ###### Flutter Coders:
