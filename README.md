@@ -34,7 +34,7 @@ V1.0 6 may '19 - Original Release
 ## Useful Links
 
 
-Donation: PayPal: rubentalstra@icloud.com / other is coming
+Donation: [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/RDTalstra)
 
 Twitter: 
 
