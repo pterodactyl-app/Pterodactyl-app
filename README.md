@@ -10,6 +10,10 @@ Features :
 
 
 
+this project was made possible by everyone who contributed to the project. (https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
+
+
+
 ### Currently available on the Play store.
 
 <a href='https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='80px'/></a>
@@ -30,7 +34,7 @@ V1.0 6 may '19 - Original Release
 ## Useful Links
 
 
-Donation: <https://www.paypal.me/RDTalstra>
+Donation: PayPal: rubentalstra@icloud.com / other is coming
 
 Twitter: 
 
