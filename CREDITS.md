@@ -10,6 +10,8 @@ for all the poeple how worked with me on this amazing project.
 
 > - German Language: `@Jan#6705`
 
+> - Norwegian language: `@Bendik0208#5557`
+
 
 
 ###### Flutter Coders:
