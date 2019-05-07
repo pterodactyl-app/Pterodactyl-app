@@ -34,7 +34,7 @@ V1.0 6 may '19 - Original Release
 ## Useful Links
 
 
-Donation: [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/RDTalstra)
+Donation: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
 
 Twitter: 
 
