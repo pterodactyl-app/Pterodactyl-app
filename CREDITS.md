@@ -13,3 +13,9 @@ for all the poeple how worked with me on this amazing project.
 ###### Flutter Coders:
 
 > - `@appomatrix#9639`
+
+
+
+###### Donators:
+
+> - Adnroid play store console `@/var/www/Jordy`
