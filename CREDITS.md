@@ -15,6 +15,7 @@ for all the poeple how worked with me on this amazing project.
 > - Dutch language: `@Lucas_#6183`
 
 
+
 ###### Flutter Coders:
 
 > - `@appomatrix#9639`
@@ -24,3 +25,5 @@ for all the poeple how worked with me on this amazing project.
 ###### Donators:
 
 > - Android play store console `@/var/www/Jordy ツ#0049`
+
+> - $0.50 CAD `@Kiffey14#2010`
