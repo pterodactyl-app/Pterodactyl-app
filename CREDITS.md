@@ -1,7 +1,7 @@
 ## CREDITS
 
 
-for all the poeple how worked with me on the amazing project.
+for all the poeple how worked with me on this amazing project.
 
 
 ###### Translators:
