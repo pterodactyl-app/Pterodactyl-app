@@ -1,7 +1,7 @@
 {
     "url_login":"URL (Bijvoorbeeld: https://panel.pterodactyl.app)",
     "api_key_login":"API Sleutel",
-    "remember_me":"Onthoud mij (Niet aanbevolen voor gedeelde of openbare apparaten)",
+    "remember_me":"Onthoud mij",
     "clear":"MAAK LEEG",
     "next":"VOLGENDE",
     "login_error":"Het veld gebruikersnaam en/of wachtwoord mag niet leeg zijn.",
@@ -24,7 +24,7 @@
     "action_start":"Start",
     "action_stop":"Stop",
     "action_restart":"Herstart",
-    "action_kill":"Geforceerd stoppen (no save etc)",
+    "action_kill":"Geforceerd",
     "action_stats": "Statistieken",
     "action_file": "Bestandenlijst (komt in 0.8)",
     "dark_mode":"Donkere modus",
