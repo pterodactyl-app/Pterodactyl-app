@@ -57,4 +57,9 @@ then you copy this code:
 ```
 and change to the languge you are working on. 
 
+##Done !
 
+
+but the json file in a zip and then make a issue and post your discord name#1234 with it so i can add you to the file with translators. 
+
+thank you very much.
