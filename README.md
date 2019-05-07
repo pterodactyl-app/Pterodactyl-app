@@ -9,20 +9,38 @@ Features :
 - See the CPU that you are using
 
 
-https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app
+## Links:
 
-## Getting Started
++ [Android APP](https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+### Version logs
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+V1.0 6 may '19 - Original Release
+
+
+
+### License
+
+- Copyright 2019 Ruben Talstra
+- Licensed under BSD 3-Clause "New" or "Revised" License (https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE.md)
+
+
+## Useful Links
+
+
+Social Media:
+
+Twitter: 
+
+Facebook: 
+
+Dribbble: 
+
+Google+: 
+
+Instagram: 
 
 
 //flutter build apk --release --target-platform=android-arm64 --release --target-platform=android-arm
