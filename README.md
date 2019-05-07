@@ -9,9 +9,9 @@ Features :
 - See the CPU that you are using
 
 
-## Links:
+Currently available on the Play store.
 
-+ [Android APP](https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app)
+<a href='https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='80px'/></a>
 
 
 
@@ -24,7 +24,7 @@ V1.0 6 may '19 - Original Release
 ### License
 
 - Copyright 2019 Ruben Talstra
-- Licensed under BSD 3-Clause "New" or "Revised" License (https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE.md)
+- Licensed under BSD 3-Clause "New" or "Revised" License (https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE)
 
 
 ## Useful Links
