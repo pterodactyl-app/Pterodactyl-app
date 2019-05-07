@@ -47,7 +47,7 @@ class DemoLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      ['en', 'fr', 'de', 'nl', 'dk'].contains(locale.languageCode);
+      ['en', 'fr', 'de', 'nl', 'dk', 'no'].contains(locale.languageCode);
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
@@ -82,6 +82,7 @@ return DynamicTheme(
           const Locale('fr', 'FR'),
           const Locale('de', 'DE'),
           const Locale('dk', 'DK'),
+          const Locale('no', 'NO'),
           const Locale('nl', 'NL')
         ],
         localizationsDelegates: [
