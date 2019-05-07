@@ -9,6 +9,8 @@ Features :
 - See the CPU that you are using
 
 
+this project was made possible by everyone who contributed to the project. (https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
+
 
 ### Currently available on the Play store.
 
@@ -30,7 +32,7 @@ V1.0 6 may '19 - Original Release
 ## Useful Links
 
 
-Donation: <https://www.paypal.me/RDTalstra>
+Donation: PayPal: rubentalstra@icloud.com / other is coming
 
 Twitter: 
 
