@@ -24,7 +24,7 @@
     "action_start":"Start",
     "action_stop":"Stop",
     "action_restart":"Herstart",
-    "action_kill":"Forceer stop",
+    "action_kill":"Kill",
     "action_stats": "Statistieken",
     "action_file": "Bestandenlijst (komt in 0.8)",
     "dark_mode":"Donkere modus",

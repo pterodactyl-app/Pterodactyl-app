@@ -190,7 +190,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontSize: 18.0))
                         ],
                       )
                     ]),
@@ -218,7 +218,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontSize: 18.0))
                         ],
                       ),
                       Material(
@@ -264,7 +264,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontSize: 18.0))
                         ],
                       )
                     ]),
@@ -292,7 +292,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontSize: 18.0))
                         ],
                       ),
                       Material(
