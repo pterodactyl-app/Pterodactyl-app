@@ -31,6 +31,8 @@ V1.0 6 may '19 - Original Release
 ## Useful Links
 
 
+Donation: <https://www.paypal.me/RDTalstra>
+
 Social Media:
 
 Twitter: 
