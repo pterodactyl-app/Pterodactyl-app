@@ -39,4 +39,6 @@ Facebook:
 Instagram: 
 
 
-//flutter build apk --release --target-platform=android-arm64 --release --target-platform=android-arm
+
+```flutter build appbundle --release --target-platform=android-arm
+flutter build appbundle --release --target-platform=android-arm64```
