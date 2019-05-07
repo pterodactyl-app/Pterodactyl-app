@@ -40,6 +40,6 @@ Instagram:
 
 
 
-``flutter build appbundle --release --target-platform=android-arm
+```flutter build appbundle --release --target-platform=android-arm
 
-flutter build appbundle --release --target-platform=android-arm64``
+flutter build appbundle --release --target-platform=android-arm64```
