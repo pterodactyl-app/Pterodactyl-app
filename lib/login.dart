@@ -74,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
             new CheckboxListTile(
               value: checkValue,
               onChanged: _onChanged,
-              title: new Text(DemoLocalizations.of(context).trans('remember_me')),
+              title:
+                  new Text(DemoLocalizations.of(context).trans('remember_me')),
               controlAffinity: ListTileControlAffinity.leading,
             ),
             ButtonBar(
@@ -158,16 +159,18 @@ class _LoginPageState extends State<LoginPage> {
           barrierDismissible: false,
           child: new CupertinoAlertDialog(
             content: new Text(
-              "username or password \ncan't be empty",
+              DemoLocalizations.of(context).trans('login_error'),
               style: new TextStyle(fontSize: 16.0),
             ),
             actions: <Widget>[
               new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text("OK", style: TextStyle(
-                color: Colors.black)),)
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: new Text(
+                    DemoLocalizations.of(context).trans('login_error_ok'),
+                    style: TextStyle(color: Colors.black)),
+              )
             ],
           ));
     }

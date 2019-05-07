@@ -8,6 +8,7 @@ import './shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'actionserver.dart';
+import 'main.dart';
 
 class StatePage extends StatefulWidget {
   StatePage({Key key, this.info}) : super(key: key);
@@ -66,7 +67,7 @@ class _StatePageState extends State<StatePage> {
               color: globals.isDarkTheme ? Colors.white : Colors.black,
             ),
           ),
-          title: Text('Stats',
+          title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
               style: TextStyle(
                   color: globals.isDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700)),
@@ -106,7 +107,7 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('State: $_stats',
+                          Text(DemoLocalizations.of(context).trans('utilization_stats_on'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -142,9 +143,9 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('PERFORMANCE REPORT',
+                              Text(DemoLocalizations.of(context).trans('utilization_performance_memory'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text('memory',
+                              Text(DemoLocalizations.of(context).trans('utilization_memory'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white
@@ -179,9 +180,9 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('PERFORMANCE REPORT',
+                              Text(DemoLocalizations.of(context).trans('utilization_performance_cpu'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text('CPU',
+                              Text(DemoLocalizations.of(context).trans('utilization_cpu'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white
@@ -216,9 +217,9 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('PERFORMANCE REPORT',
+                              Text(DemoLocalizations.of(context).trans('utilization_performance_disk'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text('Disk',
+                              Text(DemoLocalizations.of(context).trans('utilization_disk'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white

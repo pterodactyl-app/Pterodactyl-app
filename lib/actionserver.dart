@@ -321,7 +321,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(('Stats'),
+                          Text(DemoLocalizations.of(context)
+                                  .trans('action_stats'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -360,7 +361,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(('File List (coming panel 0.8)'),
+                          Text(DemoLocalizations.of(context)
+                                  .trans('action_file'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
