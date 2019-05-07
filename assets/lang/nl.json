@@ -36,9 +36,9 @@
     "app_version":"App Versie",
     "notifications":"Schakel notificaties in",
     "notifications_sub":"Krijg notificaties in het hoofdmenu",
-    "delete_data": "Verwijder alle data
+    "delete_data": "Verwijder alle data",
     "delete_data_sub": "Deze knop verwijdert alle appdata!",
-    "utilization_stats": "Statistieken"
+    "utilization_stats": "Statistieken",
     "utilization_stats_on": "Status: $_stats",
     "utilization_performance_memory": "PRESTATIE RAPPORT",
     "utilization_memory": "geheugen",
