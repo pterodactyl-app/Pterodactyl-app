@@ -18,4 +18,4 @@ for all the poeple how worked with me on this amazing project.
 
 ###### Donators:
 
-> - Adnroid play store console `@/var/www/Jordy ツ#0049`
+> - Android play store console `@/var/www/Jordy ツ#0049`
