@@ -40,6 +40,7 @@ dependencies:
   font_awesome_flutter: any
   dynamic_theme: any
   get_version: any
+  firebase_messaging: any
 
   dbutils:
     git:

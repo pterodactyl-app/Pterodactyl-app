@@ -207,7 +207,7 @@ class _ServerListPageState extends State<ServerListPage> {
                         ),
                       ),
                     ),
-                  ),
+                  ),                  
                 ],
               ),
             ),
