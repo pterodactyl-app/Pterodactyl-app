@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
 <img src="https://opencollective.com/pterodactyl-app/tiers/donators/badge.svg?label=Donators&color=brightgreen" />
-<img src="https://opencollective.com/pterodactyl-app/tiers/big-donator/badge.svg?label=BIG DONATOR&color=brightgreen" />
+<img src="https://opencollective.com/pterodactyl-app/tiers/big-donator/badge.svg?label=BIG_DONATOR&color=brightgreen" />
 
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
