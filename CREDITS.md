@@ -14,6 +14,13 @@ for all the poeple how worked with me on this amazing project.
 
 > - Dutch language: `@Lucas_#6183` and `@/home/Jesse ツ | I USE DEL BUTTON#5885`
 
+> - Italian language: `@????#????`
+
+> - Swedish language: `@MrKaKisen#8523`
+
+> - Polish language: `@????#????`
+
+
 
 
 ###### Flutter Coders:
