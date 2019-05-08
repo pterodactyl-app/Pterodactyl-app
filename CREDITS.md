@@ -36,3 +36,9 @@ for all the poeple how worked with me on this amazing project.
 > - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001`
 
 > - $0.50 CAD `@Kiffey14#2010`
+
+
+
+###### Beta Testers:
+
+> - `@ThatProgrammer#6001`
