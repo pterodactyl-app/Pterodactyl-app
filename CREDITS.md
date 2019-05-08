@@ -18,7 +18,7 @@ for all the poeple how worked with me on this amazing project.
 
 > - Swedish language: `@MrKaKisen#8523`
 
-> - Polish language: `@????#????`
+> - Polish language: `@riko.dev#9357`
 
 
 
