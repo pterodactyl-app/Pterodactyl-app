@@ -1,8 +1,8 @@
 # Pterodactyl Mobile App 🚀
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
-[![Donate](https://opencollective.com/pterodactyl-app/tiers/donators/badge.svg?label=Donators&color=brightgreen)
-[![Donate](https://opencollective.com/pterodactyl-app/tiers/big-donator/badge.svg?label=BIG DONATOR&color=brightgreen)
+https://opencollective.com/pterodactyl-app/tiers/donators/badge.svg?label=Donators&color=brightgreen
+https://opencollective.com/pterodactyl-app/tiers/big-donator/badge.svg?label=BIG DONATOR&color=brightgreen
 
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
