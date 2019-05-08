@@ -1,5 +1,7 @@
 # Pterodactyl Mobile App 🚀
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
+
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
 
@@ -33,8 +35,6 @@ V1.0 6 may '19 - Original Release
 
 ## Useful Links
 
-
-Donation: PayPal: rubentalstra@icloud.com / other is coming
 
 Twitter: 
 
