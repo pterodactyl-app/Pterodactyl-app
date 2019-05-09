@@ -51,13 +51,22 @@ class DemoLocalizationsDelegate
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
+
+// flutter 0.11 localeResolutionCallback fix, change it if fixed
+    if (locale == null || isSupported(locale) == false) {
+      debugPrint('*app_locale_delegate* fallback to locale ');
+
+      locale = Locale('en', 'US'); // fallback to default language
+    }
+
     DemoLocalizations localizations = new DemoLocalizations(locale);
     await localizations.load();
 
-    print("Load ${locale.languageCode}");
+print("Load ${locale.languageCode}");
 
     return localizations;
   }
+
 
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
