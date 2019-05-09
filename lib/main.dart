@@ -46,12 +46,20 @@ class DemoLocalizationsDelegate
   const DemoLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) =>
-      ['en', 'fr', 'de', 'nl', 'dk', 'no', 'pl', 'it', 'se'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => [
+        'en',
+        'fr',
+        'de',
+        'nl',
+        'dk',
+        'no',
+        'pl',
+        'it',
+        'se'
+      ].contains(locale.languageCode);
 
   @override
   Future<DemoLocalizations> load(Locale locale) async {
-
 // flutter 0.11 localeResolutionCallback fix, change it if fixed
     if (locale == null || isSupported(locale) == false) {
       debugPrint('*app_locale_delegate* fallback to locale ');
@@ -62,70 +70,68 @@ class DemoLocalizationsDelegate
     DemoLocalizations localizations = new DemoLocalizations(locale);
     await localizations.load();
 
-print("Load ${locale.languageCode}");
+    print("Load ${locale.languageCode}");
 
     return localizations;
   }
-
 
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-
-return DynamicTheme(
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColorBrightness:
-                globals.isDarkTheme ? Brightness.dark : Brightness.light,
-            brightness: brightness,
-          ),
-  themedWidgetBuilder: (context, theme) {
-    return new MaterialApp(
-        supportedLocales: [
-          const Locale('en', 'US'),
-          const Locale('fr', 'FR'),
-          const Locale('de', 'DE'),
-          const Locale('dk', 'DK'),
-          const Locale('no', 'NO'),
-          const Locale('nl', 'NL'),
-          const Locale('se', 'SE'),
-          const Locale('it', 'IT'),
-          const Locale('pl', 'PL')
-        ],
-        localizationsDelegates: [
-          const DemoLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
-        ],
-        localeResolutionCallback:
-            (Locale locale, Iterable<Locale> supportedLocales) {
-          for (Locale supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode ||
-                supportedLocale.countryCode == locale.countryCode) {
-              return supportedLocale;
-            }
-          }
+              primarySwatch: Colors.blue,
+              primaryColorBrightness:
+                  globals.isDarkTheme ? Brightness.dark : Brightness.light,
+              brightness: brightness,
+            ),
+        themedWidgetBuilder: (context, theme) {
+          return new MaterialApp(
+            supportedLocales: [
+              const Locale('en', 'US'),
+              const Locale('fr', 'FR'),
+              const Locale('de', 'DE'),
+              const Locale('dk', 'DK'),
+              const Locale('no', 'NO'),
+              const Locale('nl', 'NL'),
+              const Locale('se', 'SE'),
+              const Locale('it', 'IT'),
+              const Locale('pl', 'PL')
+            ],
+            localizationsDelegates: [
+              const DemoLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
+            localeResolutionCallback:
+                (Locale locale, Iterable<Locale> supportedLocales) {
+              for (Locale supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale.languageCode ||
+                    supportedLocale.countryCode == locale.countryCode) {
+                  return supportedLocale;
+                }
+              }
 
-          return supportedLocales.first;
-        },
-        title: 'PTERODACTYL APP',
-        debugShowCheckedModeBanner: false,
-        theme: theme,
-        home: new LoginPage(),
-        routes: <String, WidgetBuilder>{
-          '/login': (BuildContext context) => new LoginPage(),
-          '/home': (BuildContext context) => new MyHomePage(),
-          '/servers': (BuildContext context) => new ServerListPage(),
-          '/about': (BuildContext context) => new AboutPage(),
-          '/settings': (BuildContext context) => new SettingsList(),
-        },);
-      });
+              return supportedLocales.first;
+            },
+            title: 'PTERODACTYL APP',
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            home: new LoginPage(),
+            routes: <String, WidgetBuilder>{
+              '/login': (BuildContext context) => new LoginPage(),
+              '/home': (BuildContext context) => new MyHomePage(),
+              '/servers': (BuildContext context) => new ServerListPage(),
+              '/about': (BuildContext context) => new AboutPage(),
+              '/settings': (BuildContext context) => new SettingsList(),
+            },
+          );
+        });
   }
 }
 

@@ -9,4 +9,10 @@
             android:gravity="center"
             android:src="@drawable/ic_launcher" />
     </item>
+    <item
+    android:bottom="40dp"
+    >
+    <bitmap android:src="@drawable/pterodactyl_text"
+            android:gravity="bottom" />
+    </item>
 </layer-list>
