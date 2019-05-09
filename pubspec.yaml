@@ -35,12 +35,11 @@ dependencies:
   convert: ^2.1.1
   flutter_sparkline: any
   flutter_staggered_grid_view: any
-  shared_preferences: ^0.5.2
+  shared_preferences: any
   flutter_cupertino_settings: any
   font_awesome_flutter: any
   dynamic_theme: any
   get_version: any
-  firebase_messaging: any
 
   dbutils:
     git:

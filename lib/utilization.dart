@@ -20,11 +20,10 @@ class StatePage extends StatefulWidget {
 
 class _StatePageState extends State<StatePage> {
   Map data;
-  int _stats;
+  String _stats;
   int _memory;
-  int _cpu;
+  List<double> _cpu;
   int _disk;
-
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
@@ -38,12 +37,11 @@ class _StatePageState extends State<StatePage> {
       },
     );
     data = json.decode(response.body);
-    Map<String, dynamic> myAttributes = data['attributes'];
     setState(() {
-      _stats = myAttributes['state'];
-      _memory = myAttributes['memory']['current'];
-      _cpu = myAttributes['cpu']['cores'];
-      _disk = myAttributes['disk']['current'];
+      _stats = data["attributes"]['state'];
+      _memory = data["attributes"]['memory']['current'];
+      _cpu = data["attributes"]['cpu']['cores'];
+      _disk = data["attributes"]['disk']['current'];
     });
   }
 
@@ -90,7 +88,6 @@ class _StatePageState extends State<StatePage> {
           // ],
         ),
         body: StaggeredGridView.count(
-
           crossAxisCount: 2,
           crossAxisSpacing: 12.0,
           mainAxisSpacing: 12.0,
@@ -107,7 +104,7 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_stats_on'),
+                          Text("State: $_stats",
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -143,9 +140,13 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(DemoLocalizations.of(context).trans('utilization_performance_memory'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_performance_memory'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text(DemoLocalizations.of(context).trans('utilization_memory'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_memory'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white
@@ -180,9 +181,13 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(DemoLocalizations.of(context).trans('utilization_performance_cpu'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_performance_cpu'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text(DemoLocalizations.of(context).trans('utilization_cpu'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_cpu'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white
@@ -217,9 +222,13 @@ class _StatePageState extends State<StatePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(DemoLocalizations.of(context).trans('utilization_performance_disk'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_performance_disk'),
                                   style: TextStyle(color: Colors.redAccent)),
-                              Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                              Text(
+                                  DemoLocalizations.of(context)
+                                      .trans('utilization_disk'),
                                   style: TextStyle(
                                       color: globals.isDarkTheme
                                           ? Colors.white
@@ -246,9 +255,7 @@ class _StatePageState extends State<StatePage> {
             StaggeredTile.extent(2, 220.0),
             StaggeredTile.extent(2, 220.0),
           ],
-        )
-        
-        );
+        ));
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {

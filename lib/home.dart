@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:http/http.dart' as http;
 import 'globals.dart' as globals;
 import 'dart:async';
@@ -44,14 +45,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+return DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (brightness) => ThemeData(
+            primarySwatch: Colors.blue,
+            primaryColorBrightness:
+                globals.isDarkTheme ? Brightness.dark : Brightness.light,
+            brightness: brightness,
+          ),
+  themedWidgetBuilder: (context, theme) {
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 2.0,
-          backgroundColor: globals.isDarkTheme ? null : Colors.white,
+          backgroundColor: globals.isDarkTheme ? Colors.transparent : Colors.white,
           title: Text(DemoLocalizations.of(context).trans('dashboard'),
               style: TextStyle(
-                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                  color: globals.isDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
           //actions: <Widget>[
@@ -237,6 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
             StaggeredTile.extent(2, 110.0),
           ],
         ));
+    });
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {
