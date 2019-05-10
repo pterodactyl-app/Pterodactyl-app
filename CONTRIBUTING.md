@@ -1,8 +1,8 @@
 ### Add Language
 
-make a Json file in: ```assets/lang/``` ,and name it like this ```en.json``` first 2 letter of the country code.
+Make a Json file in: ```assets/lang/```, and name it like this ```en.json``` first 2 letter of the country code.
 
-then you copy this code:
+Then you copy this code:
 
 ```json
 {
@@ -48,18 +48,18 @@ then you copy this code:
     "utilization_stats": "Stats",
     "utilization_stats_on": "State: $_stats",
     "utilization_performance_memory": "PERFORMANCE REPORT",
-    "utilization_memory": "memory",
+    "utilization_memory": "Memory",
     "utilization_performance_cpu": "PERFORMANCE REPORT",
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "PERFORMANCE REPORT",
     "utilization_disk": "Disk"
 }
 ```
-and change to the languge you are working on. 
+And change to the languge you are working on. 
 
 ##Done !
 
 
-then make a pull requests and post your discord name#1234 with it so i can add you to the file with translators. 
+Then make a pull requests and post your discord name#1234 with it so i can add you to the file with translators. 
 
-thank you very much.
+Thank you very much.
