@@ -12,7 +12,7 @@ For all the people who worked with me on this amazing project.
 
 > - Norwegian language: `@Bendik0208#5557`
 
-> - Dutch language: `@Lucas_#6183` and `@/home/Jesse ツ | I USE DEL BUTTON#5885`
+> - Dutch language: `@Lucas_#6183` and `@/home/Jesse ツ | I USE DEL BUTTON#5885` and `@/var/www/Jordy ツ#0049`
 
 > - Italian language: `@????#????`
 
