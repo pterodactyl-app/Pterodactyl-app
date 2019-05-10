@@ -41,7 +41,7 @@
     "utilization_stats": "Status",
     "utilization_stats_on": "Status: $_stats",
     "utilization_performance_memory": "PRESTASJONSRAPPORT",
-    "utilization_memory": "memory",
+    "utilization_memory": "Memory",
     "utilization_performance_cpu": "PRESTASJONSRAPPORT",
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "PRESTASJONSRAPPORT",
