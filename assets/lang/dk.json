@@ -41,7 +41,7 @@
     "utilization_stats": "Stats",
     "utilization_stats_on": "Tilstand: $_stats",
     "utilization_performance_memory": "RESULTATRAPPORT",
-    "utilization_memory": "memory",
+    "utilization_memory": "Memory",
     "utilization_performance_cpu": "RESULTATRAPPORT",
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "RESULTATRAPPORT",
