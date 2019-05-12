@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import './shared_preferences_helper.dart';
+import '../auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
-import 'globals.dart' as globals;
+import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'main.dart';
+import '../../main.dart';
 import 'actionserver.dart';
 
 class SendPage extends StatefulWidget {

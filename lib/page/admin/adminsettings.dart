@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'globals.dart' as globals;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import './shared_preferences_helper.dart';
-import 'package:pterodactyl_app/login.dart';
-import 'main.dart';
+import '../auth/shared_preferences_helper.dart';
+import '../../main.dart';
 
-class SettingsList extends StatefulWidget {
+class AdminSettingsList extends StatefulWidget {
   @override
-  SettingsListPageState createState() => new SettingsListPageState();
+  AdminSettingsListPageState createState() => new AdminSettingsListPageState();
 }
 
-class SettingsListPageState extends State<SettingsList> {
+class AdminSettingsListPageState extends State<AdminSettingsList> {
   String _projectVersion = '';
 
   @override
@@ -158,11 +158,11 @@ class SettingsListPageState extends State<SettingsList> {
               title: Text(DemoLocalizations.of(context).trans('logout')),
               subtitle:
                   new Text(DemoLocalizations.of(context).trans('logout_sub')),
-              onTap: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) => new LoginPage()),
-                    (Route<dynamic> route) => false);
+              onTap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('seenadmin');
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/adminlogin', (Route<dynamic> route) => false);
               },
             ),
             Divider(
@@ -173,13 +173,13 @@ class SettingsListPageState extends State<SettingsList> {
               title: Text(DemoLocalizations.of(context).trans('delete_data')),
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
-              onTap: () {
+              onTap: () async {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
-                Navigator.of(context).pushAndRemoveUntil(
-                    new MaterialPageRoute(
-                        builder: (BuildContext context) => new LoginPage()),
-                    (Route<dynamic> route) => false);
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('seen');
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
               },
             ),
           ],

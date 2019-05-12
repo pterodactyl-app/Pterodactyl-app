@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import './shared_preferences_helper.dart';
-import 'package:pterodactyl_app/home.dart';
+import '../auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'main.dart';
+import '../../main.dart';
 
-class User {
-  final String api, url;
-  const User({
-    this.api,
-    this.url,
+class Admin {
+  final String adminapi, adminurl;
+  const Admin({
+    this.adminapi,
+    this.adminurl,
   });
 }
 
-class LoginPage extends StatefulWidget {
+class AdminLoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _AdminLoginPageState createState() => new _AdminLoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _apiController = TextEditingController();
-  final _urlController = TextEditingController();
+class _AdminLoginPageState extends State<AdminLoginPage> {
+  final _apiadminController = TextEditingController();
+  final _urladminController = TextEditingController();
 
   bool checkValue = false;
 
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image.asset('assets/images/pterodactyl_icon.png', width: 100),
                 SizedBox(height: 8.0),
                 Text(
-                  'PTERODACTYL APP',
+                  'ADMIN LOGIN',
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
@@ -54,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
             AccentColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
-                controller: _apiController,
+                controller: _apiadminController,
                 decoration: InputDecoration(
                   labelText:
                       DemoLocalizations.of(context).trans('api_key_login'),
@@ -65,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
-                controller: _urlController,
+                controller: _urladminController,
                 decoration: InputDecoration(
                   labelText: DemoLocalizations.of(context).trans('url_login'),
                 ),
@@ -88,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _apiController.clear();
-                    _urlController.clear();
+                    _apiadminController.clear();
+                    _urladminController.clear();
                   },
                 ),
                 RaisedButton(
@@ -102,14 +101,25 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () async {
                     await SharedPreferencesHelper.setString(
-                        "apiKey", _apiController.text);
+                        "apiAdminKey", _apiadminController.text);
                     await SharedPreferencesHelper.setString(
-                        "panelUrl", _urlController.text);
+                        "panelAdminUrl", _urladminController.text);
                     _navigator();
                   },
                 ),
               ],
             ),
+new RaisedButton(
+  child: const Text('Client Login'),
+  elevation: 5.0,
+  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
+  onPressed: () {
+    Navigator.of(context)
+          .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+  },
+),            
           ],
         ),
       ),
@@ -121,8 +131,8 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("apiKey", _apiController.text);
-      sharedPreferences.setString("panelUrl", _urlController.text);
+      sharedPreferences.setString("apiAdminKey", _apiadminController.text);
+      sharedPreferences.setString("panelAdminUrl", _urladminController.text);
       sharedPreferences.commit();
       getCredential();
     });
@@ -134,11 +144,11 @@ class _LoginPageState extends State<LoginPage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text = sharedPreferences.getString("apiKey");
-          _urlController.text = sharedPreferences.getString("panelUrl");
+          _apiadminController.text = sharedPreferences.getString("apiAdminKey");
+          _urladminController.text = sharedPreferences.getString("panelAdminUrl");
         } else {
-          _apiController.clear();
-          _urlController.clear();
+          _apiadminController.clear();
+          _urladminController.clear();
           sharedPreferences.clear();
         }
       } else {
@@ -148,11 +158,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _navigator() {
-    if (_apiController.text.length != 0 || _urlController.text.length != 0) {
-      Navigator.of(context).pushAndRemoveUntil(
-          new MaterialPageRoute(
-              builder: (BuildContext context) => new MyHomePage()),
-          (Route<dynamic> route) => false);
+    if (_apiadminController.text.length != 0 || _urladminController.text.length != 0) {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/adminhome', (Route<dynamic> route) => false);
     } else {
       showDialog(
           context: context,

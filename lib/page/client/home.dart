@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import './shared_preferences_helper.dart';
+import '../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:http/http.dart' as http;
-import 'globals.dart' as globals;
+import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
 import 'settings.dart';
-import 'main.dart';
+import '../../main.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);

@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import './shared_preferences_helper.dart';
-import 'globals.dart' as globals;
+import '../auth/shared_preferences_helper.dart';
+import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'main.dart';
-import 'actionserver.dart';
+import '../../main.dart';
+import 'adminhome.dart';
+import 'adminactionserver.dart';
 
-class User {
-  final String id, name;
-  const User({
-    this.id,
-    this.name,
+class Admin {
+  final String adminid, adminname;
+  const Admin({
+    this.adminid,
+    this.adminname,
   });
 }
 
-class ServerListPage extends StatefulWidget {
-  ServerListPage({Key key}) : super(key: key);
+class AdminServerListPage extends StatefulWidget {
+  AdminServerListPage({Key key}) : super(key: key);
 
   @override
-  _ServerListPageState createState() => _ServerListPageState();
+  _AdminServerListPageState createState() => _AdminServerListPageState();
 }
 
-class _ServerListPageState extends State<ServerListPage> {
+class _AdminServerListPageState extends State<AdminServerListPage> {
   Map data;
   List userData;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     http.Response response = await http.get(
-      "$_url/api/client",
+      "$_urladmin/api/application/servers",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
-        "Authorization": "Bearer $_api"
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
       },
     );
     data = json.decode(response.body);
@@ -104,12 +106,12 @@ class _ServerListPageState extends State<ServerListPage> {
                         onTap: () {
                           var route = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new ActionServerPage(
-                                    server: User(
-                                        id:
+                                new AdminActionServerPage(
+                                    server: Admin(
+                                        adminid:
                                             userData[index]["attributes"]
                                                 ["identifier"],
-                                        name: userData[index]["attributes"]
+                                        adminname: userData[index]["attributes"]
                                             ["name"])),
                           );
                           Navigator.of(context).push(route);

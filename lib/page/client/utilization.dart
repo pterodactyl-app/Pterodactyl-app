@@ -2,13 +2,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'globals.dart' as globals;
-import './shared_preferences_helper.dart';
+import '../../globals.dart' as globals;
+import '../auth/shared_preferences_helper.dart';
 
 import 'dart:async';
 import 'dart:convert';
 import 'actionserver.dart';
-import 'main.dart';
+import '../../main.dart';
 
 class StatePage extends StatefulWidget {
   StatePage({Key key, this.info}) : super(key: key);

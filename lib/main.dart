@@ -5,12 +5,24 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
+import 'page/auth/auth.dart';
 
-import 'login.dart';
-import 'home.dart';
-import 'servers.dart';
-import 'settings.dart';
+import 'page/client/login.dart';
+import 'page/client/home.dart';
+import 'page/client/servers.dart';
+import 'page/client/settings.dart';
+
 import 'about.dart';
+
+import 'page/admin/adminlogin.dart';
+import 'page/admin/adminhome.dart';
+import 'page/admin/adminsettings.dart';
+//import 'page/admin/adminservers.dart';
+//import 'page/admin/adminnodes.dart';
+//import 'page/admin/adminallocations.dart';
+//import 'page/admin/adminactionserver.dart';
+//import 'page/admin/adminactionnodes.dart';
+
 
 class DemoLocalizations {
   DemoLocalizations(this.locale);
@@ -122,13 +134,18 @@ class MyApp extends StatelessWidget {
             title: 'PTERODACTYL APP',
             debugShowCheckedModeBanner: false,
             theme: theme,
-            home: new LoginPage(),
+            home: new Splash(),
             routes: <String, WidgetBuilder>{
-              '/login': (BuildContext context) => new LoginPage(),
               '/home': (BuildContext context) => new MyHomePage(),
+              '/login': (BuildContext context) => new LoginPage(),
               '/servers': (BuildContext context) => new ServerListPage(),
               '/about': (BuildContext context) => new AboutPage(),
               '/settings': (BuildContext context) => new SettingsList(),
+
+              '/adminhome': (BuildContext context) => new AdminHomePage(),
+              '/adminlogin': (BuildContext context) => new AdminLoginPage(),
+              '/adminsettings': (BuildContext context) => new AdminSettingsList(),
+              
             },
           );
         });
