@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 import '../../globals.dart' as globals;
 import 'adminnodes.dart';
 import 'adminallocations.dart';
+import 'admincreateallocation.dart';
+
+class Allocation {
+  final String adminids, adminname;
+  const Allocation({
+    this.adminids,
+    this.adminname,
+  });
+}
 
 class Admin {
   final String adminid, adminname;
@@ -77,7 +86,7 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.play_arrow,
+                            child: Icon(Icons.public,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -113,12 +122,12 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Material(
-                          color: Colors.red,
+                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(24.0),
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.stop,
+                            child: Icon(Icons.public,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -136,9 +145,15 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                       )
                     ]),
               ),
-              //onTap: () {
-              //postReinstall();
-              //},
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new AdminCreateAllocationPage(
+                      server: Allocation(
+                          adminids: widget.server.adminids,
+                          adminname: widget.server.adminname,)),
+                );
+                Navigator.of(context).push(route);
+              },
             ),
           ],
           staggeredTiles: [

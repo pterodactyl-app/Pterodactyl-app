@@ -109,17 +109,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-new RaisedButton(
-  child: const Text('Admin Login'),
-  elevation: 5.0,
-  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                  ),
-  onPressed: () {
-    Navigator.of(context)
-          .pushNamedAndRemoveUntil('/adminlogin', (Route<dynamic> route) => false);
-  },
-),            
+            new FlatButton(
+              child: new Text('Do you have a Admin account? Tap then Here'),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/adminlogin', (Route<dynamic> route) => false);
+              },
+            ),
           ],
         ),
       ),

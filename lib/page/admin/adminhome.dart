@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'adminservers.dart';
 import 'adminsettings.dart';
 import 'adminnodes.dart';
+import 'adminusers.dart';
 import '../../main.dart';
 
 class AdminHomePage extends StatefulWidget {
@@ -22,6 +23,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Map data;
   int userTotalServers = 0;
   int totalNodes = 0;
+  int totalUsers = 0;
 
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
@@ -55,11 +57,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
     });
   }
 
+Future getUsers() async {
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    http.Response response = await http.get(
+      "$_urladmin/api/application/users",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    data = json.decode(response.body);
+    setState(() {
+      totalUsers = data["meta"]["pagination"]["total"];
+    });
+  }  
+
   @override
   void initState() {
     super.initState();
     getData();
     getNodesData();
+    getUsers();
   }
 
   @override
@@ -186,6 +205,42 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => AdminNodesListPage())),
                   ),
+_buildTile(
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Total Users',
+                                    style: TextStyle(color: Colors.redAccent)),
+                                Text('$totalUsers',
+                                    style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 34.0))
+                              ],
+                            ),
+                            Material(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(24.0),
+                                child: Center(
+                                    child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Icon(Icons.person,
+                                      color: Colors.white, size: 30.0),
+                                )))
+                          ]),
+                    ),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => AdminUsersListPage())),
+                  ),                  
                   _buildTile(
                     Padding(
                       padding: const EdgeInsets.all(24.0),
@@ -263,6 +318,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                 ],
                 staggeredTiles: [
+                  StaggeredTile.extent(2, 110.0),
                   StaggeredTile.extent(2, 110.0),
                   StaggeredTile.extent(2, 110.0),
                   StaggeredTile.extent(1, 180.0),

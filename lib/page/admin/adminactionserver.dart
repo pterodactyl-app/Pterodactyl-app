@@ -102,7 +102,10 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
           backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () { 
+              Navigator.of(context).pop();
+              SharedPreferencesHelper.remove("NodeAdminIP");
+            },
             icon: Icon(
               Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black,
@@ -149,7 +152,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.play_arrow,
+                            child: Icon(Icons.restore_page,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -184,7 +187,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.stop,
+                            child: Icon(Icons.report_problem,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -219,7 +222,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.refresh,
+                            child: Icon(Icons.report,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -254,7 +257,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                           child: Center(
                               child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.refresh,
+                            child: Icon(Icons.report_off,
                                 color: Colors.white, size: 30.0),
                           ))),
                       Column(
@@ -384,7 +387,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         barrierDismissible: false,
         child: new CupertinoAlertDialog(
           content: new Text(
-            'Are you sure to Unuspend this server.',
+            'Your give the owner of this server his access back to his server do you want that?',
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[

@@ -5,25 +5,33 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
-import 'adminhome.dart';
-import 'adminactionserver.dart';
+import 'adminuserinfo.dart';
 
 class Admin {
-  final String adminid, adminname;
+  final String adminid, uuid, username, email, firstname, lastname, language, rootadmin, fa, createdat, updatedat;
   const Admin({
     this.adminid,
-    this.adminname,
-  });
+    this.uuid,
+    this.username,
+    this.email,
+    this.firstname,
+    this.lastname,
+    this.language,
+    this.rootadmin,
+    this.fa,
+    this.createdat,
+    this.updatedat,
+    });
 }
 
-class AdminServerListPage extends StatefulWidget {
-  AdminServerListPage({Key key}) : super(key: key);
+class AdminUsersListPage extends StatefulWidget {
+  AdminUsersListPage({Key key}) : super(key: key);
 
   @override
-  _AdminServerListPageState createState() => _AdminServerListPageState();
+  _AdminUsersListPageState createState() => _AdminUsersListPageState();
 }
 
-class _AdminServerListPageState extends State<AdminServerListPage> {
+class _AdminUsersListPageState extends State<AdminUsersListPage> {
   Map data;
   List userData;
 
@@ -31,7 +39,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     http.Response response = await http.get(
-      "$_urladmin/api/application/servers",
+      "$_urladmin/api/application/users",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -62,28 +70,22 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('server_list'),
+        title: Text('User List',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
-         actions: <Widget>
-         [
-           Container
-           (
-             margin: EdgeInsets.only(right: 8.0),
-             child: Row
-             (
-               mainAxisAlignment: MainAxisAlignment.center,
-               crossAxisAlignment: CrossAxisAlignment.center,
-               children: <Widget>
-               [
-                 IconButton(icon: Icon(Icons.search), onPressed: () {
-                   
-                 })
-               ],
+        actions: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.search), onPressed: () {})
+              ],
             ),
-           )
-         ],
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
@@ -107,13 +109,20 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                         onTap: () {
                           var route = new MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                new AdminActionServerPage(
+                                new AdminUserInfoPage(
                                     server: Admin(
-                                        adminid:
-                                            userData[index]["attributes"]
-                                                ["identifier"],
-                                        adminname: userData[index]["attributes"]
-                                            ["name"])),
+                                        adminid: userData[index]["attributes"]["id"].toString(),
+                                        uuid: userData[index]["attributes"]["uuid"],
+                                        username: userData[index]["attributes"]["username"],
+                                        email: userData[index]["attributes"]["email"],
+                                        firstname: userData[index]["attributes"]["first_name"],
+                                        lastname: userData[index]["attributes"]["last_name"],
+                                        language: userData[index]["attributes"]["language"],
+                                        rootadmin: userData[index]["attributes"]["root_admin"],
+                                        fa: userData[index]["attributes"]["2fa"],
+                                        createdat: userData[index]["attributes"]["created_at"],
+                                        updatedat: userData[index]["attributes"]["updated_at"]
+                                            )),
                           );
                           Navigator.of(context).push(route);
                         },
@@ -129,22 +138,24 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                      '${userData[index]["attributes"]["description"]}',
-                                      style:
-                                          TextStyle(color: Colors.blueAccent)),
+                                      '${userData[index]["attributes"]["first_name"]} ${userData[index]["attributes"]["last_name"]}',
+                                      style: TextStyle(
+                                          color: globals.isDarkTheme
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18.0)),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                          '${userData[index]["attributes"]["name"]}',
+                                          '${userData[index]["attributes"]["email"]}',
                                           style: TextStyle(
-                                              color: globals.isDarkTheme
-                                                  ? Colors.white
-                                                  : Colors.black,
+                                              color: Colors.blueAccent,
                                               fontWeight: FontWeight.w700,
-                                              fontSize: 18.0)),
+                                              fontSize: 14.0)),
                                     ],
                                   ),
                                 ],
@@ -155,9 +166,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('total_ram'),
+                                  Text('Root Admin',
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -172,16 +181,14 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["limits"]["memory"]} MB',
+                                            '${userData[index]["attributes"]["root_admin"]}',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
                                       ),
                                     ),
                                   ),
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('total_disk'),
+                                  Text('2FA',
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -196,7 +203,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["limits"]["disk"]} MB',
+                                            '${userData[index]["attributes"]["2fa"]}',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
@@ -210,7 +217,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                         ),
                       ),
                     ),
-                  ),                  
+                  ),
                 ],
               ),
             ),

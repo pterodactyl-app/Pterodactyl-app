@@ -109,17 +109,14 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ],
             ),
-new RaisedButton(
-  child: const Text('Client Login'),
-  elevation: 5.0,
-  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                  ),
-  onPressed: () {
-    Navigator.of(context)
-          .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-  },
-),            
+            new FlatButton(
+              child: new Text(
+                  'Dont have an Admin account? Tap then here'),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
+              },
+            ),
           ],
         ),
       ),
@@ -145,7 +142,8 @@ new RaisedButton(
       if (checkValue != null) {
         if (checkValue) {
           _apiadminController.text = sharedPreferences.getString("apiAdminKey");
-          _urladminController.text = sharedPreferences.getString("panelAdminUrl");
+          _urladminController.text =
+              sharedPreferences.getString("panelAdminUrl");
         } else {
           _apiadminController.clear();
           _urladminController.clear();
@@ -158,9 +156,10 @@ new RaisedButton(
   }
 
   _navigator() {
-    if (_apiadminController.text.length != 0 || _urladminController.text.length != 0) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/adminhome', (Route<dynamic> route) => false);
+    if (_apiadminController.text.length != 0 ||
+        _urladminController.text.length != 0) {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/adminhome', (Route<dynamic> route) => false);
     } else {
       showDialog(
           context: context,
