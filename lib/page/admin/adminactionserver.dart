@@ -322,7 +322,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             ),
             new FlatButton(
               onPressed: () {
-                postReinstall();
+                postRebuild();
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )
