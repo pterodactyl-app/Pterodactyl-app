@@ -8,30 +8,8 @@ import '../../main.dart';
 import 'adminuserinfo.dart';
 
 class Admin {
-  final String adminid,
-      uuid,
-      username,
-      email,
-      firstname,
-      lastname,
-      language,
-      rootadmin,
-      fa,
-      createdat,
-      updatedat;
-  const Admin({
-    this.adminid,
-    this.uuid,
-    this.username,
-    this.email,
-    this.firstname,
-    this.lastname,
-    this.language,
-    this.rootadmin,
-    this.fa,
-    this.createdat,
-    this.updatedat,
-  });
+  final String adminid, username;
+  const Admin({this.adminid, this.username});
 }
 
 class AdminUsersListPage extends StatefulWidget {
@@ -118,28 +96,14 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                       child: InkWell(
                         onTap: () {
                           var route = new MaterialPageRoute(
-                            builder: (BuildContext context) => new AdminUserInfoPage(
-                                server: Admin(
-                                    adminid: userData[index]["attributes"]["id"]
-                                        .toString(),
-                                    uuid: userData[index]["attributes"]["uuid"],
-                                    username: userData[index]["attributes"]
-                                        ["username"],
-                                    email: userData[index]["attributes"]
-                                        ["email"],
-                                    firstname: userData[index]["attributes"]
-                                        ["first_name"],
-                                    lastname: userData[index]["attributes"]
-                                        ["last_name"],
-                                    language: userData[index]["attributes"]
-                                        ["language"],
-                                    rootadmin: userData[index]["attributes"]
-                                        ["root_admin"],
-                                    fa: userData[index]["attributes"]["2fa"],
-                                    createdat: userData[index]["attributes"]
-                                        ["created_at"],
-                                    updatedat: userData[index]["attributes"]
-                                        ["updated_at"])),
+                            builder: (BuildContext context) =>
+                                new AdminUserInfoPage(
+                                    server: Admin(
+                                        adminid: userData[index]["attributes"]
+                                                ["id"]
+                                            .toString(),
+                                        username: userData[index]["attributes"]
+                                            ["username"])),
                           );
                           Navigator.of(context).push(route);
                         },

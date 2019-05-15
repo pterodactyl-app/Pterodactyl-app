@@ -1,7 +1,10 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import '../auth/shared_preferences_helper.dart';
 import '../../globals.dart' as globals;
-import '../../main.dart';
+import 'dart:async';
+import 'dart:convert';
 import 'adminusers.dart';
 
 class AdminUserInfoPage extends StatefulWidget {
@@ -13,6 +16,49 @@ class AdminUserInfoPage extends StatefulWidget {
 }
 
 class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
+  Map data;
+  int firstname;
+  int lastname;
+  int language;
+  int rootadmin;
+  int fa;
+  int email;
+  int uuid;
+  int externalid;
+  int createdat;
+  int updatedat;
+
+  Future getData() async {
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    http.Response response = await http.get(
+      "$_urladmin/api/application/users/${widget.server.adminid}",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    data = json.decode(response.body);
+    setState(() {
+      firstname = data["attributes"]["first_name"];
+      lastname = data["attributes"]["last_name"];
+      language = data["attributes"]["language"];
+      rootadmin = data["attributes"]["root_admin"];
+      fa = data["attributes"]["2fa"];
+      email = data["attributes"]["email"];
+      uuid = data["attributes"]["uuid"];
+      externalid = data["attributes"]["external_id"];
+      createdat = data["attributes"]["created_at"];
+      updatedat = data["attributes"]["updated_at"];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +113,8 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('${widget.server.firstname} ${widget.server.lastname}',
+                          Text(
+                              '$firstname $lastname',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -91,7 +138,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('${widget.server.email}',
+                          Text('$email',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -115,7 +162,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('uuid: ${widget.server.uuid}',
+                          Text('uuid: $uuid',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -163,7 +210,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Language: ${widget.server.language}',
+                          Text('Language: $language',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -187,7 +234,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Root Admin: ${widget.server.rootadmin}',
+                          Text('Root Admin: $rootadmin',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -211,7 +258,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('2FA: ${widget.server.fa}',
+                          Text('2FA: $fa',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -235,7 +282,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Created at: ${widget.server.createdat}',
+                          Text('Created at: $createdat',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -259,7 +306,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Updated at: ${widget.server.updatedat}',
+                          Text('Updated at: $updatedat',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
