@@ -32,7 +32,7 @@ this project was made possible by everyone who contributed to the project. (http
 
 ### Version logs
 
-V1.0 6 may '19 - Original Release
+V1.0 may 6 '19 - Original Release
 
 
 
