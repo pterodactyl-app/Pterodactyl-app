@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import '../auth/shared_preferences_helper.dart';
 import 'dart:async';
-import 'dart:convert';
-import '../../main.dart';
 import 'adminservers.dart';
 
 class AdminActionServerPage extends StatefulWidget {
@@ -23,7 +21,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postRebuild() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
-    var url = '$_urladmin/api/client/servers/${widget.server.adminid}/rebuild';
+    var url = '$_urladmin/api/application/servers/${widget.server.adminid}/rebuild';
 
     var response = await http.post(
       url,
@@ -42,7 +40,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     var url =
-        '$_urladmin/api/client/servers/${widget.server.adminid}/reinstall';
+        '$_urladmin/api/application/servers/${widget.server.adminid}/reinstall';
 
     var response = await http.post(
       url,
@@ -60,7 +58,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postSuspend() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
-    var url = '$_urladmin/api/client/servers/${widget.server.adminid}/suspend';
+    var url = '$_urladmin/api/application/servers/${widget.server.adminid}/suspend';
 
     var response = await http.post(
       url,
@@ -79,7 +77,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     var url =
-        '$_urladmin/api/client/servers/${widget.server.adminid}/unsuspend';
+        '$_urladmin/api/application/servers/${widget.server.adminid}/unsuspend';
 
     var response = await http.post(
       url,
@@ -322,7 +320,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             ),
             new FlatButton(
               onPressed: () {
-                postReinstall();
+                postRebuild();
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )

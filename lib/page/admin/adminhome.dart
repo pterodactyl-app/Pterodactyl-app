@@ -57,7 +57,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     });
   }
 
-Future getUsers() async {
+  Future getUsers() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     http.Response response = await http.get(
@@ -71,7 +71,7 @@ Future getUsers() async {
     setState(() {
       totalUsers = data["meta"]["pagination"]["total"];
     });
-  }  
+  }
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ Future getUsers() async {
                 elevation: 2.0,
                 backgroundColor:
                     globals.isDarkTheme ? Colors.transparent : Colors.white,
-                title: Text(DemoLocalizations.of(context).trans('dashboard'),
+                title: Text('ADMIN PANEL',
                     style: TextStyle(
                         color: globals.isDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
@@ -205,7 +205,7 @@ Future getUsers() async {
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => AdminNodesListPage())),
                   ),
-_buildTile(
+                  _buildTile(
                     Padding(
                       padding: const EdgeInsets.all(24.0),
                       child: Row(
@@ -240,7 +240,7 @@ _buildTile(
                     ),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => AdminUsersListPage())),
-                  ),                  
+                  ),
                   _buildTile(
                     Padding(
                       padding: const EdgeInsets.all(24.0),
