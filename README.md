@@ -32,7 +32,7 @@ This project was made possible by everyone who contributed to this project. [CRE
 
 ### Version logs
 
-V1.0 may 6 '19 - Original Release
+V1.0 may 6 '19 - Original Release 
 
 
 
