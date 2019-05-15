@@ -80,7 +80,10 @@ FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   @override
   void initState() {
     super.initState();
-  firebaseCloudMessaging_Listeners();
+    getData();
+    getNodesData();
+    getUsers();    
+    firebaseCloudMessaging_Listeners();
 }
 void firebaseCloudMessaging_Listeners() {
   if (Platform.isIOS) iOS_Permission();
@@ -111,9 +114,6 @@ void iOS_Permission() {
   {
     print("Settings registered: $settings");
   });    
-    getData();
-    getNodesData();
-    getUsers();
   }
 
   @override
