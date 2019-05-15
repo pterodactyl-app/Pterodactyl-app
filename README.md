@@ -6,7 +6,7 @@
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
 
-##Features :
+### Features :
 client panel
 - Start/Stop/Restart/Kill your server
 - Send commands to your server
