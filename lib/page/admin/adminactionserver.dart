@@ -21,7 +21,8 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postRebuild() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
-    var url = '$_urladmin/api/application/servers/${widget.server.adminid}/rebuild';
+    var url =
+        '$_urladmin/api/application/servers/${widget.server.adminid}/rebuild';
 
     var response = await http.post(
       url,
@@ -58,7 +59,8 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postSuspend() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
-    var url = '$_urladmin/api/application/servers/${widget.server.adminid}/suspend';
+    var url =
+        '$_urladmin/api/application/servers/${widget.server.adminid}/suspend';
 
     var response = await http.post(
       url,
@@ -100,7 +102,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
           backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
-            onPressed: () { 
+            onPressed: () {
               Navigator.of(context).pop();
               SharedPreferencesHelper.remove("NodeAdminIP");
             },
@@ -302,7 +304,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             child: child));
   }
 
- _rebuild() {
+  _rebuild() {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -321,14 +323,15 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             new FlatButton(
               onPressed: () {
                 postRebuild();
+                Navigator.pop(context);
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )
           ],
         ));
-  }  
+  }
 
- _reinstall() {
+  _reinstall() {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -347,12 +350,13 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             new FlatButton(
               onPressed: () {
                 postReinstall();
+                Navigator.pop(context);
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )
           ],
         ));
-  }  
+  }
 
   _suspend() {
     showDialog(
@@ -373,13 +377,15 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             new FlatButton(
               onPressed: () {
                 postSuspend();
+                Navigator.pop(context);
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )
           ],
         ));
   }
- _unsuspend() {
+
+  _unsuspend() {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -398,11 +404,11 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             new FlatButton(
               onPressed: () {
                 postUnsuspend();
+                Navigator.pop(context);
               },
               child: new Text('YES', style: TextStyle(color: Colors.black)),
             )
           ],
         ));
-  }  
-  
+  }
 }

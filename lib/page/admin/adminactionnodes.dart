@@ -30,7 +30,6 @@ class AdminActionNodesPage extends StatefulWidget {
 }
 
 class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,10 +146,12 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
               ),
               onTap: () {
                 var route = new MaterialPageRoute(
-                  builder: (BuildContext context) => new AdminCreateAllocationPage(
-                      server: Allocation(
-                          adminids: widget.server.adminids,
-                          adminname: widget.server.adminname,)),
+                  builder: (BuildContext context) =>
+                      new AdminCreateAllocationPage(
+                          server: Allocation(
+                        adminids: widget.server.adminids,
+                        adminname: widget.server.adminname,
+                      )),
                 );
                 Navigator.of(context).push(route);
               },

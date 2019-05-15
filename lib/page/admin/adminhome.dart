@@ -197,7 +197,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 child: Center(
                                     child: Padding(
                                   padding: EdgeInsets.all(16.0),
-                                  child: Icon(Icons.build,
+                                  child: Icon(Icons.public,
                                       color: Colors.white, size: 30.0),
                                 )))
                           ]),

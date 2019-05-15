@@ -110,8 +110,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               ],
             ),
             new FlatButton(
-              child: new Text(
-                  'Dont have an Admin account? Tap then here'),
+              child: new Text('Dont have an Admin account? Tap then here'),
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);

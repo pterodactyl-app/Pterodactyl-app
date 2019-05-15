@@ -111,7 +111,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                     server: Admin(
                                         adminid:
                                             userData[index]["attributes"]
-                                                ["identifier"],
+                                                ["id"].toString(),
                                         adminname: userData[index]["attributes"]
                                             ["name"])),
                           );

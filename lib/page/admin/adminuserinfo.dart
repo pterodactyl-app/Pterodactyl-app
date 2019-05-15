@@ -17,16 +17,16 @@ class AdminUserInfoPage extends StatefulWidget {
 
 class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
   Map data;
-  int firstname;
-  int lastname;
-  int language;
-  int rootadmin;
-  int fa;
-  int email;
-  int uuid;
-  int externalid;
-  int createdat;
-  int updatedat;
+  String firstname;
+  String lastname;
+  String language;
+  bool rootadmin;
+  bool fa;
+  String email;
+  String uuid;
+  String externalid;
+  String createdat;
+  String updatedat;
 
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
@@ -113,8 +113,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                              '$firstname $lastname',
+                          Text('$firstname $lastname',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -234,7 +233,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('Root Admin: $rootadmin',
+                          Text('Admin: $rootadmin',
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -288,7 +287,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontSize: 15.0))
                         ],
                       )
                     ]),
@@ -312,7 +311,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontSize: 15.0))
                         ],
                       )
                     ]),

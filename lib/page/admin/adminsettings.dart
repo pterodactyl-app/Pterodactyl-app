@@ -177,7 +177,7 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
+                prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               },

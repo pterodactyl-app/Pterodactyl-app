@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
 import 'adminuserinfo.dart';
+import 'admincreateuser.dart';
 
 class Admin {
   final String adminid, username;
@@ -204,6 +205,12 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () { Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => AdminCreateUserPage()));},
+        icon: Icon(Icons.add),
+        label: Text("USER"),
       ),
     );
   }
