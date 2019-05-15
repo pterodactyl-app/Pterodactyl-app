@@ -21,7 +21,7 @@ Admin panel
 - View all the allocations in your nodes
 
 
-This project was made possible by everyone who contributed to this project. (https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
+This project was made possible by everyone who contributed to this project. [CREDITS](https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
 
 
 
