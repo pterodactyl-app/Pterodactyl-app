@@ -7,21 +7,21 @@ A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
 
 ### Features :
-client panel
-- Start/Stop/Restart/Kill your server
+Client panel
+- Start, stop, restart or kill your server
 - Send commands to your server
-- See the CPU/memory/disk/stats that you are using
+- See the CPU, memory and disk stats that you are using
 
-admin panel
-- look at your servers
-- rebuild/reinstall/suspend/unsuspend your servers
-- view your user list and create a user
-- view your node 
-- add a allocation to your node
-- view all the allocations in your nodes
+Admin panel
+- Look at your servers
+- Rebuild/reinstall/suspend/unsuspend your servers
+- View your user list and create a user
+- View your node 
+- Add a allocation to your node
+- View all the allocations in your nodes
 
 
-this project was made possible by everyone who contributed to the project. (https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
+This project was made possible by everyone who contributed to the project. (https://github.com/rubentalstra/Pterodactyl-app/blob/master/CREDITS.md)
 
 
 
