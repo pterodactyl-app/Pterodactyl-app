@@ -1,7 +1,7 @@
 # Pterodactyl Mobile App 🚀
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
-<span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a></span>
+<span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Patreon-Donate-yellow.svg" alt="Patreon donate button" /></a></span>
 
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
