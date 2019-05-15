@@ -39,7 +39,7 @@ V1.0 may 6 '19 - Original Release
 ### License
 
 - Copyright 2019 Ruben Talstra
-- Licensed under GNU General Public License v3.0 (https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE)
+- Licensed under [GNU General Public License v3.0](https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE)
 
 
 ## Useful Links
