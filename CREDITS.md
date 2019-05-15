@@ -43,6 +43,8 @@ For all the people who worked with me on this amazing project.
 
 > - `@ThatProgrammer#6001`
 
+> - `@Griffindor#7378 `
+
 
 
 ###### Contributors:
