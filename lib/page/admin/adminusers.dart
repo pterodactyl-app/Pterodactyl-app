@@ -59,7 +59,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('User List',
+        title: Text(DemoLocalizations.of(context).trans('Admin_User_List_list'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

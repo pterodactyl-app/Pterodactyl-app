@@ -72,7 +72,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('Create User',
+        title: Text(DemoLocalizations.of(context).trans('Admin_create_user_Titel'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -170,7 +170,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
                 ),
                 RaisedButton(
                   child:
-                      Text('Ceate a user'),
+                      Text(DemoLocalizations.of(context).trans('Admin_create_user_Create_A_User')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

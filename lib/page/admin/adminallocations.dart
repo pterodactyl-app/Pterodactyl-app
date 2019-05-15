@@ -54,7 +54,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('List specific node allocations',
+        title: Text(DemoLocalizations.of(context).trans('Admin_allocations_List'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -116,7 +116,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                          'IP: ${userData[index]["attributes"]["ip"]}',
+                                          DemoLocalizations.of(context).trans('Admin_allocations_IP'),
                                           style: TextStyle(
                                               color: globals.isDarkTheme
                                                   ? Colors.white
@@ -133,7 +133,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text('ID',
+                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_ID'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -156,7 +156,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                       ),
                                     ),
                                   ),
-                                  Text('assigned',
+                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_Assigned'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -179,7 +179,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                       ),
                                     ),
                                   ),
-                                  Text('Port',
+                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_Port'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -20,6 +22,8 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _AdminHomePageState extends State<AdminHomePage> {
+FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   Map data;
   int userTotalServers = 0;
   int totalNodes = 0;
@@ -76,6 +80,37 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   void initState() {
     super.initState();
+  firebaseCloudMessaging_Listeners();
+}
+void firebaseCloudMessaging_Listeners() {
+  if (Platform.isIOS) iOS_Permission();
+
+  _firebaseMessaging.getToken().then((token){
+    print(token);
+  });
+
+  _firebaseMessaging.configure(
+    onMessage: (Map<String, dynamic> message) async {
+      print('on message $message');
+    },
+    onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+    },
+    onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+    },
+  );
+}
+
+void iOS_Permission() {
+  _firebaseMessaging.requestNotificationPermissions(
+      IosNotificationSettings(sound: true, badge: true, alert: true)
+  );
+  _firebaseMessaging.onIosSettingsRegistered
+      .listen((IosNotificationSettings settings)
+  {
+    print("Settings registered: $settings");
+  });    
     getData();
     getNodesData();
     getUsers();
@@ -98,7 +133,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 elevation: 2.0,
                 backgroundColor:
                     globals.isDarkTheme ? Colors.transparent : Colors.white,
-                title: Text('ADMIN PANEL',
+                title: Text(DemoLocalizations.of(context).trans('Admin_HomePanel'),
                     style: TextStyle(
                         color: globals.isDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
@@ -180,7 +215,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Total Nodes',
+                                Text(DemoLocalizations.of(context).trans('Admin_HomeTotalNodes'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalNodes',
                                     style: TextStyle(
@@ -216,7 +251,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Total Users',
+                                Text(DemoLocalizations.of(context).trans('Admin_HomeTotalUsers'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalUsers',
                                     style: TextStyle(
