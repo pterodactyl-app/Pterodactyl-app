@@ -52,7 +52,7 @@ Then you copy this code:
     "utilization_performance_cpu": "PERFORMANCE REPORT",
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "PERFORMANCE REPORT",
-    "utilization_disk": "Disk"
+    "utilization_disk": "Disk",
     
     "Admin_Login": "ADMIN LOGIN",
     "Admin_NoAdminAccount": "Dont have an Admin account? Tap then here",
