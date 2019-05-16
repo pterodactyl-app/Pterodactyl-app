@@ -62,7 +62,6 @@
     "NO": "NEIN",
     "YES": "JA",
     "Admin_allocations_List": "Liste der spezifischen Node Allokationen",
-    "Admin_allocations_IP": "IP: ${userData[index]['attributes']['ip']}",
     "Admin_allocations_ID": "ID",
     "Admin_allocations_Assigned": "zugewiesen",
     "Admin_allocations_Port": "Port",
