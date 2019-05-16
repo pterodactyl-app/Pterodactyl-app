@@ -72,7 +72,6 @@ Then you copy this code:
     "NO": "NO",
     "YES": "YES",
     "Admin_allocations_List": "List specific node allocations",
-    "Admin_allocations_IP": "IP: ${userData[index]['attributes']['ip']}",
     "Admin_allocations_ID": "ID",
     "Admin_allocations_Assigned": "assigned",
     "Admin_allocations_Port": "Port",
