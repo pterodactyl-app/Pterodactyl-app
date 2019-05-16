@@ -133,7 +133,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 backgroundColor:
                     globals.isDarkTheme ? Colors.transparent : Colors.white,
                 title: Text(
-                    DemoLocalizations.of(context).trans('Admin_HomePanel'),
+                    DemoLocalizations.of(context).trans('admin_homepanel'),
                     style: TextStyle(
                         color: globals.isDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
@@ -217,7 +217,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               children: <Widget>[
                                 Text(
                                     DemoLocalizations.of(context)
-                                        .trans('Admin_HomeTotalNodes'),
+                                        .trans('admin_hometotalnodes'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalNodes',
                                     style: TextStyle(
@@ -255,7 +255,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               children: <Widget>[
                                 Text(
                                     DemoLocalizations.of(context)
-                                        .trans('Admin_HomeTotalUsers'),
+                                        .trans('admin_hometotalusers'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalUsers',
                                     style: TextStyle(
