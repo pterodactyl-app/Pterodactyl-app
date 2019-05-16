@@ -116,7 +116,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                          DemoLocalizations.of(context).trans('Admin_allocations_IP'),
+                                          'IP: ${userData[index]['attributes']['ip']}',
                                           style: TextStyle(
                                               color: globals.isDarkTheme
                                                   ? Colors.white
