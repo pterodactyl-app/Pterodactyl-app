@@ -62,7 +62,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('Admin_server_list'),
+        title: Text(DemoLocalizations.of(context).trans('admin_server_list'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

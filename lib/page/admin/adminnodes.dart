@@ -58,7 +58,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('Admin_nodes_Nodes'),
+        title: Text(DemoLocalizations.of(context).trans('admin_nodes_nodes'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
