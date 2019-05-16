@@ -37,7 +37,7 @@
     "notifications":"Enable notifications",
     "notifications_sub":"Get notifications in the main menu",
     "delete_data": "Delete all the data",
-    "delete_data_sub": "This button delete all the data of the app!",
+    "delete_data_sub": "This button deletes all the data of the app!",
     "utilization_stats": "Stats",
     "utilization_stats_on": "State: $_stats",
     "utilization_performance_memory": "PERFORMANCE REPORT",
@@ -49,7 +49,7 @@
 
 
     "Admin_Login": "ADMIN LOGIN",
-    "Admin_NoAdminAccount": "Dont have an Admin account? Tap then here",
+    "Admin_NoAdminAccount": "Dont have an Admin account? Tap here then",
     "Admin_HomePanel": "Admin Panel",
     "Admin_HomeTotalNodes": "Total Nodes",
     "Admin_HomeTotalUsers": "Total Users",
@@ -62,7 +62,7 @@
     "Admin_ActionServer_suspend_server": "Suspend Server",
     "Admin_Alert_Suspend_server_info": "This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.",
     "Admin_ActionServer_unsuspend_server": "Unsuspend Server",
-    "Admin_Alert_Unsuspend_server_info": "Your give the owner of this server his access back to his server do you want that?",
+    "Admin_Alert_Unsuspend_server_info": "You give the owner of this server his access back to his server do you want that?",
     "NO": "NO",
     "YES": "YES",
     "Admin_allocations_List": "List specific node allocations",
@@ -79,7 +79,7 @@
     "Admin_create_user_first_name": "first name",
     "Admin_create_user_last_name": "last name",
     "Admin_create_user_last_password": "password",
-    "Admin_create_user_Create_A_User": "Ceate a new user",
+    "Admin_create_user_Create_A_User": "Create a new user",
     "Admin_nodes_Nodes": "Nodes",
     "Admin_server_list":"Admin server list",
     "Admin_User_List_list": "Admin user list"
