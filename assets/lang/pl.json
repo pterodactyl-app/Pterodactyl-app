@@ -68,7 +68,7 @@
     "admin_allocations_id": "ID",
     "admin_allocations_assigned": "przydzielony",
     "admin_allocations_port": "Port",
-    "admin_allocationscreate_assign": "Assign New Allocations",
+    "admin_allocationscreate_assign": "Przydziel nowe alokacje",
     "admin_allocationscreate_ip": "Alias IP (nie wymagane)",
     "admin_allocationscreate_port": "Port (tylko 1)",
     "admin_create_user_title": "Utwórz użytkownika",
