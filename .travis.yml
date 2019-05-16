@@ -13,7 +13,7 @@ before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
   - ./flutter/bin/flutter doctor
 script:
-  - ./flutter/bin/flutter run
+  - ./flutter/bin/flutter build appbundle --release --target-platform=android-arm64
 cache:
   directories:
     - $HOME/.pub-cache
