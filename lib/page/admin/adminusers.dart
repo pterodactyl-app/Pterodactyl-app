@@ -59,7 +59,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('Admin_User_List_list'),
+        title: Text(DemoLocalizations.of(context).trans('admin_user_list_list'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -212,7 +212,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
               .push(MaterialPageRoute(builder: (_) => AdminCreateUserPage()));
         },
         icon: Icon(Icons.add),
-        label: Text(DemoLocalizations.of(context).trans('Admin_User_List_User')),
+        label: Text(DemoLocalizations.of(context).trans('admin_user_list_user')),
       ),
     );
   }
