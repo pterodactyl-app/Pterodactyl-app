@@ -273,7 +273,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                         children: <Widget>[
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('Admin_ActionServer_unsuspend_server'),
+                                  .trans('admin_actionserver_unsuspend_server'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
