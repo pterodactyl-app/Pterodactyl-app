@@ -55,7 +55,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(
-            DemoLocalizations.of(context).trans('Admin_allocations_List'),
+            DemoLocalizations.of(context).trans('admin_allocations_list'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -136,7 +136,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                 children: <Widget>[
                                   Text(
                                       DemoLocalizations.of(context)
-                                          .trans('Admin_allocations_ID'),
+                                          .trans('admin_allocations_id'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -161,7 +161,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                   ),
                                   Text(
                                       DemoLocalizations.of(context)
-                                          .trans('Admin_allocations_Assigned'),
+                                          .trans('admin_allocations_assigned'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -186,7 +186,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                   ),
                                   Text(
                                       DemoLocalizations.of(context)
-                                          .trans('Admin_allocations_Port'),
+                                          .trans('admin_allocations_port'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
