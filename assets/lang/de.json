@@ -44,7 +44,7 @@
     "utilization_disk": "Speicherplatz",
 
 
-    "Admin_Login": "ADMIN LOGIN",
+    "admin_ogin": "ADMIN LOGIN",
     "Admin_NoAdminAccount": "Du hast keinen Admin Account? Klicke hier",
     "Admin_HomePanel": "Admin Panel",
     "Admin_HomeTotalNodes": "Nodes insgesamt",
@@ -71,12 +71,12 @@
     "Admin_create_user_Titel": "Benutzer erstellen",
     "Admin_create_user_username": "username",
     "Admin_create_user_email": "email",
-    "Admin_create_user_first_name": "Vorname",
-    "Admin_create_user_last_name": "Nachname",
-    "Admin_create_user_last_password": "Passwort",
-    "Admin_create_user_Create_A_User": "Neuen Benutzer erstellen",
-    "Admin_nodes_Nodes": "Nodes",
-    "Admin_server_list":"Admin server Liste",
-    "Admin_User_List_list": "Admin user Liste",
-    "Admin_User_List_User": "USER"
+    "admin_create_user_first_name": "Vorname",
+    "admin_create_user_last_name": "Nachname",
+    "admin_create_user_last_password": "Passwort",
+    "admin_create_user_Create_A_User": "Neuen Benutzer erstellen",
+    "admin_nodes_Nodes": "Nodes",
+    "admin_server_list":"Admin server Liste",
+    "admin_User_List_list": "Admin user Liste",
+    "admin_user_list_user": "USER"
 }
