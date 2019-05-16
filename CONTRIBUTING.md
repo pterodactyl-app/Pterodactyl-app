@@ -1,3 +1,17 @@
+# Contributing
+
+👍🎉 First off, thanks for taking the time to contribute! 🎉👍
+
+### Code of Conduct
+This project and everyone participating in it is governed by our [Code of Conduct](https://github.com/rubentalstra/Pterodactyl-app/blob/master/CODE_OF_CONDUCT.md). By participating you are expected to uphold this code.
+
+### Branches
+This does not apply just yet, as the project is not in a production ready state at the moment, but will apply when the first stable release has been released.
+
+The `master` branch should **always** be in a runnable and stable state, and should only be written to when there's a new release, or when a fix for a major bug has to be released.
+
+Development should be done in the `develop` branch, this branch should - just like `master` - be in a runnable state at all times.
+
 ### Add Language
 
 Make a Json file in: ```assets/lang/```, and name it like this ```en.json``` first 2 letter of the country code.
