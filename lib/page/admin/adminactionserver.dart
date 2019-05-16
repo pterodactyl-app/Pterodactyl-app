@@ -162,7 +162,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                         children: <Widget>[
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('Admin_ActionServer_Rebuild_server'),
+                                  .trans('admin_actionserver_rebuild_server'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -199,7 +199,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                         children: <Widget>[
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('Admin_ActionServer_Reinstall_server'),
+                                  .trans('admin_actionserver_reinstall_server'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -236,7 +236,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                         children: <Widget>[
                           Text(
                               DemoLocalizations.of(context)
-                                  .trans('Admin_ActionServer_suspend_server'),
+                                  .trans('admin_actionserver_suspend_server'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -320,7 +320,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         child: new CupertinoAlertDialog(
           content: new Text(
             DemoLocalizations.of(context)
-                .trans('Admin_Alert_Rebuild_server_info'),
+                .trans('admin_alert_rebuild_server_info'),
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -328,7 +328,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('NO'),
+              child: new Text(DemoLocalizations.of(context).trans('no'),
                   style: TextStyle(color: Colors.black)),
             ),
             new FlatButton(
@@ -336,7 +336,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 postRebuild();
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('YES'),
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
                   style: TextStyle(color: Colors.black)),
             )
           ],
@@ -350,7 +350,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         child: new CupertinoAlertDialog(
           content: new Text(
             DemoLocalizations.of(context)
-                .trans('Admin_Alert_Reinstall_server_info'),
+                .trans('admin_alert_reinstall_server_info'),
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -358,7 +358,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('NO'),
+              child: new Text(DemoLocalizations.of(context).trans('no'),
                   style: TextStyle(color: Colors.black)),
             ),
             new FlatButton(
@@ -366,7 +366,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 postReinstall();
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('YES'),
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
                   style: TextStyle(color: Colors.black)),
             )
           ],
@@ -380,7 +380,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         child: new CupertinoAlertDialog(
           content: new Text(
             DemoLocalizations.of(context)
-                .trans('Admin_Alert_Suspend_server_info'),
+                .trans('admin_alert_suspend_server_info'),
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -388,7 +388,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('NO'),
+              child: new Text(DemoLocalizations.of(context).trans('no'),
                   style: TextStyle(color: Colors.black)),
             ),
             new FlatButton(
@@ -396,7 +396,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 postSuspend();
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('YES'),
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
                   style: TextStyle(color: Colors.black)),
             )
           ],
@@ -410,7 +410,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         child: new CupertinoAlertDialog(
           content: new Text(
             DemoLocalizations.of(context)
-                .trans('Admin_Alert_Unsuspend_server_info'),
+                .trans('admin_alert_unsuspend_server_info'),
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -418,7 +418,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('NO'),
+              child: new Text(DemoLocalizations.of(context).trans('no'),
                   style: TextStyle(color: Colors.black)),
             ),
             new FlatButton(
@@ -426,7 +426,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 postUnsuspend();
                 Navigator.pop(context);
               },
-              child: new Text(DemoLocalizations.of(context).trans('YES'),
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
                   style: TextStyle(color: Colors.black)),
             )
           ],
