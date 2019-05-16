@@ -63,7 +63,7 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
         ),
         title: Text(
             DemoLocalizations.of(context)
-                .trans('Admin_allocationscreate_assign'),
+                .trans('admin_allocationscreate_assign'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -96,7 +96,7 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
                 controller: _aliasController,
                 decoration: InputDecoration(
                   labelText: DemoLocalizations.of(context)
-                      .trans('Admin_allocationscreate_IP'),
+                      .trans('admin_allocationscreate_ip'),
                 ),
               ),
             ),
@@ -108,7 +108,7 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
                 controller: _portsController,
                 decoration: InputDecoration(
                   labelText: DemoLocalizations.of(context)
-                      .trans('Admin_allocationscreate_Port'),
+                      .trans('admin_allocationscreate_port'),
                 ),
               ),
             ),
