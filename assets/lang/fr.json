@@ -48,9 +48,9 @@
   "utilization_disk": "Espace disque",
 
   "admin_login": "ADMIN LOGIN",
-  "admin_noadminaccount": "Dont have an Admin account? Tap then here",
+  "admin_noadminaccount": "Dont have an Admin account? Tap here then",
   "admin_homepanel": "Admin Panel",
-  "admin_hometotalNodes": "Total Nodes",
+  "admin_hometotalnodes": "Total Nodes",
   "admin_hometotalusers": "Total Users",
   "admin_actionnodes_list_off_allocations": "List of all allocations",
   "admin_actionnodes_create_allocation": "Create allocation",
@@ -61,7 +61,7 @@
   "admin_actionserver_suspend_server": "Suspend Server",
   "admin_alert_suspend_server_info": "This will suspend the server, stop any running processes, and immediately block the user from being able to access their files or otherwise manage the server through the panel or API.",
   "admin_actionserver_unsuspend_server": "Unsuspend Server",
-  "admin_alert_unsuspend_server_info": "Your give the owner of this server his access back to his server do you want that?",
+  "admin_alert_unsuspend_server_info": "You give the owner of this server his access back to his server do you want that?",
   "no": "NO",
   "yes": "YES",
   "admin_allocations_list": "List specific node allocations",
@@ -77,9 +77,9 @@
   "admin_create_user_first_name": "first name",
   "admin_create_user_last_name": "last name",
   "admin_create_user_last_password": "password",
-  "admin_create_user_create_a_user": "Ceate a new user",
+  "admin_create_user_create_a_user": "Create a new user",
   "admin_nodes_nodes": "Nodes",
-  "admin_server_list": "Admin server list",
+  "admin_server_list":"Admin server list",
   "admin_user_list_list": "Admin user list",
-  "admin_user_list_user": "USER"
+  "admin_user_list_user": "USER" 
 }
