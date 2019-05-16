@@ -115,7 +115,7 @@ Then make a pull requests and post your discord name#1234 with it so i can add y
 Thank you very much.
 
 ### Where to find us
-**Issues/Bug Reports:** [Github Issues](https://github.com/rubentalstra/Pterodactyl-app/issues)
-**Suggestions/Feature Requests:** [Github Issues](https://github.com/rubentalstra/Pterodactyl-app/issues)
-**Security Matters:** Discord (Ruben#9365)
-**Discord Channel** [Unofficial Pterodactyl App](https://discord.gg/gN8Jcd)
+- **Issues/Bug Reports:** [Github Issues](https://github.com/rubentalstra/Pterodactyl-app/issues)
+- **Suggestions/Feature Requests:** [Github Issues](https://github.com/rubentalstra/Pterodactyl-app/issues)
+- **Security Matters:** Discord (Ruben#9365)
+- **Discord Channel** [Unofficial Pterodactyl App](https://discord.gg/gN8Jcd)
