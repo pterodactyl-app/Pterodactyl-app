@@ -66,24 +66,18 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
-         actions: <Widget>
-         [
-           Container
-           (
-             margin: EdgeInsets.only(right: 8.0),
-             child: Row
-             (
-               mainAxisAlignment: MainAxisAlignment.center,
-               crossAxisAlignment: CrossAxisAlignment.center,
-               children: <Widget>
-               [
-                 IconButton(icon: Icon(Icons.search), onPressed: () {
-                   
-                 })
-               ],
+        actions: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.search), onPressed: () {})
+              ],
             ),
-           )
-         ],
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
@@ -109,9 +103,9 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                             builder: (BuildContext context) =>
                                 new AdminActionServerPage(
                                     server: Admin(
-                                        adminid:
-                                            userData[index]["attributes"]
-                                                ["id"].toString(),
+                                        adminid: userData[index]["attributes"]
+                                                ["id"]
+                                            .toString(),
                                         adminname: userData[index]["attributes"]
                                             ["name"])),
                           );
@@ -210,7 +204,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                         ),
                       ),
                     ),
-                  ),                  
+                  ),
                 ],
               ),
             ),

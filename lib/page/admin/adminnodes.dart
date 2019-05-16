@@ -9,11 +9,7 @@ import 'adminactionnodes.dart';
 
 class Nodes {
   final String adminids, adminname, adminip;
-  const Nodes({
-    this.adminids,
-    this.adminname,
-    this.adminip
-  });
+  const Nodes({this.adminids, this.adminname, this.adminip});
 }
 
 class AdminNodesListPage extends StatefulWidget {
@@ -104,14 +100,17 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                           globals.isDarkTheme ? Colors.grey[850] : Colors.white,
                       child: InkWell(
                         onTap: () async {
-                          await SharedPreferencesHelper.setString(
-                        "NodeAdminIP", userData[index]["attributes"]["ip"]);
+                          await SharedPreferencesHelper.setString("NodeAdminIP",
+                              userData[index]["attributes"]["ip"]);
                           var route = new MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 new AdminActionNodesPage(
                                     server: Nodes(
-                                        adminids: userData[index]["attributes"]["id"].toString(),
-                                        adminname: userData[index]["attributes"]["name"],                                   )),
+                                  adminids: userData[index]["attributes"]["id"]
+                                      .toString(),
+                                  adminname: userData[index]["attributes"]
+                                      ["name"],
+                                )),
                           );
                           Navigator.of(context).push(route);
                         },
@@ -208,7 +207,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                         ),
                       ),
                     ),
-                  ),                  
+                  ),
                 ],
               ),
             ),

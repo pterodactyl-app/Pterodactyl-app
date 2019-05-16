@@ -54,7 +54,8 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('Admin_allocations_List'),
+        title: Text(
+            DemoLocalizations.of(context).trans('Admin_allocations_List'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -133,7 +134,9 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_ID'),
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('Admin_allocations_ID'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
@@ -156,12 +159,14 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                       ),
                                     ),
                                   ),
-                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_Assigned'),
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('Admin_allocations_Assigned'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
                                             : Colors.black,
-                                            fontSize: 18.0,
+                                        fontSize: 18.0,
                                       )),
                                   Padding(
                                     padding:
@@ -179,12 +184,14 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                       ),
                                     ),
                                   ),
-                                  Text(DemoLocalizations.of(context).trans('Admin_allocations_Port'),
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('Admin_allocations_Port'),
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
                                             : Colors.black,
-                                            fontSize: 18.0,
+                                        fontSize: 18.0,
                                       )),
                                   Padding(
                                     padding:

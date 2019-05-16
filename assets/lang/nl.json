@@ -81,5 +81,6 @@
     "Admin_create_user_Create_A_User": "Ceate a new user",
     "Admin_nodes_Nodes": "Nodes",
     "Admin_server_list":"Admin server list",
-    "Admin_User_List_list": "Admin user list"
+    "Admin_User_List_list": "Admin user list",
+    "Admin_User_List_User": "USER"
 }

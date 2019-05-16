@@ -207,10 +207,12 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () { Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => AdminCreateUserPage()));},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => AdminCreateUserPage()));
+        },
         icon: Icon(Icons.add),
-        label: Text("USER"),
+        label: Text(DemoLocalizations.of(context).trans('Admin_User_List_User')),
       ),
     );
   }

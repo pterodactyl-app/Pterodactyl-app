@@ -22,7 +22,7 @@ class AdminHomePage extends StatefulWidget {
 }
 
 class _AdminHomePageState extends State<AdminHomePage> {
-FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   Map data;
   int userTotalServers = 0;
@@ -82,38 +82,37 @@ FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
     super.initState();
     getData();
     getNodesData();
-    getUsers();    
+    getUsers();
     firebaseCloudMessaging_Listeners();
-}
-void firebaseCloudMessaging_Listeners() {
-  if (Platform.isIOS) iOS_Permission();
+  }
 
-  _firebaseMessaging.getToken().then((token){
-    print(token);
-  });
+  void firebaseCloudMessaging_Listeners() {
+    if (Platform.isIOS) iOS_Permission();
 
-  _firebaseMessaging.configure(
-    onMessage: (Map<String, dynamic> message) async {
-      print('on message $message');
-    },
-    onResume: (Map<String, dynamic> message) async {
-      print('on resume $message');
-    },
-    onLaunch: (Map<String, dynamic> message) async {
-      print('on launch $message');
-    },
-  );
-}
+    _firebaseMessaging.getToken().then((token) {
+      print(token);
+    });
 
-void iOS_Permission() {
-  _firebaseMessaging.requestNotificationPermissions(
-      IosNotificationSettings(sound: true, badge: true, alert: true)
-  );
-  _firebaseMessaging.onIosSettingsRegistered
-      .listen((IosNotificationSettings settings)
-  {
-    print("Settings registered: $settings");
-  });    
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+      },
+    );
+  }
+
+  void iOS_Permission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
   }
 
   @override
@@ -133,7 +132,8 @@ void iOS_Permission() {
                 elevation: 2.0,
                 backgroundColor:
                     globals.isDarkTheme ? Colors.transparent : Colors.white,
-                title: Text(DemoLocalizations.of(context).trans('Admin_HomePanel'),
+                title: Text(
+                    DemoLocalizations.of(context).trans('Admin_HomePanel'),
                     style: TextStyle(
                         color: globals.isDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
@@ -215,7 +215,9 @@ void iOS_Permission() {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(DemoLocalizations.of(context).trans('Admin_HomeTotalNodes'),
+                                Text(
+                                    DemoLocalizations.of(context)
+                                        .trans('Admin_HomeTotalNodes'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalNodes',
                                     style: TextStyle(
@@ -251,7 +253,9 @@ void iOS_Permission() {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(DemoLocalizations.of(context).trans('Admin_HomeTotalUsers'),
+                                Text(
+                                    DemoLocalizations.of(context)
+                                        .trans('Admin_HomeTotalUsers'),
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalUsers',
                                     style: TextStyle(

@@ -26,7 +26,8 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
     String _ports = await SharedPreferencesHelper.getString("ports");
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/application/nodes/${widget.server.adminids}/allocations';
+    var url =
+        '$_url/api/application/nodes/${widget.server.adminids}/allocations';
 
     Map data = {
       "ip": "$_ip",
@@ -60,7 +61,9 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('Admin_allocationscreate_assign'),
+        title: Text(
+            DemoLocalizations.of(context)
+                .trans('Admin_allocationscreate_assign'),
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -92,7 +95,8 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
               child: TextField(
                 controller: _aliasController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context).trans('Admin_allocationscreate_IP'),
+                  labelText: DemoLocalizations.of(context)
+                      .trans('Admin_allocationscreate_IP'),
                 ),
               ),
             ),
@@ -103,7 +107,8 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
                 keyboardType: TextInputType.number,
                 controller: _portsController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context).trans('Admin_allocationscreate_Port'),
+                  labelText: DemoLocalizations.of(context)
+                      .trans('Admin_allocationscreate_Port'),
                 ),
               ),
             ),
@@ -137,7 +142,6 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
             ),
           ],
         ),
-        
       ),
     );
   }

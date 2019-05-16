@@ -33,7 +33,7 @@
     "notifications": "Benachrichtigungen aktivieren",
     "notifications_sub": "Benachrichtungen im Hauptmenü anzeigen",
     "delete_data": "Alle Daten löschen",
-    "delete_data_sub": "Dieser Button wird alle Daten der App löschen!"
+    "delete_data_sub": "Dieser Button wird alle Daten der App löschen!",
     "utilization_stats": "Statistiken",
     "utilization_stats_on": "Status: $_stats",
     "utilization_performance_memory": "LEISTUNGSBERICHT",
@@ -77,5 +77,6 @@
     "Admin_create_user_Create_A_User": "Neuen Benutzer erstellen",
     "Admin_nodes_Nodes": "Nodes",
     "Admin_server_list":"Admin server Liste",
-    "Admin_User_List_list": "Admin user Liste"
+    "Admin_User_List_list": "Admin user Liste",
+    "Admin_User_List_User": "USER"
 }
