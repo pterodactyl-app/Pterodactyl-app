@@ -93,7 +93,7 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('Admin_Actionnodes_List_off_allocations'),
+                          Text(DemoLocalizations.of(context).trans('admin_actionnodes_list_off_allocations'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
@@ -134,7 +134,7 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('Admin_Actionnodes_Create_allocation'),
+                          Text(DemoLocalizations.of(context).trans('admin_actionnodes_create_allocation'),
                               style: TextStyle(
                                   color: globals.isDarkTheme
                                       ? Colors.white
