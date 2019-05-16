@@ -111,7 +111,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             ),
             new FlatButton(
               child: new Text(
-                  DemoLocalizations.of(context).trans('noadminaccount')),
+                  DemoLocalizations.of(context).trans('admin_noadminaccount')),
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
