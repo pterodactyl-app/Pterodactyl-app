@@ -39,6 +39,8 @@ For all the people who worked with me on this amazing project.
 
 > - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001`
 
+> - €5,00 EURO `@Jules [skoali.fr]#6511 `
+
 > - $0.50 CAD `@Kiffey14#2010`
 
 
