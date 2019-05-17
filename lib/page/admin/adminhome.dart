@@ -295,7 +295,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.settings_applications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
                             Text(
                                 DemoLocalizations.of(context).trans('settings'),
                                 style: TextStyle(
@@ -332,7 +332,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.notifications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
                             Text(DemoLocalizations.of(context).trans('alerts'),
                                 style: TextStyle(
                                     color: globals.isDarkTheme
