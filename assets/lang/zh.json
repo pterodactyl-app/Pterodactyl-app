@@ -1,5 +1,5 @@
 {
-    "url_login": "面板地址(例如: https://panel.pterodactyl.app)",
+    "url_login": "面板地址 (例如: https://panel.pterodactyl.app)",
     "api_key_login": "API KEY",
     "remember_me": "记住我",
     "clear": "清空",
@@ -24,9 +24,9 @@
     "action_start": "启动",
     "action_stop": "停止",
     "action_restart": "重启",
-    "action_kill": "杀死(强制停止)",
+    "action_kill": "杀死 (强制停止)",
     "action_stats": "状态",
-    "action_file": "文件列表(将在面板0.8版本到来)",
+    "action_file": "文件列表 (将在面板0.8版本到来)",
     "dark_mode": "夜间模式",
     "dark_mode_sub": "黑色和灰色主题",
     "cores": "核心数",
