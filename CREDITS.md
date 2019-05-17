@@ -6,6 +6,8 @@ For all the people who worked with me on this amazing project.
 
 ###### Translators:
 
+> - French Language: `⚡ ZeProf2Coding#4274`
+
 > - Danish Language: `@Noah 101#0001`
 
 > - German Language: `@Jan#6705`
@@ -47,8 +49,9 @@ For all the people who worked with me on this amazing project.
 
 > - `@Griffindor#7378 `
 
-
+> - `⚡ ZeProf2Coding#4274`
 
 ###### Contributors:
 
+> - Helped ruben at the beginning of the app `⚡ ZeProf2Coding#4274`
 > - Improve (markdown) files `@/var/www/Jordy ツ#0049`
