@@ -6,6 +6,19 @@
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleLocalizations</key>
+    <array>
+    	<string>en</string>
+    	<string>de</string>
+    	<string>fr</string>
+    	<string>nl</string>
+		<string>dk</string>
+		<string>no</string>
+		<string>pl</string>
+		<string>it</string>
+		<string>se</string>
+		<string>zh</string>
+    </array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

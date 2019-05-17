@@ -11,7 +11,7 @@ description: A Pterodactyl Mobile App.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.4.8+29
+version: 2.5.0+31
 authors:
   - Ruben Talstra <rubentalstra1211@outlook.com>
   - Arnaud Lier <zeprofdecoding@gmail.com>
@@ -73,6 +73,7 @@ flutter:
    - assets/lang/pl.json
    - assets/lang/it.json
    - assets/lang/se.json
+   - assets/lang/zh.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

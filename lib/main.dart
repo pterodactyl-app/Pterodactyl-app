@@ -115,7 +115,7 @@ class MyApp extends StatelessWidget {
               const Locale('se', 'SE'),
               const Locale('it', 'IT'),
               const Locale('pl', 'PL'),
-              const Locale('zh', 'CN'), // 'zh_CN'
+              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'), // 'zh_Hans_CN'
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
