@@ -20,6 +20,8 @@ For all the people who worked with me on this amazing project.
 
 > - Polish language: `@riko.dev#9357`
 
+> - Chinese Simplified `@gzzchh#0998`
+
 
 
 
