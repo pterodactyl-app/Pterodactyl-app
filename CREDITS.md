@@ -6,7 +6,7 @@ For all the people who worked with me on this amazing project.
 
 ###### Translators:
 
-> - French Language: `⚡ ZeProf2Coding#4274`
+> - French Language: `⚡ ZeProf2Coding#4274` and `@Jules [skoali.fr]#6511 `
 
 > - Danish Language: `@Noah 101#0001`
 
