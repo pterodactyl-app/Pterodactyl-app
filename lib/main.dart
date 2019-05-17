@@ -67,7 +67,8 @@ class DemoLocalizationsDelegate
         'no',
         'pl',
         'it',
-        'se'
+        'se',
+        'zh'
       ].contains(locale.languageCode);
 
   @override
@@ -113,7 +114,8 @@ class MyApp extends StatelessWidget {
               const Locale('nl', 'NL'),
               const Locale('se', 'SE'),
               const Locale('it', 'IT'),
-              const Locale('pl', 'PL')
+              const Locale('pl', 'PL'),
+              const Locale('zh', 'CN'), // 'zh_CN'
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
