@@ -68,7 +68,7 @@ class DemoLocalizationsDelegate
         'pl',
         'it',
         'se',
-        'zh'
+        'zh-Hans'
       ].contains(locale.languageCode);
 
   @override

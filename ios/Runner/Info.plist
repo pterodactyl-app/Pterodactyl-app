@@ -17,7 +17,7 @@
 		<string>pl</string>
 		<string>it</string>
 		<string>se</string>
-		<string>zh</string>
+		<string>zh-Hans</string>
     </array>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
