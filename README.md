@@ -2,6 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
 <span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-green.svg" alt="Patreon donate button" /></a></span>
+[![Codemagic build status](https://api.codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/status_badge.svg)](https://codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/latest_build)
 
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
