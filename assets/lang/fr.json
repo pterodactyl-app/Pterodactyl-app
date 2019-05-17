@@ -1,5 +1,5 @@
 {
-  "url_login": "URL (exemple: panel.pterodactyl.app)",
+  "url_login": "URL (exemple: https://panel.pterodactyl.app)",
   "api_key_login": "CLÉ API",
   "remember_me": "Se souvenir de moi",
   "clear": "EFFACER",
