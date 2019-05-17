@@ -6,6 +6,7 @@
     "next":"DALEJ",
     "login_error":"nazwa użytkownika lub hasło \nnie mogą być puste",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Panel",
     "logout":"Wyloguj",
     "logout_sub":"Rozłącz się",

@@ -6,6 +6,7 @@
     "next":"NÄSTA",
     "login_error":"användarnamn och lösenord \nkan ej lämnas tomma",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Överblick",
     "logout":"Logga ut",
     "logout_sub":"Koppla ifrån",

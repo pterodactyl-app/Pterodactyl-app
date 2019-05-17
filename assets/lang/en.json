@@ -6,6 +6,7 @@
     "next":"NEXT",
     "login_error":"username or password \ncan't be empty",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Dashboard",
     "logout":"Logout",
     "logout_sub":"Disconnect",
@@ -47,7 +48,6 @@
     "utilization_performance_disk": "PERFORMANCE REPORT",
     "utilization_disk": "Disk",
 
-
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Dont have an Admin account? Tap here then",
     "admin_homepanel": "Admin Panel",
@@ -83,5 +83,4 @@
     "admin_server_list":"Admin server list",
     "admin_user_list_list": "Admin user list",
     "admin_user_list_user": "USER" 
-
 }

@@ -6,6 +6,7 @@
   "next": "SUIVANT",
   "login_error": "Le nom d'utilisateur ou le mot de passe ne peut pas être vide",
   "login_error_ok": "OK",
+  "login_admin_account": "Do you have a Admin account? Tap then Here",
   "dashboard": "Tableau de bord",
   "logout": "Se déconnecter",
   "logout_sub": "Déconnecter",
