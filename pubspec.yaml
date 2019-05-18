@@ -41,6 +41,7 @@ dependencies:
   dynamic_theme: any
   get_version: any
   firebase_messaging: any
+  url_launcher: any
 
   dbutils:
     git:
