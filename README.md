@@ -5,7 +5,7 @@
 [![Codemagic build status](https://api.codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/status_badge.svg)](https://codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/latest_build)
 
 A unofficial mobile app for the Pterodactyl Panel
-<img align="right" src="https://pterodactyl.io/pterodactyl.png" height="170">
+<img align="right" src="https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/03736E05-CF2B-49F5-8CC0-910CAF4CA528.jpeg" height="170">
 
 ### Features :
 Client panel
