@@ -37,7 +37,7 @@ class DemoLocalizations {
 
   Future<bool> load() async {
     String data = await rootBundle
-        .loadString('assets/lang/${this.locale.languageCode}.json');
+        .loadString('assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
     Map<String, dynamic> _result = json.decode(data);
 
     this._sentences = new Map();
@@ -84,7 +84,7 @@ class DemoLocalizationsDelegate
     DemoLocalizations localizations = new DemoLocalizations(locale);
     await localizations.load();
 
-    print("Load ${locale.languageCode}");
+    print("Load ${locale.languageCode}_${locale.countryCode}");
 
     return localizations;
   }
@@ -117,6 +117,7 @@ class MyApp extends StatelessWidget {
               const Locale('it', 'IT'),
               const Locale('pl', 'PL'),
               const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'), // 'zh_Hans_CN'
+              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'), // 'zh_Hant_TW'
               const Locale('si', 'SI'),
             ],
             localizationsDelegates: [
