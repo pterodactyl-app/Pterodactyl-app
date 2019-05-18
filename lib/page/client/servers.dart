@@ -57,12 +57,11 @@ class _ServerListPageState extends State<ServerListPage> {
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
-          icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+          icon: Icon(Icons.arrow_back),
         ),
         title: Text(DemoLocalizations.of(context).trans('server_list'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.isDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
         // actions: <Widget>
         // [

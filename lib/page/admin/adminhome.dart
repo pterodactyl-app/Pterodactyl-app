@@ -83,11 +83,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
     getData();
     getNodesData();
     getUsers();
-    firebaseCloudMessaging_Listeners();
+    firebaseCloudMessagingListeners();
   }
 
-  void firebaseCloudMessaging_Listeners() {
-    if (Platform.isIOS) iOS_Permission();
+  void firebaseCloudMessagingListeners() {
+    if (Platform.isIOS) iOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
       print(token);
@@ -106,7 +106,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     );
   }
 
-  void iOS_Permission() {
+  void iOSPermission() {
     _firebaseMessaging.requestNotificationPermissions(
         IosNotificationSettings(sound: true, badge: true, alert: true));
     _firebaseMessaging.onIosSettingsRegistered

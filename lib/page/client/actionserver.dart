@@ -186,11 +186,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_start'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontWeight: FontWeight.w700, fontSize: 18.0))
                         ],
                       )
                     ]),
@@ -214,11 +210,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_stop'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontWeight: FontWeight.w700, fontSize: 18.0))
                         ],
                       ),
                       Material(
@@ -260,11 +252,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_restart'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontWeight: FontWeight.w700, fontSize: 18.0))
                         ],
                       )
                     ]),
@@ -288,11 +276,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               DemoLocalizations.of(context)
                                   .trans('action_kill'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
+                                  fontWeight: FontWeight.w700, fontSize: 18.0))
                         ],
                       ),
                       Material(
@@ -321,14 +305,11 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context)
+                          Text(
+                              DemoLocalizations.of(context)
                                   .trans('action_stats'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
@@ -361,14 +342,11 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context)
+                          Text(
+                              DemoLocalizations.of(context)
                                   .trans('action_file'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
@@ -396,11 +374,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         children: <Widget>[
                           Text((DemoLocalizations.of(context).trans('console')),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(

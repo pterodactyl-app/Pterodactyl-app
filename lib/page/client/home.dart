@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import 'dart:async';
@@ -45,21 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-return DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => ThemeData(
-            primarySwatch: Colors.blue,
-            primaryColorBrightness:
-                globals.isDarkTheme ? Brightness.dark : Brightness.light,
-            brightness: brightness,
-          ),
-  themedWidgetBuilder: (context, theme) {
 
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 2.0,
-          backgroundColor: globals.isDarkTheme ? Colors.transparent : Colors.white,
+          backgroundColor: globals.isDarkTheme ? null : Colors.white,
           title: Text(DemoLocalizations.of(context).trans('dashboard'),
               style: TextStyle(
                   color: globals.isDarkTheme ? null : Colors.black,
@@ -110,9 +100,6 @@ return DynamicTheme(
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$userTotalServers',
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
@@ -146,12 +133,9 @@ return DynamicTheme(
                             child: Icon(Icons.settings_applications,
                                 color: Colors.white, size: 30.0),
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
                       Text(DemoLocalizations.of(context).trans('settings'),
                           style: TextStyle(
-                              color: globals.isDarkTheme
-                                  ? Colors.white
-                                  : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('settings_sub'),
@@ -180,12 +164,9 @@ return DynamicTheme(
                             child: Icon(Icons.notifications,
                                 color: Colors.white, size: 30.0),
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
                       Text(DemoLocalizations.of(context).trans('alerts'),
                           style: TextStyle(
-                              color: globals.isDarkTheme
-                                  ? Colors.white
-                                  : Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('alerts_sub'),
@@ -220,9 +201,6 @@ return DynamicTheme(
                               DemoLocalizations.of(context)
                                   .trans('coming_soon_sub'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 34.0))
                         ],
@@ -248,7 +226,6 @@ return DynamicTheme(
             StaggeredTile.extent(2, 110.0),
           ],
         ));
-    });
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {
