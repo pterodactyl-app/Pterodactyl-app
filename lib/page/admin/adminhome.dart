@@ -183,9 +183,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     style: TextStyle(color: Colors.blueAccent)),
                                 Text('$userTotalServers',
                                     style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 34.0))
                               ],
@@ -221,9 +218,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalNodes',
                                     style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 34.0))
                               ],
@@ -259,9 +253,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('$totalUsers',
                                     style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 34.0))
                               ],
@@ -299,9 +290,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             Text(
                                 DemoLocalizations.of(context).trans('settings'),
                                 style: TextStyle(
-                                    color: globals.isDarkTheme
-                                        ? Colors.white
-                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 24.0)),
                             Text(
@@ -335,9 +323,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             Padding(padding: EdgeInsets.only(bottom: 12.0)),
                             Text(DemoLocalizations.of(context).trans('alerts'),
                                 style: TextStyle(
-                                    color: globals.isDarkTheme
-                                        ? Colors.white
-                                        : Colors.black,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 24.0)),
                             Text(

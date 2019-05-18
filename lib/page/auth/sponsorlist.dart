@@ -15,6 +15,12 @@ class SponsorList {
       message: "https://thunderbolt-hosting.com/",
     ),
     SponsorList(
+      avatarUrl: "https://avatars0.githubusercontent.com/u/50382144?s=460&v=4",
+      name: "Jordy",
+      datetime: "Android license",
+      message: "https://avatars0.githubusercontent.com/u/50382144?s=460&v=4",
+    ),
+    SponsorList(
       avatarUrl:
           "https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/minicenter_logo.png",
       name: "MiniCenter",

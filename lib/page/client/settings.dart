@@ -146,7 +146,7 @@ class SettingsListPageState extends State<SettingsList> {
             new ListTile(
               leading: Icon(Icons.euro_symbol),
               title: Text('Sponsors'),
-              subtitle: new Text('Everyone how sponsored this project'),
+              subtitle: new Text('Everyone who sponsored this project'),
               onTap: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => SponsorPage()));
