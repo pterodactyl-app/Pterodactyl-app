@@ -6,6 +6,7 @@
     "next": "下一步",
     "login_error": "用户名或者密码 \n不能为空",
     "login_error_ok": "好",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",
     "dashboard": "仪表板",
     "logout": "注销",
     "logout_sub": "断开连接",

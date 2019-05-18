@@ -6,6 +6,7 @@
     "next": "NÆSTE",
     "login_error": "brugernavn eller password \nkan ikke være tomt",
     "login_error_ok": "OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",
     "dashboard": "Instrumentbræt",
     "logout": "Log ud",
     "logout_sub": "Disconnect",

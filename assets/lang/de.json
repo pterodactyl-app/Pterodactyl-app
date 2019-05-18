@@ -1,9 +1,12 @@
 {
-    "url_login": "URL (Beispiel: panel.pterodactyl.app)",
+    "url_login": "URL (Beispiel: https://panel.pterodactyl.app)",
     "api_key_login": "API-SCHLÜSSEL",
     "remember_me": "Eingeloggt bleiben",
     "clear": "SÄUBERN",
     "next": "NÄCHSTER",
+    "login_error":"username or password \ncan't be empty",
+    "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",     
     "dashboard": "Dashboard",
     "logout": "Ausloggen",
     "logout_sub": "Verbindung trennen",
@@ -42,7 +45,6 @@
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "LEISTUNGSBERICHT",
     "utilization_disk": "Speicherplatz",
-
 
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Du hast keinen Admin Account? Klicke hier",

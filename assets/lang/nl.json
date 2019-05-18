@@ -6,6 +6,7 @@
     "next":"VOLGENDE",
     "login_error":"Het veld gebruikersnaam en/of wachtwoord mag niet leeg zijn.",
     "login_error_ok":"OKÉ",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Bureaublad",
     "logout":"Afmelden",
     "logout_sub":"Meld je af voor dit account",

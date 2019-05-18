@@ -6,6 +6,7 @@
     "next":"NESTE",
     "login_error":"Brukernavnet eller passordet \nkan ikke være tomt",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Skrivebord",
     "logout":"Logg av",
     "logout_sub":"Koble fra",

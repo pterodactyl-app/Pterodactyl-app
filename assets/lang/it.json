@@ -6,6 +6,7 @@
     "next":"PROSSIMO",
     "login_error":"nome utente o password \nnon possone essere vuoti",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? Tap then Here",   
     "dashboard":"Dashboard",
     "logout":"Esci",
     "logout_sub":"Scollega",
