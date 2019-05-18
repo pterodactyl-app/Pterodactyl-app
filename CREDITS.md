@@ -24,6 +24,8 @@ For all the people who worked with me on this amazing project.
 
 > - Chinese Simplified `@gzzchh#0998`
 
+> - Chinese Taiwan `@StarBurstNetork#2291`
+
 > - Slovenian language: `@Perhaps.#8928`
 
 
