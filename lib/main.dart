@@ -108,6 +108,7 @@ class MyApp extends StatelessWidget {
           return new MaterialApp(
             supportedLocales: [
               const Locale('en', 'US'),
+              const Locale('en', 'UK'),
               const Locale('fr', 'FR'),
               const Locale('de', 'DE'),
               const Locale('dk', 'DK'),
