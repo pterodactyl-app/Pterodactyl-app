@@ -14,7 +14,7 @@ Development should be done in the `develop` branch, this branch should - just li
 
 ### Add Language
 
-Make a Json file in: ```assets/lang/```, and name it like this ```en.json``` first 2 letter of the country code.
+Make a Json file in: ```assets/lang/```, and name it like this ```en_US.json```, first 2 letter of the language Code and ```_``` finaly your country Code ```US```.
 
 Then you copy this code:
 
