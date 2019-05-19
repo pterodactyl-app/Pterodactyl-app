@@ -47,9 +47,9 @@ For all the people who worked with me on this amazing project.
 
 > - Webhosting `@CodeCo#3866` (https://deploys.io/)
 
-> - €5,00 EURO `@Jules [skoali.fr]#6511` (https://accuratenode.com/)
+> - €5,00 EURO `@Perhaps.#8928` (https://accuratenode.com/)
 
-> - €5,00 EURO `@Perhaps.#8928` (https://skoali.fr/)
+> - €5,00 EURO `@Jules [skoali.fr]#6511` (https://skoali.fr/)
 
 > - $0.50 CAD `@Kiffey14#2010`
 
