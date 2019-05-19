@@ -79,10 +79,10 @@
     "admin_create_user_first_name": "Voornaam",
     "admin_create_user_last_name": "Achternaam",
     "admin_create_user_last_password": "Wachtwoord",
-    "admin_create_user_create_a_user": "Create a new user",
+    "admin_create_user_create_a_user": "Maak een nieuwe gebruiker",
     "admin_nodes_nodes": "Nodes",
-    "admin_server_list":"Admin server list",
-    "admin_user_list_list": "Admin user list",
+    "admin_server_list":"Admin server lijst",
+    "admin_user_list_list": "Admin gebruiker lijst",
     "admin_user_list_user": "GEBRUIKER",
     
     "admin_view_server": "Bekijk Server",
@@ -100,6 +100,6 @@
     "language": "Taal:",
     "rootadmin": "Root admin:",
     "2fa": "2FA",
-    "created_at": "Created at:",
-    "updated_at": "Updated at:"
+    "created_at": "Gemaakt op:",
+    "updated_at": "Geupdate op:"
 }
