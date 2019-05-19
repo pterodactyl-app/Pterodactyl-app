@@ -45,7 +45,11 @@ For all the people who worked with me on this amazing project.
 
 > - $21.53 EURO `@Nyx#8228`
 
-> - €5,00 EURO `@Jules [skoali.fr]#6511 `
+> - Webhosting `@CodeCo#3866` (https://deploys.io/)
+
+> - €5,00 EURO `@Jules [skoali.fr]#6511`
+
+> - €5,00 EURO `@Perhaps.#8928`
 
 > - $0.50 CAD `@Kiffey14#2010`
 
