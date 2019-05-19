@@ -160,11 +160,11 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                         EdgeInsets.symmetric(horizontal: 4.0),
                                     child: Material(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
+                                      color: "${userData[index]["attributes"]["root_admin"]}" == "true" ? Colors.green : Colors.blue,
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["root_admin"]}',
+                                            '${userData[index]["attributes"]["root_admin"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
@@ -182,11 +182,11 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                         EdgeInsets.symmetric(horizontal: 4.0),
                                     child: Material(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
+                                      color: "${userData[index]["attributes"]["2fa"]}" == "true" ? Colors.green : Colors.red,
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["2fa"]}',
+                                            '${userData[index]["attributes"]["2fa"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
