@@ -17,11 +17,17 @@ class AdminLoginPage extends StatefulWidget {
   _AdminLoginPageState createState() => new _AdminLoginPageState();
 }
 
+String dropdownValue = 'https://';
+
+bool checkValue = false;
+
 class _AdminLoginPageState extends State<AdminLoginPage> {
   final _apiadminController = TextEditingController();
   final _urladminController = TextEditingController();
 
-  bool checkValue = false;
+
+
+  
 
   SharedPreferences sharedPreferences;
 
@@ -49,7 +55,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 50.0),
             AccentColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
@@ -61,6 +67,21 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               ),
             ),
             SizedBox(height: 12.0),
+            DropdownButton<String>(
+              value: dropdownValue,
+              onChanged: (String newValue) {
+                setState(() {
+                  dropdownValue = newValue;
+                });
+              },
+              items: <String>['https://', 'http://']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
@@ -104,6 +125,8 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         "apiAdminKey", _apiadminController.text);
                     await SharedPreferencesHelper.setString(
                         "panelAdminUrl", _urladminController.text);
+                    await SharedPreferencesHelper.setString(
+                        "adminhttps", dropdownValue);
                     _navigator();
                   },
                 ),
@@ -128,6 +151,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
+      sharedPreferences.setString("adminhttps", dropdownValue);
       sharedPreferences.setString("apiAdminKey", _apiadminController.text);
       sharedPreferences.setString("panelAdminUrl", _urladminController.text);
       sharedPreferences.commit();
@@ -144,6 +168,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
           _apiadminController.text = sharedPreferences.getString("apiAdminKey");
           _urladminController.text =
               sharedPreferences.getString("panelAdminUrl");
+          dropdownValue = sharedPreferences.getString("adminhttps");
         } else {
           _apiadminController.clear();
           _urladminController.clear();

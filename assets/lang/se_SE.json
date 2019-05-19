@@ -1,5 +1,5 @@
 {
-    "url_login":"URL (till exempel https://panel.pterodactyl.app)",
+    "url_login":"URL (panel.pterodactyl.app)",
     "api_key_login":"API KEY",
     "remember_me":"Kom ihåg mig",
     "clear":"TÖM",
@@ -65,6 +65,7 @@
     "admin_alert_unsuspend_server_info": "Detta kommer att ge ägaren av denna server tillgång till dess filer igen. Vill du göra detta?",
     "no": "NEJ",
     "yes": "JA",
+    "admin_nodestotalallocations": "Total Allocations",
     "admin_allocations_list": "Lista specifika nodallokeringar",
     "admin_allocations_id": "ID",
     "admin_allocations_assigned": "tilldelad",
@@ -82,5 +83,23 @@
     "admin_nodes_nodes": "Servernoder",
     "admin_server_list":"Adminserverlista",
     "admin_user_list_list": "Adminanvändarlista",
-    "admin_user_list_user": "ANVÄNDARE"  
+    "admin_user_list_user": "ANVÄNDARE",
+    
+    "admin_view_server": "View Server",
+    "admin_view_server_identifier": "Identifier:", 
+    "admin_view_server_installed": "Installed:", 
+    "admin_view_server_name": "Name:",
+    "admin_view_server_description": "Description:",
+    "admin_view_server_suspended": "Suspended:",
+    "admin_view_server_startup_command": "Startup Command:",
+    "firstname": "First name:",
+    "lastname": "Last name:",
+    "email": "Email:",
+    "uuid": "uuid:",
+    "id": "ID:",
+    "language": "Language:",
+    "rootadmin": "Root admin:",
+    "2fa": "2FA",
+    "created_at": "Created at:",
+    "updated_at": "Updated at:"
 }

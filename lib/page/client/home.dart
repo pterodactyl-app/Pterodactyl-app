@@ -20,11 +20,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers = 0;
   
-  Future getData() async {
+  Future getDataHome() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
     http.Response response = await http.get(
-      "$_url/api/client",
+      "$_https$_url/api/client",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_api"
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getData();
+    getDataHome();
   }
 
   @override

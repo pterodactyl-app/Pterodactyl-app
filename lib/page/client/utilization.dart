@@ -28,8 +28,9 @@ class _StatePageState extends State<StatePage> {
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
     http.Response response = await http.get(
-      "$_url/api/client/servers/${widget.info.id}/utilization",
+      "$_https$_url/api/client/servers/${widget.info.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",

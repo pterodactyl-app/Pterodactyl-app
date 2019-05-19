@@ -189,6 +189,7 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
               onTap: () async {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
+                SharedPreferencesHelper.remove("adminhttps");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(

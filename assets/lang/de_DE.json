@@ -1,5 +1,5 @@
 {
-    "url_login": "URL (Beispiel: https://panel.pterodactyl.app)",
+    "url_login": "URL (panel.pterodactyl.app)",
     "api_key_login": "API-SCHLÜSSEL",
     "remember_me": "Eingeloggt bleiben",
     "clear": "SÄUBERN",
@@ -63,6 +63,7 @@
     "Admin_alert_unsuspend_server_info": "Du gibst dem Besitzer dieses Servers seinen Zugang zu seinem Server zurück, willst du das?",
     "no": "NEIN",
     "yes": "JA",
+    "admin_nodestotalallocations": "Total Allocations",
     "admin_allocations_list": "Liste der spezifischen Node Allokationen",
     "admin_allocations_id": "ID",
     "admin_allocations_assigned": "zugewiesen",
@@ -80,5 +81,23 @@
     "admin_nodes_nodes": "Nodes",
     "admin_server_list":"Admin server Liste",
     "admin_user_list_list": "Admin user Liste",
-    "admin_user_list_user": "USER"
+    "admin_user_list_user": "USER",
+
+    "admin_view_server": "View Server",
+    "admin_view_server_identifier": "Identifier:", 
+    "admin_view_server_installed": "Installed:", 
+    "admin_view_server_name": "Name:",
+    "admin_view_server_description": "Description:",
+    "admin_view_server_suspended": "Suspended:",
+    "admin_view_server_startup_command": "Startup Command:",
+    "firstname": "First name:",
+    "lastname": "Last name:",
+    "email": "Email:",
+    "uuid": "uuid:",
+    "id": "ID:",
+    "language": "Language:",
+    "rootadmin": "Root admin:",
+    "2fa": "2FA",
+    "created_at": "Created at:",
+    "updated_at": "Updated at:"   
 }

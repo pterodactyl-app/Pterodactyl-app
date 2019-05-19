@@ -17,11 +17,13 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => new _LoginPageState();
 }
 
+String dropdownValue = 'https://';
+
+bool checkValue = false;
+
 class _LoginPageState extends State<LoginPage> {
   final _apiController = TextEditingController();
   final _urlController = TextEditingController();
-
-  bool checkValue = false;
 
   SharedPreferences sharedPreferences;
 
@@ -49,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 50.0),
             AccentColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
@@ -61,6 +63,21 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(height: 12.0),
+            DropdownButton<String>(
+              value: dropdownValue,
+              onChanged: (String newValue) {
+                setState(() {
+                  dropdownValue = newValue;
+                });
+              },
+              items: <String>['https://', 'http://']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
@@ -104,13 +121,16 @@ class _LoginPageState extends State<LoginPage> {
                         "apiKey", _apiController.text);
                     await SharedPreferencesHelper.setString(
                         "panelUrl", _urlController.text);
+                    await SharedPreferencesHelper.setString(
+                        "https", dropdownValue);
                     _navigator();
                   },
                 ),
               ],
             ),
             new FlatButton(
-              child: new Text(DemoLocalizations.of(context).trans('login_admin_account')),
+              child: new Text(
+                  DemoLocalizations.of(context).trans('login_admin_account')),
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/adminlogin', (Route<dynamic> route) => false);
@@ -129,6 +149,7 @@ class _LoginPageState extends State<LoginPage> {
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("apiKey", _apiController.text);
       sharedPreferences.setString("panelUrl", _urlController.text);
+      sharedPreferences.setString("https", dropdownValue);
       sharedPreferences.commit();
       getCredential();
     });
@@ -142,6 +163,7 @@ class _LoginPageState extends State<LoginPage> {
         if (checkValue) {
           _apiController.text = sharedPreferences.getString("apiKey");
           _urlController.text = sharedPreferences.getString("panelUrl");
+          dropdownValue = sharedPreferences.getString("https");
         } else {
           _apiController.clear();
           _urlController.clear();

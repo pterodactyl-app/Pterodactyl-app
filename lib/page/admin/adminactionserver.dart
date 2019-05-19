@@ -7,6 +7,18 @@ import '../auth/shared_preferences_helper.dart';
 import 'dart:async';
 import '../../main.dart';
 import 'adminservers.dart';
+import 'admineditserver.dart';
+import 'adminserverinfo.dart';
+
+class EditServer {
+  final String adminid;
+  const EditServer({this.adminid});
+}
+
+class ViewServer {
+  final String adminid;
+  const ViewServer({this.adminid});
+}
 
 class AdminActionServerPage extends StatefulWidget {
   AdminActionServerPage({Key key, this.server}) : super(key: key);
@@ -22,8 +34,9 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postRebuild() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     var url =
-        '$_urladmin/api/application/servers/${widget.server.adminid}/rebuild';
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/rebuild';
 
     var response = await http.post(
       url,
@@ -41,8 +54,9 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postReinstall() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     var url =
-        '$_urladmin/api/application/servers/${widget.server.adminid}/reinstall';
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/reinstall';
 
     var response = await http.post(
       url,
@@ -60,8 +74,9 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postSuspend() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     var url =
-        '$_urladmin/api/application/servers/${widget.server.adminid}/suspend';
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/suspend';
 
     var response = await http.post(
       url,
@@ -79,8 +94,9 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Future postUnsuspend() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     var url =
-        '$_urladmin/api/application/servers/${widget.server.adminid}/unsuspend';
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/unsuspend';
 
     var response = await http.post(
       url,
@@ -288,8 +304,89 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 _unsuspend();
               },
             ),
+_buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.create,
+                                color: Colors.white, size: 30.0),
+                          ))),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('View Server info',
+                              style: TextStyle(
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18.0))
+                        ],
+                      )
+                    ]),
+              ),
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new AdminServerInfoPage(
+                      server: ViewServer(adminid: widget.server.adminid)),
+                );
+                Navigator.of(context).push(route); 
+              
+              },
+            ),            
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.create,
+                                color: Colors.white, size: 30.0),
+                          ))),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Edit Server',
+                              style: TextStyle(
+                                  color: globals.isDarkTheme
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18.0))
+                        ],
+                      )
+                    ]),
+              ),
+              onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new AdminEditServerPage(
+                      server: EditServer(adminid: widget.server.adminid)),
+                );
+                Navigator.of(context).push(route);
+              },
+            ),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),

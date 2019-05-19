@@ -30,7 +30,8 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
     //-----login----//
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
-    var url = '$_urladmin/api/application/users';
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    var url = '$_adminhttps$_urladmin/api/application/users';
 
     Map data = {
       "username": "$_usermane",

@@ -5,18 +5,18 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
-import 'adminactionnodes.dart';
+import 'adminactionserver.dart';
 
-class AdminCreateAllocationPage extends StatefulWidget {
-  AdminCreateAllocationPage({Key key, this.server}) : super(key: key);
-  final Allocation server;
+class AdminEditServerPage extends StatefulWidget {
+  AdminEditServerPage({Key key, this.server}) : super(key: key);
+  final EditServer server;
 
   @override
-  _AdminCreateAllocationPageState createState() =>
-      _AdminCreateAllocationPageState();
+  _AdminEditServerPageState createState() =>
+      _AdminEditServerPageState();
 }
 
-class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
+class _AdminEditServerPageState extends State<AdminEditServerPage> {
   final _aliasController = TextEditingController();
   final _portsController = TextEditingController();
 
@@ -26,13 +26,15 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
-    var url =
-        '$_adminhttps$_urladmin/api/application/nodes/${widget.server.adminids}/allocations';
+    var url = '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/details';
 
     Map data = {
-      "ip": "${widget.server.adminnodeip}",
-      "alias": "$_alias",
-      "ports": "$_ports"
+      "name": "",
+      "description": "",
+      "memory": "",
+      "disk": "",
+      "cpu": "",
+      "STARTUP": "",
     };
     //encode Map to JSON
     var body = json.encode(data);

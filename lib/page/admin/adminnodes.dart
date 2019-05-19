@@ -8,8 +8,8 @@ import '../../main.dart';
 import 'adminactionnodes.dart';
 
 class Nodes {
-  final String adminids, adminname, adminip;
-  const Nodes({this.adminids, this.adminname, this.adminip});
+  final String adminids, adminname, adminip, adminnodeip;
+  const Nodes({this.adminids, this.adminname, this.adminip, this.adminnodeip});
 }
 
 class AdminNodesListPage extends StatefulWidget {
@@ -26,8 +26,9 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/nodes",
+      "$_adminhttps$_urladmin/api/application/nodes",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -99,9 +100,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                       color:
                           globals.isDarkTheme ? Colors.grey[850] : Colors.white,
                       child: InkWell(
-                        onTap: () async {
-                          await SharedPreferencesHelper.setString("NodeAdminIP",
-                              userData[index]["attributes"]["ip"]);
+                        onTap: () {
                           var route = new MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 new AdminActionNodesPage(
@@ -110,6 +109,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                                       .toString(),
                                   adminname: userData[index]["attributes"]
                                       ["name"],
+                                  adminnodeip: userData[index]["attributes"]["ip"]
                                 )),
                           );
                           Navigator.of(context).push(route);

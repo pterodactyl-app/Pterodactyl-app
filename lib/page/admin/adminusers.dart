@@ -27,8 +27,9 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/users",
+      "$_adminhttps$_urladmin/api/application/users",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",

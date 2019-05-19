@@ -46,7 +46,7 @@ SponsorList(
           "https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/discord2.png",
       name: "AccurateNode",
       datetime: "€ 5,00",
-      message: "https://accuaratenode.com/",
+      message: "https://accuratenode.com/",
     ),    
   ];
 }

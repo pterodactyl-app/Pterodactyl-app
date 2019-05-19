@@ -32,8 +32,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/servers",
+      "$_adminhttps$_urladmin/api/application/servers",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"
@@ -48,8 +49,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Future getNodesData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/nodes",
+      "$_adminhttps$_urladmin/api/application/nodes",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"
@@ -64,8 +66,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Future getUsers() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/users",
+      "$_adminhttps$_urladmin/api/application/users",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"

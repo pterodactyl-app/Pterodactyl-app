@@ -6,35 +6,34 @@ import '../../globals.dart' as globals;
 import '../../main.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'adminusers.dart';
+import 'adminactionserver.dart';
 
-class AdminUserInfoPage extends StatefulWidget {
-  AdminUserInfoPage({Key key, this.server}) : super(key: key);
-  final Admin server;
+class AdminServerInfoPage extends StatefulWidget {
+  AdminServerInfoPage({Key key, this.server}) : super(key: key);
+  final ViewServer server;
 
   @override
-  _AdminUserInfoPageState createState() => _AdminUserInfoPageState();
+  _AdminServerInfoPageState createState() => _AdminServerInfoPageState();
 }
 
-class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
+class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
   Map data;
-  String firstname;
-  String lastname;
-  String language;
-  bool rootadmin;
-  bool fa;
-  String email;
-  String uuid;
-  String externalid;
-  String createdat;
-  String updatedat;
+  String identifier;
+  String name;
+  String description;
+  bool suspended;
+  int memory;
+  int disk;
+  int cpu;
+  bool installed;
+  String startupCommand;
 
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/api/application/users/${widget.server.adminid}",
+      "$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -43,16 +42,15 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      firstname = data["attributes"]["first_name"];
-      lastname = data["attributes"]["last_name"];
-      language = data["attributes"]["language"];
-      rootadmin = data["attributes"]["root_admin"];
-      fa = data["attributes"]["2fa"];
-      email = data["attributes"]["email"];
-      uuid = data["attributes"]["uuid"];
-      externalid = data["attributes"]["external_id"];
-      createdat = data["attributes"]["created_at"];
-      updatedat = data["attributes"]["updated_at"];
+      identifier = data["attributes"]["identifier"];
+      name = data["attributes"]["name"];
+      description = data["attributes"]["description"];
+      suspended = data["attributes"]["suspended"];
+      memory = data["attributes"]["limits"]["memory"];
+      disk = data["attributes"]["limits"]["disk"];
+      cpu = data["attributes"]["limits"]["cpu"];
+      installed = data["attributes"]["container"]["installed"];
+      startupCommand = data["attributes"]["container"]["startup_command"];
     });
   }
 
@@ -76,7 +74,7 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
               color: globals.isDarkTheme ? Colors.white : Colors.black,
             ),
           ),
-          title: Text('${widget.server.username}',
+          title: Text(DemoLocalizations.of(context).trans('admin_view_server'),
               style: TextStyle(
                   color: globals.isDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700)),
@@ -115,9 +113,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('firstname'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_identifier'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$firstname',
+                          Text('$identifier',
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -137,9 +135,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('lastname'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_installed'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$lastname',
+                          Text(installed != "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -159,9 +157,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('email'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_name'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$email',
+                          Text('$name',
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -181,31 +179,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('uuid'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_description'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$uuid',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 15.0))
-                        ],
-                      )
-                    ]),
-              ),
-              //onTap: () {},
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('id'),
-                              style: TextStyle(color: Colors.blueAccent)),
-                          Text('${widget.server.adminid.toString()}',
+                          Text('$description',
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -225,9 +201,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('language'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_suspended'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$language',
+                          Text("$suspended" == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -247,9 +223,31 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('rootadmin'),
+                          Text(DemoLocalizations.of(context).trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$rootadmin" == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                          Text('${memory.toString()} MB',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
+                        ],
+                      )
+                    ]),
+              ),
+              //onTap: () {},.toString()
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text('${disk.toString()} MB',
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -269,39 +267,9 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('2fa'),
+                          Text(DemoLocalizations.of(context).trans('utilization_cpu'),
                               style: TextStyle(color: Colors.blueAccent)),
-                        ],
-                      ),
-                      Material(
-                          color: "$fa" == "true" ? Colors.green : Colors.red,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(
-                                "$fa" == "true" ? Icons.lock : Icons.lock_open,
-                                color: Colors.white,
-                                size: 30.0),
-                          )),
-                    ]),
-              ),
-              //onTap: () {},
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context).trans('created_at'),
-                              style: TextStyle(color: Colors.blueAccent)),
-                          Text('$createdat',
+                          Text(cpu.toString() != 0 ? "∞" : "${cpu.toString()}%",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -321,12 +289,11 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context).trans('updated_at'),
+                          Text(DemoLocalizations.of(context).trans('admin_view_server_startup_command'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text('$updatedat',
+                          Text(startupCommand,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 10.5))
                         ],
                       )
                     ]),
@@ -343,7 +310,6 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ));

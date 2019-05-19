@@ -39,7 +39,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -60,7 +61,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStop() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -81,7 +83,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postRestart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -102,7 +105,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postKill() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON

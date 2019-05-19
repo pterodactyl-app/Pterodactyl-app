@@ -22,8 +22,9 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/nodes/${widget.server.adminid}/allocations",
+      "$_adminhttps$_urladmin/api/application/nodes/${widget.server.adminid}/allocations",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
