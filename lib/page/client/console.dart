@@ -78,6 +78,20 @@ class _SendPageState extends State<SendPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
+            /*SizedBox(height: 80.0),
+            Column(
+              children: <Widget>[
+                new FlatButton(
+              child: new Text(
+                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
+                
+              },
+            ),
+              ],
+            ),*/
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[

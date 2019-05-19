@@ -27,6 +27,13 @@ class SponsorList {
       datetime: "\$ 21.53",
       message: "https://www.minicenter.net/",
     ),
+SponsorList(
+      avatarUrl:
+          "https://pbs.twimg.com/profile_images/1010254773826793472/vjxA9idJ_400x400.jpg",
+      name: "deploys.io",
+      datetime: "WebHosting",
+      message: "https://deploys.io/",
+    ),    
     SponsorList(
       avatarUrl:
           "https://pbs.twimg.com/profile_images/1104864471581949952/q4wO6V9c_400x400.jpg",
@@ -34,5 +41,12 @@ class SponsorList {
       datetime: "€ 5,00",
       message: "https://skoali.fr/",
     ),
+SponsorList(
+      avatarUrl:
+          "https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/discord2.png",
+      name: "AccurateNode",
+      datetime: "€ 5,00",
+      message: "https://accuaratenode.com/",
+    ),    
   ];
 }
