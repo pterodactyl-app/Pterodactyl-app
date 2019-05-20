@@ -33,12 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
 
-    if (response.statusCode == 401) {
-      SharedPreferencesHelper.remove('apiKey');
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-    }
-
     data = json.decode(response.body);
     setState(() {
       userTotalServers = data["meta"]["pagination"]["total"];
@@ -48,10 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    SharedPreferencesHelper.isAuthenticated().then((val) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-    });
 
     getDataHome();
   }
