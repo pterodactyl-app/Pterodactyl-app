@@ -27,7 +27,7 @@
     "action_restart":"Starta om",
     "action_kill":"Avsluta",
     "action_stats": "Statistik",
-    "action_file": "Fillista (kommer i panel version 0.8)",
+    "action_file": "Fillista",
     "dark_mode":"Mörkt läge",
     "dark_mode_sub":"Svart och grått tema",
     "cores":"Kärnor",

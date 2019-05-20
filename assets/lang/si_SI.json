@@ -27,7 +27,7 @@
     "action_restart":"Ponovni zagon",
     "action_kill":"Ubij",
     "action_stats": "Statistika",
-    "action_file": "Seznam datotek (prihaja v verziji 0.8)",
+    "action_file": "Seznam datotek",
     "dark_mode":"Nočni način",
     "dark_mode_sub":"Črna in Siva Tema",
     "cores":"Jedra",

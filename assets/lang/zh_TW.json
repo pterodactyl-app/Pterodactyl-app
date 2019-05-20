@@ -27,7 +27,7 @@
     "action_restart": "重啟",
     "action_kill": "殺死(強制停止)",
     "action_stats": "狀態",
-    "action_file": "檔案列表(將在面板0.8版本到來)",
+    "action_file": "檔案列表",
     "dark_mode": "夜間模式",
     "dark_mode_sub": "黑色和灰色主題",
     "cores": "核心數",

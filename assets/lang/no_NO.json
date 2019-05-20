@@ -27,7 +27,7 @@
     "action_restart":"Omstart",
     "action_kill":"Kill",
     "action_stats": "Statistikk",
-    "action_file": "Filliste (coming panel 0.8)",
+    "action_file": "Filliste",
     "dark_mode":"Mørk modus",
     "dark_mode_sub":"Sort og grå modus",
     "cores":"Cores",

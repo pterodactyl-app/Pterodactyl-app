@@ -27,7 +27,7 @@
     "action_restart":"Herstart",
     "action_kill":"Forceer stop",
     "action_stats": "Statistieken",
-    "action_file": "Bestandenlijst (komt in 0.8)",
+    "action_file": "Bestandenlijst",
     "dark_mode":"Donkere modus",
     "dark_mode_sub":"Zwart en grijze thema",
     "cores":"Kernen",
