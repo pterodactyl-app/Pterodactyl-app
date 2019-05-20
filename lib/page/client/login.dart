@@ -62,31 +62,38 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 12.0),
-            DropdownButton<String>(
-              value: dropdownValue,
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue = newValue;
-                });
-              },
-              items: <String>['https://', 'http://']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            AccentColorOverride(
-              color: Color(0xFFC5032B),
-              child: TextField(
-                controller: _urlController,
-                decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context).trans('url_login'),
+            SizedBox(height: 60.0, child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      dropdownValue = newValue;
+                    });
+                  },
+                  items: <String>['https://', 'http://']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
                 ),
-              ),
-            ),
+                AccentColorOverride(
+                  color: Color(0xFFC5032B),
+                  child: new Flexible(child: TextField(
+                    controller: _urlController,
+                    decoration: InputDecoration(
+                      labelText: DemoLocalizations.of(context).trans('url_login'),
+                    ),
+                  ),
+                  )
+                ),
+              ],
+            ),),
             new CheckboxListTile(
               value: checkValue,
               onChanged: _onChanged,
