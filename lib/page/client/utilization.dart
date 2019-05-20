@@ -11,8 +11,8 @@ import 'actionserver.dart';
 import '../../main.dart';
 
 class StatePage extends StatefulWidget {
-  StatePage({Key key, this.info}) : super(key: key);
-  final Stats info;
+  StatePage({Key key, this.server}) : super(key: key);
+  final Stats server;
 
   @override
   _StatePageState createState() => _StatePageState();
@@ -21,16 +21,19 @@ class StatePage extends StatefulWidget {
 class _StatePageState extends State<StatePage> {
   Map data;
   String _stats;
-  int _memory;
+  int _memorycurrent;
+  int _memorylimit;
   List<double> _cpu;
-  int _disk;
+  int _diskcurrent;
+  int _disklimit;
+
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
     http.Response response = await http.get(
-      "$_https$_url/api/client/servers/${widget.info.id}/utilization",
+      "$_https$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -39,10 +42,12 @@ class _StatePageState extends State<StatePage> {
     );
     data = json.decode(response.body);
     setState(() {
-      _stats = data["attributes"]['state'];
-      _memory = data["attributes"]['memory']['current'];
-      _cpu = data["attributes"]['cpu']['cores'];
-      _disk = data["attributes"]['disk']['current'];
+      _stats = data["attributes"]["state"];
+      _memorycurrent = data["attributes"]["memory"]["current"];
+      _memorylimit = data["attributes"]["memory"]["limit"];
+      //_cpu = data["attributes"]["cpu"]["cores"];
+      _diskcurrent = data["attributes"]["disk"]["current"];
+      _disklimit = data["attributes"]["disk"]["limit"];
     });
   }
 
@@ -54,6 +59,7 @@ class _StatePageState extends State<StatePage> {
 
   @override
   Widget build(BuildContext context) {
+    var data = "$_cpu" != null ? [0] : "$_cpu";
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -68,7 +74,6 @@ class _StatePageState extends State<StatePage> {
           ),
           title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
               style: TextStyle(
-                  color: globals.isDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700)),
           // actions: <Widget>
           // [
@@ -105,64 +110,26 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("$_stats" == "off" ? DemoLocalizations.of(context).trans('utilization_stats_offline') : DemoLocalizations.of(context).trans('utilization_stats_online'),
+                          Text("Stats:",
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text("$_stats" == "on" ? DemoLocalizations.of(context).trans('utilization_stats_online') : DemoLocalizations.of(context).trans('utilization_stats_offline'),
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: _stats == "off" ? Colors.red : Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.whatshot,
-                                color: Colors.white, size: 30.0),
-                          )))
+                          color: "$_stats" == "on" ? Colors.green : Colors.red,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(
+                                "$_stats" == "on" ? Icons.play_arrow : Icons.stop,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
                     ]),
               ),
-            ),
-            _buildTile(
-              Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_performance_memory'),
-                                  style: TextStyle(color: Colors.redAccent)),
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_memory'),
-                                  style: TextStyle(
-                                      color: globals.isDarkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0)),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                      Sparkline(
-                        data: _memory == "0" ? [0] : _memory.toString(),
-                        lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
-                      )
-                    ],
-                  )),
+              //onTap: () {},
             ),
             _buildTile(
               Padding(
@@ -198,7 +165,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _cpu == "0" ? [0] : _cpu.toString(),
+                        data: data,
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
@@ -207,51 +174,72 @@ class _StatePageState extends State<StatePage> {
             ),
             _buildTile(
               Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_performance_disk'),
-                                  style: TextStyle(color: Colors.redAccent)),
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_disk'),
-                                  style: TextStyle(
-                                      color: globals.isDarkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0)),
-                            ],
-                          ),
+                          Text(DemoLocalizations.of(context).trans('utilization_memory'),
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text("$_memorycurrent MB/ $_memorylimit MB",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                      Sparkline(
-                        data: _disk == "0" ? [0] : _disk.toString(),
-                        lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
-                      )
-                    ],
-                  )),
-            ),
+                      Material(
+                          color: "$_memorycurrent" == "$_memorylimit" ? Colors.red : Colors.green,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.memory,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
+                    ]),
+              ),
+              //onTap: () {},
+            ),            
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text("$_diskcurrent MB/ $_disklimit MB",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
+                        ],
+                      ),
+                      Material(
+                          color: "$_diskcurrent" == "$_disklimit" ? Colors.red : Colors.green,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.sd_storage,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
+                    ]),
+              ),
+              //onTap: () {},
+            ),           
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 220.0),
-            StaggeredTile.extent(2, 220.0),
-            StaggeredTile.extent(2, 220.0),
+            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 110.0),
           ],
         ));
   }

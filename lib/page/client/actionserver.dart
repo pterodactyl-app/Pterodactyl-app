@@ -330,7 +330,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
               onTap: () {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      new StatePage(info: Stats(id: widget.server.id)),
+                      new StatePage(server: Stats(id: widget.server.id)),
                 );
                 Navigator.of(context).push(route);
               },
