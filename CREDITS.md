@@ -41,15 +41,17 @@ For all the people who worked with me on this amazing project.
 
 > - Android play store console `@/var/www/Jordy ツ#0049`
 
-> - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001` (https://thunderbolt-hosting.com/)
+> - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001` [Thunderbolt hosting](https://thunderbolt-hosting.com/)
 
-> - $21.53 EURO `@Nyx#8228` (https://minicenter.net/)
+> - $25.00 CAD `@ThatProgrammer#6001` [CodersLight LLC](https://coderslight.com/)
 
-> - Webhosting `@CodeCo#3866` (https://deploys.io/)
+> - $21.53 CAD `@Nyx#8228` (https://minicenter.net/)
 
-> - €5,00 EURO `@Perhaps.#8928` (https://accuratenode.com/)
+> - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
 
-> - €5,00 EURO `@Jules [skoali.fr]#6511` (https://skoali.fr/)
+> - €5,00 EURO `@Perhaps.#8928` [AccurateNode](https://accuratenode.com/)
+
+> - €5,00 EURO `@Jules [skoali.fr]#6511` [Skoali](https://skoali.fr/)
 
 > - $0.50 CAD `@Kiffey14#2010`
 
