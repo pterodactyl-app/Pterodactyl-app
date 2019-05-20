@@ -40,12 +40,21 @@ class _StatePageState extends State<StatePage> {
         "Authorization": "Bearer $_api"
       },
     );
+
+    List<double> parseCpu(List<double> cpu) {
+      List<double> result;
+      cpu.forEach((f) => result.add(f));
+      return result;
+    }
+
     data = json.decode(response.body);
     setState(() {
       _stats = data["attributes"]["state"];
       _memorycurrent = data["attributes"]["memory"]["current"];
       _memorylimit = data["attributes"]["memory"]["limit"];
-      //_cpu = data["attributes"]["cpu"]["cores"];
+      _cpu = [0.0];
+      _cpu = data["attributes"]["cpu"]["cores"].length < 0 ?
+      parseCpu(data["attributes"]["cpu"]["cores"]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,];
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -59,7 +68,7 @@ class _StatePageState extends State<StatePage> {
 
   @override
   Widget build(BuildContext context) {
-    var data = "$_cpu" != null ? [0] : "$_cpu";
+    List<double> data = _cpu;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -148,7 +157,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: data,
+                        data: _cpu,
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
