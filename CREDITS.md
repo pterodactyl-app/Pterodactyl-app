@@ -34,6 +34,7 @@ For all the people who worked with me on this amazing project.
 ###### Flutter Coders:
 
 > - `@appomatrix#9639`
+> - `@Yvan#9877`
 
 
 
