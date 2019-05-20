@@ -107,6 +107,7 @@ class MyApp extends StatelessWidget {
             ),
         themedWidgetBuilder: (context, theme) {
           return new MaterialApp(
+            navigatorKey: key,
             supportedLocales: [
               const Locale('en', 'US'),
               const Locale('en', 'UK'),

@@ -59,10 +59,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
       },
     );
 
-
     data = json.decode(response.body);
     setState(() {
-      if(data.containsKey('meta')) {
+      if (data.containsKey('meta')) {
         totalNodes = data["meta"]["pagination"]["total"];
       }
     });
@@ -82,7 +81,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
     data = json.decode(response.body);
     setState(() {
-      if(data.containsKey('meta')) {
+      if (data.containsKey('meta')) {
         totalUsers = data["meta"]["pagination"]["total"];
       }
     });
@@ -91,10 +90,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   void initState() {
     super.initState();
-
-    SharedPreferencesHelper.isAuthenticated().then((val) {
-      Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-    });
 
     getData();
     getNodesData();
