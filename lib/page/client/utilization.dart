@@ -54,7 +54,7 @@ class _StatePageState extends State<StatePage> {
       _memorylimit = data["attributes"]["memory"]["limit"];
       _cpu = [0.0];
       _cpu = data["attributes"]["cpu"]["cores"].length < 0 ?
-      parseCpu(data["attributes"]["cpu"]["cores"]) : [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,];
+      parseCpu(data["attributes"]["cpu"]["cores"]) : [0.0];
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
