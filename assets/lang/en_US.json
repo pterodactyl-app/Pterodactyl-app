@@ -6,7 +6,7 @@
     "next":"NEXT",
     "login_error":"username or password \ncan't be empty",
     "login_error_ok":"OK",
-    "login_admin_account": "Do you have a Admin account? tap here then",   
+    "login_admin_account": "Do you have an Admin account? tap here then",
     "dashboard":"Dashboard",
     "logout":"Logout",
     "logout_sub":"Disconnect",

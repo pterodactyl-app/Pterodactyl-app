@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
+
     http.Response response = await http.get(
       "$_https$_url/api/client",
       headers: {
@@ -31,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
         "Authorization": "Bearer $_api"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
       userTotalServers = data["meta"]["pagination"]["total"];
@@ -40,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
     getDataHome();
   }
 

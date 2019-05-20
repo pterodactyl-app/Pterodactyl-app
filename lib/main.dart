@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -106,6 +107,7 @@ class MyApp extends StatelessWidget {
             ),
         themedWidgetBuilder: (context, theme) {
           return new MaterialApp(
+            navigatorKey: key,
             supportedLocales: [
               const Locale('en', 'US'),
               const Locale('en', 'UK'),
@@ -129,9 +131,11 @@ class MyApp extends StatelessWidget {
             localeResolutionCallback:
                 (Locale locale, Iterable<Locale> supportedLocales) {
               for (Locale supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode == locale.languageCode ||
-                    supportedLocale.countryCode == locale.countryCode) {
-                  return supportedLocale;
+                if(!Platform.isIOS) {
+                  if (supportedLocale.languageCode == locale.languageCode ||
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
                 }
               }
 

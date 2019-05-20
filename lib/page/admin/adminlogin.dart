@@ -25,10 +25,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   final _apiadminController = TextEditingController();
   final _urladminController = TextEditingController();
 
-
-
-  
-
   SharedPreferences sharedPreferences;
 
   @override

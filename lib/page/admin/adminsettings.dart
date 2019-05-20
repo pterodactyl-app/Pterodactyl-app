@@ -69,23 +69,6 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
-        // actions: <Widget>
-        // [
-        //   Container
-        //   (
-        //     margin: EdgeInsets.only(right: 8.0),
-        //     child: Row
-        //     (
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       crossAxisAlignment: CrossAxisAlignment.center,
-        //       children: <Widget>
-        //       [
-        //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-        //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-        //       ],
-        //     ),
-        //   )
-        // ],
       ),
       body: SingleChildScrollView(
           child: SafeArea(

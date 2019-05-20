@@ -149,7 +149,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text('Root Admin',
+                                  Text('Superuser',
                                       style: TextStyle(
                                         color: globals.isDarkTheme
                                             ? Colors.white
