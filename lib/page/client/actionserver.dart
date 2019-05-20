@@ -152,30 +152,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.play_arrow,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_start'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_start'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -185,30 +177,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_stop'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.stop,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_stop'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -218,30 +202,23 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.refresh,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_restart'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context).trans('action_restart'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -251,30 +228,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_kill'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.offline_bolt,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_kill'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -284,30 +253,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_stats'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.amber,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.show_chart,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_stats'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -321,32 +282,29 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_file'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.folder_open,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_file'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
+              /*
+              onTap: () {
+                postKill();
+              },
+              */
             ),
             _buildTile(
               Padding(
@@ -386,12 +344,12 @@ class _ActionServerPageState extends State<ActionServerPage> {
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ));

@@ -64,10 +64,8 @@ class _StatePageState extends State<StatePage> {
   void initState() {
     getData();
     super.initState();
-      timer = Timer.periodic(Duration(seconds: 15), (Timer t) => getData());
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => getData());
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +75,10 @@ class _StatePageState extends State<StatePage> {
           backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              timer.cancel();
+            }, 
             icon: Icon(
               Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black,
@@ -187,7 +188,11 @@ class _StatePageState extends State<StatePage> {
                               DemoLocalizations.of(context)
                                   .trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_memorycurrent MB/ $_memorylimit MB",
+                          Text(
+                              "$_memorycurrent" == null
+                                  ? DemoLocalizations.of(context)
+                                      .trans('utilization_stats_offline')
+                                  : "$_memorycurrent MB / $_memorylimit MB",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -221,7 +226,11 @@ class _StatePageState extends State<StatePage> {
                               DemoLocalizations.of(context)
                                   .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_diskcurrent MB/ $_disklimit MB",
+                          Text(
+                              "$_diskcurrent" == null
+                                  ? DemoLocalizations.of(context)
+                                      .trans('utilization_stats_offline')
+                                  : "$_diskcurrent MB / $_disklimit MB",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
