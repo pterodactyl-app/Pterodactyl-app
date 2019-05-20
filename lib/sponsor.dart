@@ -66,7 +66,7 @@ class _SponsorPageState extends State<SponsorPage> {
                           width: 16.0,
                         ),
                         Text(
-                          _model.datetime,
+                          _model.donation,
                           style: TextStyle(fontSize: 12.0),
                         ),
                       ],
