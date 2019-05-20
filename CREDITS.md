@@ -45,7 +45,7 @@ For all the people who worked with me on this amazing project.
 
 > - $25.00 CAD `@ThatProgrammer#6001` [CodersLight LLC](https://coderslight.com/)
 
-> - $21.53 CAD `@Nyx#8228` (https://minicenter.net/)
+> - $21.53 CAD `@Nyx#8228` [MiniCenter](https://minicenter.net/)
 
 > - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
 
