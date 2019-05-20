@@ -157,7 +157,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _cpu,
+                        data: "$_cpu",
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
