@@ -26,6 +26,7 @@ class _StatePageState extends State<StatePage> {
   List<double> _cpu = [0.0].toList();
   int _diskcurrent;
   int _disklimit;
+  Timer timer;
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
@@ -63,7 +64,10 @@ class _StatePageState extends State<StatePage> {
   void initState() {
     getData();
     super.initState();
+      timer = Timer.periodic(Duration(seconds: 15), (Timer t) => getData());
   }
+
+
 
   @override
   Widget build(BuildContext context) {
