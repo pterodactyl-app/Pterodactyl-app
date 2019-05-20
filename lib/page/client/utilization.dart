@@ -23,15 +23,15 @@ class _StatePageState extends State<StatePage> {
   String _stats;
   int _memorycurrent;
   int _memorylimit;
-  List<double> _cpu;
+  List<double> _cpu = [0.0].toList();
   int _diskcurrent;
   int _disklimit;
-
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
+
     http.Response response = await http.get(
       "$_https$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
@@ -41,20 +41,19 @@ class _StatePageState extends State<StatePage> {
       },
     );
 
-    List<double> parseCpu(List<double> cpu) {
-      List<double> result;
-      cpu.forEach((f) => result.add(f));
+    List<double> parseCpu(cpu) {
+      List<double> result = [];
+      cpu.forEach((f) => result.add(f.toDouble()));
       return result;
     }
 
     data = json.decode(response.body);
+
     setState(() {
       _stats = data["attributes"]["state"];
       _memorycurrent = data["attributes"]["memory"]["current"];
       _memorylimit = data["attributes"]["memory"]["limit"];
-      _cpu = [0.0];
-      _cpu = data["attributes"]["cpu"]["cores"].length < 0 ?
-      parseCpu(data["attributes"]["cpu"]["cores"]) : [0.0];
+      _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -62,13 +61,12 @@ class _StatePageState extends State<StatePage> {
 
   @override
   void initState() {
-    super.initState();
     getData();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<double> data = _cpu;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -82,8 +80,7 @@ class _StatePageState extends State<StatePage> {
             ),
           ),
           title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700)),
+              style: TextStyle(fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -104,7 +101,12 @@ class _StatePageState extends State<StatePage> {
                         children: <Widget>[
                           Text("Stats:",
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_stats" == "on" ? DemoLocalizations.of(context).trans('utilization_stats_online') : DemoLocalizations.of(context).trans('utilization_stats_offline'),
+                          Text(
+                              "$_stats" == "on"
+                                  ? DemoLocalizations.of(context)
+                                      .trans('utilization_stats_online')
+                                  : DemoLocalizations.of(context)
+                                      .trans('utilization_stats_offline'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -115,7 +117,9 @@ class _StatePageState extends State<StatePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
-                                "$_stats" == "on" ? Icons.play_arrow : Icons.stop,
+                                "$_stats" == "on"
+                                    ? Icons.play_arrow
+                                    : Icons.stop,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
@@ -157,7 +161,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: "$_cpu",
+                        data: _cpu.isNotEmpty ? _cpu : [0.0],
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
@@ -175,7 +179,9 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_memory'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text("$_memorycurrent MB/ $_memorylimit MB",
                               style: TextStyle(
@@ -183,18 +189,19 @@ class _StatePageState extends State<StatePage> {
                         ],
                       ),
                       Material(
-                          color: "$_memorycurrent" == "$_memorylimit" ? Colors.red : Colors.green,
+                          color: "$_memorycurrent" == "$_memorylimit"
+                              ? Colors.red
+                              : Colors.green,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.memory,
-                                color: Colors.white,
-                                size: 30.0),
+                                color: Colors.white, size: 30.0),
                           )),
                     ]),
               ),
               //onTap: () {},
-            ),            
+            ),
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -206,7 +213,9 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text("$_diskcurrent MB/ $_disklimit MB",
                               style: TextStyle(
@@ -214,18 +223,19 @@ class _StatePageState extends State<StatePage> {
                         ],
                       ),
                       Material(
-                          color: "$_diskcurrent" == "$_disklimit" ? Colors.red : Colors.green,
+                          color: "$_diskcurrent" == "$_disklimit"
+                              ? Colors.red
+                              : Colors.green,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.sd_storage,
-                                color: Colors.white,
-                                size: 30.0),
+                                color: Colors.white, size: 30.0),
                           )),
                     ]),
               ),
               //onTap: () {},
-            ),           
+            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),
