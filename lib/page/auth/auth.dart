@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/page/admin/adminhome.dart';
@@ -16,10 +18,11 @@ class SplashState extends State<Splash> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var bool2 = prefs.getBool('seen');
     bool _seen = (bool2 ?? false);
-
     if (_seen) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new MyHomePage()));
+      if (await isAuthenticated()) {
+        Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context) => new MyHomePage()));
+      }
     } else {
       prefs.setBool('seen', true);
       Navigator.of(context).pushReplacement(
@@ -31,13 +34,63 @@ class SplashState extends State<Splash> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seenadmin = (prefs.getBool('seenadmin') ?? false);
 
-    if (_seenadmin) {
+    if (_seenadmin && await isAuthenticated(isAdmin: true)) {
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(builder: (context) => new AdminHomePage()));
     } else {
       prefs.setBool('seenadmin', true);
       Navigator.of(context).pushReplacement(
           new MaterialPageRoute(builder: (context) => new AdminLoginPage()));
+    }
+  }
+
+  Future<bool> isAuthenticated({isAdmin = false}) async {
+    if (isAdmin) {
+      String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+      String _adminhttps =
+          await SharedPreferencesHelper.getString("adminhttps");
+      String _urladmin =
+          await SharedPreferencesHelper.getString("panelAdminUrl");
+
+      http.Response response = await http.get(
+        "$_adminhttps$_urladmin/api/application/servers",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer $_apiadmin"
+        },
+      );
+
+      if (response.statusCode == 401) {
+        // Todo fix Navigation context for logging out if key isn't available
+        SharedPreferencesHelper.remove('apiAdminKey');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/adminlogin', (Route<dynamic> route) => false);
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      String _apikey = await SharedPreferencesHelper.getString("apiKey");
+      String _adminhttps = await SharedPreferencesHelper.getString("https");
+      String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
+
+      http.Response response = await http.get(
+        "$_adminhttps$_urladmin/api/client",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer $_apikey"
+        },
+      );
+
+      if (response.statusCode == 401) {
+        // Todo fix Navigation context for logging out if key isn't available
+        SharedPreferencesHelper.remove('apiKey');
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 
@@ -57,5 +110,3 @@ class SplashState extends State<Splash> {
     );
   }
 }
-
-
