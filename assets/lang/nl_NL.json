@@ -103,5 +103,7 @@
     "created_at": "Gemaakt op:",
     "updated_at": "Geupdate op:",
     "admin_actionserver_view_server_info": "View Server info",
-    "admin_actionserver_edit_server_info": "Edit Server info" 
+    "admin_actionserver_edit_server_info": "Edit Server info",
+    "utilization_stats_offline": "Server is offline",
+    "utilization_stats_online": "Server is online"  
 }

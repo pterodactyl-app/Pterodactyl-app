@@ -11,9 +11,10 @@ import 'admineditserver.dart';
 import 'adminserverinfo.dart';
 
 class EditServer {
-  final String adminid, adminname, admindescription, adminmemory, admindisk, admincpu, adminstartupcommand;
+  final String adminid, adminuser, adminname, admindescription, adminmemory, admindisk, admincpu, adminstartupcommand;
   const EditServer({
     this.adminid,
+    this.adminuser,
     this.adminname,
     this.admindescription,
     this.adminmemory,

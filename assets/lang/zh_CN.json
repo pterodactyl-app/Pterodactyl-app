@@ -83,6 +83,7 @@
     "admin_server_list": "管理员服务器列表",
     "admin_user_list_list": "管理员用户列表",
     "admin_user_list_user": "添加用户",
+
     "admin_view_server": "查看服务器",
     "admin_view_server_identifier": "区分ID:",
     "admin_view_server_installed": "已完成安装:",
@@ -101,6 +102,7 @@
     "created_at": "创建于:",
     "updated_at": "更新于:",
     "admin_actionserver_view_server_info": "View Server info",
-    "admin_actionserver_edit_server_info": "Edit Server info" 
-
+    "admin_actionserver_edit_server_info": "Edit Server info",
+    "utilization_stats_offline": "Server is offline",
+    "utilization_stats_online": "Server is online"  
 }

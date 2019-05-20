@@ -105,17 +105,14 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("State: $_stats",
+                          Text("$_stats" == "off" ? DemoLocalizations.of(context).trans('utilization_stats_offline') : DemoLocalizations.of(context).trans('utilization_stats_online'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: _stats != null ? Colors.green : Colors.red,
+                          color: _stats == "off" ? Colors.red : Colors.green,
                           borderRadius: BorderRadius.circular(24.0),
                           child: Center(
                               child: Padding(
@@ -160,7 +157,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _memory != null ? _memory : [0],
+                        data: _memory == "0" ? [0] : _memory.toString(),
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
@@ -201,7 +198,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _cpu != null ? _cpu : [0],
+                        data: _cpu == "0" ? [0] : _cpu.toString(),
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
@@ -242,7 +239,7 @@ class _StatePageState extends State<StatePage> {
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _disk != null ? _disk : [0],
+                        data: _disk == "0" ? [0] : _disk.toString(),
                         lineWidth: 5.0,
                         lineColor: Colors.greenAccent,
                       )
