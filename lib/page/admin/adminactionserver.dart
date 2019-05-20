@@ -11,10 +11,17 @@ import 'admineditserver.dart';
 import 'adminserverinfo.dart';
 
 class EditServer {
-  final String adminid;
-  const EditServer({this.adminid});
+  final String adminid, adminname, admindescription, adminmemory, admindisk, admincpu, adminstartupcommand;
+  const EditServer({
+    this.adminid,
+    this.adminname,
+    this.admindescription,
+    this.adminmemory,
+    this.admindisk,
+    this.admincpu,
+    this.adminstartupcommand,
+  });
 }
-
 class ViewServer {
   final String adminid;
   const ViewServer({this.adminid});
@@ -159,34 +166,24 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.restore_page,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('admin_actionserver_rebuild_server'),
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_rebuild_server'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
@@ -196,34 +193,24 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.report_problem,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('admin_actionserver_reinstall_server'),
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_reinstall_server'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
@@ -233,34 +220,24 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          color: Colors.amber,
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.report,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('admin_actionserver_suspend_server'),
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_suspend_server'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
@@ -270,69 +247,51 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          color: Colors.green,
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.report_off,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('admin_actionserver_unsuspend_server'),
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_unsuspend_server'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 17.0)),
                     ]),
               ),
               onTap: () {
                 _unsuspend();
               },
             ),
-_buildTile(
+            _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.create,
+                            child: Icon(Icons.pageview,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('View Server info',
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_view_server_info'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
@@ -340,57 +299,57 @@ _buildTile(
                   builder: (BuildContext context) => new AdminServerInfoPage(
                       server: ViewServer(adminid: widget.server.adminid)),
                 );
-                Navigator.of(context).push(route); 
-              
+                Navigator.of(context).push(route);
               },
-            ),            
+            ),
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.create,
+                            child: Icon(Icons.edit,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Edit Server',
-                              style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context)
+                              .trans('admin_actionserver_edit_server_info'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) => new AdminEditServerPage(
-                      server: EditServer(adminid: widget.server.adminid)),
+                      server: EditServer(
+                      adminid: widget.server.adminid,
+                      adminuser: widget.server.adminuser,
+                      adminname: widget.server.adminname,
+                      admindescription: widget.server.admindescription,
+                      admincpu: widget.server.admincpu,
+                      admindisk: widget.server.admindisk,
+                      adminmemory: widget.server.adminmemory,
+                      adminstartupcommand: widget.server.adminstartupcommand
+                      )),
                 );
                 Navigator.of(context).push(route);
               },
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
           ],
         ));
   }

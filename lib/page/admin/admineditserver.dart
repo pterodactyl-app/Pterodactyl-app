@@ -12,34 +12,45 @@ class AdminEditServerPage extends StatefulWidget {
   final EditServer server;
 
   @override
-  _AdminEditServerPageState createState() =>
-      _AdminEditServerPageState();
+  _AdminEditServerPageState createState() => _AdminEditServerPageState();
 }
 
 class _AdminEditServerPageState extends State<AdminEditServerPage> {
-  final _aliasController = TextEditingController();
-  final _portsController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _cpuController = TextEditingController();
+  final _diskController = TextEditingController();
+  final _memoryController = TextEditingController();
+  final _startupcommandController = TextEditingController();
 
-  Future postSend() async {
-    String _alias = await SharedPreferencesHelper.getString("alias");
-    String _ports = await SharedPreferencesHelper.getString("ports");
+  Future editServer() async {
+    //use for edit server info//
+    String _name = await SharedPreferencesHelper.getString("name");
+    String _description = await SharedPreferencesHelper.getString("description");
+    String _cpu = await SharedPreferencesHelper.getString("cpu");
+    String _disk = await SharedPreferencesHelper.getString("disk");
+    String _memory = await SharedPreferencesHelper.getString("memory");
+    String _startupcommand = await SharedPreferencesHelper.getString("startupcommand");
+    //login//
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
-    var url = '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/details';
+    var url =
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/details';
 
     Map data = {
-      "name": "",
-      "description": "",
-      "memory": "",
-      "disk": "",
-      "cpu": "",
-      "STARTUP": "",
+      "name": _name,
+      "description": _description,
+      "memory": _memory,
+      "disk": _disk,
+      "cpu": _cpu,
+      "STARTUP": _startupcommand,
+      "user": "${widget.server.adminuser}"
     };
     //encode Map to JSON
     var body = json.encode(data);
 
-    var response = await http.post(url,
+    var response = await http.patch(url,
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
@@ -64,8 +75,7 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(
-            DemoLocalizations.of(context)
-                .trans('admin_allocationscreate_assign'),
+            'Edit server information',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -91,14 +101,53 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 20.0),
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
-                controller: _aliasController,
+                controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context)
-                      .trans('admin_allocationscreate_ip'),
+                  labelText: widget.server.adminname,
+                ),
+              ),
+            ),
+            SizedBox(height: 12.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  labelText: widget.server.admindescription
+                ),
+              ),
+            ),
+            SizedBox(height: 12.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                controller: _memoryController,
+                decoration: InputDecoration(
+                  labelText: widget.server.adminmemory,
+                ),
+              ),
+            ),
+            SizedBox(height: 12.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                controller: _diskController,
+                decoration: InputDecoration(
+                  labelText: widget.server.admindisk,
+                ),
+              ),
+            ),
+            SizedBox(height: 12.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                controller: _cpuController,
+                decoration: InputDecoration(
+                  labelText: widget.server.admincpu
                 ),
               ),
             ),
@@ -107,10 +156,9 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
               color: Color(0xFFC5032B),
               child: TextField(
                 keyboardType: TextInputType.number,
-                controller: _portsController,
+                controller: _startupcommandController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context)
-                      .trans('admin_allocationscreate_port'),
+                  labelText: widget.server.adminstartupcommand,
                 ),
               ),
             ),
@@ -122,22 +170,28 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _aliasController.clear();
-                    _portsController.clear();
+                    _nameController.clear();
+                    _descriptionController.clear();
+                    _cpuController.clear();
+                    _diskController.clear();
+                    _memoryController.clear();
+                    _startupcommandController.clear();
                   },
                 ),
                 RaisedButton(
-                  child: Text('Submit'),
+                  child: Text('Edit Server'),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "ports", _portsController.text);
-                    await SharedPreferencesHelper.setString(
-                        "alias", _aliasController.text);
-                    postSend();
+                    await SharedPreferencesHelper.setString("name", _nameController.text);
+                    await SharedPreferencesHelper.setString("description", _descriptionController.text);
+                    await SharedPreferencesHelper.setString("cpu", _cpuController.text);
+                    await SharedPreferencesHelper.setString("disk", _diskController.text);
+                    await SharedPreferencesHelper.setString("memory", _memoryController.text);
+                    await SharedPreferencesHelper.setString("startupcommand", _startupcommandController.text);
+                    editServer();
                   },
                 ),
               ],

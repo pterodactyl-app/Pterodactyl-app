@@ -80,7 +80,7 @@ class _SponsorPageState extends State<SponsorPage> {
                 ],
               ),
               onTap: () {
-                launch(_model.message);
+                launch(_model.link);
               },
             );
           },

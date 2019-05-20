@@ -99,5 +99,7 @@
     "rootadmin": "Root admin:",
     "2fa": "2FA",
     "created_at": "Created at:",
-    "updated_at": "Updated at:"   
+    "updated_at": "Updated at:",
+    "admin_actionserver_view_server_info": "View Server info",
+    "admin_actionserver_edit_server_info": "Edit Server info"    
 }

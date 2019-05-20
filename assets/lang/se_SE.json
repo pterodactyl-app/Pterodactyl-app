@@ -101,5 +101,7 @@
     "rootadmin": "Root-administratör:",
     "2fa": "2FA",
     "created_at": "Skapades:",
-    "updated_at": "Uppdaterades:"
+    "updated_at": "Uppdaterades:",
+    "admin_actionserver_view_server_info": "View Server info",
+    "admin_actionserver_edit_server_info": "Edit Server info"
 }

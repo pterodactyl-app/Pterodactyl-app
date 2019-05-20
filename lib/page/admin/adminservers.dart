@@ -8,10 +8,16 @@ import '../../main.dart';
 import 'adminactionserver.dart';
 
 class Admin {
-  final String adminid, adminname;
+  final String adminid, adminuser, adminname, admindescription, adminmemory, admindisk, admincpu, adminstartupcommand;
   const Admin({
     this.adminid,
+    this.adminuser,
     this.adminname,
+    this.admindescription,
+    this.adminmemory,
+    this.admindisk,
+    this.admincpu,
+    this.adminstartupcommand,
   });
 }
 
@@ -103,11 +109,15 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                             builder: (BuildContext context) =>
                                 new AdminActionServerPage(
                                     server: Admin(
-                                        adminid: userData[index]["attributes"]
-                                                ["id"]
-                                            .toString(),
-                                        adminname: userData[index]["attributes"]
-                                            ["name"])),
+                                        adminid: userData[index]["attributes"]["id"].toString(),
+                                        adminname: userData[index]["attributes"]["name"],
+                                        adminuser: userData[index]["attributes"]["user"].toString(),
+                                        admindescription: userData[index]["attributes"]["description"],
+                                        adminmemory: userData[index]["attributes"]["limits"]["memory"].toString(),
+                                        admindisk: userData[index]["attributes"]["limits"]["disk"].toString(),
+                                        admincpu: userData[index]["attributes"]["limits"]["cpu"].toString(),
+                                        adminstartupcommand: userData[index]["attributes"]["container"]["startup_command"],
+                                        )),
                           );
                           Navigator.of(context).push(route);
                         },

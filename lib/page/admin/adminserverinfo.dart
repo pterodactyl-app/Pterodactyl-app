@@ -291,7 +291,7 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         children: <Widget>[
                           Text(DemoLocalizations.of(context).trans('admin_view_server_startup_command'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text(startupCommand,
+                          Text("$startupCommand",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 10.5))
                         ],
