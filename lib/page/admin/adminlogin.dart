@@ -62,6 +62,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ),
             ),
+            SizedBox(height: 12.0),
             SizedBox(
               height: 60.0,
               child: new Row(
