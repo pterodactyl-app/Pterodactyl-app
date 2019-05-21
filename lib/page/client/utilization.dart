@@ -200,7 +200,11 @@ class _StatePageState extends State<StatePage> {
                       Sparkline(
                         data: _cpu.isNotEmpty ? _cpu : [0.0],
                         lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
+                        lineGradient: new LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.green[800], Colors.green[200]],
+                        ),
                       )
                     ],
                   )),
