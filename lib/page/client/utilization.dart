@@ -261,11 +261,11 @@ class _StatePageState extends State<StatePage> {
                                 "$_stats" == "on"
                                     ? Icons.memory
                                     : "$_stats" == "off"
-                                        ? Icons.stop
+                                        ? Icons.memory
                                         : "$_stats" == "starting"
-                                            ? Icons.loop
+                                            ? Icons.memory
                                             : "$_stats" == "stopping"
-                                                ? Icons.pause
+                                                ? Icons.memory
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
@@ -326,11 +326,11 @@ class _StatePageState extends State<StatePage> {
                                 "$_stats" == "on"
                                     ? Icons.sd_storage
                                     : "$_stats" == "off"
-                                        ? Icons.stop
+                                        ? Icons.sd_storage
                                         : "$_stats" == "starting"
-                                            ? Icons.loop
+                                            ? Icons.sd_storage
                                             : "$_stats" == "stopping"
-                                                ? Icons.pause
+                                                ? Icons.sd_storage
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
