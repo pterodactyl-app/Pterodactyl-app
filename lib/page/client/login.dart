@@ -135,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+            SizedBox(height: 50.0),
             new FlatButton(
               child: new Text(
                   DemoLocalizations.of(context).trans('login_admin_account')),
