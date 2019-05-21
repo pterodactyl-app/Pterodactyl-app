@@ -160,11 +160,20 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                         EdgeInsets.symmetric(horizontal: 4.0),
                                     child: Material(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      color: "${userData[index]["attributes"]["root_admin"]}" == "true" ? Colors.green : Colors.blue,
+                                      color:
+                                          "${userData[index]["attributes"]["root_admin"]}" ==
+                                                  "true"
+                                              ? Colors.green
+                                              : Colors.blue,
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["root_admin"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                                            '${userData[index]["attributes"]["root_admin"]}' ==
+                                                    "true"
+                                                ? DemoLocalizations.of(context)
+                                                    .trans('yes')
+                                                : DemoLocalizations.of(context)
+                                                    .trans('no'),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
@@ -182,11 +191,20 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                         EdgeInsets.symmetric(horizontal: 4.0),
                                     child: Material(
                                       borderRadius: BorderRadius.circular(8.0),
-                                      color: "${userData[index]["attributes"]["2fa"]}" == "true" ? Colors.green : Colors.red,
+                                      color:
+                                          "${userData[index]["attributes"]["2fa"]}" ==
+                                                  "true"
+                                              ? Colors.green
+                                              : Colors.red,
                                       child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Text(
-                                            '${userData[index]["attributes"]["2fa"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                                            '${userData[index]["attributes"]["2fa"]}' ==
+                                                    "true"
+                                                ? DemoLocalizations.of(context)
+                                                    .trans('yes')
+                                                : DemoLocalizations.of(context)
+                                                    .trans('no'),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.white)),
@@ -213,7 +231,8 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
               .push(MaterialPageRoute(builder: (_) => AdminCreateUserPage()));
         },
         icon: Icon(Icons.add),
-        label: Text(DemoLocalizations.of(context).trans('admin_user_list_user')),
+        label:
+            Text(DemoLocalizations.of(context).trans('admin_user_list_user')),
       ),
     );
   }

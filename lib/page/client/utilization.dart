@@ -190,11 +190,10 @@ class _StatePageState extends State<StatePage> {
                             ],
                           ),
                           Text("Yvan Fix did. Current CPU",
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0)),
-                            
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0)),
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
@@ -257,7 +256,13 @@ class _StatePageState extends State<StatePage> {
                             child: Icon(
                                 "$_stats" == "on"
                                     ? Icons.memory
-                                    : Icons.data_usage,
+                                    : "$_stats" == "off"
+                                        ? Icons.stop
+                                        : "$_stats" == "starting"
+                                            ? Icons.loop
+                                            : "$_stats" == "stopping"
+                                                ? Icons.pause
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
@@ -280,7 +285,8 @@ class _StatePageState extends State<StatePage> {
                               DemoLocalizations.of(context)
                                   .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_stats" == "on"
+                          Text(
+                              "$_stats" == "on"
                                   ? "$_diskcurrent MB / $_disklimit MB"
                                   : "$_stats" == "off"
                                       ? DemoLocalizations.of(context)
@@ -315,7 +321,13 @@ class _StatePageState extends State<StatePage> {
                             child: Icon(
                                 "$_stats" == "on"
                                     ? Icons.sd_storage
-                                    : Icons.data_usage,
+                                    : "$_stats" == "off"
+                                        ? Icons.stop
+                                        : "$_stats" == "starting"
+                                            ? Icons.loop
+                                            : "$_stats" == "stopping"
+                                                ? Icons.pause
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
