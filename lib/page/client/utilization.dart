@@ -24,6 +24,7 @@ class _StatePageState extends State<StatePage> {
   int _memorycurrent;
   int _memorylimit;
   List<double> _cpu = [0.0].toList();
+  //double _cpucurrent;
   int _diskcurrent;
   int _disklimit;
   Timer timer;
@@ -55,6 +56,7 @@ class _StatePageState extends State<StatePage> {
       _memorycurrent = data["attributes"]["memory"]["current"];
       _memorylimit = data["attributes"]["memory"]["limit"];
       _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
+      //_cpucurrent = data["attributes"]["cpu"]["current"];
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -64,7 +66,7 @@ class _StatePageState extends State<StatePage> {
   void initState() {
     getData();
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => getData());
+    timer = Timer.periodic(Duration(seconds: 3), (Timer t) => getData());
   }
 
   @override
@@ -78,7 +80,7 @@ class _StatePageState extends State<StatePage> {
             onPressed: () {
               Navigator.of(context).pop();
               timer.cancel();
-            }, 
+            },
             icon: Icon(
               Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black,
@@ -110,21 +112,46 @@ class _StatePageState extends State<StatePage> {
                               "$_stats" == "on"
                                   ? DemoLocalizations.of(context)
                                       .trans('utilization_stats_online')
-                                  : DemoLocalizations.of(context)
-                                      .trans('utilization_stats_offline'),
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_stats" == "on" ? Colors.green : Colors.red,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
                                 "$_stats" == "on"
                                     ? Icons.play_arrow
-                                    : Icons.stop,
+                                    : "$_stats" == "off"
+                                        ? Icons.stop
+                                        : "$_stats" == "starting"
+                                            ? Icons.loop
+                                            : "$_stats" == "stopping"
+                                                ? Icons.pause
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
@@ -162,6 +189,12 @@ class _StatePageState extends State<StatePage> {
                                       fontSize: 20.0)),
                             ],
                           ),
+                          Text("Yvan Fix did. Current CPU",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0)),
+                            
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
@@ -189,23 +222,44 @@ class _StatePageState extends State<StatePage> {
                                   .trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text(
-                              "$_memorycurrent" == null
-                                  ? DemoLocalizations.of(context)
-                                      .trans('utilization_stats_offline')
-                                  : "$_memorycurrent MB / $_memorylimit MB",
+                              "$_stats" == "on"
+                                  ? "$_memorycurrent MB / $_memorylimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_memorycurrent" == "$_memorylimit"
-                              ? Colors.red
-                              : Colors.green,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.memory,
-                                color: Colors.white, size: 30.0),
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.memory
+                                    : Icons.data_usage,
+                                color: Colors.white,
+                                size: 30.0),
                           )),
                     ]),
               ),
@@ -226,24 +280,44 @@ class _StatePageState extends State<StatePage> {
                               DemoLocalizations.of(context)
                                   .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text(
-                              "$_diskcurrent" == null
-                                  ? DemoLocalizations.of(context)
-                                      .trans('utilization_stats_offline')
-                                  : "$_diskcurrent MB / $_disklimit MB",
+                          Text("$_stats" == "on"
+                                  ? "$_diskcurrent MB / $_disklimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_diskcurrent" == "$_disklimit"
-                              ? Colors.red
-                              : Colors.green,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.sd_storage,
-                                color: Colors.white, size: 30.0),
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.sd_storage
+                                    : Icons.data_usage,
+                                color: Colors.white,
+                                size: 30.0),
                           )),
                     ]),
               ),

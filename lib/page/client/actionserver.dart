@@ -1,5 +1,6 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import '../auth/shared_preferences_helper.dart';
@@ -300,11 +301,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
                               fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
-              /*
               onTap: () {
-                postKill();
+                _filelist();
               },
-              */
             ),
             _buildTile(
               Padding(
@@ -368,5 +367,26 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     print('Not set yet');
                   },
             child: child));
+  }
+
+  _filelist() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: new CupertinoAlertDialog(
+          content: new Text(
+            "this will be soon added",
+            style: new TextStyle(fontSize: 16.0),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
+                  style: TextStyle(color: Colors.black)),
+            )
+          ],
+        ));
   }
 }
