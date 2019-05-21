@@ -106,7 +106,7 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Stats:",
+                          Text("Status:",
                               style: TextStyle(color: Colors.blueAccent)),
                           Text(
                               "$_stats" == "on"
