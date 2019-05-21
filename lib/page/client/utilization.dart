@@ -177,7 +177,7 @@ class _StatePageState extends State<StatePage> {
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_performance_cpu'),
-                                  style: TextStyle(color: Colors.redAccent)),
+                                  style: TextStyle(color: Colors.blueAccent)),
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_cpu'),
