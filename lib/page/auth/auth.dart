@@ -14,6 +14,9 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
+
+  BuildContext context;
+
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var bool2 = prefs.getBool('seen');
@@ -52,6 +55,13 @@ class SplashState extends State<Splash> {
       String _urladmin =
           await SharedPreferencesHelper.getString("panelAdminUrl");
 
+      if(_urladmin.isEmpty) {
+        SharedPreferencesHelper.remove('apiAdminKey');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/adminlogin', (Route<dynamic> route) => false);
+        return false;
+      }
+
       http.Response response = await http.get(
         "$_adminhttps$_urladmin/api/application/servers",
         headers: {
@@ -74,6 +84,13 @@ class SplashState extends State<Splash> {
       String _adminhttps = await SharedPreferencesHelper.getString("https");
       String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
 
+      if(_urladmin.isEmpty) {
+        SharedPreferencesHelper.remove('apiKey');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/login', (Route<dynamic> route) => false);
+        return false;
+      }
+
       http.Response response = await http.get(
         "$_adminhttps$_urladmin/api/client",
         headers: {
@@ -81,6 +98,8 @@ class SplashState extends State<Splash> {
           "Authorization": "Bearer $_apikey"
         },
       );
+
+      print(response.statusCode);
 
       if (response.statusCode == 401) {
         // Todo fix Navigation context for logging out if key isn't available
@@ -103,6 +122,7 @@ class SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return new Scaffold(
       body: new Center(
         child: new Text('Loading...'),
