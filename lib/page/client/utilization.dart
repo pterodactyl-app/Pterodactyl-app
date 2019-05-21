@@ -24,7 +24,7 @@ class _StatePageState extends State<StatePage> {
   int _memorycurrent;
   int _memorylimit;
   List<double> _cpu = [0.0].toList();
-  //double _cpucurrent;
+  double _currentCpu;
   int _diskcurrent;
   int _disklimit;
   Timer timer;
@@ -56,7 +56,7 @@ class _StatePageState extends State<StatePage> {
       _memorycurrent = data["attributes"]["memory"]["current"];
       _memorylimit = data["attributes"]["memory"]["limit"];
       _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
-      //_cpucurrent = data["attributes"]["cpu"]["current"];
+      _currentCpu = data["attributes"]["cpu"]["current"].toDouble();
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -189,7 +189,7 @@ class _StatePageState extends State<StatePage> {
                                       fontSize: 20.0)),
                             ],
                           ),
-                          Text("Yvan Fix did. Current CPU",
+                          Text("$_currentCpu",
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w400,
