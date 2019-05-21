@@ -25,6 +25,7 @@ class _StatePageState extends State<StatePage> {
   int _memorylimit;
   List<double> _cpu = [0.0].toList();
   double _currentCpu;
+  int _limitCpu;
   int _diskcurrent;
   int _disklimit;
   Timer timer;
@@ -57,6 +58,7 @@ class _StatePageState extends State<StatePage> {
       _memorylimit = data["attributes"]["memory"]["limit"];
       _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
       _currentCpu = data["attributes"]["cpu"]["current"].toDouble();
+      _limitCpu = data["attributes"]["cpu"]["limit"];
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -189,7 +191,16 @@ class _StatePageState extends State<StatePage> {
                                       fontSize: 20.0)),
                             ],
                           ),
-                          Text("$_currentCpu",
+                          Text(
+                              "$_stats" == "on"
+                                  ? "${_limitCpu.toString()}" != 0
+                                      ? "$_currentCpu % / ∞ %"
+                                      : "$_currentCpu % / ${_limitCpu.toString()} %"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : DemoLocalizations.of(context)
+                                          .trans('utilization_stats_Loading'),
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w400,
