@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
 import 'adminactionserver.dart';
+import 'admincreateserver.dart';
 
 class Admin {
   final String adminid,
@@ -268,6 +269,16 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
             ),
           ));
         },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          /*
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => AdminCreateServerPage()));
+          */
+        },
+        icon: Icon(Icons.add),
+        label: Text("Server"),
       ),
     );
   }
