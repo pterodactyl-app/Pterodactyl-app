@@ -1,42 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../auth/shared_preferences_helper.dart';
-import '../../globals.dart' as globals;
+import '../../auth/shared_preferences_helper.dart';
+import '../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import 'adminactionserver.dart';
-import 'create_server/admincreateserver.dart';
+import '../../../main.dart';
+import 'admincreateservernest.dart';
+import 'admincreateserverlimit.dart';
 
-class Admin {
-  final String adminid,
-      adminuser,
-      adminname,
-      admindescription,
-      adminmemory,
-      admindisk,
-      admincpu,
-      adminstartupcommand;
-  const Admin({
-    this.adminid,
-    this.adminuser,
-    this.adminname,
-    this.admindescription,
-    this.adminmemory,
-    this.admindisk,
-    this.admincpu,
-    this.adminstartupcommand,
-  });
+class Egg {
+  final String nestid, userid, eggid, dockerimage, servername, startup;
+  const Egg(
+      {this.nestid,
+      this.userid,
+      this.eggid,
+      this.dockerimage,
+      this.startup,
+      this.servername});
 }
 
-class AdminServerListPage extends StatefulWidget {
-  AdminServerListPage({Key key}) : super(key: key);
+class AdminCreateServerEggsPage extends StatefulWidget {
+  AdminCreateServerEggsPage({Key key, this.server}) : super(key: key);
+  final Nest server;
 
   @override
-  _AdminServerListPageState createState() => _AdminServerListPageState();
+  _AdminCreateServerEggsPageState createState() =>
+      _AdminCreateServerEggsPageState();
 }
 
-class _AdminServerListPageState extends State<AdminServerListPage> {
+class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
   Map data;
   List userData;
 
@@ -45,7 +37,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/api/application/servers",
+      "$_adminhttps$_urladmin/api/application/nests",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -76,22 +68,10 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('admin_server_list'),
+        title: Text("List Nest",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
-        actions: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                IconButton(icon: Icon(Icons.search), onPressed: () {})
-              ],
-            ),
-          )
-        ],
       ),
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
@@ -122,33 +102,18 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                 onTap: () {
                                   var route = new MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        new AdminActionServerPage(
-                                            server: Admin(
-                                          adminid: userData[index]["attributes"]
+                                        new AdminCreateServerLimitPage(
+                                            server: Egg(
+                                          eggid: userData[index]["attributes"]
                                                   ["id"]
                                               .toString(),
-                                          adminname: userData[index]
-                                              ["attributes"]["name"],
-                                          adminuser: userData[index]
-                                                  ["attributes"]["user"]
-                                              .toString(),
-                                          admindescription: userData[index]
-                                              ["attributes"]["description"],
-                                          adminmemory: userData[index]
-                                                      ["attributes"]["limits"]
-                                                  ["memory"]
-                                              .toString(),
-                                          admindisk: userData[index]
-                                                      ["attributes"]["limits"]
-                                                  ["disk"]
-                                              .toString(),
-                                          admincpu: userData[index]
-                                                      ["attributes"]["limits"]
-                                                  ["cpu"]
-                                              .toString(),
-                                          adminstartupcommand: userData[index]
-                                                  ["attributes"]["container"]
-                                              ["startup_command"],
+                                          dockerimage: userData[index]
+                                              ["attributes"]["docker_image"],
+                                          startup: userData[index]["attributes"]
+                                              ["startup"],
+                                          userid: widget.server.userid,
+                                          nestid: widget.server.nestid,
+                                          servername: widget.server.servername,
                                         )),
                                   );
                                   Navigator.of(context).push(route);
@@ -170,7 +135,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                                '${userData[index]["attributes"]["description"]}',
+                                                '${userData[index]["attributes"]["description"]}}',
                                                 style: TextStyle(
                                                     color: Colors.blueAccent)),
                                             Row(
@@ -180,7 +145,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                    '${userData[index]["attributes"]["name"]}',
+                                                    '${userData[index]["attributes"]["author"]}',
                                                     style: TextStyle(
                                                         color:
                                                             globals.isDarkTheme
@@ -188,7 +153,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                                                 : Colors.black,
                                                         fontWeight:
                                                             FontWeight.w700,
-                                                        fontSize: 18.0)),
+                                                        fontSize: 20.0)),
                                               ],
                                             ),
                                           ],
@@ -201,9 +166,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_ram'),
+                                            Text("ID:",
                                                 style: TextStyle(
                                                   color: globals.isDarkTheme
                                                       ? Colors.white
@@ -219,33 +182,7 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                                                 child: Padding(
                                                   padding: EdgeInsets.all(4.0),
                                                   child: Text(
-                                                      '${userData[index]["attributes"]["limits"]["memory"]} MB',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_disk'),
-                                                style: TextStyle(
-                                                  color: globals.isDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["limits"]["disk"]} MB',
+                                                      '${userData[index]["attributes"]["id"]}',
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w700,
@@ -269,14 +206,6 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
             ),
           ));
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AdminCreateServerPage()));
-        },
-        icon: Icon(Icons.add),
-        label: Text("Server"),
       ),
     );
   }

@@ -1,21 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../auth/shared_preferences_helper.dart';
-import '../../globals.dart' as globals;
+import '../../auth/shared_preferences_helper.dart';
+import '../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import 'adminactionnodes.dart';
+import '../../../main.dart';
+import 'admincreateservernodes.dart';
+import 'admincreateserversend.dart';
 
-class AdminAllocationsPage extends StatefulWidget {
-  AdminAllocationsPage({Key key, this.server}) : super(key: key);
-  final Admin server;
-
-  @override
-  _AdminAllocationsPageState createState() => _AdminAllocationsPageState();
+class Allocations {
+  final String nestid,
+      userid,
+      eggid,
+      dockerimage,
+      startup,
+      limitmemory,
+      limitswap,
+      disklimit,
+      iolimit,
+      cpulimit,
+      locationsid,
+      nodeid,
+      allocationsid,
+      servername;
+  const Allocations(
+      {this.nestid,
+      this.userid,
+      this.eggid,
+      this.dockerimage,
+      this.startup,
+      this.limitmemory,
+      this.limitswap,
+      this.disklimit,
+      this.iolimit,
+      this.cpulimit,
+      this.locationsid,
+      this.nodeid,
+      this.allocationsid,
+      this.servername});
 }
 
-class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
+class AdminCreateServerAllocationsPage extends StatefulWidget {
+  AdminCreateServerAllocationsPage({Key key, this.server}) : super(key: key);
+  final Nodes server;
+
+  @override
+  _AdminCreateServerAllocationsPageState createState() => _AdminCreateServerAllocationsPageState();
+}
+
+class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllocationsPage> {
   Map data;
   List userData;
 
@@ -24,7 +57,7 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/api/application/nodes/${widget.server.adminid}/allocations",
+      "$_adminhttps$_urladmin/api/application/nodes/${widget.server.userid}/allocations",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -88,10 +121,29 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
                                   ? Colors.grey[700]
                                   : Color(0x802196F3),
                               child: InkWell(
-                                /*
-                                onTap: () {                                  
+                                onTap: () {
+                                  var route = new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        new AdminCreateServerSendPage(
+                                            server: Allocations(
+                                          allocationsid: userData[index]["attributes"]["id"].toString(),
+                                          locationsid: widget.server.locationsid,
+                                          limitmemory: widget.server.limitmemory,
+                                          limitswap: widget.server.limitswap,
+                                          disklimit: widget.server.disklimit,
+                                          iolimit: widget.server.iolimit,
+                                          cpulimit: widget.server.cpulimit,
+                                          userid: widget.server.userid,
+                                          nestid: widget.server.nestid,
+                                          eggid: widget.server.eggid,
+                                          dockerimage: widget.server.dockerimage,
+                                          startup: widget.server.startup,
+                                          nodeid: widget.server.nodeid,
+                                          servername: widget.server.servername,
+                                        )),
+                                  );
+                                  Navigator.of(context).push(route);
                                 },
-                                */
                                 child: Container(
                                   child: Padding(
                                     padding: EdgeInsets.all(24.0),
