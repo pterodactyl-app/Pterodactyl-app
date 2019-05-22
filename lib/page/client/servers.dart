@@ -64,6 +64,18 @@ class _ServerListPageState extends State<ServerListPage> {
             style: TextStyle(
                 color: globals.isDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
+        actions: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.search), onPressed: () {})
+              ],
+            ),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
@@ -77,11 +89,10 @@ class _ServerListPageState extends State<ServerListPage> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: SizedBox.fromSize(
-                      size: Size.fromHeight(172.0),
+                      size: Size.fromHeight(140.0),
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
-                          /// Item description inside a material
                           Container(
                             margin: EdgeInsets.only(top: 24.0),
                             child: Material(
@@ -140,7 +151,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                             ),
                                           ],
                                         ),
-//info
+
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -173,14 +184,6 @@ class _ServerListPageState extends State<ServerListPage> {
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
                                             Text(
                                                 DemoLocalizations.of(context)
                                                     .trans('total_disk'),
