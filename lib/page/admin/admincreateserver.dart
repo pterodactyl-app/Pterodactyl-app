@@ -6,14 +6,12 @@ import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
 
-class AdminCreateUserPage extends StatefulWidget {
-  AdminCreateUserPage({Key key}) : super(key: key);
-
+class AdminCreateServerPage extends StatefulWidget {
   @override
-  _AdminCreateUserPageState createState() => _AdminCreateUserPageState();
+  _AdminCreateServerPageState createState() => new _AdminCreateServerPageState();
 }
 
-class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
+class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _firstnameController = TextEditingController();

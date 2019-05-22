@@ -27,7 +27,7 @@
     "action_restart":"Zrestartuj",
     "action_kill":"Zabij proces",
     "action_stats": "Statystyki",
-    "action_file": "Pliki (dost. w wersji 0.8)",
+    "action_file": "Pliki",
     "dark_mode":"Ciemny motyw",
     "dark_mode_sub":"Czarny i szary motyw",
     "cores":"Rdzenie",
@@ -104,6 +104,9 @@
     "updated_at": "Zaktualizowany o:",
     "admin_actionserver_view_server_info": "View Server info",
     "admin_actionserver_edit_server_info": "Edit Server info",
-    "utilization_stats_offline": "Server is offline",
-    "utilization_stats_online": "Server is online"  
+    "utilization_stats_offline": "Offline",
+    "utilization_stats_online": "Server is online",
+    "utilization_stats_starting": "Server is starting",
+    "utilization_stats_stopping": "Server is stopping",
+    "utilization_stats_Loading": "Retrieving data"     
 }

@@ -27,7 +27,7 @@
     "action_restart": "重启",
     "action_kill": "杀死(强制停止)",
     "action_stats": "状态",
-    "action_file": "文件列表(将在面板0.8版本到来)",
+    "action_file": "文件列表",
     "dark_mode": "夜间模式",
     "dark_mode_sub": "黑色和灰色主题",
     "cores": "核心数",
@@ -103,6 +103,9 @@
     "updated_at": "更新于:",
     "admin_actionserver_view_server_info": "View Server info",
     "admin_actionserver_edit_server_info": "Edit Server info",
-    "utilization_stats_offline": "Server is offline",
-    "utilization_stats_online": "Server is online"  
+    "utilization_stats_offline": "Offline",
+    "utilization_stats_online": "Server is online",
+    "utilization_stats_starting": "Server is starting",
+    "utilization_stats_stopping": "Server is stopping",
+    "utilization_stats_Loading": "Retrieving data"    
 }

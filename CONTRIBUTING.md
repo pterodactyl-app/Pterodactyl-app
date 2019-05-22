@@ -48,7 +48,7 @@ Then you copy this code:
     "action_restart":"Restart",
     "action_kill":"Kill",
     "action_stats": "Stats",
-    "action_file": "File List (coming panel 0.8)",
+    "action_file": "File List",
     "dark_mode":"Dark mode",
     "dark_mode_sub":"Black and Grey Theme",
     "cores":"Cores",
@@ -121,7 +121,11 @@ Then you copy this code:
     "rootadmin": "Root admin:",
     "2fa": "2FA",
     "created_at": "Created at:",
-    "updated_at": "Updated at:"
+    "updated_at": "Updated at:",
+    "admin_actionserver_view_server_info": "View Server info",
+    "admin_actionserver_edit_server_info": "Edit Server info",
+    "utilization_stats_offline": "Server is offline",
+    "utilization_stats_online": "Server is online" 
 }
 ```
 And change to the languge you are working on. 

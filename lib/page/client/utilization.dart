@@ -23,15 +23,18 @@ class _StatePageState extends State<StatePage> {
   String _stats;
   int _memorycurrent;
   int _memorylimit;
-  List<double> _cpu;
+  List<double> _cpu = [0.0].toList();
+  double _currentCpu;
+  int _limitCpu;
   int _diskcurrent;
   int _disklimit;
-
+  Timer timer;
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
+
     http.Response response = await http.get(
       "$_https$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
@@ -40,12 +43,22 @@ class _StatePageState extends State<StatePage> {
         "Authorization": "Bearer $_api"
       },
     );
+
+    List<double> parseCpu(cpu) {
+      List<double> result = [];
+      cpu.forEach((f) => result.add(f.toDouble()));
+      return result;
+    }
+
     data = json.decode(response.body);
+
     setState(() {
       _stats = data["attributes"]["state"];
       _memorycurrent = data["attributes"]["memory"]["current"];
       _memorylimit = data["attributes"]["memory"]["limit"];
-      //_cpu = data["attributes"]["cpu"]["cores"];
+      _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
+      _currentCpu = data["attributes"]["cpu"]["current"].toDouble();
+      _limitCpu = data["attributes"]["cpu"]["limit"];
       _diskcurrent = data["attributes"]["disk"]["current"];
       _disklimit = data["attributes"]["disk"]["limit"];
     });
@@ -53,45 +66,30 @@ class _StatePageState extends State<StatePage> {
 
   @override
   void initState() {
-    super.initState();
     getData();
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 3), (Timer t) => getData());
   }
 
   @override
   Widget build(BuildContext context) {
-    var data = "$_cpu" != null ? [0] : "$_cpu";
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              timer.cancel();
+            },
             icon: Icon(
               Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black,
             ),
           ),
           title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
-              style: TextStyle(
-                  fontWeight: FontWeight.w700)),
-          // actions: <Widget>
-          // [
-          //   Container
-          //   (
-          //     margin: EdgeInsets.only(right: 8.0),
-          //     child: Row
-          //     (
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: <Widget>
-          //       [
-          //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-          //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-          //       ],
-          //     ),
-          //   )
-          // ],
+              style: TextStyle(fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -110,20 +108,52 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Stats:",
+                          Text("Status:",
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_stats" == "on" ? DemoLocalizations.of(context).trans('utilization_stats_online') : DemoLocalizations.of(context).trans('utilization_stats_offline'),
+                          Text(
+                              "$_stats" == "on"
+                                  ? DemoLocalizations.of(context)
+                                      .trans('utilization_stats_online')
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_stats" == "on" ? Colors.green : Colors.red,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
-                                "$_stats" == "on" ? Icons.play_arrow : Icons.stop,
+                                "$_stats" == "on"
+                                    ? Icons.play_arrow
+                                    : "$_stats" == "off"
+                                        ? Icons.stop
+                                        : "$_stats" == "starting"
+                                            ? Icons.loop
+                                            : "$_stats" == "stopping"
+                                                ? Icons.pause
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
@@ -149,7 +179,7 @@ class _StatePageState extends State<StatePage> {
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_performance_cpu'),
-                                  style: TextStyle(color: Colors.redAccent)),
+                                  style: TextStyle(color: Colors.blueAccent)),
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_cpu'),
@@ -161,13 +191,31 @@ class _StatePageState extends State<StatePage> {
                                       fontSize: 20.0)),
                             ],
                           ),
+                          Text(
+                              "$_stats" == "on"
+                                  ? "${_limitCpu.toString()}" != 0
+                                      ? "$_currentCpu % / ∞ %"
+                                      : "$_currentCpu % / ${_limitCpu.toString()} %"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : DemoLocalizations.of(context)
+                                          .trans('utilization_stats_Loading'),
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0)),
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: data,
+                        data: _cpu.isNotEmpty ? _cpu : [0.0],
                         lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
+                        lineGradient: new LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.green[800], Colors.green[200]],
+                        ),
                       )
                     ],
                   )),
@@ -183,26 +231,60 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_memory'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_memorycurrent MB/ $_memorylimit MB",
+                          Text(
+                              "$_stats" == "on"
+                                  ? "$_memorycurrent MB / $_memorylimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_memorycurrent" == "$_memorylimit" ? Colors.red : Colors.green,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.memory,
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.memory
+                                    : "$_stats" == "off"
+                                        ? Icons.memory
+                                        : "$_stats" == "starting"
+                                            ? Icons.memory
+                                            : "$_stats" == "stopping"
+                                                ? Icons.memory
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
                     ]),
               ),
               //onTap: () {},
-            ),            
+            ),
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -214,26 +296,60 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$_diskcurrent MB/ $_disklimit MB",
+                          Text(
+                              "$_stats" == "on"
+                                  ? "$_diskcurrent MB / $_disklimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: "$_diskcurrent" == "$_disklimit" ? Colors.red : Colors.green,
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.sd_storage,
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.sd_storage
+                                    : "$_stats" == "off"
+                                        ? Icons.sd_storage
+                                        : "$_stats" == "starting"
+                                            ? Icons.sd_storage
+                                            : "$_stats" == "stopping"
+                                                ? Icons.sd_storage
+                                                : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
                           )),
                     ]),
               ),
               //onTap: () {},
-            ),           
+            ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),

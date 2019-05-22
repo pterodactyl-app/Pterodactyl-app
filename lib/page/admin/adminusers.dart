@@ -81,130 +81,177 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
         itemCount: userData == null ? 0 : userData.length,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 16.0),
-                    child: Material(
-                      elevation: 14.0,
-                      borderRadius: BorderRadius.circular(12.0),
-                      shadowColor: globals.isDarkTheme
-                          ? Colors.grey[700]
-                          : Color(0x802196F3),
-                      color:
-                          globals.isDarkTheme ? Colors.grey[850] : Colors.white,
-                      child: InkWell(
-                        onTap: () {
-                          var route = new MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                new AdminUserInfoPage(
-                                    server: Admin(
-                                        adminid: userData[index]["attributes"]
-                                                ["id"]
-                                            .toString(),
-                                        username: userData[index]["attributes"]
-                                            ["username"])),
-                          );
-                          Navigator.of(context).push(route);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(30.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              /// Title and rating
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                      '${userData[index]["attributes"]["first_name"]} ${userData[index]["attributes"]["last_name"]}',
-                                      style: TextStyle(
-                                          color: globals.isDarkTheme
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18.0)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                          '${userData[index]["attributes"]["email"]}',
-                                          style: TextStyle(
-                                              color: Colors.blueAccent,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 14.0)),
-                                    ],
-                                  ),
-                                ],
-                              ),
+              child: Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
+            child: Stack(
+              children: <Widget>[
+                /// Item card
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox.fromSize(
+                      size: Size.fromHeight(140.0),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          /// Item description inside a material
+                          Container(
+                            margin: EdgeInsets.only(top: 24.0),
+                            child: Material(
+                              elevation: 14.0,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shadowColor: globals.isDarkTheme
+                                  ? Colors.grey[700]
+                                  : Color(0x802196F3),
+                              child: InkWell(
+                                onTap: () {
+                                  var route = new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        new AdminUserInfoPage(
+                                            server: Admin(
+                                                adminid: userData[index]
+                                                        ["attributes"]["id"]
+                                                    .toString(),
+                                                username: userData[index]
+                                                        ["attributes"]
+                                                    ["username"])),
+                                  );
+                                  Navigator.of(context).push(route);
+                                },
+                                child: Container(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        /// Title and rating
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                                '${userData[index]["attributes"]["first_name"]} ${userData[index]["attributes"]["last_name"]}',
+                                                style: TextStyle(
+                                                    color: globals.isDarkTheme
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 20.0)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Text(
+                                                    '${userData[index]["attributes"]["email"]}',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.blueAccent,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 18.0)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
 
-                              /// Infos
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text('Root Admin',
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: "${userData[index]["attributes"]["root_admin"]}" == "true" ? Colors.green : Colors.blue,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["root_admin"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
+                                        /// Infos
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text('Superuser',
+                                                style: TextStyle(
+                                                  color: globals.isDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color:
+                                                    "${userData[index]["attributes"]["root_admin"]}" ==
+                                                            "true"
+                                                        ? Colors.green
+                                                        : Colors.blue,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["root_admin"]}' ==
+                                                              "true"
+                                                          ? DemoLocalizations
+                                                                  .of(context)
+                                                              .trans('yes')
+                                                          : DemoLocalizations
+                                                                  .of(context)
+                                                              .trans('no'),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                            Text('2FA',
+                                                style: TextStyle(
+                                                  color: globals.isDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color:
+                                                    "${userData[index]["attributes"]["2fa"]}" ==
+                                                            "true"
+                                                        ? Colors.green
+                                                        : Colors.red,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["2fa"]}' ==
+                                                              "true"
+                                                          ? DemoLocalizations
+                                                                  .of(context)
+                                                              .trans('yes')
+                                                          : DemoLocalizations
+                                                                  .of(context)
+                                                              .trans('no'),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text('2FA',
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: "${userData[index]["attributes"]["2fa"]}" == "true" ? Colors.green : Colors.red,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["2fa"]}' == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+              ],
             ),
-          );
+          ));
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -213,7 +260,8 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
               .push(MaterialPageRoute(builder: (_) => AdminCreateUserPage()));
         },
         icon: Icon(Icons.add),
-        label: Text(DemoLocalizations.of(context).trans('admin_user_list_user')),
+        label:
+            Text(DemoLocalizations.of(context).trans('admin_user_list_user')),
       ),
     );
   }

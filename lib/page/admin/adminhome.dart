@@ -31,8 +31,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
-    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     http.Response response = await http.get(
       "$_adminhttps$_urladmin/api/application/servers",
       headers: {
@@ -40,6 +40,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
       userTotalServers = data["meta"]["pagination"]["total"];
@@ -57,9 +58,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
-      totalNodes = data["meta"]["pagination"]["total"];
+      if (data.containsKey('meta')) {
+        totalNodes = data["meta"]["pagination"]["total"];
+      }
     });
   }
 
@@ -74,15 +78,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
-      totalUsers = data["meta"]["pagination"]["total"];
+      if (data.containsKey('meta')) {
+        totalUsers = data["meta"]["pagination"]["total"];
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
+
     getData();
     getNodesData();
     getUsers();
