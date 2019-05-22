@@ -39,6 +39,12 @@ If you found this project useful, then please consider giving it a :star: on Git
 V1.0 may 6 '19 - Original Release 
 
 
+# Donate
+
+> If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
+>
+> - [PayPal](https://www.paypal.me/RDTalstra)
+
 
 ### License
 
