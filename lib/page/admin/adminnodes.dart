@@ -68,133 +68,158 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
         itemCount: userData == null ? 0 : userData.length,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 16.0),
-                    child: Material(
-                      elevation: 14.0,
-                      borderRadius: BorderRadius.circular(12.0),
-                      shadowColor: globals.isDarkTheme
-                          ? Colors.grey[700]
-                          : Color(0x802196F3),
-                      color:
-                          globals.isDarkTheme ? Colors.grey[850] : Colors.white,
-                      child: InkWell(
-                        onTap: () {
-                          var route = new MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                new AdminActionNodesPage(
-                                    server: Nodes(
-                                  adminids: userData[index]["attributes"]["id"]
-                                      .toString(),
-                                  adminname: userData[index]["attributes"]
-                                      ["name"],
-                                  adminnodeip: userData[index]["attributes"]["ip"]
-                                )),
-                          );
-                          Navigator.of(context).push(route);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(30.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              /// Title and rating
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                      '${userData[index]["attributes"]["description"]} ${userData[index]["attributes"]["id"]}',
-                                      style:
-                                          TextStyle(color: Colors.blueAccent)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                          '${userData[index]["attributes"]["name"]}',
-                                          style: TextStyle(
-                                              color: globals.isDarkTheme
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18.0)),
-                                    ],
-                                  ),
-                                ],
-                              ),
+              child: Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
+            child: Stack(
+              children: <Widget>[
+                /// Item card
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox.fromSize(
+                      size: Size.fromHeight(140.0),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          /// Item description inside a material
+                          Container(
+                            margin: EdgeInsets.only(top: 24.0),
+                            child: Material(
+                              elevation: 14.0,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shadowColor: globals.isDarkTheme
+                                  ? Colors.grey[700]
+                                  : Color(0x802196F3),
+                              child: InkWell(
+                                onTap: () {
+                                  var route = new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        new AdminActionNodesPage(
+                                            server: Nodes(
+                                                adminids: userData[index]
+                                                        ["attributes"]["id"]
+                                                    .toString(),
+                                                adminname: userData[index]
+                                                    ["attributes"]["name"],
+                                                adminnodeip: userData[index]
+                                                    ["attributes"]["ip"])),
+                                  );
+                                  Navigator.of(context).push(route);
+                                },
+                                child: Container(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        /// Title and rating
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                                '${userData[index]["attributes"]["description"]} ${userData[index]["attributes"]["id"]}',
+                                                style: TextStyle(
+                                                    color: Colors.blueAccent)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Text(
+                                                    '${userData[index]["attributes"]["name"]}',
+                                                    style: TextStyle(
+                                                        color:
+                                                            globals.isDarkTheme
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20.0)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
 
-                              /// Infos
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('total_ram'),
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["memory"]} MB',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
+                                        /// Infos
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                                DemoLocalizations.of(context)
+                                                    .trans('total_ram'),
+                                                style: TextStyle(
+                                                  color: globals.isDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.green,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["memory"]} MB',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                                DemoLocalizations.of(context)
+                                                    .trans('total_disk'),
+                                                style: TextStyle(
+                                                  color: globals.isDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.green,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["disk"]} MB',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('total_disk'),
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["disk"]} MB',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+              ],
             ),
-          );
+          ));
         },
       ),
     );

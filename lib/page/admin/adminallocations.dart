@@ -64,6 +64,168 @@ class _AdminAllocationsPageState extends State<AdminAllocationsPage> {
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
         itemBuilder: (BuildContext context, int index) {
+
+          return InkWell(
+              child: Padding(
+            padding: EdgeInsets.only(bottom: 16.0),
+            child: Stack(
+              children: <Widget>[
+                /// Item card
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox.fromSize(
+                      size: Size.fromHeight(140.0),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          /// Item description inside a material
+                          Container(
+                            margin: EdgeInsets.only(top: 24.0),
+                            child: Material(
+                              elevation: 14.0,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shadowColor: globals.isDarkTheme
+                                  ? Colors.grey[700]
+                                  : Color(0x802196F3),
+                              child: InkWell(
+                                /*
+                                onTap: () {                                  
+                                },
+                                */
+                                child: Container(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(24.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        /// Title and rating
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                      '${userData[index]["attributes"]["alias"]}',
+                                      style:
+                                          TextStyle(color: Colors.blueAccent)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                          'IP: ${userData[index]['attributes']['ip']}',
+                                          style: TextStyle(
+                                              color: globals.isDarkTheme
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18.0)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                              /// Infos
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('admin_allocations_id'),
+                                      style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 18.0,
+                                      )),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.green,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: Text(
+                                            '${userData[index]["attributes"]["id"]}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('admin_allocations_assigned'),
+                                      style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 18.0,
+                                      )),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.green,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: Text(
+                                            '${userData[index]["attributes"]["assigned"]}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                      DemoLocalizations.of(context)
+                                          .trans('admin_allocations_port'),
+                                      style: TextStyle(
+                                        color: globals.isDarkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 18.0,
+                                      )),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.green,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(4.0),
+                                        child: Text(
+                                            '${userData[index]["attributes"]["port"]}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white)),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                ),
+              ],
+            ),
+          ));
+
           return InkWell(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
