@@ -1,5 +1,6 @@
 # Pterodactyl Mobile App 🚀
 
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/gpl-3.0)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
 <span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-green.svg" alt="Patreon donate button" /></a></span>
 [![Codemagic build status](https://api.codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/status_badge.svg)](https://codemagic.io/apps/5ccaf2ab80113f001c2e4176/5ccaf2ab80113f001c2e4175/latest_build)
@@ -80,7 +81,7 @@ License
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-       https://www.gnu.org/licenses/gpl-3.0.en.html
+       https://www.gnu.org/licenses/gpl-3.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
