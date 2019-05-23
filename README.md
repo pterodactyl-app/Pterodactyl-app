@@ -64,7 +64,6 @@ Instagram:
 
 Website: [Pterodactyl app website](https://pterodactyl-app.com/)
 
-Project Board: [click here](https://trello.com/b/YqCe05Vl/pterodactyl-app)
 
 
 ```
