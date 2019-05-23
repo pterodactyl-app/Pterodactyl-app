@@ -87,6 +87,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 children: <Widget>[
                   DropdownButton<String>(
                     value: dropdownValue,
+                    isDense: true,
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
@@ -96,7 +97,8 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value,
+                          style: TextStyle(fontSize: 18.0)),
                       );
                     }).toList(),
                   ),
@@ -155,6 +157,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ],
             ),
+            SizedBox(height: 50.0),
             new FlatButton(
               child: new Text(
                   DemoLocalizations.of(context).trans('admin_noadminaccount')),

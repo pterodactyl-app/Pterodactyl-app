@@ -85,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  SizedBox(height: 2.0),
                   DropdownButton<String>(
                     value: dropdownValue,
+                    isDense: true,
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
@@ -97,7 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value,
+                          style: TextStyle(fontSize: 18.0)),
                       );
                     }).toList(),
                   ),

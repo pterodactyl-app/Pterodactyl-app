@@ -134,6 +134,46 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
     return response;
   }
 
+  Future postDelete() async {
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    var url =
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}';
+
+    var response = await http.delete(
+      url,
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postForcedelete() async {
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    var url =
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/force';
+
+    var response = await http.delete(
+      url,
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -341,8 +381,62 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 Navigator.of(context).push(route);
               },
             ),
+
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.red,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.delete,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text("Safely Delete Server",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
+                    ]),
+              ),
+              onTap: () {
+                _delete();
+              },
+            ),
+
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.red,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.delete_forever,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text("Forcefully Delete Server",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 18.0)),
+                    ]),
+              ),
+              onTap: () {
+                _forcedelete();
+              },
+            ),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 170.0),
+            StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),
@@ -487,4 +581,61 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
           ],
         ));
   }
+
+  _delete() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: new CupertinoAlertDialog(
+          content: new Text("This action will attempt to delete the server from both the panel and daemon. If either one reports an error the action will be cancelled.",
+            style: new TextStyle(fontSize: 16.0),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('no'),
+                  style: TextStyle(color: Colors.black)),
+            ),
+            new FlatButton(
+              onPressed: () {
+                postDelete();
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
+                  style: TextStyle(color: Colors.black)),
+            )
+          ],
+        ));
+  }
+
+  _forcedelete() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: new CupertinoAlertDialog(
+          content: new Text("This action will attempt to delete the server from both the panel and daemon. If the daemon does not respond, or reports an error the deletion will continue.",
+            style: new TextStyle(fontSize: 16.0),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('no'),
+                  style: TextStyle(color: Colors.black)),
+            ),
+            new FlatButton(
+              onPressed: () {
+                postForcedelete();
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
+                  style: TextStyle(color: Colors.black)),
+            )
+          ],
+        ));
+  }
+
 }
