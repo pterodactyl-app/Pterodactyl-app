@@ -15,4 +15,5 @@
 */
 library globals;
 
-bool isDarkTheme = false;
+bool useDarkTheme = false;
+

@@ -24,7 +24,7 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'adminservers.dart';
-import 'adminsettings.dart';
+import '../../settings.dart';
 import 'adminnodes.dart';
 import 'adminusers.dart';
 import '../../main.dart';
@@ -148,7 +148,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
         data: (brightness) => ThemeData(
               primarySwatch: Colors.blue,
               primaryColorBrightness:
-                  globals.isDarkTheme ? Brightness.dark : Brightness.light,
+                  globals.useDarkTheme ? Brightness.dark : Brightness.light,
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
@@ -157,11 +157,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 automaticallyImplyLeading: false,
                 elevation: 2.0,
                 backgroundColor:
-                    globals.isDarkTheme ? Colors.transparent : Colors.white,
+                    globals.useDarkTheme ? Colors.transparent : Colors.white,
                 title: Text(
                     DemoLocalizations.of(context).trans('admin_homepanel'),
                     style: TextStyle(
-                        color: globals.isDarkTheme ? null : Colors.black,
+                        color: globals.useDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
                         fontSize: 30.0)),
                 //actions: <Widget>[
@@ -174,12 +174,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 //Text(DemoLocalizations.of(context).trans('logout'),
                 //style: TextStyle(
                 //color:
-                //globals.isDarkTheme ? Colors.white : Colors.blue,
+                //globals.useDarkTheme ? Colors.white : Colors.blue,
                 //fontWeight: FontWeight.w700,
                 //fontSize: 14.0)),
                 //Icon(
                 //Icons.subdirectory_arrow_left,
-                //color: globals.isDarkTheme ? Colors.white : Colors.black,
+                //color: globals.useDarkTheme ? Colors.white : Colors.black,
                 //)
                 //],
                 //),
@@ -322,14 +322,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 DemoLocalizations.of(context)
                                     .trans('settings_sub'),
                                 style: TextStyle(
-                                  color: globals.isDarkTheme
+                                  color: globals.useDarkTheme
                                       ? Colors.white70
                                       : Colors.black45,
                                 )),
                           ]),
                     ),
                     onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => AdminSettingsList())),
+                        MaterialPageRoute(builder: (_) => SettingsList())),
                   ),
                   _buildTile(
                     Padding(
@@ -355,7 +355,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 DemoLocalizations.of(context)
                                     .trans('alerts_sub'),
                                 style: TextStyle(
-                                  color: globals.isDarkTheme
+                                  color: globals.useDarkTheme
                                       ? Colors.white70
                                       : Colors.black45,
                                 )),
@@ -382,7 +382,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: globals.isDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+        shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

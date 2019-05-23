@@ -17,6 +17,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'globals.dart' as globals;
 import 'dart:async';
@@ -26,13 +27,13 @@ import 'page/auth/auth.dart';
 import 'page/client/login.dart';
 import 'page/client/home.dart';
 import 'page/client/servers.dart';
-import 'page/client/settings.dart';
 
+
+import 'settings.dart';
 import 'about.dart';
 
 import 'page/admin/adminlogin.dart';
 import 'page/admin/adminhome.dart';
-import 'page/admin/adminsettings.dart';
 //import 'page/admin/adminservers.dart';
 //import 'page/admin/adminnodes.dart';
 //import 'page/admin/adminallocations.dart';
@@ -85,7 +86,8 @@ class DemoLocalizationsDelegate
         'it',
         'se',
         'zh',
-        'si'
+        'si',
+        'es'
       ].contains(locale.languageCode);
 
   @override
@@ -107,6 +109,9 @@ class DemoLocalizationsDelegate
 
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
+
+
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -117,7 +122,7 @@ class MyApp extends StatelessWidget {
         data: (brightness) => ThemeData(
               primarySwatch: Colors.blue,
               primaryColorBrightness:
-                  globals.isDarkTheme ? Brightness.dark : Brightness.light,
+                  globals.useDarkTheme ? Brightness.dark : Brightness.light,
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
@@ -137,6 +142,7 @@ class MyApp extends StatelessWidget {
               const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'), // 'zh_Hans_CN'
               const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'), // 'zh_Hant_TW'
               const Locale('si', 'SI'),
+              const Locale('es', 'ES'),
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
@@ -168,15 +174,15 @@ class MyApp extends StatelessWidget {
               '/settings': (BuildContext context) => new SettingsList(),
 
               '/adminhome': (BuildContext context) => new AdminHomePage(),
-              '/adminlogin': (BuildContext context) => new AdminLoginPage(),
-              '/adminsettings': (BuildContext context) => new AdminSettingsList(),
-              
+              '/adminlogin': (BuildContext context) => new AdminLoginPage(),              
             },
           );
         });
   }
 }
 
-void main() {
+Future main() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  globals.useDarkTheme = (prefs.getBool('Value') ?? false);
   runApp(new MyApp());
 }

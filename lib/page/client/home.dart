@@ -22,7 +22,7 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
-import 'settings.dart';
+import '../../settings.dart';
 import '../../main.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -77,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 2.0,
-          backgroundColor: globals.isDarkTheme ? null : Colors.white,
+          backgroundColor: globals.useDarkTheme ? null : Colors.white,
           title: Text(DemoLocalizations.of(context).trans('dashboard'),
               style: TextStyle(
-                  color: globals.isDarkTheme ? null : Colors.black,
+                  color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
           //actions: <Widget>[
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('settings_sub'),
                           style: TextStyle(
-                            color: globals.isDarkTheme
+                            color: globals.useDarkTheme
                                 ? Colors.white70
                                 : Colors.black45,
                           )),
@@ -199,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('alerts_sub'),
                           style: TextStyle(
-                            color: globals.isDarkTheme
+                            color: globals.useDarkTheme
                                 ? Colors.white70
                                 : Colors.black45,
                           )),
@@ -260,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: globals.isDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+        shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

@@ -83,18 +83,18 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+          backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
           leading: IconButton(
-            color: globals.isDarkTheme ? Colors.white : Colors.black,
+            color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(
               Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black,
+              color: globals.useDarkTheme ? Colors.white : Colors.black,
             ),
           ),
           title: Text('${widget.server.adminname}',
               style: TextStyle(
-                  color: globals.isDarkTheme ? Colors.white : Colors.black,
+                  color: globals.useDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
@@ -159,7 +159,7 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
                               DemoLocalizations.of(context)
                                   .trans('admin_actionnodes_create_allocation'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
+                                  color: globals.useDarkTheme
                                       ? Colors.white
                                       : Colors.black,
                                   fontWeight: FontWeight.w700,
@@ -202,7 +202,7 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: globals.isDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+        shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

@@ -69,15 +69,15 @@ class _ServerListPageState extends State<ServerListPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
         title: Text(DemoLocalizations.of(context).trans('server_list'),
             style: TextStyle(
-                color: globals.isDarkTheme ? null : Colors.black,
+                color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
         actions: <Widget>[
           Container(
@@ -113,7 +113,7 @@ class _ServerListPageState extends State<ServerListPage> {
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+                              shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
                                   var route = new MaterialPageRoute(
@@ -175,7 +175,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                 DemoLocalizations.of(context)
                                                     .trans('total_ram'),
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),
@@ -201,7 +201,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                 DemoLocalizations.of(context)
                                                     .trans('total_disk'),
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),
