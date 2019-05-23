@@ -133,9 +133,7 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme
-                                  ? Colors.grey[700]
-                                  : Color(0x802196F3),
+                              shadowColor: globals.isDarkTheme ? Colors.blueGrey : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
                                   var route = new MaterialPageRoute(
