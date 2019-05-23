@@ -28,6 +28,8 @@ For all the people who worked with me on this amazing project.
 
 > - Slovenian language: `@Perhaps.#8928`
 
+> - Spanish language `????`
+
 
 
 
