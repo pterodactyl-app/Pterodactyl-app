@@ -30,7 +30,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/application/users?search=$_emailController",
+      "$_adminhttps$_urladmin/api/application/users?search=${_emailController.text}",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userID = data["data"]["attributes"]["id"];
+      userID = data["data"]["attributes"]["id"].toString() as int;
     });
   }
 
@@ -62,8 +62,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(
-            DemoLocalizations.of(context).trans('admin_create_user_title'),
+        title: Text('Create server 1/8',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -105,8 +104,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text(DemoLocalizations.of(context)
-                      .trans('admin_create_user_create_a_user')),
+                  child: Text('Next'),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
@@ -116,10 +114,11 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                         builder: (BuildContext context) =>
                             new AdminCreateServerNestPage(
                                 server: Create(
-                                    userid: userID.toString(),
+                                    userid: "$userID",
                                     servername: _servernameController.text)));
                     Navigator.of(context).push(route);
-                    getData();
+                    //getData();
+                    print(userID);
                   },
                 ),
               ],

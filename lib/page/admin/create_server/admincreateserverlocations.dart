@@ -86,7 +86,7 @@ class _AdminCreateServerLocationsPageState
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("List Nest",
+        title: Text("select location 5/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

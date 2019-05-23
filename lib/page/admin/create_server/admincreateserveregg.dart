@@ -68,7 +68,7 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("List Nest",
+        title: Text("select an egg 3/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -155,40 +155,6 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
                                                             FontWeight.w700,
                                                         fontSize: 20.0)),
                                               ],
-                                            ),
-                                          ],
-                                        ),
-
-                                        /// Infos
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text("ID:",
-                                                style: TextStyle(
-                                                  color: globals.isDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["id"]}',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
                                             ),
                                           ],
                                         ),

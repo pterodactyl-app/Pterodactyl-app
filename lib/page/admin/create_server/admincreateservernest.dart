@@ -62,7 +62,7 @@ class _AdminCreateServerNestPageState extends State<AdminCreateServerNestPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("List Nest",
+        title: Text("select a nest 2/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -123,8 +123,9 @@ class _AdminCreateServerNestPageState extends State<AdminCreateServerNestPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
+                                            
                                             Text(
-                                                '${userData[index]["attributes"]["description"]}}',
+                                                '${userData[index]["attributes"]["description"]}',
                                                 style: TextStyle(
                                                     color: Colors.blueAccent)),
                                             Row(
@@ -144,40 +145,6 @@ class _AdminCreateServerNestPageState extends State<AdminCreateServerNestPage> {
                                                             FontWeight.w700,
                                                         fontSize: 20.0)),
                                               ],
-                                            ),
-                                          ],
-                                        ),
-
-                                        /// Infos
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text("ID:",
-                                                style: TextStyle(
-                                                  color: globals.isDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["id"]}',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
                                             ),
                                           ],
                                         ),

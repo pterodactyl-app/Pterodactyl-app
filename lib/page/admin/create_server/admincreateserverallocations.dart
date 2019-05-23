@@ -22,7 +22,8 @@ class Allocations {
       locationsid,
       nodeid,
       allocationsid,
-      servername;
+      servername,
+      port;
   const Allocations(
       {this.nestid,
       this.userid,
@@ -37,7 +38,8 @@ class Allocations {
       this.locationsid,
       this.nodeid,
       this.allocationsid,
-      this.servername});
+      this.servername,
+      this.port});
 }
 
 class AdminCreateServerAllocationsPage extends StatefulWidget {
@@ -57,7 +59,7 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/api/application/nodes/${widget.server.userid}/allocations",
+      "$_adminhttps$_urladmin/api/application/nodes/${widget.server.nodeid}/allocations",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -88,8 +90,7 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(
-            DemoLocalizations.of(context).trans('admin_allocations_list'),
+        title: Text("Select an allocation 7/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -140,6 +141,7 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                                           startup: widget.server.startup,
                                           nodeid: widget.server.nodeid,
                                           servername: widget.server.servername,
+                                          port: userData[index]["attributes"]["port"].toString(),
                                         )),
                                   );
                                   Navigator.of(context).push(route);

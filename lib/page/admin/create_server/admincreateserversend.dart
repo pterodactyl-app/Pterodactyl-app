@@ -49,7 +49,7 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
       "deploy": {
         "locations": [widget.server.locationsid],
         "dedicated_ip": false,
-        "port_range": []
+        "port_range": [widget.server.port]
       },
       "start_on_completion": true
     };
@@ -77,17 +77,11 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
           color: globals.isDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
-            SharedPreferencesHelper.remove("username");
-            SharedPreferencesHelper.remove("email");
-            SharedPreferencesHelper.remove("first_name");
-            SharedPreferencesHelper.remove("last_name");
-            SharedPreferencesHelper.remove("password");
           },
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(
-            DemoLocalizations.of(context).trans('admin_create_user_title'),
+        title: Text("Create server 8/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

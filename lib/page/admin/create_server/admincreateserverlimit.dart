@@ -59,7 +59,7 @@ class _AdminCreateServerLimitPageState
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('add server limits',
+        title: Text('add server limits 4/8',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
