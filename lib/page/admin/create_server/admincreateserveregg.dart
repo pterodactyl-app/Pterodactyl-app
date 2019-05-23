@@ -15,26 +15,35 @@
 */
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../auth/shared_preferences_helper.dart';
-import '../../globals.dart' as globals;
+import '../../auth/shared_preferences_helper.dart';
+import '../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import 'adminactionnodes.dart';
+import '../../../main.dart';
+import 'admincreateservernest.dart';
+import 'admincreateserverlimit.dart';
 
-class Nodes {
-  final String adminids, adminname, adminip, adminnodeip;
-  const Nodes({this.adminids, this.adminname, this.adminip, this.adminnodeip});
+class Egg {
+  final String nestid, userid, eggid, dockerimage, servername, startup;
+  const Egg(
+      {this.nestid,
+      this.userid,
+      this.eggid,
+      this.dockerimage,
+      this.startup,
+      this.servername});
 }
 
-class AdminNodesListPage extends StatefulWidget {
-  AdminNodesListPage({Key key}) : super(key: key);
+class AdminCreateServerEggsPage extends StatefulWidget {
+  AdminCreateServerEggsPage({Key key, this.server}) : super(key: key);
+  final Nest server;
 
   @override
-  _AdminNodesListPageState createState() => _AdminNodesListPageState();
+  _AdminCreateServerEggsPageState createState() =>
+      _AdminCreateServerEggsPageState();
 }
 
-class _AdminNodesListPageState extends State<AdminNodesListPage> {
+class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
   Map data;
   List userData;
 
@@ -43,7 +52,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_adminhttps$_urladmin/api/application/nodes",
+      "$_adminhttps$_urladmin/api/application/nests",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
@@ -74,7 +83,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('admin_nodes_nodes'),
+        title: Text("select an egg 3/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -108,15 +117,19 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                                 onTap: () {
                                   var route = new MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        new AdminActionNodesPage(
-                                            server: Nodes(
-                                                adminids: userData[index]
-                                                        ["attributes"]["id"]
-                                                    .toString(),
-                                                adminname: userData[index]
-                                                    ["attributes"]["name"],
-                                                adminnodeip: userData[index]
-                                                    ["attributes"]["ip"])),
+                                        new AdminCreateServerLimitPage(
+                                            server: Egg(
+                                          eggid: userData[index]["attributes"]
+                                                  ["id"]
+                                              .toString(),
+                                          dockerimage: userData[index]
+                                              ["attributes"]["docker_image"],
+                                          startup: userData[index]["attributes"]
+                                              ["startup"],
+                                          userid: widget.server.userid,
+                                          nestid: widget.server.nestid,
+                                          servername: widget.server.servername,
+                                        )),
                                   );
                                   Navigator.of(context).push(route);
                                 },
@@ -137,7 +150,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                                '${userData[index]["attributes"]["description"]} ${userData[index]["attributes"]["id"]}',
+                                                '${userData[index]["attributes"]["description"]}}',
                                                 style: TextStyle(
                                                     color: Colors.blueAccent)),
                                             Row(
@@ -147,7 +160,7 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                    '${userData[index]["attributes"]["name"]}',
+                                                    '${userData[index]["attributes"]["author"]}',
                                                     style: TextStyle(
                                                         color:
                                                             globals.isDarkTheme
@@ -157,68 +170,6 @@ class _AdminNodesListPageState extends State<AdminNodesListPage> {
                                                             FontWeight.w700,
                                                         fontSize: 20.0)),
                                               ],
-                                            ),
-                                          ],
-                                        ),
-
-                                        /// Infos
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_ram'),
-                                                style: TextStyle(
-                                                  color: globals.isDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["memory"]} MB',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_disk'),
-                                                style: TextStyle(
-                                                  color: globals.isDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["disk"]} MB',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
                                             ),
                                           ],
                                         ),

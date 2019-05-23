@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>565795306919-7c4v8abdnaq30dd9f0s338tsjrc4rhrv.apps.googleusercontent.com</string>
+	<string>880686270115-vebqc84ibn0eof88ol9keckm9sjuac1d.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.565795306919-7c4v8abdnaq30dd9f0s338tsjrc4rhrv</string>
+	<string>com.googleusercontent.apps.880686270115-vebqc84ibn0eof88ol9keckm9sjuac1d</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>880686270115-hs5h9u9333vrt24erv7cnuahnt25of54.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAECYr3uGoXnDLU_wfYphnKuvxri6AfN9g</string>
+	<string>AIzaSyDfc8bq7oG8k6T9Q_--2lJvcHfozAP08N4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>565795306919</string>
+	<string>880686270115</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>nl.rubentalstra.pterodactyl</string>
+	<string>nl.rubentalstra.pterodactylapp</string>
 	<key>PROJECT_ID</key>
-	<string>pterodactyl-app</string>
+	<string>pterodactyl-mobile</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pterodactyl-app.appspot.com</string>
+	<string>pterodactyl-mobile.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:565795306919:ios:f3d6ac38704170ba</string>
+	<string>1:880686270115:ios:fedbd0edd2f12e4b</string>
 	<key>DATABASE_URL</key>
-	<string>https://pterodactyl-app.firebaseio.com</string>
+	<string>https://pterodactyl-mobile.firebaseio.com</string>
 </dict>
 </plist>

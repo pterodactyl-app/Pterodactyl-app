@@ -14,54 +14,48 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import '../auth/shared_preferences_helper.dart';
+import '../../auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart' as globals;
+import '../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import 'adminactionnodes.dart';
+import '../../../main.dart';
+import 'admincreateservernest.dart';
 
-class AdminCreateAllocationPage extends StatefulWidget {
-  AdminCreateAllocationPage({Key key, this.server}) : super(key: key);
-  final Allocation server;
-
-  @override
-  _AdminCreateAllocationPageState createState() =>
-      _AdminCreateAllocationPageState();
+class Create {
+  final String userid, servername;
+  const Create({this.userid, this.servername});
 }
 
-class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
-  final _aliasController = TextEditingController();
-  final _portsController = TextEditingController();
+class AdminCreateServerPage extends StatefulWidget {
+  @override
+  _AdminCreateServerPageState createState() =>
+      new _AdminCreateServerPageState();
+}
 
-  Future postSend() async {
-    String _alias = await SharedPreferencesHelper.getString("alias");
-    String _ports = await SharedPreferencesHelper.getString("ports");
+class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
+  Map data;
+  int userID;
+
+  final _servernameController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
-    var url =
-        '$_adminhttps$_urladmin/api/application/nodes/${widget.server.adminids}/allocations';
-
-    Map data = {
-      "ip": "${widget.server.adminnodeip}",
-      "alias": "$_alias",
-      "ports": "$_ports"
-    };
-    //encode Map to JSON
-    var body = json.encode(data);
-
-    var response = await http.post(url,
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $_apiadmin"
-        },
-        body: body);
-    print("${response.statusCode}");
-    print("${response.body}");
-    return response;
+    http.Response response = await http.get(
+      "$_adminhttps$_urladmin/api/application/users?search=${_emailController.text}",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    data = json.decode(response.body);
+    setState(() {
+      userID = data["data"]["attributes"]["id"].toString() as int;
+    });
   }
 
   @override
@@ -72,13 +66,18 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
         backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            SharedPreferencesHelper.remove("username");
+            SharedPreferencesHelper.remove("email");
+            SharedPreferencesHelper.remove("first_name");
+            SharedPreferencesHelper.remove("last_name");
+            SharedPreferencesHelper.remove("password");
+          },
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(
-            DemoLocalizations.of(context)
-                .trans('admin_allocationscreate_assign'),
+        title: Text('Create server 1/8',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -87,53 +86,54 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 20.0),
             AccentColorOverride(
-              color: Color(0xFFC5032B),
+              color: Colors.red,
               child: TextField(
-                controller: _aliasController,
+                controller: _servernameController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context)
-                      .trans('admin_allocationscreate_ip'),
+                  labelText: ('Server name'),
                 ),
               ),
             ),
             SizedBox(height: 12.0),
             AccentColorOverride(
-              color: Color(0xFFC5032B),
+              color: Colors.red,
               child: TextField(
-                keyboardType: TextInputType.number,
-                controller: _portsController,
+                controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context)
-                      .trans('admin_allocationscreate_port'),
+                  labelText: ('email of the user'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text(DemoLocalizations.of(context).trans('clear')),
+                  child: Text('Clear'),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _aliasController.clear();
-                    _portsController.clear();
+                    _servernameController.clear();
+                    _emailController.clear();
                   },
                 ),
                 RaisedButton(
-                  child: Text('Submit'),
+                  child: Text('Next'),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "ports", _portsController.text);
-                    await SharedPreferencesHelper.setString(
-                        "alias", _aliasController.text);
-                    postSend();
+                    var route = new MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            new AdminCreateServerNestPage(
+                                server: Create(
+                                    userid: "$userID",
+                                    servername: _servernameController.text)));
+                    Navigator.of(context).push(route);
+                    //getData();
+                    print(userID);
                   },
                 ),
               ],
