@@ -42,8 +42,6 @@ dependencies:
   get_version: any
   firebase_messaging: any
   url_launcher: any
-  coverage: "^0.7.0"
-  dart_codecov_generator: "^0.4.0"
 
   dbutils:
     git:
