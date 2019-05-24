@@ -11,12 +11,10 @@ description: A Pterodactyl Mobile App.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 3.0.0+39
+version: 3.0.2+41
 authors:
   - Ruben Talstra <rubentalstra1211@outlook.com>
-  - Arnaud Lier <zeprofdecoding@gmail.com>
-  - Appomatrix (from "Flutter Dev")
-  - Ala (iOS part)
+  - Yvan Watchman <ywatchman@cyberfusion.nl>
 
 environment:
   sdk: ">=2.2.0 <3.0.0"

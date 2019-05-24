@@ -20,6 +20,7 @@ import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import '../auth/shared_preferences_helper.dart';
 import 'dart:async';
+import 'dart:convert';
 import '../../main.dart';
 import 'adminservers.dart';
 import 'admineditserver.dart';
@@ -61,6 +62,8 @@ class AdminActionServerPage extends StatefulWidget {
 
 class _AdminActionServerPageState extends State<AdminActionServerPage> {
   Map data;
+  bool suspended;
+
 
   Future postRebuild() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
@@ -182,6 +185,30 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
     return response;
   }
 
+  Future getData() async {
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    http.Response response = await http.get(
+      "$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_apiadmin"
+      },
+    );
+    data = json.decode(response.body);
+    setState(() {
+      suspended = data["attributes"]["suspended"];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,50 +299,24 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
-                          color: Colors.amber,
+                          color: "$suspended" == false ? Colors.amber : Colors.green,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.report,
+                            child: Icon("$suspended" == false ? Icons.report : Icons.report_off,
                                 color: Colors.white, size: 30.0),
                           )),
                       Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(
-                          DemoLocalizations.of(context)
-                              .trans('admin_actionserver_suspend_server'),
+                      Text("$suspended" == false ? DemoLocalizations.of(context)
+                              .trans('admin_actionserver_suspend_server') : DemoLocalizations.of(context)
+                              .trans('admin_actionserver_unsuspend_server'),
+                          
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 18.0)),
                     ]),
               ),
               onTap: () {
-                _suspend();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.green,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.report_off,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(
-                          DemoLocalizations.of(context)
-                              .trans('admin_actionserver_unsuspend_server'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 17.0)),
-                    ]),
-              ),
-              onTap: () {
-                _unsuspend();
+                "$suspended" == false ? _suspend() : _unsuspend();
               },
             ),
             _buildTile(
@@ -441,7 +442,6 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),
             StaggeredTile.extent(1, 170.0),

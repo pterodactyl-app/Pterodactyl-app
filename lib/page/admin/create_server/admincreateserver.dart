@@ -54,7 +54,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userID = data["data"]["attributes"]["id"].toString() as int;
+      userID = data["data"]["attributes"]["id"];
     });
   }
 
@@ -125,6 +125,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
+                    getData();
                     var route = new MaterialPageRoute(
                         builder: (BuildContext context) =>
                             new AdminCreateServerNestPage(
@@ -132,7 +133,6 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                                     userid: "$userID",
                                     servername: _servernameController.text)));
                     Navigator.of(context).push(route);
-                    //getData();
                     print(userID);
                   },
                 ),
