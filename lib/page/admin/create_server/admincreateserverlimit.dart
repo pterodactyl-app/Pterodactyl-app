@@ -74,7 +74,7 @@ class _AdminCreateServerLimitPageState
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('add server limits 4/8',
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_4_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -89,7 +89,7 @@ class _AdminCreateServerLimitPageState
               child: TextField(
                 controller: _memoryController,
                 decoration: InputDecoration(
-                  labelText: "memory limit",
+                  labelText: DemoLocalizations.of(context).trans('memory_limit'),
                 ),
               ),
             ),
@@ -99,7 +99,7 @@ class _AdminCreateServerLimitPageState
               child: TextField(
                 controller: _swapController,
                 decoration: InputDecoration(
-                  labelText: "swap",
+                  labelText: DemoLocalizations.of(context).trans('swap_limit'),
                 ),
               ),
             ),
@@ -109,7 +109,7 @@ class _AdminCreateServerLimitPageState
               child: TextField(
                 controller: _diskController,
                 decoration: InputDecoration(
-                  labelText: "disk limit",
+                  labelText: DemoLocalizations.of(context).trans('disk_limit'),
                 ),
               ),
             ),
@@ -119,7 +119,7 @@ class _AdminCreateServerLimitPageState
               child: TextField(
                 controller: _ioController,
                 decoration: InputDecoration(
-                  labelText: "io",
+                  labelText: DemoLocalizations.of(context).trans('io_limit'),
                 ),
               ),
             ),
@@ -129,7 +129,7 @@ class _AdminCreateServerLimitPageState
               child: TextField(
                 controller: _cpuController,
                 decoration: InputDecoration(
-                  labelText: "cpu limit",
+                  labelText: DemoLocalizations.of(context).trans('cpu_limit'),
                 ),
               ),
             ),
@@ -149,7 +149,7 @@ class _AdminCreateServerLimitPageState
                   },
                 ),
                 RaisedButton(
-                  child: Text('Next'),
+                  child: Text(DemoLocalizations.of(context).trans('next')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

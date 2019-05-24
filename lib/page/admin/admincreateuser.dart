@@ -104,7 +104,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
               child: TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  labelText: ('username'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_user_username'),
                 ),
               ),
             ),
@@ -114,7 +114,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: ('email'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_user_email'),
                 ),
               ),
             ),
@@ -124,7 +124,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
               child: TextField(
                 controller: _firstnameController,
                 decoration: InputDecoration(
-                  labelText: ('first name'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_user_first_name'),
                 ),
               ),
             ),
@@ -134,7 +134,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
               child: TextField(
                 controller: _lastnameController,
                 decoration: InputDecoration(
-                  labelText: ('last name'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_user_last_name'),
                 ),
               ),
             ),
@@ -144,7 +144,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  labelText: ('password'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_user_last_password'),
                 ),
               ),
             ),

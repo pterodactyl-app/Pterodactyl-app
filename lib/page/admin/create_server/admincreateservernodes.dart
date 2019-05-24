@@ -103,7 +103,7 @@ class _AdminCreateServerNodesPageState
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('select node 6/8',
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_6_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

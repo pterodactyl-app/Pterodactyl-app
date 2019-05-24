@@ -107,7 +107,7 @@ class _AdminCreateServerAllocationsPageState
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("Select an allocation 7/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_7_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

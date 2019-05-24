@@ -64,6 +64,13 @@ class SponsorList {
       link: "",
     ),
     SponsorList(
+      avatarUrl: "",
+      name: "FalixNodes (ItzAwesome)",
+      donation: "£ 3.00 GBP",
+      message: "Monthly Supporter <3",
+      link: "https://falixnodes.host/",
+    ),
+    SponsorList(
       avatarUrl:
           "https://pbs.twimg.com/profile_images/1104864471581949952/q4wO6V9c_400x400.jpg",
       name: "Skoali",

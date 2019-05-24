@@ -85,7 +85,8 @@ class DemoLocalizationsDelegate
         'se',
         'zh',
         'si',
-        'es'
+        'es',
+        'id'
       ].contains(locale.languageCode);
 
   @override
@@ -144,6 +145,7 @@ class MyApp extends StatelessWidget {
                   countryCode: 'TW'), // 'zh_Hant_TW'
               const Locale('si', 'SI'),
               const Locale('es', 'ES'),
+              const Locale('id', 'ID'),
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),

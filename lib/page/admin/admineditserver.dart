@@ -175,7 +175,7 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Edit Server'),
+                  child: Text(DemoLocalizations.of(context).trans('admin_edit_user')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

@@ -101,7 +101,7 @@ class _AdminCreateServerLocationsPageState
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("select location 5/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_5_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

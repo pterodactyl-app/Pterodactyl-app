@@ -77,7 +77,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('Create server 1/8',
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_1_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -92,7 +92,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
               child: TextField(
                 controller: _servernameController,
                 decoration: InputDecoration(
-                  labelText: ('Server name'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_server_name'),
                 ),
               ),
             ),
@@ -102,14 +102,14 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: ('email of the user'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_email'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -119,7 +119,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Next'),
+                  child: Text(DemoLocalizations.of(context).trans('next')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

@@ -83,7 +83,7 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("select an egg 3/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_3_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

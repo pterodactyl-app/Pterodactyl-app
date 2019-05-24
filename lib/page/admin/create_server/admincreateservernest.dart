@@ -77,7 +77,7 @@ class _AdminCreateServerNestPageState extends State<AdminCreateServerNestPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("select a nest 2/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_2_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),

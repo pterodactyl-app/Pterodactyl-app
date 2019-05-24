@@ -96,7 +96,7 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("Create server 8/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_8_8'),
             style: TextStyle(
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -111,14 +111,14 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
               child: TextField(
                 controller: _databasesController,
                 decoration: InputDecoration(
-                  labelText: ('databases limit'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_database_limit'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -127,7 +127,7 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Create server'),
+                  child: Text(DemoLocalizations.of(context).trans('admin_create_server')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

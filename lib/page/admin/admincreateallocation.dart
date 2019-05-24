@@ -123,7 +123,7 @@ class _AdminCreateAllocationPageState extends State<AdminCreateAllocationPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Submit'),
+                  child: Text(DemoLocalizations.of(context).trans('submit')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

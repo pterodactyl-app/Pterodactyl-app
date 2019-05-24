@@ -231,7 +231,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             barrierDismissible: false,
             child: new CupertinoAlertDialog(
               content: new Text(
-                "400 Bad Request -- Your request is invalid.",
+                DemoLocalizations.of(context).trans('login_error_400'),
                 style: new TextStyle(fontSize: 16.0),
               ),
               actions: <Widget>[
@@ -252,7 +252,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             barrierDismissible: false,
             child: new CupertinoAlertDialog(
               content: new Text(
-                "401 Unauthorized -- You didn't pass an auth header or it was missing the bearer.",
+                DemoLocalizations.of(context).trans('login_error_401'),
                 style: new TextStyle(fontSize: 16.0),
               ),
               actions: <Widget>[
@@ -273,7 +273,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             barrierDismissible: false,
             child: new CupertinoAlertDialog(
               content: new Text(
-                "403 Forbidden -- Your key is invalid or it doesn't have access to said endpoint.",
+                DemoLocalizations.of(context).trans('login_error_403'),
                 style: new TextStyle(fontSize: 16.0),
               ),
               actions: <Widget>[
@@ -294,7 +294,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             barrierDismissible: false,
             child: new CupertinoAlertDialog(
               content: new Text(
-                "404 Not Found -- The specified kitten could not be found.",
+                DemoLocalizations.of(context).trans('login_error_404'),
                 style: new TextStyle(fontSize: 16.0),
               ),
               actions: <Widget>[
@@ -318,7 +318,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             barrierDismissible: false,
             child: new CupertinoAlertDialog(
               content: new Text(
-                "Please ask for support there is something wrong",
+                DemoLocalizations.of(context).trans('login_error_support'),
                 style: new TextStyle(fontSize: 16.0),
               ),
               actions: <Widget>[

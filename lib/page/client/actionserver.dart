@@ -331,7 +331,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text((DemoLocalizations.of(context).trans('console')),
+                          Text(DemoLocalizations.of(context).trans('console'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -390,7 +390,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
         barrierDismissible: false,
         child: new CupertinoAlertDialog(
           content: new Text(
-            "this will be soon added",
+            DemoLocalizations.of(context).trans('added_soon'),
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
