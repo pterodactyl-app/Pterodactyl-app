@@ -146,6 +146,7 @@ class MyApp extends StatelessWidget {
               const Locale('si', 'SI'),
               const Locale('es', 'ES'),
               const Locale('id', 'ID'),
+              const Locale('he', 'IL'),
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
