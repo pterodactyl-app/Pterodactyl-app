@@ -101,7 +101,7 @@
     "rootadmin": "Superuser:",
     "2fa": "2FA",
     "created_at": "Gemaakt op:",
-    "updated_at": "Geupdate op:",
+    "updated_at": "Geüpdate op:",
     "admin_actionserver_view_server_info": "View Server info",
     "admin_actionserver_edit_server_info": "Edit Server info",
     "utilization_stats_offline": "Offline",
