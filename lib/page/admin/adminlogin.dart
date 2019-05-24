@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,8 +99,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value,
-                          style: TextStyle(fontSize: 18.0)),
+                        child: Text(value, style: TextStyle(fontSize: 18.0)),
                       );
                     }).toList(),
                   ),
@@ -206,11 +207,132 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     });
   }
 
-  _navigator() {
+  Future<bool> _navigator() async {
     if (_apiadminController.text.length != 0 ||
         _urladminController.text.length != 0) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          '/adminhome', (Route<dynamic> route) => false);
+      if (_urladminController.text.isEmpty) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/adminlogin', (Route<dynamic> route) => false);
+        return false;
+      }
+
+      http.Response response = await http.get(
+        "$dropdownValue${_urladminController.text}/api/application/servers",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer ${_apiadminController.text}"
+        },
+      );
+      print(response.statusCode);
+
+      if (response.statusCode == 400) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: new CupertinoAlertDialog(
+              content: new Text(
+                "400 Bad Request -- Your request is invalid.",
+                style: new TextStyle(fontSize: 16.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text(
+                      DemoLocalizations.of(context).trans('login_error_ok'),
+                      style: TextStyle(color: Colors.black)),
+                )
+              ],
+            ));
+      }
+      if (response.statusCode == 401) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: new CupertinoAlertDialog(
+              content: new Text(
+                "401 Unauthorized -- You didn't pass an auth header or it was missing the bearer.",
+                style: new TextStyle(fontSize: 16.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text(
+                      DemoLocalizations.of(context).trans('login_error_ok'),
+                      style: TextStyle(color: Colors.black)),
+                )
+              ],
+            ));
+      }
+      if (response.statusCode == 403) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: new CupertinoAlertDialog(
+              content: new Text(
+                "403 Forbidden -- Your key is invalid or it doesn't have access to said endpoint.",
+                style: new TextStyle(fontSize: 16.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text(
+                      DemoLocalizations.of(context).trans('login_error_ok'),
+                      style: TextStyle(color: Colors.black)),
+                )
+              ],
+            ));
+      }
+      if (response.statusCode == 404) {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: new CupertinoAlertDialog(
+              content: new Text(
+                "404 Not Found -- The specified kitten could not be found.",
+                style: new TextStyle(fontSize: 16.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text(
+                      DemoLocalizations.of(context).trans('login_error_ok'),
+                      style: TextStyle(color: Colors.black)),
+                )
+              ],
+            ));
+      }
+      if (response.statusCode == 200) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/adminhome', (Route<dynamic> route) => false);
+      } else {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            child: new CupertinoAlertDialog(
+              content: new Text(
+                "Please ask for support there is something wrong",
+                style: new TextStyle(fontSize: 16.0),
+              ),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text(
+                      DemoLocalizations.of(context).trans('login_error_ok'),
+                      style: TextStyle(color: Colors.black)),
+                )
+              ],
+            ));
+      }
     } else {
       showDialog(
           context: context,

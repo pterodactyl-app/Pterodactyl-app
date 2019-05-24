@@ -56,16 +56,19 @@ class SettingsListPageState extends State<SettingsList> {
     });
   }
 
-  void handelTheme(bool value) {
+  void handelTheme(bool value) async {
+// save new value
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('Value', value);
     setState(() {
-      globals.isDarkTheme = value;
-      globals.isDarkTheme = globals.isDarkTheme;
-      if (globals.isDarkTheme) {
-        DynamicTheme.of(context).setBrightness(Brightness.dark);
-      } else {
-        DynamicTheme.of(context).setBrightness(Brightness.light);
-      }
+      globals.useDarkTheme = value;
+      print(globals.useDarkTheme);
     });
+    if (value == true) {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    } else {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
+    }
   }
 
   @override
@@ -73,16 +76,16 @@ class SettingsListPageState extends State<SettingsList> {
     return new Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('settings'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SingleChildScrollView(
@@ -104,7 +107,7 @@ class SettingsListPageState extends State<SettingsList> {
               ),
               //trailing: Switch(
               //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
+              //value: globals.useDarkTheme,
               //),
             ),
             Divider(
@@ -121,9 +124,10 @@ class SettingsListPageState extends State<SettingsList> {
                 DemoLocalizations.of(context).trans('dark_mode_sub'),
               ),
               trailing: Switch(
-                onChanged: handelTheme,
-                value: globals.isDarkTheme,
-              ),
+                  value: globals.useDarkTheme,
+                  onChanged: (bool switchValue) {
+                    handelTheme(switchValue);
+                  }),
             ),
             Divider(
               height: 20.0,
@@ -173,6 +177,7 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
+                prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               },
@@ -188,7 +193,7 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
-                SharedPreferencesHelper.remove("https");
+                SharedPreferencesHelper.remove("https");               
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(

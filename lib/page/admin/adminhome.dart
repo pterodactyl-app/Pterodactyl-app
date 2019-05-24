@@ -24,7 +24,7 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'adminservers.dart';
-import '../../settings.dart';
+import 'adminsettings.dart';
 import 'adminnodes.dart';
 import 'adminusers.dart';
 import '../../main.dart';
@@ -164,27 +164,25 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         color: globals.useDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
                         fontSize: 30.0)),
-                //actions: <Widget>[
-                //Container(
-                //margin: EdgeInsets.only(right: 8.0),
-                //child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                //children: <Widget>[
-                //Text(DemoLocalizations.of(context).trans('logout'),
-                //style: TextStyle(
-                //color:
-                //globals.useDarkTheme ? Colors.white : Colors.blue,
-                //fontWeight: FontWeight.w700,
-                //fontSize: 14.0)),
-                //Icon(
-                //Icons.subdirectory_arrow_left,
-                //color: globals.useDarkTheme ? Colors.white : Colors.black,
-                //)
-                //],
-                //),
-                //)
-                //],
+                actions: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.person),
+                          tooltip: 'Client Panel',
+                          onPressed: () {
+                            // Implement navigation to shopping cart page here...
+                            print('Shopping cart opened.');
+                          },
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
               body: StaggeredGridView.count(
                 crossAxisCount: 2,
@@ -329,7 +327,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           ]),
                     ),
                     onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => SettingsList())),
+                        MaterialPageRoute(builder: (_) => AdminSettingsList())),
                   ),
                   _buildTile(
                     Padding(

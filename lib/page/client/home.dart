@@ -22,7 +22,7 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
-import '../../settings.dart';
+import 'settings.dart';
 import '../../main.dart';
 
 class MyHomePage extends StatefulWidget {

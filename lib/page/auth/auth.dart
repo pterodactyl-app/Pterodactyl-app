@@ -96,10 +96,10 @@ class SplashState extends State<Splash> {
       }
     } else {
       String _apikey = await SharedPreferencesHelper.getString("apiKey");
-      String _adminhttps = await SharedPreferencesHelper.getString("https");
-      String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
+      String _https = await SharedPreferencesHelper.getString("https");
+      String _url = await SharedPreferencesHelper.getString("panelUrl");
 
-      if(_urladmin.isEmpty) {
+      if(_url.isEmpty) {
         SharedPreferencesHelper.remove('apiKey');
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/login', (Route<dynamic> route) => false);
@@ -107,7 +107,7 @@ class SplashState extends State<Splash> {
       }
 
       http.Response response = await http.get(
-        "$_adminhttps$_urladmin/api/client",
+        "$_https$_url/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_apikey"

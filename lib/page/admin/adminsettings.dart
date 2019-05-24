@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-/*
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,16 +58,19 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
     });
   }
 
-  void handelTheme(bool value) {
+ void handelTheme(bool value) async {
+// save new value
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('Value', value);
     setState(() {
       globals.useDarkTheme = value;
-      globals.useDarkTheme = globals.useDarkTheme;
-      if (globals.useDarkTheme) {
-        DynamicTheme.of(context).setBrightness(Brightness.dark);
-      } else {
-        DynamicTheme.of(context).setBrightness(Brightness.light);
-      }
+      print(globals.useDarkTheme);
     });
+    if (value == true) {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    } else {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
+    }
   }
 
   @override
@@ -123,9 +126,10 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
                 DemoLocalizations.of(context).trans('dark_mode_sub'),
               ),
               trailing: Switch(
-                onChanged: handelTheme,
-                value: globals.useDarkTheme,
-              ),
+                  value: globals.useDarkTheme,
+                  onChanged: (bool switchValue) {
+                    handelTheme(switchValue);
+                  }),
             ),
             Divider(
               height: 20.0,
@@ -187,8 +191,8 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("panelUrl");
-                SharedPreferencesHelper.remove("apiKey");
+                SharedPreferencesHelper.remove("panelAdminUrl");
+                SharedPreferencesHelper.remove("apiAdminKey");
                 SharedPreferencesHelper.remove("adminhttps");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seenadmin');
@@ -202,4 +206,4 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
     );
   }
 }
-*/
+

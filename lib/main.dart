@@ -29,7 +29,7 @@ import 'page/client/home.dart';
 import 'page/client/servers.dart';
 
 
-import 'settings.dart';
+import 'page/client/settings.dart';
 import 'about.dart';
 
 import 'page/admin/adminlogin.dart';
