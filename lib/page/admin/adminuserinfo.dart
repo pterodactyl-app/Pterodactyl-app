@@ -247,7 +247,10 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         children: <Widget>[
                           Text(DemoLocalizations.of(context).trans('rootadmin'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$rootadmin" == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                          Text(
+                              "$rootadmin" == "true"
+                                  ? DemoLocalizations.of(context).trans('yes')
+                                  : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -269,7 +272,10 @@ class _AdminUserInfoPageState extends State<AdminUserInfoPage> {
                         children: <Widget>[
                           Text(DemoLocalizations.of(context).trans('2fa'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$fa" == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                          Text(
+                              "$fa" == "true"
+                                  ? DemoLocalizations.of(context).trans('yes')
+                                  : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],

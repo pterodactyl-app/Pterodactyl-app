@@ -29,7 +29,6 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
-
   BuildContext context;
 
   Future checkFirstSeen() async {
@@ -70,7 +69,7 @@ class SplashState extends State<Splash> {
       String _urladmin =
           await SharedPreferencesHelper.getString("panelAdminUrl");
 
-      if(_urladmin.isEmpty) {
+      if (_urladmin.isEmpty) {
         SharedPreferencesHelper.remove('apiAdminKey');
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/adminlogin', (Route<dynamic> route) => false);
@@ -99,10 +98,10 @@ class SplashState extends State<Splash> {
       String _https = await SharedPreferencesHelper.getString("https");
       String _url = await SharedPreferencesHelper.getString("panelUrl");
 
-      if(_url.isEmpty) {
+      if (_url.isEmpty) {
         SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/login', (Route<dynamic> route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
         return false;
       }
 

@@ -60,7 +60,7 @@ class _ConsoleLogsState extends State<ConsoleLogs> {
     );
   }
 
-    Widget _buildListRow() {
+  Widget _buildListRow() {
     return Column(
       children: <Widget>[
         ListView.builder(

@@ -130,7 +130,9 @@ class _AdminServerListPageState extends State<AdminServerListPage> {
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
+                                  : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
                                   var route = new MaterialPageRoute(

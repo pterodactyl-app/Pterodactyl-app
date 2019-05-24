@@ -130,16 +130,22 @@ class _AdminCreateServerNodesPageState
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
+                                  : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
                                   var route = new MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         new AdminCreateServerAllocationsPage(
                                             server: Nodes(
-                                          nodeid: userData[index]["attributes"]["id"].toString(),
-                                          locationsid: widget.server.locationsid,
-                                          limitmemory: widget.server.limitmemory,
+                                          nodeid: userData[index]["attributes"]
+                                                  ["id"]
+                                              .toString(),
+                                          locationsid:
+                                              widget.server.locationsid,
+                                          limitmemory:
+                                              widget.server.limitmemory,
                                           limitswap: widget.server.limitswap,
                                           disklimit: widget.server.disklimit,
                                           iolimit: widget.server.iolimit,
@@ -147,7 +153,8 @@ class _AdminCreateServerNodesPageState
                                           userid: widget.server.userid,
                                           nestid: widget.server.nestid,
                                           eggid: widget.server.eggid,
-                                          dockerimage: widget.server.dockerimage,
+                                          dockerimage:
+                                              widget.server.dockerimage,
                                           startup: widget.server.startup,
                                           servername: widget.server.servername,
                                         )),

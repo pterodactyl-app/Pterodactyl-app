@@ -14,7 +14,6 @@
 * limitations under the License.
 */
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,7 +57,7 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
     });
   }
 
- void handelTheme(bool value) async {
+  void handelTheme(bool value) async {
 // save new value
     final sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool('Value', value);
@@ -140,7 +139,8 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
               subtitle:
                   new Text(DemoLocalizations.of(context).trans('license_sub')),
               onTap: () {
-                launch('https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE');
+                launch(
+                    'https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE');
               },
             ),
             Divider(
@@ -206,4 +206,3 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
     );
   }
 }
-

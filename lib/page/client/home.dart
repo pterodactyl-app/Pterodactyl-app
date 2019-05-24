@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers = 0;
-  
+
   Future getDataHome() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
@@ -54,8 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         userTotalServers = data["meta"]["pagination"]["total"];
       });
-
-    } on SocketException catch(e) {
+    } on SocketException catch (e) {
       print('Error occured: ' + e.message);
       print(_url);
       print(_https);
@@ -72,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -84,25 +82,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
           //actions: <Widget>[
-            //Container(
-              //margin: EdgeInsets.only(right: 8.0),
-              //child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                //children: <Widget>[
-                  //Text(DemoLocalizations.of(context).trans('logout'),
-                      //style: TextStyle(
-                          //color:
-                              //globals.isDarkTheme ? Colors.white : Colors.blue,
-                          //fontWeight: FontWeight.w700,
-                          //fontSize: 14.0)),
-                  //Icon(
-                    //Icons.subdirectory_arrow_left,
-                    //color: globals.isDarkTheme ? Colors.white : Colors.black,
-                  //)
-                //],
-              //),
-            //)
+          //Container(
+          //margin: EdgeInsets.only(right: 8.0),
+          //child: Row(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          //children: <Widget>[
+          //Text(DemoLocalizations.of(context).trans('logout'),
+          //style: TextStyle(
+          //color:
+          //globals.isDarkTheme ? Colors.white : Colors.blue,
+          //fontWeight: FontWeight.w700,
+          //fontSize: 14.0)),
+          //Icon(
+          //Icons.subdirectory_arrow_left,
+          //color: globals.isDarkTheme ? Colors.white : Colors.black,
+          //)
+          //],
+          //),
+          //)
           //],
         ),
         body: StaggeredGridView.count(
@@ -128,8 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$userTotalServers',
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 34.0))
+                                  fontWeight: FontWeight.w700, fontSize: 34.0))
                         ],
                       ),
                       Material(
@@ -164,8 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 12.0)),
                       Text(DemoLocalizations.of(context).trans('settings'),
                           style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.0)),
+                              fontWeight: FontWeight.w700, fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('settings_sub'),
                           style: TextStyle(
                             color: globals.useDarkTheme
@@ -195,8 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(padding: EdgeInsets.only(bottom: 12.0)),
                       Text(DemoLocalizations.of(context).trans('alerts'),
                           style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.0)),
+                              fontWeight: FontWeight.w700, fontSize: 24.0)),
                       Text(DemoLocalizations.of(context).trans('alerts_sub'),
                           style: TextStyle(
                             color: globals.useDarkTheme
@@ -229,8 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               DemoLocalizations.of(context)
                                   .trans('coming_soon_sub'),
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 34.0))
+                                  fontWeight: FontWeight.w700, fontSize: 34.0))
                         ],
                       ),
                       Material(

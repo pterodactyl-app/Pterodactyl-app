@@ -193,7 +193,7 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
-                SharedPreferencesHelper.remove("https");               
+                SharedPreferencesHelper.remove("https");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(

@@ -26,7 +26,14 @@ import 'admineditserver.dart';
 import 'adminserverinfo.dart';
 
 class EditServer {
-  final String adminid, adminuser, adminname, admindescription, adminmemory, admindisk, admincpu, adminstartupcommand;
+  final String adminid,
+      adminuser,
+      adminname,
+      admindescription,
+      adminmemory,
+      admindisk,
+      admincpu,
+      adminstartupcommand;
   const EditServer({
     this.adminid,
     this.adminuser,
@@ -38,6 +45,7 @@ class EditServer {
     this.adminstartupcommand,
   });
 }
+
 class ViewServer {
   final String adminid;
   const ViewServer({this.adminid});
@@ -368,20 +376,19 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) => new AdminEditServerPage(
                       server: EditServer(
-                      adminid: widget.server.adminid,
-                      adminuser: widget.server.adminuser,
-                      adminname: widget.server.adminname,
-                      admindescription: widget.server.admindescription,
-                      admincpu: widget.server.admincpu,
-                      admindisk: widget.server.admindisk,
-                      adminmemory: widget.server.adminmemory,
-                      adminstartupcommand: widget.server.adminstartupcommand
-                      )),
+                          adminid: widget.server.adminid,
+                          adminuser: widget.server.adminuser,
+                          adminname: widget.server.adminname,
+                          admindescription: widget.server.admindescription,
+                          admincpu: widget.server.admincpu,
+                          admindisk: widget.server.admindisk,
+                          adminmemory: widget.server.adminmemory,
+                          adminstartupcommand:
+                              widget.server.adminstartupcommand)),
                 );
                 Navigator.of(context).push(route);
               },
             ),
-
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -407,7 +414,6 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                 _delete();
               },
             ),
-
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -587,7 +593,8 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         context: context,
         barrierDismissible: false,
         child: new CupertinoAlertDialog(
-          content: new Text("This action will attempt to delete the server from both the panel and daemon. If either one reports an error the action will be cancelled.",
+          content: new Text(
+            "This action will attempt to delete the server from both the panel and daemon. If either one reports an error the action will be cancelled.",
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -615,7 +622,8 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
         context: context,
         barrierDismissible: false,
         child: new CupertinoAlertDialog(
-          content: new Text("This action will attempt to delete the server from both the panel and daemon. If the daemon does not respond, or reports an error the deletion will continue.",
+          content: new Text(
+            "This action will attempt to delete the server from both the panel and daemon. If the daemon does not respond, or reports an error the deletion will continue.",
             style: new TextStyle(fontSize: 16.0),
           ),
           actions: <Widget>[
@@ -637,5 +645,4 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
           ],
         ));
   }
-
 }

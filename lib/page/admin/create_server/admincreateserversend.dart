@@ -123,7 +123,8 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _databasesController.clear();                  },
+                    _databasesController.clear();
+                  },
                 ),
                 RaisedButton(
                   child: Text('Create server'),

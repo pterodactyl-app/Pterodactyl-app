@@ -28,7 +28,6 @@ import 'page/client/login.dart';
 import 'page/client/home.dart';
 import 'page/client/servers.dart';
 
-
 import 'page/client/settings.dart';
 import 'about.dart';
 
@@ -39,7 +38,6 @@ import 'page/admin/adminhome.dart';
 //import 'page/admin/adminallocations.dart';
 //import 'page/admin/adminactionserver.dart';
 //import 'page/admin/adminactionnodes.dart';
-
 
 class DemoLocalizations {
   DemoLocalizations(this.locale);
@@ -53,8 +51,8 @@ class DemoLocalizations {
   Map<String, String> _sentences;
 
   Future<bool> load() async {
-    String data = await rootBundle
-        .loadString('assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
+    String data = await rootBundle.loadString(
+        'assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
     Map<String, dynamic> _result = json.decode(data);
 
     this._sentences = new Map();
@@ -109,9 +107,6 @@ class DemoLocalizationsDelegate
 
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
-
-
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -139,8 +134,14 @@ class MyApp extends StatelessWidget {
               const Locale('se', 'SE'),
               const Locale('it', 'IT'),
               const Locale('pl', 'PL'),
-              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'), // 'zh_Hans_CN'
-              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'), // 'zh_Hant_TW'
+              const Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hans',
+                  countryCode: 'CN'), // 'zh_Hans_CN'
+              const Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hant',
+                  countryCode: 'TW'), // 'zh_Hant_TW'
               const Locale('si', 'SI'),
               const Locale('es', 'ES'),
             ],
@@ -152,7 +153,7 @@ class MyApp extends StatelessWidget {
             localeResolutionCallback:
                 (Locale locale, Iterable<Locale> supportedLocales) {
               for (Locale supportedLocale in supportedLocales) {
-                if(!Platform.isIOS) {
+                if (!Platform.isIOS) {
                   if (supportedLocale.languageCode == locale.languageCode ||
                       supportedLocale.countryCode == locale.countryCode) {
                     return supportedLocale;
@@ -172,9 +173,8 @@ class MyApp extends StatelessWidget {
               '/servers': (BuildContext context) => new ServerListPage(),
               '/about': (BuildContext context) => new AboutPage(),
               '/settings': (BuildContext context) => new SettingsList(),
-
               '/adminhome': (BuildContext context) => new AdminHomePage(),
-              '/adminlogin': (BuildContext context) => new AdminLoginPage(),              
+              '/adminlogin': (BuildContext context) => new AdminLoginPage(),
             },
           );
         });

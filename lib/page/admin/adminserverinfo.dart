@@ -111,7 +111,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_identifier'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_identifier'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$identifier',
                               style: TextStyle(
@@ -133,9 +135,14 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_installed'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_installed'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text(installed != "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                          Text(
+                              installed != "true"
+                                  ? DemoLocalizations.of(context).trans('yes')
+                                  : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -155,7 +162,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_name'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_name'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$name',
                               style: TextStyle(
@@ -177,7 +186,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_description'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_description'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('$description',
                               style: TextStyle(
@@ -199,9 +210,14 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_suspended'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_suspended'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text("$suspended" == "true" ? DemoLocalizations.of(context).trans('yes') : DemoLocalizations.of(context).trans('no'),
+                          Text(
+                              "$suspended" == "true"
+                                  ? DemoLocalizations.of(context).trans('yes')
+                                  : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
@@ -221,7 +237,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_memory'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_memory'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('${memory.toString()} MB',
                               style: TextStyle(
@@ -243,7 +261,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_disk'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_disk'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text('${disk.toString()} MB',
                               style: TextStyle(
@@ -265,7 +285,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('utilization_cpu'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_cpu'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text(cpu.toString() != 0 ? "∞" : "${cpu.toString()}%",
                               style: TextStyle(
@@ -287,7 +309,9 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('admin_view_server_startup_command'),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('admin_view_server_startup_command'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text("$startupCommand",
                               style: TextStyle(
