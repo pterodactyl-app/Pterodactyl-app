@@ -358,12 +358,12 @@ class _ActionServerPageState extends State<ActionServerPage> {
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(1, 150.0),
-            StaggeredTile.extent(1, 150.0),
-            StaggeredTile.extent(1, 150.0),
-            StaggeredTile.extent(1, 150.0),
-            StaggeredTile.extent(1, 150.0),
-            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ));

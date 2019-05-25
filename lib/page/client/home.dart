@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Icon(Icons.settings_applications,
                                 color: Colors.white, size: 30.0),
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       Text(DemoLocalizations.of(context).trans('settings'),
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 24.0)),
@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Icon(Icons.notifications,
                                 color: Colors.white, size: 30.0),
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Padding(padding: EdgeInsets.only(bottom: 10.0)),
                       Text(DemoLocalizations.of(context).trans('alerts'),
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 24.0)),
@@ -205,47 +205,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('Not set yet');
               },
             ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('coming_soon'),
-                              style: TextStyle(color: Colors.redAccent)),
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('coming_soon_sub'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 34.0))
-                        ],
-                      ),
-                      Material(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.build,
-                                color: Colors.white, size: 30.0),
-                          )))
-                    ]),
-              ),
-              //onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => ShopItemsPage())),
-            ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(1, 180.0),
-            StaggeredTile.extent(1, 180.0),
-            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 114.0),
+            StaggeredTile.extent(1, 187.0),
+            StaggeredTile.extent(1, 187.0),
+            StaggeredTile.extent(2, 120.0),
           ],
         ));
   }

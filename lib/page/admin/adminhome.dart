@@ -310,7 +310,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.settings_applications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 10.0)),
                             Text(
                                 DemoLocalizations.of(context).trans('settings'),
                                 style: TextStyle(
@@ -344,7 +344,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.notifications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 10.0)),
                             Text(DemoLocalizations.of(context).trans('alerts'),
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -366,11 +366,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                 ],
                 staggeredTiles: [
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(1, 180.0),
-                  StaggeredTile.extent(1, 180.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(1, 187.0),
+                  StaggeredTile.extent(1, 187.0),
                 ],
               ));
         });

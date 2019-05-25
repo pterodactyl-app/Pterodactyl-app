@@ -86,7 +86,8 @@ class DemoLocalizationsDelegate
         'zh',
         'si',
         'es',
-        'id'
+        'id',
+        'ar'
       ].contains(locale.languageCode);
 
   @override
@@ -106,19 +107,14 @@ class DemoLocalizationsDelegate
     return localizations;
   }
 
-static const List<String> rtlLanguages = <String>[
-    'ar', // Arabic
-    'fa', // Farsi
-    'he', // Hebrew
-    'ps', // Pashto
-    'ur', // Urdu
-  ];
+
 
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return DynamicTheme(
@@ -155,6 +151,7 @@ class MyApp extends StatelessWidget {
               const Locale('es', 'ES'),
               const Locale('id', 'ID'),
               const Locale('he', 'IL'),
+              const Locale('ar', 'AE'),
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
@@ -186,21 +183,6 @@ class MyApp extends StatelessWidget {
               '/settings': (BuildContext context) => new SettingsList(),
               '/adminhome': (BuildContext context) => new AdminHomePage(),
               '/adminlogin': (BuildContext context) => new AdminLoginPage(),
-            },
-            builder: (BuildContext context, Widget child) {
-              return new Directionality(
-                textDirection: TextDirection.rtl,
-                child: new Builder(
-                  builder: (BuildContext context) {
-                    return new MediaQuery(
-                      data: MediaQuery.of(context).copyWith(
-                            textScaleFactor: 1.0,
-                          ),
-                      child: child,
-                    );
-                  },
-                ),
-              );
             },
           );
         });

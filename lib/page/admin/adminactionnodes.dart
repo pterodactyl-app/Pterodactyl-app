@@ -192,8 +192,8 @@ class _AdminActionNodesPageState extends State<AdminActionNodesPage> {
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 114.0),
+            StaggeredTile.extent(2, 114.0),
           ],
         ));
   }

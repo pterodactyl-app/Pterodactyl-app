@@ -104,7 +104,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: SizedBox.fromSize(
-                      size: Size.fromHeight(140.0),
+                      size: Size.fromHeight(150.0),
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[

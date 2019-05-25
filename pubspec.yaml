@@ -77,6 +77,8 @@ flutter:
    - assets/lang/zh_TW.json
    - assets/lang/si_SI.json
    - assets/lang/es_ES.json
+   - assets/lang/id_ID.json
+   - assets/lang/ar_AE.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
