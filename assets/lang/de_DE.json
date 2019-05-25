@@ -26,6 +26,8 @@
     "action_stop": "Stop",
     "action_restart": "Restart",
     "action_kill": "Kill",
+    "action_stats": "Stats",
+    "action_file": "File List",
     "dark_mode": "Nachtmodus",
     "dark_mode_sub": "Schwarz und Grau Theme",
     "cores": "Cores",
@@ -45,7 +47,6 @@
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "LEISTUNGSBERICHT",
     "utilization_disk": "Speicherplatz",
-
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Du hast keinen Admin Account? Klicke hier",
     "admin_homepanel": "Admin Panel",
