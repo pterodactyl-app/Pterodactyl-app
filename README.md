@@ -56,11 +56,9 @@ V1.0 may 6 '19 - Original Release
 ## Useful Links
 
 
-Twitter: 
+Twitter: [Pterodactyl app Twitter](https://twitter.com/AppPterodactyl)
 
-Facebook: 
-
-Instagram: 
+Instagram: [Pterodactyl app Instagram](https://www.instagram.com/pterodactyl_app/)
 
 Website: [Pterodactyl app website](https://pterodactyl-app.com/)
 
