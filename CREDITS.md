@@ -3,6 +3,17 @@
 
 For all the people who worked with me on this amazing project.
 
+###### PARTNERED HOST:
+
+> - [Deploys.io](https://deploys.io/)
+
+> - [CodersLight LLC](https://coderslight.com/)
+
+> - [MiniCenter](https://minicenter.net/)
+
+> - [PlanetNode](https://planetnode.net/)
+
+
 
 ###### Translators:
 
@@ -49,6 +60,12 @@ For all the people who worked with me on this amazing project.
 > - $21.53 CAD `@Nyx#8228` [MiniCenter](https://minicenter.net/)
 
 > - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
+
+> - $10.00 USD `@Gebrito#1699`
+
+> - €8,00 EURO `@kloncs#1337` [samjw.xyz](https://samjw.xyz/)
+
+> - £3.00 GBP `@ItzAwesome#0001` [FalixNodes](https://falixnodes.host/)
 
 > - €5,00 EURO `@Perhaps.#8928` [AccurateNode](https://accuratenode.com/)
 
