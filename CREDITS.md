@@ -3,7 +3,7 @@
 
 For all the people who worked with me on this amazing project.
 
-###### PARTNERED HOST:
+#### PARTNERED HOST:
 
 > - [Deploys.io](https://deploys.io/)
 
