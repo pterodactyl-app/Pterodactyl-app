@@ -3,6 +3,41 @@
 
 For all the people who worked with me on this amazing project.
 
+#### PARTNERED HOST:
+
+> - [Deploys.io](https://deploys.io/)
+
+> - [CodersLight LLC](https://coderslight.com/)
+
+> - [MiniCenter](https://minicenter.net/)
+
+> - [PlanetNode](https://planetnode.net/)
+
+
+###### Donators:
+
+> - Android play store console `@/var/www/Jordy ツ#0049`
+
+> - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001` [Thunderbolt hosting](https://thunderbolt-hosting.com/)
+
+> - $25.00 CAD `@ThatProgrammer#6001` [CodersLight LLC](https://coderslight.com/)
+
+> - $21.53 CAD `@Nyx#8228` [MiniCenter](https://minicenter.net/)
+
+> - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
+
+> - $10.00 USD `@Gebrito#1699`
+
+> - €8,00 EURO `@kloncs#1337` [samjw.xyz](https://samjw.xyz/)
+
+> - £3.00 GBP `@ItzAwesome#0001` [FalixNodes](https://falixnodes.host/)
+
+> - €5,00 EURO `@Perhaps.#8928` [AccurateNode](https://accuratenode.com/)
+
+> - €5,00 EURO `@Jules [skoali.fr]#6511` [Skoali](https://skoali.fr/)
+
+> - $0.50 CAD `@Kiffey14#2010`
+
 
 ###### Translators:
 
@@ -28,35 +63,9 @@ For all the people who worked with me on this amazing project.
 
 > - Slovenian language: `@Perhaps.#8928`
 
-> - Spanish language `????`
+> - Hebrew language: `@Drdy#4403`
 
-
-
-
-###### Flutter Coders:
-
-> - `@appomatrix#9639`
-> - `@Yvan#9877`
-
-
-
-###### Donators:
-
-> - Android play store console `@/var/www/Jordy ツ#0049`
-
-> - Apple developer license team `@Numaad M. | Thunderbolt.Host#0001` [Thunderbolt hosting](https://thunderbolt-hosting.com/)
-
-> - $25.00 CAD `@ThatProgrammer#6001` [CodersLight LLC](https://coderslight.com/)
-
-> - $21.53 CAD `@Nyx#8228` [MiniCenter](https://minicenter.net/)
-
-> - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
-
-> - €5,00 EURO `@Perhaps.#8928` [AccurateNode](https://accuratenode.com/)
-
-> - €5,00 EURO `@Jules [skoali.fr]#6511` [Skoali](https://skoali.fr/)
-
-> - $0.50 CAD `@Kiffey14#2010`
+> - Arabic language: `@♥7ɑωɑяı_Đε√♥#9447`
 
 
 
@@ -67,6 +76,13 @@ For all the people who worked with me on this amazing project.
 > - `@Griffindor#7378 `
 
 > - `⚡ ZeProf2Coding#4274`
+
+
+###### Flutter Coders:
+
+> - `@appomatrix#9639`
+> - `@Yvan#9877`
+
 
 ###### Contributors:
 
