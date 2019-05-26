@@ -13,25 +13,25 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../globals.dart' as globals;
+import '../../../../globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import '../auth/shared_preferences_helper.dart';
-import '../../main.dart';
-import '../../sponsor.dart';
+import '../../../auth/shared_preferences_helper.dart';
+import '../../../../main.dart';
+import '../../../../sponsor.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class AdminSettingsList extends StatefulWidget {
+
+class SettingsList extends StatefulWidget {
   @override
-  AdminSettingsListPageState createState() => new AdminSettingsListPageState();
+  SettingsListPageState createState() => new SettingsListPageState();
 }
 
-class AdminSettingsListPageState extends State<AdminSettingsList> {
+class SettingsListPageState extends State<SettingsList> {
   String _projectVersion = '';
 
   @override
@@ -177,7 +177,8 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
                   new Text(DemoLocalizations.of(context).trans('logout_sub')),
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seenadmin');
+                prefs.remove('deploys');
+                prefs.setBool('host', true);
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/selecthost', (Route<dynamic> route) => false);
               },
@@ -191,11 +192,10 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("panelAdminUrl");
-                SharedPreferencesHelper.remove("apiAdminKey");
-                SharedPreferencesHelper.remove("adminhttps");
+                SharedPreferencesHelper.remove("api_deploys_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seenadmin');
+                prefs.remove('deploys');
+                prefs.setBool('host', true);
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/selecthost', (Route<dynamic> route) => false);
               },

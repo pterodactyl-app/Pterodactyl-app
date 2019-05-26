@@ -20,6 +20,7 @@ import 'package:flutter/cupertino.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../main.dart';
+import '../../globals.dart' as globals;
 
 class User {
   final String api, url;
@@ -53,17 +54,29 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+        leading: IconButton(
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
+          onPressed: ()  {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/selecthost', (Route<dynamic> route) => false);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 40.0),
             Column(
               children: <Widget>[
                 Image.asset('assets/images/pterodactyl_icon.png', width: 100),
                 SizedBox(height: 8.0),
                 Text(
-                  'PTERODACTYL APP',
+                  'Client Login',
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
@@ -223,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
       );
       print(response.statusCode);
 
-            if (response.statusCode == 400) {
+      if (response.statusCode == 400) {
         showDialog(
             context: context,
             barrierDismissible: false,

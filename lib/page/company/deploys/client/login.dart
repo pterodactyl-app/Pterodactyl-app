@@ -16,31 +16,31 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import '../../../../globals.dart' as globals;
 import 'package:flutter/cupertino.dart';
-import '../auth/shared_preferences_helper.dart';
+import '../../../auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../main.dart';
+import '../../../../main.dart';
+import '../../../auth/selecthost.dart';
+import '../../../../globals.dart' as globals;
 
-class Admin {
-  final String adminapi, adminurl;
-  const Admin({
-    this.adminapi,
-    this.adminurl,
+class User {
+  final String api, url;
+  const User({
+    this.api,
+    this.url,
   });
 }
 
-class AdminLoginPage extends StatefulWidget {
+class LoginDeploysPage extends StatefulWidget {
   @override
-  _AdminLoginPageState createState() => new _AdminLoginPageState();
+  _LoginDeploysPageState createState() => new _LoginDeploysPageState();
 }
-
-String dropdownValue = 'https://';
 
 bool checkValue = false;
 
-class _AdminLoginPageState extends State<AdminLoginPage> {
-  final _apiadminController = TextEditingController();
-  final _urladminController = TextEditingController();
+class _LoginDeploysPageState extends State<LoginDeploysPage> {
+  final _apiController = TextEditingController();
 
   SharedPreferences sharedPreferences;
 
@@ -53,6 +53,22 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+        leading: IconButton(
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
+          onPressed: ()  {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/selecthost', (Route<dynamic> route) => false);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        title: Text('Client Login',
+            style: TextStyle(
+                color: globals.useDarkTheme ? null : Colors.black,
+                fontWeight: FontWeight.w700)),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -60,19 +76,19 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[
-                Image.asset('assets/images/pterodactyl_icon.png', width: 100),
+                Image.network(
+                    globals.useDarkTheme
+                        ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
+                        : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
+                    width: 100),
                 SizedBox(height: 8.0),
-                Text(
-                  DemoLocalizations.of(context).trans('admin_login'),
-                  style: Theme.of(context).textTheme.headline,
-                ),
               ],
             ),
             SizedBox(height: 50.0),
             AccentColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
-                controller: _apiadminController,
+                controller: _apiController,
                 decoration: InputDecoration(
                   labelText:
                       DemoLocalizations.of(context).trans('api_key_login'),
@@ -80,43 +96,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               ),
             ),
             SizedBox(height: 12.0),
-            SizedBox(
-              height: 60.0,
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  DropdownButton<String>(
-                    value: dropdownValue,
-                    isDense: true,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['https://', 'http://']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value, style: TextStyle(fontSize: 18.0)),
-                      );
-                    }).toList(),
-                  ),
-                  AccentColorOverride(
-                      color: Color(0xFFC5032B),
-                      child: new Flexible(
-                        child: TextField(
-                          controller: _urladminController,
-                          decoration: InputDecoration(
-                            labelText: DemoLocalizations.of(context)
-                                .trans('url_login'),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-            ),
             new CheckboxListTile(
               value: checkValue,
               onChanged: _onChanged,
@@ -134,8 +113,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _apiadminController.clear();
-                    _urladminController.clear();
+                    _apiController.clear();
                   },
                 ),
                 RaisedButton(
@@ -148,24 +126,11 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                   ),
                   onPressed: () async {
                     await SharedPreferencesHelper.setString(
-                        "apiAdminKey", _apiadminController.text);
-                    await SharedPreferencesHelper.setString(
-                        "panelAdminUrl", _urladminController.text);
-                    await SharedPreferencesHelper.setString(
-                        "adminhttps", dropdownValue);
+                        "api_deploys_Key", _apiController.text);
                     _navigator();
                   },
                 ),
               ],
-            ),
-            SizedBox(height: 50.0),
-            new FlatButton(
-              child: new Text(
-                  DemoLocalizations.of(context).trans('admin_noadminaccount')),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-              },
             ),
           ],
         ),
@@ -178,9 +143,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("adminhttps", dropdownValue);
-      sharedPreferences.setString("apiAdminKey", _apiadminController.text);
-      sharedPreferences.setString("panelAdminUrl", _urladminController.text);
+      sharedPreferences.setString("api_deploys_Key", _apiController.text);
       sharedPreferences.commit();
       getCredential();
     });
@@ -192,13 +155,9 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiadminController.text = sharedPreferences.getString("apiAdminKey");
-          _urladminController.text =
-              sharedPreferences.getString("panelAdminUrl");
-          dropdownValue = sharedPreferences.getString("adminhttps");
+          _apiController.text = sharedPreferences.getString("api_deploys_Key");
         } else {
-          _apiadminController.clear();
-          _urladminController.clear();
+          _apiController.clear();
           sharedPreferences.clear();
         }
       } else {
@@ -208,19 +167,18 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   }
 
   Future<bool> _navigator() async {
-    if (_apiadminController.text.length != 0 ||
-        _urladminController.text.length != 0) {
-      if (_urladminController.text.isEmpty) {
+    if (_apiController.text.length != 0) {
+      if (_apiController.text.isEmpty) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminlogin', (Route<dynamic> route) => false);
+            '/selecthost', (Route<dynamic> route) => false);
         return false;
       }
 
       http.Response response = await http.get(
-        "$dropdownValue${_urladminController.text}/api/application/servers",
+        "https://panel.deploys.io/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer ${_apiadminController.text}"
+          "Authorization": "Bearer ${_apiController.text}"
         },
       );
       print(response.statusCode);
@@ -311,7 +269,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminhome', (Route<dynamic> route) => false);
+            '/homedeploys', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,

@@ -15,13 +15,16 @@
 */
 import 'dart:async';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
+import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/page/admin/adminhome.dart';
 import 'package:pterodactyl_app/page/admin/adminlogin.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
+import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -30,6 +33,7 @@ class Splash extends StatefulWidget {
 
 class SplashState extends State<Splash> {
   BuildContext context;
+
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -61,8 +65,36 @@ class SplashState extends State<Splash> {
     }
   }
 
-  Future<bool> isAuthenticated({isAdmin = false}) async {
-    if (isAdmin) {
+
+  Future<bool> isAuthenticated({isAdmin = false, isDeploys = false}) async {
+    if (isDeploys) {
+      String _apideployskey = await SharedPreferencesHelper.getString("api_deploys_Key");
+
+      if (_apideployskey.isEmpty) {
+        SharedPreferencesHelper.remove('api_deploys_Key');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/deployslogin', (Route<dynamic> route) => false);
+        return false;
+      }
+
+      http.Response response = await http.get(
+        "https://panel.deploys.io/api/client",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer $_apideployskey"
+        },
+      );
+
+      if (response.statusCode == 401) {
+        // Todo fix Navigation context for logging out if key isn't available
+        SharedPreferencesHelper.remove('api_deploys_Key');
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/deployslogin', (Route<dynamic> route) => false);
+        return false;
+      } else {
+        return true;
+      }
+    } if (isAdmin) {
       String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
       String _adminhttps =
           await SharedPreferencesHelper.getString("adminhttps");

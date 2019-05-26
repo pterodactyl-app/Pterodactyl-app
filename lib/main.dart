@@ -23,6 +23,7 @@ import 'globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'page/auth/auth.dart';
+import 'page/auth/selecthost.dart';
 
 import 'page/client/login.dart';
 import 'page/client/home.dart';
@@ -38,6 +39,9 @@ import 'page/admin/adminhome.dart';
 //import 'page/admin/adminallocations.dart';
 //import 'page/admin/adminactionserver.dart';
 //import 'page/admin/adminactionnodes.dart';
+
+import 'page/company/deploys/client/home.dart';
+import 'page/company/deploys/client/login.dart';
 
 class DemoLocalizations {
   DemoLocalizations(this.locale);
@@ -185,6 +189,9 @@ class MyApp extends StatelessWidget {
               '/settings': (BuildContext context) => new SettingsList(),
               '/adminhome': (BuildContext context) => new AdminHomePage(),
               '/adminlogin': (BuildContext context) => new AdminLoginPage(),
+              '/selecthost': (BuildContext context) => new SelectHostPage(),
+              '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
+              '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
             },
           );
         });

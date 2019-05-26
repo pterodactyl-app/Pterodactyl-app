@@ -177,9 +177,8 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
-                prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                    '/selecthost', (Route<dynamic> route) => false);
               },
             ),
             Divider(
@@ -197,7 +196,7 @@ class SettingsListPageState extends State<SettingsList> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                    '/selecthost', (Route<dynamic> route) => false);
               },
             ),
           ],

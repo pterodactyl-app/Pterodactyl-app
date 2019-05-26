@@ -64,6 +64,21 @@ class SponsorList {
       link: "",
     ),
     SponsorList(
+      avatarUrl:
+          "",
+      name: "Gabriel",
+      donation: "\$ 10.00 USD",
+      message: "",
+      link: "",
+    ),    
+    SponsorList(
+      avatarUrl: "https://cdn.discordapp.com/attachments/581892189341089822/581897822589157377/SBL2kBlack_ThatDarkGreenShit-DarkBlue_grad.png",
+      name: "Sam Walsh",
+      donation: "€ 8,00 EURO",
+      message: "<3",
+      link: "https://samjw.xyz",
+    ),
+    SponsorList(
       avatarUrl: "",
       name: "FalixNodes (ItzAwesome)",
       donation: "£ 3.00 GBP",

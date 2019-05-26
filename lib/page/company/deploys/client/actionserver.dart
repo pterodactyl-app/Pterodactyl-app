@@ -17,11 +17,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart' as globals;
-import '../auth/shared_preferences_helper.dart';
+import '../../../../globals.dart' as globals;
+import '../../../auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
+import '../../../../main.dart';
 import 'console.dart';
 import 'servers.dart';
 import 'utilization.dart';
@@ -53,10 +53,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -75,10 +73,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -97,10 +93,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -119,10 +113,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON
@@ -212,7 +204,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _stop();
+                postStop();
               },
             ),
             _buildTile(
@@ -238,7 +230,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _restart();
+                postRestart();
               },
             ),
             _buildTile(
@@ -263,7 +255,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _kill();
+                postKill();
               },
             ),
             _buildTile(
@@ -385,91 +377,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
                   },
             child: child));
   }
-
-  _restart() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('Are you sure you want to restart your server?',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postRestart();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
-  }
-
-  _stop() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('are you sure you want to stop this server.',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postStop();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
-  }
-
-  _kill() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('Are you sure you want to kill your server, nothing will be saved.',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postKill();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
-  }
-
 
   _filelist() {
     showDialog(
