@@ -179,7 +179,7 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                    '/adminlogin', (Route<dynamic> route) => false);
               },
             ),
             Divider(
@@ -197,7 +197,7 @@ class AdminSettingsListPageState extends State<AdminSettingsList> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seenadmin');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                    '/adminlogin', (Route<dynamic> route) => false);
               },
             ),
           ],

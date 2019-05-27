@@ -23,7 +23,7 @@ class SponsorList {
   SponsorList(
       {this.avatarUrl, this.name, this.donation, this.message, this.link});
 
-  static final List<SponsorList> dummyData = [
+  static final List<SponsorList> sponsorList = [
     SponsorList(
       avatarUrl:
           "https://s3-eu-west-1.amazonaws.com/tpd/logos/5c033220e32b98000128f214/0x0.png",
@@ -63,6 +63,14 @@ class SponsorList {
       message: "",
       link: "",
     ),
+    SponsorList(
+      avatarUrl:
+          "",
+      name: "MyServerPlanet",
+      donation: "\$15.00 CAD",
+      message: "",
+      link: "https://myserverplanet.com/",
+    ),  
     SponsorList(
       avatarUrl:
           "",

@@ -43,9 +43,9 @@ class _SponsorPageState extends State<SponsorPage> {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: SponsorList.dummyData.length,
+          itemCount: SponsorList.sponsorList.length,
           itemBuilder: (context, index) {
-            SponsorList _model = SponsorList.dummyData[index];
+            SponsorList _model = SponsorList.sponsorList[index];
             return GestureDetector(
               child: Column(
                 children: <Widget>[

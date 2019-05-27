@@ -60,8 +60,8 @@ class _LoginPageState extends State<LoginPage> {
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: ()  {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+            //Navigator.of(context).pushNamedAndRemoveUntil(
+                    //'/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image.asset('assets/images/pterodactyl_icon.png', width: 100),
                 SizedBox(height: 8.0),
                 Text(
-                  'Client Login',
+                  'CLIENT LOGIN',
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],

@@ -34,7 +34,6 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> {
   BuildContext context;
 
-
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var bool2 = prefs.getBool('seen');
@@ -65,43 +64,15 @@ class SplashState extends State<Splash> {
     }
   }
 
-
-  Future<bool> isAuthenticated({isAdmin = false, isDeploys = false}) async {
-    if (isDeploys) {
-      String _apideployskey = await SharedPreferencesHelper.getString("api_deploys_Key");
-
-      if (_apideployskey.isEmpty) {
-        SharedPreferencesHelper.remove('api_deploys_Key');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/deployslogin', (Route<dynamic> route) => false);
-        return false;
-      }
-
-      http.Response response = await http.get(
-        "https://panel.deploys.io/api/client",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer $_apideployskey"
-        },
-      );
-
-      if (response.statusCode == 401) {
-        // Todo fix Navigation context for logging out if key isn't available
-        SharedPreferencesHelper.remove('api_deploys_Key');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/deployslogin', (Route<dynamic> route) => false);
-        return false;
-      } else {
-        return true;
-      }
-    } if (isAdmin) {
+  Future<bool> isAuthenticated({isAdmin = false}) async {
+    if (isAdmin) {
       String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
       String _adminhttps =
           await SharedPreferencesHelper.getString("adminhttps");
       String _urladmin =
           await SharedPreferencesHelper.getString("panelAdminUrl");
 
-      if (_urladmin.isEmpty) {
+      if(_urladmin.isEmpty) {
         SharedPreferencesHelper.remove('apiAdminKey');
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/adminlogin', (Route<dynamic> route) => false);
@@ -127,18 +98,18 @@ class SplashState extends State<Splash> {
       }
     } else {
       String _apikey = await SharedPreferencesHelper.getString("apiKey");
-      String _https = await SharedPreferencesHelper.getString("https");
-      String _url = await SharedPreferencesHelper.getString("panelUrl");
+      String _adminhttps = await SharedPreferencesHelper.getString("https");
+      String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
 
-      if (_url.isEmpty) {
+      if(_urladmin.isEmpty) {
         SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/login', (Route<dynamic> route) => false);
         return false;
       }
 
       http.Response response = await http.get(
-        "$_https$_url/api/client",
+        "$_adminhttps$_urladmin/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_apikey"

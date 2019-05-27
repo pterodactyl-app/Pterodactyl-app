@@ -178,7 +178,7 @@ class SettingsListPageState extends State<SettingsList> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                    '/login', (Route<dynamic> route) => false);
               },
             ),
             Divider(
@@ -196,7 +196,7 @@ class SettingsListPageState extends State<SettingsList> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                    '/login', (Route<dynamic> route) => false);
               },
             ),
           ],
