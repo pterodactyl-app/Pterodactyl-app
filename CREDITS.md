@@ -92,3 +92,5 @@ For all the people who worked with me on this amazing project.
 
 > - Helped ruben at the beginning of the app `⚡ ZeProf2Coding#4274`
 > - Improve (markdown) files `@/var/www/Jordy ツ#0049`
+> - Creating the old logo `@ThatProgrammer#6001`
+> - Creater of the new logo `@Emerald#1101`
