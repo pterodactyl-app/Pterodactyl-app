@@ -42,7 +42,7 @@ V1.0 may 6 '19 - Original Release
 
 # Donate
 
-> If you found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
+> If you like this project and want to support me found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
 >
 > - [PayPal](https://www.paypal.me/RDTalstra)
 
