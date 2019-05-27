@@ -48,7 +48,6 @@ _showVersionDialog(context) async {
       String message =
           "There is a newer version of app available please update it now.";
       String btnLabel = "Update Now";
-      String btnLabelCancel = "Later";
       return Platform.isIOS
           ? new CupertinoAlertDialog(
               title: Text(title),
@@ -57,10 +56,6 @@ _showVersionDialog(context) async {
                 FlatButton(
                   child: Text(btnLabel),
                   onPressed: () => _launchURL(APP_STORE_URL),
-                ),
-                FlatButton(
-                  child: Text(btnLabelCancel),
-                  onPressed: () => Navigator.pop(context),
                 ),
               ],
             )
@@ -71,10 +66,6 @@ _showVersionDialog(context) async {
                 FlatButton(
                   child: Text(btnLabel),
                   onPressed: () => _launchURL(PLAY_STORE_URL),
-                ),
-                FlatButton(
-                  child: Text(btnLabelCancel),
-                  onPressed: () => Navigator.pop(context),
                 ),
               ],
             );
