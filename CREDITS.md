@@ -24,7 +24,7 @@ For all the people who worked with me on this amazing project.
 
 > - $21.53 CAD `@Nyx#8228` [MiniCenter](https://minicenter.net/)
 
-> - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
+> - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/share/104?utm_source=ruben-app&utm_medium=sponsors&utm_campaign=list/)
 
 > - $15.00 CAD `@mspnick#0607` [MyServerPlanet](https://myserverplanet.com/)
 
