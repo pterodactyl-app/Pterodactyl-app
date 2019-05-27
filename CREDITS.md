@@ -26,6 +26,8 @@ For all the people who worked with me on this amazing project.
 
 > - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/)
 
+> - $15.00 CAD `@mspnick#0607` [MyServerPlanet](https://myserverplanet.com/)
+
 > - $10.00 USD `@Gebrito#1699`
 
 > - €8,00 EURO `@kloncs#1337` [samjw.xyz](https://samjw.xyz/)
