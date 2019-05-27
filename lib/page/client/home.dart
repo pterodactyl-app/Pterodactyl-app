@@ -14,16 +14,17 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
+import 'dart:io';
 import '../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
 import 'settings.dart';
 import '../../main.dart';
+import '../auth/check_update.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -64,8 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    try {
+      versionCheck(context);
+    } catch (e) {
+      print(e);
+    }
     super.initState();
-
     getDataHome();
   }
 

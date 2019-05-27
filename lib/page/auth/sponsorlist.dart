@@ -68,7 +68,7 @@ class SponsorList {
           "",
       name: "MyServerPlanet",
       donation: "\$15.00 CAD",
-      message: "",
+      message: "MyServerPlanet started in 2014 set out to sell affordable reseller hosting with WHMCS included - MyServerPlanet sells WHMCS resellers for £12.50/month.",
       link: "https://myserverplanet.com/",
     ),  
     SponsorList(

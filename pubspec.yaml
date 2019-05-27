@@ -40,6 +40,7 @@ dependencies:
   get_version: any
   firebase_messaging: any
   url_launcher: any
+  firebase_remote_config: any
 
   dbutils:
     git:
