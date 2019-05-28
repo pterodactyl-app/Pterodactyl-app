@@ -1,5 +1,6 @@
 # Pterodactyl Mobile App 🚀
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/54f943f0dc3841be8c31fac5dfa13f3d)](https://app.codacy.com/app/rubentalstra/Pterodactyl-app?utm_source=github.com&utm_medium=referral&utm_content=rubentalstra/Pterodactyl-app&utm_campaign=Badge_Grade_Dashboard)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/gpl-3.0)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
 <span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-green.svg" alt="Patreon donate button" /></a></span>
