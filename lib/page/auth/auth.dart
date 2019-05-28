@@ -33,8 +33,6 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
-  BuildContext context;
-
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var bool2 = prefs.getBool('seen');
@@ -73,13 +71,6 @@ class SplashState extends State<Splash> {
       String _urladmin =
           await SharedPreferencesHelper.getString("panelAdminUrl");
 
-      if(_urladmin.isEmpty) {
-        SharedPreferencesHelper.remove('apiAdminKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminlogin', (Route<dynamic> route) => false);
-        return false;
-      }
-
       http.Response response = await http.get(
         "$_adminhttps$_urladmin/api/application/servers",
         headers: {
@@ -99,25 +90,16 @@ class SplashState extends State<Splash> {
       }
     } else {
       String _apikey = await SharedPreferencesHelper.getString("apiKey");
-      String _adminhttps = await SharedPreferencesHelper.getString("https");
-      String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
-
-      if(_urladmin.isEmpty) {
-        SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/login', (Route<dynamic> route) => false);
-        return false;
-      }
+      String _https = await SharedPreferencesHelper.getString("https");
+      String _url = await SharedPreferencesHelper.getString("panelUrl");
 
       http.Response response = await http.get(
-        "$_adminhttps$_urladmin/api/client",
+        "$_https$_url/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_apikey"
         },
       );
-
-      print(response.statusCode);
 
       if (response.statusCode == 401) {
         // Todo fix Navigation context for logging out if key isn't available
@@ -140,7 +122,6 @@ class SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     return new Scaffold(
       body: new Center(
         child: new Text('Loading...'),
