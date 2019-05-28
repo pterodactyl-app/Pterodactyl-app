@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -367,8 +368,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(2, 110.0),
           ],
         ));
-
-        
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {
@@ -388,107 +387,195 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   _restart() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('Are you sure you want to restart your server?',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postRestart();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_restart');
+        String message = "Are you sure you want to restart your server?";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postRestart();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postRestart();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
   }
 
   _stop() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('are you sure you want to stop this server.',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postStop();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_stop');
+        String message = "are you sure you want to stop this server.";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postStop();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postStop();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
   }
 
   _kill() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text('Are you sure you want to kill your server, nothing will be saved.',
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('no'),
-                  style: TextStyle(color: Colors.black)),
-            ),
-            new FlatButton(
-              onPressed: () {
-                postKill();
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_kill');
+        String message =
+            "Are you sure you want to kill your server, nothing will be saved.";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postKill();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postKill();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
   }
-
 
   _filelist() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        child: new CupertinoAlertDialog(
-          content: new Text(
-            DemoLocalizations.of(context).trans('added_soon'),
-            style: new TextStyle(fontSize: 16.0),
-          ),
-          actions: <Widget>[
-            new FlatButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: new Text(DemoLocalizations.of(context).trans('yes'),
-                  style: TextStyle(color: Colors.black)),
-            )
-          ],
-        ));
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_file');
+        String message = DemoLocalizations.of(context).trans('added_soon');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
   }
 }

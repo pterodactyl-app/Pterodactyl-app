@@ -13,7 +13,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
@@ -59,9 +61,9 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: ()  {
+          onPressed: () {
             //Navigator.of(context).pushNamedAndRemoveUntil(
-                    //'/selecthost', (Route<dynamic> route) => false);
+            //'/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -238,132 +240,233 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.statusCode == 400) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_400'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "400";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_400');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
       }
       if (response.statusCode == 401) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_401'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "401";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_401');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
       }
       if (response.statusCode == 403) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_403'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "403";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_403');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
       }
       if (response.statusCode == 404) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_404'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "404";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_404');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
       }
       if (response.statusCode == 200) {
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_support'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "Need Support";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_support');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
       }
     } else {
       showDialog(
-          context: context,
-          barrierDismissible: false,
-          child: new CupertinoAlertDialog(
-            content: new Text(
-              DemoLocalizations.of(context).trans('login_error'),
-              style: new TextStyle(fontSize: 16.0),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: new Text(
-                    DemoLocalizations.of(context).trans('login_error_ok'),
-                    style: TextStyle(color: Colors.black)),
-              )
-            ],
-          ));
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          String title = "Login Error";
+          String message = DemoLocalizations.of(context).trans('login_error');
+          String btnLabel =
+              DemoLocalizations.of(context).trans('login_error_ok');
+          return Platform.isIOS
+              ? new CupertinoAlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(btnLabel),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                )
+              : new AlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(btnLabel),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+        },
+      );
     }
   }
 }

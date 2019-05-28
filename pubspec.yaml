@@ -41,6 +41,7 @@ dependencies:
   firebase_messaging: any
   url_launcher: any
   firebase_remote_config: any
+  adhara_socket_io: any
 
   dbutils:
     git:

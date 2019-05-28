@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 import 'dart:async';
+import 'package:pterodactyl_app/page/auth/check_update.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
 import 'package:pterodactyl_app/page/client/login.dart';

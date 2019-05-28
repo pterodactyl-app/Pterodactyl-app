@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import '../auth/check_update.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -104,6 +105,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   @override
   void initState() {
+    try {
+      versionCheck(context);
+    } catch (e) {
+      print(e);
+    }
     super.initState();
 
     getData();

@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:flutter/material.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +22,8 @@ import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
 import 'actionserver.dart';
+
+const String URI = "";
 
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
@@ -31,6 +34,11 @@ class SendPage extends StatefulWidget {
 }
 
 class _SendPageState extends State<SendPage> {
+  List<String> toPrint = ["trying to conenct"];
+  SocketIOManager manager;
+  SocketIO socket;
+  bool isProbablyConnected = false;
+
   final _sendController = TextEditingController();
 
   Future postSend() async {
@@ -57,6 +65,82 @@ class _SendPageState extends State<SendPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    manager = SocketIOManager();
+    initSocket();
+  }
+
+  initSocket() async {
+    setState(() => isProbablyConnected = true);
+    socket = await manager.createInstance(
+        //Socket IO server URI
+        URI,
+        //Query params - can be used for authentication
+        query: {
+          "auth": "--SOME AUTH STRING---",
+          "info": "new connection from adhara-socketio",
+          "timestamp": DateTime.now().toString()
+        },
+        //Enable or disable platform channel logging
+        enableLogging: false);
+    socket.onConnect((data) {
+      pprint("connected...");
+      pprint(data);
+      sendMessage();
+    });
+    socket.onConnectError(pprint);
+    socket.onConnectTimeout(pprint);
+    socket.onError(pprint);
+    socket.onDisconnect(pprint);
+    socket.on("news", (data) {
+      pprint("news");
+      pprint(data);
+    });
+    socket.connect();
+  }
+
+  disconnect() async {
+    await manager.clearInstance(socket);
+    setState(() => isProbablyConnected = false);
+  }
+
+  sendMessage() {
+    if (socket != null) {
+      pprint("sending message...");
+      socket.emit("message", [
+        "Hello world!",
+        1908,
+        {
+          "wonder": "Woman",
+          "comics": ["DC", "Marvel"]
+        },
+        {"test": "=!./"},
+        [
+          "I'm glad",
+          2019,
+          {
+            "come back": "Tony",
+            "adhara means": ["base", "foundation"]
+          },
+          {"test": "=!./"},
+        ]
+      ]);
+      pprint("Message emitted...");
+    }
+  }
+
+  pprint(data) {
+    setState(() {
+      if (data is Map) {
+        data = json.encode(data);
+      }
+      print(data);
+      toPrint.add(data);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -73,70 +157,56 @@ class _SendPageState extends State<SendPage> {
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+      body: Container(
+        color: Colors.black,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                new FlatButton(
-              child: new Text(
-                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-                
-              },
-            ),
-              ],
-            ),*/
-            SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Text(
-                  DemoLocalizations.of(context).trans('coming_soon'),
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ],
-            ),
-            SizedBox(height: 80.0),
-            AccentColorOverride(
-              color: Colors.red,
-              child: TextField(
-                controller: _sendController,
-                decoration: InputDecoration(
-                  labelText: (DemoLocalizations.of(context)
-                      .trans('type_command_here')),
-                ),
+            Expanded(
+                child: Center(
+              child: ListView(
+                children: toPrint.map((String _) => Text(_ ?? "")).toList(),
               ),
-            ),
-            ButtonBar(
+            )),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                FlatButton(
-                  child: Text(DemoLocalizations.of(context).trans('clear')),
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                AccentColorOverride(
+                  color: Colors.red,
+                  child: TextField(
+                    controller: _sendController,
+                    decoration: InputDecoration(
+                      labelText: (DemoLocalizations.of(context)
+                          .trans('type_command_here')),
+                    ),
                   ),
-                  onPressed: () {
-                    _sendController.clear();
-                  },
                 ),
-                RaisedButton(
-                  child:
-                      Text(DemoLocalizations.of(context).trans('send_command')),
-                  elevation: 8.0,
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                 Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: RaisedButton(
+                      child: Text("Connect"),
+                      onPressed: isProbablyConnected?null:initSocket,
+                    ),
                   ),
-                  onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "send", _sendController.text);
-                    postSend();
-                  },
-                ),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: RaisedButton(
+                      child: Text(
+                          DemoLocalizations.of(context).trans('send_command')),
+                      //onPressed: isProbablyConnected?sendMessage:null,
+                      onPressed: () async {
+                        await SharedPreferencesHelper.setString(
+                            "send", _sendController.text);
+                        postSend();
+                      },
+                    )),
               ],
             ),
+            SizedBox(
+              height: 12.0,
+            )
           ],
         ),
       ),
