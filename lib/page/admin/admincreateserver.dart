@@ -69,12 +69,12 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
             SharedPreferencesHelper.remove("password");
           },
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(
             DemoLocalizations.of(context).trans('admin_create_user_title'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
