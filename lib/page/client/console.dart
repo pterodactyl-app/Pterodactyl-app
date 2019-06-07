@@ -23,7 +23,7 @@ import 'dart:convert';
 import '../../main.dart';
 import 'actionserver.dart';
 
-const String URI = "";
+String socketUrl;
 
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
@@ -68,26 +68,50 @@ class _SendPageState extends State<SendPage> {
   void initState() {
     super.initState();
     manager = SocketIOManager();
-    initSocket();
+    getServerInfo().then(initSocket);
   }
 
-  initSocket() async {
+  getServerInfo() async {
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+
+    var url = '$_https$_url/api/app/user/console/${widget.server.id}';
+
+    var response = await http.get(url, headers: {
+      "Accept": "Application/vnd.pterodactyl.v1+json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $_api"
+    });
+
+    return response;
+  }
+
+  initSocket(socketData) async {
+    Map data = json.decode(socketData.body);
+
+    if ( !data.containsKey('attributes') ) {
+      return;
+    }
+
+    data = data['attributes'];
+    print(data['identifier']);
+    socketUrl = "https://" + data['node'] + "/v1/ws/" + data['identifier'];
+
     setState(() => isProbablyConnected = true);
     socket = await manager.createInstance(
         //Socket IO server URI
-        URI,
+        socketUrl,
         //Query params - can be used for authentication
         query: {
-          "auth": "--SOME AUTH STRING---",
-          "info": "new connection from adhara-socketio",
-          "timestamp": DateTime.now().toString()
+          "token": data['daemon_key'],
         },
         //Enable or disable platform channel logging
         enableLogging: false);
     socket.onConnect((data) {
       pprint("connected...");
       pprint(data);
-      sendMessage();
+//      sendMessage();
     });
     socket.onConnectError(pprint);
     socket.onConnectTimeout(pprint);
@@ -157,62 +181,77 @@ class _SendPageState extends State<SendPage> {
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
-      body: Container(
-        color: Colors.black,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            Expanded(
-                child: Center(
-              child: ListView(
-                children: toPrint.map((String _) => Text(_ ?? "")).toList(),
-              ),
-            )),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
+            /*SizedBox(height: 80.0),
+            Column(
               children: <Widget>[
-                AccentColorOverride(
-                  color: Colors.red,
-                  child: TextField(
-                    controller: _sendController,
-                    decoration: InputDecoration(
-                      labelText: (DemoLocalizations.of(context)
-                          .trans('type_command_here')),
-                    ),
-                  ),
+                new FlatButton(
+              child: new Text(
+                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
+
+              },
+            ),
+              ],
+            ),*/
+            SizedBox(height: 80.0),
+            Column(
+              children: <Widget>[
+                Text(
+                  DemoLocalizations.of(context).trans('coming_soon'),
+                  style: Theme.of(context).textTheme.headline,
                 ),
-                 Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: RaisedButton(
-                      child: Text("Connect"),
-                      onPressed: isProbablyConnected?null:initSocket,
-                    ),
-                  ),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: RaisedButton(
-                      child: Text(
-                          DemoLocalizations.of(context).trans('send_command')),
-                      //onPressed: isProbablyConnected?sendMessage:null,
-                      onPressed: () async {
-                        await SharedPreferencesHelper.setString(
-                            "send", _sendController.text);
-                        postSend();
-                      },
-                    )),
               ],
             ),
-            SizedBox(
-              height: 12.0,
-            )
+            SizedBox(height: 80.0),
+            AccentColorOverride(
+              color: Colors.red,
+              child: TextField(
+                controller: _sendController,
+                decoration: InputDecoration(
+                  labelText: (DemoLocalizations.of(context)
+                      .trans('type_command_here')),
+                ),
+              ),
+            ),
+            ButtonBar(
+              children: <Widget>[
+                FlatButton(
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
+                  onPressed: () {
+                    _sendController.clear();
+                  },
+                ),
+                RaisedButton(
+                  child:
+                  Text(DemoLocalizations.of(context).trans('send_command')),
+                  elevation: 8.0,
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
+                  onPressed: () async {
+                    await SharedPreferencesHelper.setString(
+                        "send", _sendController.text);
+                    postSend();
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 }
+
 
 class AccentColorOverride extends StatelessWidget {
   const AccentColorOverride({Key key, this.color, this.child})
