@@ -24,6 +24,7 @@ import '../../main.dart';
 import 'actionserver.dart';
 
 String socketUrl;
+List<String> logRows = new List<String>();
 
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
@@ -90,7 +91,7 @@ class _SendPageState extends State<SendPage> {
   initSocket(socketData) async {
     Map data = json.decode(socketData.body);
 
-    if ( !data.containsKey('attributes') ) {
+    if (!data.containsKey('attributes')) {
       return;
     }
 
@@ -117,9 +118,28 @@ class _SendPageState extends State<SendPage> {
     socket.onConnectTimeout(pprint);
     socket.onError(pprint);
     socket.onDisconnect(pprint);
-    socket.on("news", (data) {
-      pprint("news");
-      pprint(data);
+    socket.on('initial status', (data) {
+      if (data['status'] == 1 || data['status'] == 2) {
+        socket.emit('send server log', null);
+      }
+    });
+    socket.on('status', (data) {});
+    socket.on('server log', (data) {
+      data.toString().split('/\n/\g').forEach((data) => {logRows.add(data)});
+    });
+
+    socket.on('console', (data) {
+      pprint('console');
+      if (data['line'] != null) {
+        setState(() {
+          data['line']
+              .toString()
+              .split('\\n\\g')
+              .forEach((data) => {
+                logRows.add(data)
+              });
+        });
+      }
     });
     socket.connect();
   }
@@ -185,28 +205,11 @@ class _SendPageState extends State<SendPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            /*SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                new FlatButton(
-              child: new Text(
-                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-
-              },
-            ),
-              ],
-            ),*/
             SizedBox(height: 80.0),
             Column(
-              children: <Widget>[
-                Text(
-                  DemoLocalizations.of(context).trans('coming_soon'),
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ],
+                children: <Widget>[
+                  getTextWidgets()
+                ]
             ),
             SizedBox(height: 80.0),
             AccentColorOverride(
@@ -232,7 +235,7 @@ class _SendPageState extends State<SendPage> {
                 ),
                 RaisedButton(
                   child:
-                  Text(DemoLocalizations.of(context).trans('send_command')),
+                      Text(DemoLocalizations.of(context).trans('send_command')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
@@ -252,6 +255,12 @@ class _SendPageState extends State<SendPage> {
   }
 }
 
+Widget getTextWidgets({List<String> strings = null}) {
+  if (logRows != null) {
+    return new Row(children: logRows.map((item) => new Text(item)).toList());
+  }
+  return new Row(children: []);
+}
 
 class AccentColorOverride extends StatelessWidget {
   const AccentColorOverride({Key key, this.color, this.child})
