@@ -177,8 +177,7 @@ class SettingsListPageState extends State<SettingsList> {
                   new Text(DemoLocalizations.of(context).trans('logout_sub')),
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('deploys');
-                prefs.setBool('host', true);
+                prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/selecthost', (Route<dynamic> route) => false);
               },
@@ -194,8 +193,7 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferencesHelper.remove("api_deploys_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('deploys');
-                prefs.setBool('host', true);
+                prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/selecthost', (Route<dynamic> route) => false);
               },

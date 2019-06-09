@@ -95,7 +95,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                       ]),
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('host', false);
+                  prefs.setString('company', 'deploys');
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => LoginDeploysPage()));
             }),

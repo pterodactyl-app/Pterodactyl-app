@@ -34,29 +34,35 @@ class Splash extends StatefulWidget {
 
 class SplashState extends State<Splash> {
 
-  Future checkSeen({bool isCompany: false}) async {
+  Future checkSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    String company = prefs.get('company') != null
+        ? prefs.getString('company')
+        : null;
 
     if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
       checkAuthentication(isAdmin: true, prefs: prefs);
       return;
     }
 
-    checkAuthentication(prefs: prefs);
+    checkAuthentication(prefs: prefs, isCompany: company);
 
   }
 
-  Future checkAuthentication({isAdmin = false, SharedPreferences prefs, isCompany: false}) async {
+  Future checkAuthentication({isAdmin = false, SharedPreferences prefs, isCompany}) async {
 
     isAuthenticated(isAdmin: isAdmin).then((bool) => {
       prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) => {
-        if( !isCompany) {
+        if(isCompany == null) {
           Navigator.of(context).pushReplacement(
               new MaterialPageRoute(builder: (context) =>
               isAdmin ? new AdminHomePage() : new MyHomePage())
           )
         } else {
-          Navigator.of(context).pushReplacementNamed('')
+          Navigator.of(context).pushReplacementNamed(
+              isAdmin
+                  ? '/' + isCompany + '/admin/home'
+                  : '/' + isCompany + '/home')
         }
       })
     });
@@ -100,11 +106,11 @@ class SplashState extends State<Splash> {
     }
 
   }
-  
+
   Future<bool> isCompanyLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.containsKey('company');
-  } 
+  }
 
   @override
   void initState() {
