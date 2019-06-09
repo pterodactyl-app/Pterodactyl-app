@@ -37,15 +37,12 @@ class SplashState extends State<Splash> {
   Future checkSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    checkAuthentication(prefs: prefs);
+    if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
+      checkAuthentication(isAdmin: true, prefs: prefs);
+      return;
+    }
 
-//    if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
-//      return checkAuthentication();
-//    }
-//
-//    if (prefs.containsKey('seen_client') && prefs.getBool('seen_client')) {
-//      return;
-//    }
+    checkAuthentication(prefs: prefs);
 
   }
 
@@ -61,53 +58,42 @@ class SplashState extends State<Splash> {
   }
 
   Future<bool> isAuthenticated({isAdmin = false}) async {
+    String _api, _https, _url, _route;
     if (isAdmin) {
-      String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
-      String _adminhttps =
-          await SharedPreferencesHelper.getString("adminhttps");
-      String _urladmin =
-          await SharedPreferencesHelper.getString("panelAdminUrl");
+      // Set authentication check route
+      _route = "/application/servers";
 
-      http.Response response = await http.get(
-        "$_adminhttps$_urladmin/api/application/servers",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer $_apiadmin"
-        },
-      );
+      _api = await SharedPreferencesHelper.getString("apiAdminKey");
+      _https = await SharedPreferencesHelper.getString("adminhttps");
+      _url = await SharedPreferencesHelper.getString("panelAdminUrl");
 
-      if (response.statusCode == 401) {
-        // Todo fix Navigation context for logging out if key isn't available
-        SharedPreferencesHelper.remove('apiAdminKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminlogin', (Route<dynamic> route) => false);
-        return false;
-      } else {
-        return true;
-      }
     } else {
-      String _apikey = await SharedPreferencesHelper.getString("apiKey");
-      String _https = await SharedPreferencesHelper.getString("https");
-      String _url = await SharedPreferencesHelper.getString("panelUrl");
-
-      http.Response response = await http.get(
-        "$_https$_url/api/client",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer $_apikey"
-        },
-      );
-
-      if (response.statusCode == 401) {
-        // Todo fix Navigation context for logging out if key isn't available
-        SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-        return false;
-      } else {
-        return true;
-      }
+      // Set authentication check route
+      _route = "/client";
+      _api = await SharedPreferencesHelper.getString("apiKey");
+      _https = await SharedPreferencesHelper.getString("https");
+      _url = await SharedPreferencesHelper.getString("panelUrl");
     }
+
+    http.Response response = await http.get(
+      "$_https$_url/api/$_route",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Authorization": "Bearer $_api"
+      },
+    );
+
+    if (response.statusCode == 401) {
+      // Todo fix Navigation context for logging out if key isn't available
+      SharedPreferencesHelper.remove('apiKey');
+      SharedPreferencesHelper.remove('apiAdminKey');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/' + (isAdmin ? 'admin' : '') + 'login', (Route<dynamic> route) => false);
+      return false;
+    } else {
+      return true;
+    }
+
   }
 
   @override
