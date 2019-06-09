@@ -33,34 +33,31 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
-  Future checkFirstSeen() async {
+
+  Future checkSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var bool2 = prefs.getBool('seen');
-    bool _seen = (bool2 ?? false);
-    if (_seen) {
-      if (await isAuthenticated()) {
-        Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new MyHomePage()));
-      }
-    } else {
-      prefs.setBool('seen', true);
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new LoginPage()));
-    }
+
+    checkAuthentication(prefs: prefs);
+
+//    if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
+//      return checkAuthentication();
+//    }
+//
+//    if (prefs.containsKey('seen_client') && prefs.getBool('seen_client')) {
+//      return;
+//    }
+
   }
 
-  Future admincheckFirstSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seenadmin = (prefs.getBool('seenadmin') ?? false);
+  Future checkAuthentication({isAdmin = false, SharedPreferences prefs}) async {
 
-    if (_seenadmin && await isAuthenticated(isAdmin: true)) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new AdminHomePage()));
-    } else {
-      prefs.setBool('seenadmin', true);
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new AdminLoginPage()));
-    }
+    isAuthenticated(isAdmin: isAdmin).then((bool) => {
+      prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) => {
+        Navigator.of(context).pushReplacement(
+            new MaterialPageRoute(builder: (context) => isAdmin ? new AdminHomePage() : new MyHomePage())
+        )
+      })
+    });
   }
 
   Future<bool> isAuthenticated({isAdmin = false}) async {
@@ -116,8 +113,9 @@ class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    checkFirstSeen();
-    admincheckFirstSeen();
+    checkSeen();
+//    checkFirstSeen();
+//    admincheckFirstSeen();
   }
 
   @override
