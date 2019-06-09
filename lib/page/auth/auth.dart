@@ -73,7 +73,6 @@ class SplashState extends State<Splash> {
     if (isAdmin) {
       // Set authentication check route
       _route = "/application/servers";
-
       _api = await SharedPreferencesHelper.getString("apiAdminKey");
       _https = await SharedPreferencesHelper.getString("adminhttps");
       _url = await SharedPreferencesHelper.getString("panelAdminUrl");
@@ -86,8 +85,16 @@ class SplashState extends State<Splash> {
       _url = await SharedPreferencesHelper.getString("panelUrl");
     }
 
+    // Host cannot be empty, otherwise an exception will occur.
+    if(_https.isEmpty) {
+      await Navigator.of(context).pushNamedAndRemoveUntil(
+          '/' + (isAdmin ? 'admin' : '') + 'login', (
+          Route<dynamic> route) => false);
+      return false;
+    }
+
     http.Response response = await http.get(
-      "$_https$_url/api/$_route",
+      "$_https$_url/api$_route",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_api"
@@ -99,11 +106,11 @@ class SplashState extends State<Splash> {
       SharedPreferencesHelper.remove('apiKey');
       SharedPreferencesHelper.remove('apiAdminKey');
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/' + (isAdmin ? 'admin' : '') + 'login', (Route<dynamic> route) => false);
-      return false;
-    } else {
-      return true;
+          '/' + (isAdmin ? 'admin' : '') + 'login', (
+          Route<dynamic> route) => false);
     }
+
+  return true;
 
   }
 

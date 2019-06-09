@@ -196,7 +196,6 @@ class _LoginPageState extends State<LoginPage> {
       sharedPreferences.setString("apiKey", _apiController.text);
       sharedPreferences.setString("panelUrl", _urlController.text);
       sharedPreferences.setString("https", dropdownValue);
-      sharedPreferences.commit();
       getCredential();
     });
   }
