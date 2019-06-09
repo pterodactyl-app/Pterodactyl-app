@@ -7,7 +7,7 @@ packages:
       name: adhara_socket_io
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.10"
+    version: "0.1.11"
   async:
     dependency: transitive
     description:
@@ -72,14 +72,14 @@ packages:
       name: firebase_messaging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.1+1"
+    version: "5.0.2"
   firebase_remote_config:
     dependency: "direct main"
     description:
       name: firebase_remote_config
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+1"
+    version: "0.2.0+2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -171,7 +171,7 @@ packages:
       name: package_info
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0+3"
+    version: "0.4.0+4"
   path:
     dependency: transitive
     description:
@@ -213,7 +213,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.3+1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -288,7 +288,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.2"
+    version: "5.0.3"
   vector_math:
     dependency: transitive
     description:
@@ -297,5 +297,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.2.0 <3.0.0"
-  flutter: ">=0.5.6 <2.0.0"
+  dart: ">=2.2.2 <3.0.0"
+  flutter: ">=1.5.0 <2.0.0"

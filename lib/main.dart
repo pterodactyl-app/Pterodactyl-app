@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'page/company/companies.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'globals.dart' as globals;
 import 'dart:async';
@@ -122,6 +123,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, WidgetBuilder> routes = getRoutes(companyRoutes());
     return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ThemeData(
@@ -181,21 +183,31 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: theme,
             home: new Splash(),
-            routes: <String, WidgetBuilder>{
-              '/home': (BuildContext context) => new MyHomePage(),
-              '/login': (BuildContext context) => new LoginPage(),
-              '/servers': (BuildContext context) => new ServerListPage(),
-              '/about': (BuildContext context) => new AboutPage(),
-              '/settings': (BuildContext context) => new SettingsList(),
-              '/adminhome': (BuildContext context) => new AdminHomePage(),
-              '/adminlogin': (BuildContext context) => new AdminLoginPage(),
-              '/selecthost': (BuildContext context) => new SelectHostPage(),
-              '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
-              '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
-            },
+            routes: routes,
           );
         });
   }
+}
+
+Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
+  Map routes = <String, WidgetBuilder>{
+    '/home': (BuildContext context) => new MyHomePage(),
+    '/login': (BuildContext context) => new LoginPage(),
+    '/servers': (BuildContext context) => new ServerListPage(),
+    '/about': (BuildContext context) => new AboutPage(),
+    '/settings': (BuildContext context) => new SettingsList(),
+    '/adminhome': (BuildContext context) => new AdminHomePage(),
+    '/adminlogin': (BuildContext context) => new AdminLoginPage(),
+    '/selecthost': (BuildContext context) => new SelectHostPage(),
+//    '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
+//    '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
+  };
+
+  companies.forEach((k, v) => {
+  routes.addAll(companies[k])
+  });
+
+  return routes;
 }
 
 Future main() async {
