@@ -203,15 +203,18 @@ class _SendPageState extends State<SendPage> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
-            Column(
-                children: <Widget>[
-                  getTextWidgets()
-                ]
+            SizedBox(height: 10.0),
+            SingleChildScrollView(
+                child: new Wrap(
+                  direction: Axis.vertical,
+                  children: <Widget>[
+                    getTextWidgets()
+                  ],
+                )
             ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 10.0),
             AccentColorOverride(
               color: Colors.red,
               child: TextField(
@@ -255,7 +258,7 @@ class _SendPageState extends State<SendPage> {
   }
 }
 
-Widget getTextWidgets({List<String> strings = null}) {
+Widget getTextWidgets() {
   if (logRows != null) {
     return new Row(children: logRows.map((item) => new Text(item)).toList());
   }
