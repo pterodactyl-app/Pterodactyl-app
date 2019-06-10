@@ -149,31 +149,6 @@ class _SendPageState extends State<SendPage> {
     setState(() => isProbablyConnected = false);
   }
 
-  sendMessage() {
-    if (socket != null) {
-      pprint("sending message...");
-      socket.emit("message", [
-        "Hello world!",
-        1908,
-        {
-          "wonder": "Woman",
-          "comics": ["DC", "Marvel"]
-        },
-        {"test": "=!./"},
-        [
-          "I'm glad",
-          2019,
-          {
-            "come back": "Tony",
-            "adhara means": ["base", "foundation"]
-          },
-          {"test": "=!./"},
-        ]
-      ]);
-      pprint("Message emitted...");
-    }
-  }
-
   pprint(data) {
     setState(() {
       if (data is Map) {
@@ -192,7 +167,10 @@ class _SendPageState extends State<SendPage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            disconnect();
+            Navigator.of(context).pop();
+          },
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
