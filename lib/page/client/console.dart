@@ -206,13 +206,17 @@ class _SendPageState extends State<SendPage> {
           padding: EdgeInsets.symmetric(horizontal: 12.0),
           children: <Widget>[
             SizedBox(height: 10.0),
-            SingleChildScrollView(
-                child: new Wrap(
-                  direction: Axis.vertical,
-                  children: <Widget>[
-                    getTextWidgets()
-                  ],
-                )
+            Container(
+              height: 425,
+              color: Colors.black,
+              child: SingleChildScrollView(
+                  child: new Wrap(
+                    direction: Axis.vertical,
+                    children: <Widget>[
+                      getTextWidgets()
+                    ],
+                  )
+              ),
             ),
             SizedBox(height: 10.0),
             AccentColorOverride(
@@ -260,7 +264,7 @@ class _SendPageState extends State<SendPage> {
 
 Widget getTextWidgets() {
   if (logRows != null) {
-    return new Row(children: logRows.map((item) => new Text(item)).toList());
+    return new Row(children: logRows.map((item) => new Text(item, style: TextStyle(color: Colors.white),)).toList());
   }
   return new Row(children: []);
 }
