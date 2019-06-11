@@ -38,7 +38,7 @@ For all the people who worked with me on this amazing project.
 
 > - €5,00 EURO `@Jules [skoali.fr]#6511` [Skoali](https://skoali.fr/)
 
-> - $2,00 CAD `@TheFlash787#2898`
+> - $2,00 CAD `@TheFlash787#2898` (Monthly)
 
 > - $0.50 CAD `@Kiffey14#2010`
 
