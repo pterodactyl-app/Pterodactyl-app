@@ -1,0 +1,45 @@
+{
+  "partners": [
+      {
+        "name": "Deploys.io",
+        "url": "https://deploys.io",
+        "logo": {
+          "dark": "https://deploys.io/img/deploys.io/logo/text/dark.png",
+          "light": "https://deploys.io/img/deploys.io/logo/text/light.png"
+        }
+      },
+      {
+        "name": "CodersLight LLC",
+        "url": "https://coderslight.com/",
+        "logo": {
+          "dark": "",
+          "light": ""
+        }
+      },
+      {
+        "name": "MiniCenter",
+        "url": "https://minicenter.net/",
+        "logo": {
+          "dark": "",
+          "light": ""
+        }
+      },
+      {
+        "name": "PlanetNode",
+        "url": "https://planetnode.net/",
+        "logo": {
+          "dark": "",
+          "light": ""
+        }
+      },
+      {
+        "name": "Revivenode Hosting",
+        "url": "",
+        "logo": {
+          "dark": "",
+          "light": ""
+        }
+      }
+  ]
+}
+
