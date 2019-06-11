@@ -28,6 +28,8 @@ For all the people who worked with me on this amazing project.
 
 > - Webhosting `@CodeCo#3866` [Deploys.io](https://deploys.io/share/104?utm_source=ruben-app&utm_medium=sponsors&utm_campaign=list/)
 
+> - $20.00 CAD `@Diamond#0010` [Revivenode Hosting]() (Monthly) 
+
 > - $15.00 CAD `@mspnick#0607` [MyServerPlanet](https://myserverplanet.com/)
 
 > - $10.00 USD `@Gebrito#1699`
