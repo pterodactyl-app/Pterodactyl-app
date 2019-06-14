@@ -14,18 +14,12 @@
 * limitations under the License.
 */
 import 'dart:async';
-import 'package:pterodactyl_app/page/auth/check_update.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
-import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/page/admin/adminhome.dart';
-import 'package:pterodactyl_app/page/admin/adminlogin.dart';
-import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
-import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
-import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
 class Splash extends StatefulWidget {
   @override
