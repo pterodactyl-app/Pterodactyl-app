@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info/package_info.dart';
@@ -11,6 +12,9 @@ const PLAY_STORE_URL =
     'https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app';
 
 versionCheck(context) async {
+  // Check if is debug then don't show message
+  if(!kReleaseMode) return;
+
   //Get Current installed version of app
   final PackageInfo info = await PackageInfo.fromPlatform();
   double currentVersion = double.parse(info.version.trim().replaceAll(".", ""));
@@ -22,7 +26,7 @@ versionCheck(context) async {
     // Using default duration to force fetching from remote server.
     await remoteConfig.fetch(expiration: const Duration(seconds: 0));
     await remoteConfig.activateFetched();
-    remoteConfig.getString('force_update_current_version');
+
     double newVersion = double.parse(remoteConfig
         .getString('force_update_current_version')
         .trim()
