@@ -165,3 +165,8 @@ class _SelectHostPageState extends State<SelectHostPage> {
             child: child));
   }
 }
+
+Future<Map> _updatePartners() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+}
