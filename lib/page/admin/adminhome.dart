@@ -110,32 +110,55 @@ class _AdminHomePageState extends State<AdminHomePage> {
     } catch (e) {
       print(e);
     }
+
     super.initState();
+    firebaseCloudMessagingListeners();
 
     getData();
     getNodesData();
     getUsers();
-    firebaseCloudMessagingListeners();
+  }
+
+  void showNotification(msg) {
+    print(msg);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: new Text(msg['title']),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: null,
+                child: new Text(msg['body']),
+              ),
+            ],
+          );
+        }
+    );
   }
 
   void firebaseCloudMessagingListeners() {
     if (Platform.isIOS) iOSPermission();
 
-    _firebaseMessaging.getToken().then((token) {
-      print(token);
-    });
-
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('on message $message');
+        showNotification(message['notification']);
       },
       onResume: (Map<String, dynamic> message) async {
         print('on resume $message');
+        showNotification(message['notification']);
       },
       onLaunch: (Map<String, dynamic> message) async {
         print('on launch $message');
       },
     );
+
+    _firebaseMessaging.getToken().then((token) {
+      assert(token != null);
+      print(token);
+    });
+
   }
 
   void iOSPermission() {
