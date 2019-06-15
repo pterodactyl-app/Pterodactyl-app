@@ -115,13 +115,11 @@ class SplashState extends State<Splash> {
 
   @override
   void initState() {
-    super.initState();
-/*    
-    if(await isCompanyLogin()) {
-
-      return;
-    }
-*/
+    super.initState();    
+//    if(await isCompanyLogin()) {
+//
+//      return;
+//    }
     checkSeen();
   }
 
