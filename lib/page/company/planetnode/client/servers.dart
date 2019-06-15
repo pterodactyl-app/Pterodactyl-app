@@ -15,11 +15,11 @@
 */
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../../auth/shared_preferences_helper.dart';
-import '../../../../globals.dart' as globals;
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../../../main.dart';
+import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
 
 class User {

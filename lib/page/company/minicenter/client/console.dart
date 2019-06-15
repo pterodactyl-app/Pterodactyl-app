@@ -13,13 +13,14 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:flutter/material.dart';
-import '../../../auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
-import '../../../../globals.dart' as globals;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../../../main.dart';
+import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
 
 class SendPage extends StatefulWidget {

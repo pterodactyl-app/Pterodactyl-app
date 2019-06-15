@@ -15,7 +15,6 @@
 */
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';

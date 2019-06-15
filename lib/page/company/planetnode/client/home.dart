@@ -14,16 +14,16 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import '../../../auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-import '../../../../globals.dart' as globals;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
 import 'settings.dart';
-import '../../../../main.dart';
+import 'package:pterodactyl_app/main.dart';
 
 class MyPlanetNodeHomePage extends StatefulWidget {
   MyPlanetNodeHomePage({Key key}) : super(key: key);

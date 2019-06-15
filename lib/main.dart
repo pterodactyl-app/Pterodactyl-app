@@ -215,17 +215,17 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
     '/adminlogin': (BuildContext context) => new AdminLoginPage(),
     '/selecthost': (BuildContext context) => new SelectHostPage(),
 //Companies
-    '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
-    '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
+    '/home_deploys': (BuildContext context) => new MyDeploysHomePage(),
+    '/login_deploys': (BuildContext context) => new LoginDeploysPage(),
 
-    '/home_coderslight': (BuildContext context) => new MyReviveNodeHomePage(),
-    '/login_coderslight': (BuildContext context) => new LoginReviveNodePage(),
+    '/home_coderslight': (BuildContext context) => new MyCodersLightHomePage(),
+    '/login_coderslight': (BuildContext context) => new LoginCodersLightPage(),
 
-    '/home_minicenter': (BuildContext context) => new MyReviveNodeHomePage(),
-    '/login_minicenter': (BuildContext context) => new LoginReviveNodePage(),
+    '/home_minicenter': (BuildContext context) => new MyMiniCenterHomePage(),
+    '/login_minicenter': (BuildContext context) => new LoginMiniCenterPage(),
 
-    '/home_planetnode': (BuildContext context) => new MyReviveNodeHomePage(),
-    '/login_planetnode': (BuildContext context) => new LoginReviveNodePage(),
+    '/home_planetnode': (BuildContext context) => new MyPlanetNodeHomePage(),
+    '/login_planetnode': (BuildContext context) => new LoginPlanetNodePage(),
 
     '/home_revicenode': (BuildContext context) => new MyReviveNodeHomePage(),
     '/login_revicenode': (BuildContext context) => new LoginReviveNodePage(),
