@@ -16,12 +16,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';
+import 'package:pterodactyl_app/page/company/minicenter/client/home.dart';
+import 'package:pterodactyl_app/page/company/planetnode/client/home.dart';
+import 'package:pterodactyl_app/page/company/revivenode/client/home.dart';
 
 Map companyRoutes() {
   Map c = <String, Map>{};
   companies().forEach((f) => {
         c[f] = <String, WidgetBuilder>{
-          '/' + f + '/home': (BuildContext context) => new MyDeploysHomePage() // Todo: https://stackoverflow.com/a/14705238
+          '/' + f + '/home': (BuildContext context) => new MyDeploysHomePage(), // Todo: https://stackoverflow.com/a/14705238
+          '/' + f + '/home': (BuildContext context) => new MyCodersLightHomePage(),
+          '/' + f + '/home': (BuildContext context) => new MyMiniCenterHomePage(),
+          '/' + f + '/home': (BuildContext context) => new MyPlanetNodeHomePage(),
+          '/' + f + '/home': (BuildContext context) => new MyReviveNodeHomePage(),
         }
       });
   return c;
@@ -30,5 +38,9 @@ Map companyRoutes() {
 List<String> companies() {
   List<String> companies = [];
   companies.add('deploys');
+  companies.add('coderslight');
+  companies.add('minicenter');
+  companies.add('planetnode');
+  companies.add('revivenode');
   return companies;
 }

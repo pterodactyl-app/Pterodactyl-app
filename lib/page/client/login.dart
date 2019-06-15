@@ -19,10 +19,10 @@ import 'package:package_info/package_info.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import '../auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../main.dart';
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 
 class User {
   final String api, url;

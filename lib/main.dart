@@ -20,29 +20,44 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'page/company/companies.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'globals.dart' as globals;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'page/auth/auth.dart';
-import 'page/auth/selecthost.dart';
+import 'package:pterodactyl_app/page/auth/auth.dart';
+import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
-import 'page/client/login.dart';
-import 'page/client/home.dart';
-import 'page/client/servers.dart';
+import 'package:pterodactyl_app/page/client/login.dart';
+import 'package:pterodactyl_app/page/client/home.dart';
+import 'package:pterodactyl_app/page/client/servers.dart';
 
-import 'page/client/settings.dart';
-import 'about.dart';
+import 'package:pterodactyl_app/page/client/settings.dart';
+import 'package:pterodactyl_app/about.dart';
 
-import 'page/admin/adminlogin.dart';
-import 'page/admin/adminhome.dart';
-//import 'page/admin/adminservers.dart';
-//import 'page/admin/adminnodes.dart';
-//import 'page/admin/adminallocations.dart';
-//import 'page/admin/adminactionserver.dart';
-//import 'page/admin/adminactionnodes.dart';
+import 'package:pterodactyl_app/page/admin/adminlogin.dart';
+import 'package:pterodactyl_app/page/admin/adminhome.dart';
+//import 'package:pterodactyl_app/page/admin/adminservers.dart';
+//import 'package:pterodactyl_app/page/admin/adminnodes.dart';
+//import 'package:pterodactyl_app/page/admin/adminallocations.dart';
+//import 'package:pterodactyl_app/page/admin/adminactionserver.dart';
+//import 'package:pterodactyl_app/page/admin/adminactionnodes.dart';
 
-import 'page/company/deploys/client/home.dart';
-import 'page/company/deploys/client/login.dart';
+
+//companies
+import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/minicenter/client/home.dart';
+import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/planetnode/client/home.dart';
+import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/revivenode/client/home.dart';
+import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
+//
 
 class DemoLocalizations {
   DemoLocalizations(this.locale);
@@ -199,8 +214,22 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
     '/adminhome': (BuildContext context) => new AdminHomePage(),
     '/adminlogin': (BuildContext context) => new AdminLoginPage(),
     '/selecthost': (BuildContext context) => new SelectHostPage(),
-//    '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
-//    '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
+//Companies
+    '/homedeploys': (BuildContext context) => new MyDeploysHomePage(),
+    '/deployslogin': (BuildContext context) => new LoginDeploysPage(),
+
+    '/home_coderslight': (BuildContext context) => new MyReviveNodeHomePage(),
+    '/login_coderslight': (BuildContext context) => new LoginReviveNodePage(),
+
+    '/home_minicenter': (BuildContext context) => new MyReviveNodeHomePage(),
+    '/login_minicenter': (BuildContext context) => new LoginReviveNodePage(),
+
+    '/home_planetnode': (BuildContext context) => new MyReviveNodeHomePage(),
+    '/login_planetnode': (BuildContext context) => new LoginReviveNodePage(),
+
+    '/home_revicenode': (BuildContext context) => new MyReviveNodeHomePage(),
+    '/login_revicenode': (BuildContext context) => new LoginReviveNodePage(),
+//
   };
 
   companies.forEach((k, v) => {

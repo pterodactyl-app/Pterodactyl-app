@@ -13,16 +13,15 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/globals.dart' as globals;
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import '../../../../globals.dart' as globals;
+import '../../../auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:pterodactyl_app/main.dart';
+import '../../../../main.dart';
 import 'console.dart';
 import 'servers.dart';
 import 'utilization.dart';
@@ -54,10 +53,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -76,10 +73,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -98,10 +93,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -120,10 +113,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON
@@ -213,7 +204,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _stop();
+                postStop();
               },
             ),
             _buildTile(
@@ -239,7 +230,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _restart();
+                postRestart();
               },
             ),
             _buildTile(
@@ -264,7 +255,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     ]),
               ),
               onTap: () {
-                _kill();
+                postKill();
               },
             ),
             _buildTile(
@@ -368,6 +359,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(2, 110.0),
           ],
         ));
+
+        
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {
@@ -385,197 +378,24 @@ class _ActionServerPageState extends State<ActionServerPage> {
             child: child));
   }
 
-  _restart() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context).trans('action_restart');
-        String message = "Are you sure you want to restart your server?";
-        String btnLabelNo = DemoLocalizations.of(context).trans('no');
-        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
-        return Platform.isIOS
-            ? new CupertinoAlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postRestart();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            : new AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postRestart();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-      },
-    );
-  }
-
-  _stop() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context).trans('action_stop');
-        String message = "are you sure you want to stop this server.";
-        String btnLabelNo = DemoLocalizations.of(context).trans('no');
-        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
-        return Platform.isIOS
-            ? new CupertinoAlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postStop();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            : new AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postStop();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-      },
-    );
-  }
-
-  _kill() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context).trans('action_kill');
-        String message =
-            "Are you sure you want to kill your server, nothing will be saved.";
-        String btnLabelNo = DemoLocalizations.of(context).trans('no');
-        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
-        return Platform.isIOS
-            ? new CupertinoAlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postKill();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            : new AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelNo),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      postKill();
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-      },
-    );
-  }
-
   _filelist() {
     showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context).trans('action_file');
-        String message = DemoLocalizations.of(context).trans('added_soon');
-        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
-        return Platform.isIOS
-            ? new CupertinoAlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            : new AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-      },
-    );
+        context: context,
+        barrierDismissible: false,
+        child: new CupertinoAlertDialog(
+          content: new Text(
+            DemoLocalizations.of(context).trans('added_soon'),
+            style: new TextStyle(fontSize: 16.0),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
+                  style: TextStyle(color: Colors.black)),
+            )
+          ],
+        ));
   }
 }

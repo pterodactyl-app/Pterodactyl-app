@@ -15,13 +15,12 @@
 */
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import '../../../auth/shared_preferences_helper.dart';
+import '../../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'package:pterodactyl_app/main.dart';
+import '../../../../main.dart';
 import 'actionserver.dart';
-
 
 class User {
   final String id, name;
@@ -43,11 +42,9 @@ class _ServerListPageState extends State<ServerListPage> {
   List userData;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
+    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
     http.Response response = await http.get(
-      "$_https$_url/api/client",
+      "https://panel.coderslight.com/api/client",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_api"

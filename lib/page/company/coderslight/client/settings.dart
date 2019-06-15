@@ -16,14 +16,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import '../../../../globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/sponsor.dart';
+import '../../../auth/shared_preferences_helper.dart';
+import '../../../../main.dart';
+import '../../../../sponsor.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class SettingsList extends StatefulWidget {
   @override
@@ -176,9 +177,9 @@ class SettingsListPageState extends State<SettingsList> {
                   new Text(DemoLocalizations.of(context).trans('logout_sub')),
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
+                prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                    '/selecthost', (Route<dynamic> route) => false);
               },
             ),
             Divider(
@@ -190,13 +191,11 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("panelUrl");
-                SharedPreferencesHelper.remove("apiKey");
-                SharedPreferencesHelper.remove("https");
+                SharedPreferencesHelper.remove("api_coderslight_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
+                prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                    '/selecthost', (Route<dynamic> route) => false);
               },
             ),
           ],

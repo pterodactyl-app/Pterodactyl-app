@@ -19,12 +19,17 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import '../company/deploys/client/login.dart';
-import '../client/login.dart';
+import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/client/login.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
+import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
+import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
+import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
+
 
 class SelectHostPage extends StatefulWidget {
   SelectHostPage({Key key}) : super(key: key);
@@ -99,6 +104,30 @@ class _SelectHostPageState extends State<SelectHostPage> {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => LoginDeploysPage()));
             }),
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.network(
+                                globals.useDarkTheme
+                                    ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
+                                    : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
+                                width: 100),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'coderslight');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginCodersLightPage()));
+            }),            
             _buildTile(
                 Padding(
                   padding: const EdgeInsets.all(24.0),

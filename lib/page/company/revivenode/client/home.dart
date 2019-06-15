@@ -14,37 +14,34 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import '../../../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'dart:io';
+import '../../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'servers.dart';
 import 'settings.dart';
-import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/page/auth/check_update.dart';
+import '../../../../main.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+class MyReviveNodeHomePage extends StatefulWidget {
+  MyReviveNodeHomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyReviveNodeHomePageState createState() => _MyReviveNodeHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyReviveNodeHomePageState extends State<MyReviveNodeHomePage> {
   Map data;
   int userTotalServers = 0;
 
   Future getDataHome() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
+    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
 
     try {
       http.Response response = await http.get(
-        "$_https$_url/api/client",
+        "https://panel.revivenode.com/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_api"
@@ -57,20 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     } on SocketException catch (e) {
       print('Error occured: ' + e.message);
-      print(_url);
-      print(_https);
       print('End debug');
     }
   }
 
   @override
   void initState() {
-    try {
-      versionCheck(context);
-    } catch (e) {
-      print(e);
-    }
     super.initState();
+
     getDataHome();
   }
 
@@ -81,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
           automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.useDarkTheme ? null : Colors.white,
-          title: Text(DemoLocalizations.of(context).trans('dashboard'),
+          title: Text('Deploys.io Panel',
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
