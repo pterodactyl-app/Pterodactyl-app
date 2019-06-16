@@ -76,8 +76,8 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
               children: <Widget>[
                 Image.network(
                     globals.useDarkTheme
-                        ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
-                        : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
+                        ? 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png'
+                        : 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png',
                     width: 100),
                 SizedBox(height: 8.0),
               ],

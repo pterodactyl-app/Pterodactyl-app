@@ -56,9 +56,9 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: ()  {
+          onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -76,8 +76,8 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
               children: <Widget>[
                 Image.network(
                     globals.useDarkTheme
-                        ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
-                        : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
+                        ? 'https://avatars2.githubusercontent.com/u/35084758?s=280&v=4'
+                        : 'https://pbs.twimg.com/profile_images/1041472632984616961/uIjCN238.jpg',
                     width: 100),
                 SizedBox(height: 8.0),
               ],
@@ -152,7 +152,8 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text = sharedPreferences.getString("api_coderslight_Key");
+          _apiController.text =
+              sharedPreferences.getString("api_coderslight_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();

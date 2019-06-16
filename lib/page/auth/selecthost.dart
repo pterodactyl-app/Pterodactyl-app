@@ -212,6 +212,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
+            StaggeredTile.extent(1, 110.0),
           ],
         ));
   }

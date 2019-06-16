@@ -56,9 +56,9 @@ class _LoginMiniCenterPageState extends State<LoginMiniCenterPage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: ()  {
+          onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -74,11 +74,9 @@ class _LoginMiniCenterPageState extends State<LoginMiniCenterPage> {
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[
-                Image.network(
-                    globals.useDarkTheme
-                        ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
-                        : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                    width: 100),
+                Text('MiniCenter',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 23.0)),
                 SizedBox(height: 8.0),
               ],
             ),
@@ -152,7 +150,8 @@ class _LoginMiniCenterPageState extends State<LoginMiniCenterPage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text = sharedPreferences.getString("api_minicenter_Key");
+          _apiController.text =
+              sharedPreferences.getString("api_minicenter_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();

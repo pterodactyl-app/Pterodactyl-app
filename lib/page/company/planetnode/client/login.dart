@@ -57,9 +57,9 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: ()  {
+          onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -78,7 +78,7 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
                 Image.network(
                   globals.useDarkTheme
                       ? 'https://planetnode.net/templates/planetnode/img/header/logo.png'
-                      : 'https://planetnode.net/templates/planetnode/img/header/logo.png',
+                      : 'https://planetnode.net/templates/planetnode/img/header/logo-b.png',
                   width: 100,
                 ),
                 SizedBox(height: 8.0),
@@ -154,7 +154,8 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text = sharedPreferences.getString("api_planetnode_Key");
+          _apiController.text =
+              sharedPreferences.getString("api_planetnode_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();
