@@ -28,26 +28,32 @@ class Splash extends StatefulWidget {
 
 class SplashState extends State<Splash> {
 
+  String company;
+  SplashState() {
+    this.company = null;
+  }
+
   Future checkSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String company = prefs.get('company') != null
+
+    this.company = prefs.get('company') != null
         ? prefs.getString('company')
-        : null;
+        : '';
 
     if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
       checkAuthentication(isAdmin: true, prefs: prefs);
       return;
     }
 
-    checkAuthentication(prefs: prefs, isCompany: company);
+    checkAuthentication(prefs: prefs);
 
   }
 
-  Future checkAuthentication({isAdmin = false, SharedPreferences prefs, isCompany}) async {
+  Future checkAuthentication({isAdmin = false, SharedPreferences prefs}) async {
 
     isAuthenticated(isAdmin: isAdmin).then((bool) => {
       prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) => {
-        if(isCompany == null) {
+        if(this.company == null) {
           Navigator.of(context).pushReplacement(
               new MaterialPageRoute(builder: (context) =>
               isAdmin ? new AdminHomePage() : new MyHomePage())
@@ -55,8 +61,8 @@ class SplashState extends State<Splash> {
         } else {
           Navigator.of(context).pushReplacementNamed(
               isAdmin
-                  ? '/' + isCompany + '/admin/home'
-                  : '/' + isCompany + '/home')
+                  ? '/' + this.company + '/admin/home'
+                  : '/' + this.company + '/home')
         }
       })
     });
@@ -82,7 +88,7 @@ class SplashState extends State<Splash> {
     // Host cannot be empty, otherwise an exception will occur.
     if(_https.isEmpty) {
       await Navigator.of(context).pushNamedAndRemoveUntil(
-          '/' + (isAdmin ? 'admin' : '') + 'login', (
+          '/' + (this.company != null ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
           Route<dynamic> route) => false);
       return false;
     }
@@ -94,13 +100,14 @@ class SplashState extends State<Splash> {
         "Authorization": "Bearer $_api"
       },
     );
+    print(response);
 
     if (response.statusCode == 401) {
       // Todo fix Navigation context for logging out if key isn't available
       SharedPreferencesHelper.remove('apiKey');
       SharedPreferencesHelper.remove('apiAdminKey');
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/' + (isAdmin ? 'admin' : '') + 'login', (
+          '/' + (this.company != null ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
           Route<dynamic> route) => false);
     }
 
@@ -116,10 +123,7 @@ class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();    
-//    if(await isCompanyLogin()) {
-//
-//      return;
-//    }
+
     checkSeen();
   }
 

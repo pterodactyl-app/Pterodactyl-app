@@ -77,27 +77,6 @@ class _MyCodersLightHomePageState extends State<MyCodersLightHomePage> {
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 30.0)),
-          //actions: <Widget>[
-          //Container(
-          //margin: EdgeInsets.only(right: 8.0),
-          //child: Row(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          //children: <Widget>[
-          //Text(DemoLocalizations.of(context).trans('logout'),
-          //style: TextStyle(
-          //color:
-          //globals.isDarkTheme ? Colors.white : Colors.blue,
-          //fontWeight: FontWeight.w700,
-          //fontSize: 14.0)),
-          //Icon(
-          //Icons.subdirectory_arrow_left,
-          //color: globals.isDarkTheme ? Colors.white : Colors.black,
-          //)
-          //],
-          //),
-          //)
-          //],
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,

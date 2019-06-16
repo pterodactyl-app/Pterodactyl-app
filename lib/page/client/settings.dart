@@ -195,6 +195,7 @@ class SettingsListPageState extends State<SettingsList> {
                 SharedPreferencesHelper.remove("https");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
+                prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               },
