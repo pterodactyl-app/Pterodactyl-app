@@ -112,7 +112,6 @@ class _SendPageState extends State<SendPage> {
     socket.onConnect((data) {
       pprint("connected...");
       pprint(data);
-//      sendMessage();
     });
     socket.onConnectError(pprint);
     socket.onConnectTimeout(pprint);
@@ -125,7 +124,7 @@ class _SendPageState extends State<SendPage> {
     });
     socket.on('status', (data) {});
     socket.on('server log', (data) {
-      data.toString().split('/\n/\g').forEach((data) => {logRows.add(data)});
+      data.toString().split('/\n/\g').forEach((data) => logRows.add(data));
     });
 
     socket.on('console', (data) {
@@ -136,7 +135,12 @@ class _SendPageState extends State<SendPage> {
               .toString()
               .split('\\n\\g')
               .forEach((data) => {
-                logRows.add(data)
+                if(data.length > 52) {
+                  logRows.add(data.substring(0, 51)),
+                  logRows.add(data.substring(52))
+                } else {
+                  logRows.add(data)
+                }
               });
         });
       }
@@ -146,7 +150,10 @@ class _SendPageState extends State<SendPage> {
 
   disconnect() async {
     await manager.clearInstance(socket);
-    setState(() => isProbablyConnected = false);
+    setState(() => {
+      isProbablyConnected = false,
+      logRows.clear()
+    });
   }
 
   pprint(data) {
