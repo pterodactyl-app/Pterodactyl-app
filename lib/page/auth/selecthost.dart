@@ -89,7 +89,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Column(
@@ -98,16 +98,18 @@ class _SelectHostPageState extends State<SelectHostPage> {
                           children: <Widget>[
                             Image.network(
                                 globals.useDarkTheme
-                                    ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
-                                    : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                                width: 100),
+                                    ? 'https://planetnode.net/templates/planetnode/img/header/logo.png'
+                                    : 'https://planetnode.net/templates/planetnode/img/header/logo.png',
+                              width: 100,
+                              height: 60,
+                            ),
                           ],
                         ),
                       ]),
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  prefs.setString('company', 'coderslight');
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginCodersLightPage()));
+                  prefs.setString('company', 'planetnode');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
             }),            
             _buildTile(
                 Padding(

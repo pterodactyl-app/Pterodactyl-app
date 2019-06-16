@@ -76,10 +76,11 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
             Column(
               children: <Widget>[
                 Image.network(
-                    globals.useDarkTheme
-                        ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
-                        : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                    width: 100),
+                  globals.useDarkTheme
+                      ? 'https://planetnode.net/templates/planetnode/img/header/logo.png'
+                      : 'https://planetnode.net/templates/planetnode/img/header/logo.png',
+                  width: 100,
+                ),
                 SizedBox(height: 8.0),
               ],
             ),
@@ -268,7 +269,7 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/home_planetnode', (Route<dynamic> route) => false);
+            '/planetnode/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,
