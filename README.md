@@ -52,10 +52,18 @@ This project needs you! If you would like to support this project's further deve
 Of course, you can also choose what you want to donate, all donations are awesome!
 
 
-### License
+## 👨 Developed By
 
-- Copyright 2019 Ruben Talstra and Yvan Watchman
-- Licensed under [GNU General Public License v3.0](https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE)
+```
+Ruben Talstra and Yvan Watchman
+```
+
+Passionate #Flutter, #Android Developer, #iOS Developer.
+
+<a href="https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app"><img src="https://github.com/aritraroy/social-icons/blob/master/play-store-icon.png?raw=true" width="60"></a>
+<a href="https://twitter.com/AppPterodactyl"><img src="https://github.com/aritraroy/social-icons/blob/master/twitter-icon.png?raw=true" width="60"></a>
+<a href=""><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
+<a href=""><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
 
 
 ## Useful Links
@@ -78,7 +86,7 @@ flutter build appbundle --release --target-platform=android-arm64
 License
 -------
 
-    Copyright 2018 Ruben Talstra Yvan Watchman
+    Copyright 2018 Ruben Talstra and Yvan Watchman
 
     Licensed under the GNU General Public License v3.0 (the "License");
     you may not use this file except in compliance with the License.
