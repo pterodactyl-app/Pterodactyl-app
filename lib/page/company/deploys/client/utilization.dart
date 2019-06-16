@@ -46,7 +46,7 @@ class _StatePageState extends State<StatePage> {
   Timer timer;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
 
     http.Response response = await http.get(
       "https://panel.deploys.io/api/client/servers/${widget.server.id}/utilization",

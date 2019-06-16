@@ -174,7 +174,7 @@ class _LoginMiniCenterPageState extends State<LoginMiniCenterPage> {
       }
 
       http.Response response = await http.get(
-        "https://--------/api/client",
+        "https://panel.minicenter.net/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer ${_apiController.text}"

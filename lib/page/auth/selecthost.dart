@@ -110,28 +110,84 @@ class _SelectHostPageState extends State<SelectHostPage> {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'planetnode');
               Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
-            }),            
+            }),
             _buildTile(
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Nothing here',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                            Image.network(
+                                globals.useDarkTheme
+                                    ? 'https://avatars2.githubusercontent.com/u/35084758?s=280&v=4'
+                                    : 'https://pbs.twimg.com/profile_images/1041472632984616961/uIjCN238.jpg',
+                              width: 100,
+                              height: 60,
+                            ),
                           ],
                         ),
                       ]),
                 ), onTap: () async {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => LoginDeploysPage()));
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'coderslight');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
             }),
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.network(
+                                globals.useDarkTheme
+                                    ? 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png'
+                                    : 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png',
+                              width: 100,
+                              height: 60,
+                            ),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'revivenode');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+            }),             
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('MiniCenter',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 23.0
+                                )
+                            ),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'minicenter');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+            }),                                     
             _buildTile(
                 Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -158,6 +214,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
             }),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),

@@ -41,7 +41,11 @@ class _ReviveNodeServerListPageState extends State<ReviveNodeServerListPage> {
   Map data;
   List userData;
 
-  Future getData() async {
+  final _searchForm = TextEditingController();
+  dynamic appBarTitle;
+  Icon icon = Icon(Icons.search);
+
+  Future getData({String search: ''}) async {
     String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
     http.Response response = await http.get(
       "https://panel.revivenode.com/api/client",
@@ -52,7 +56,16 @@ class _ReviveNodeServerListPageState extends State<ReviveNodeServerListPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userData = data["data"];
+      userData = [];
+      if(search.isNotEmpty) {
+        data['data'].forEach((v) {
+          if(v['attributes']['name'].toString().contains(search)) {
+            userData.add(v);
+          }
+        });
+      } else {
+        userData = data["data"];
+      }
     });
   }
 
@@ -73,21 +86,34 @@ class _ReviveNodeServerListPageState extends State<ReviveNodeServerListPage> {
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text(DemoLocalizations.of(context).trans('server_list'),
-            style: TextStyle(
-                color: globals.useDarkTheme ? null : Colors.black,
-                fontWeight: FontWeight.w700)),
+        title: (this.appBarTitle != null ? this.appBarTitle : new Text(DemoLocalizations.of(context).trans('server_list'))),
         actions: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                IconButton(icon: Icon(Icons.search), onPressed: () {})
-              ],
-            ),
-          )
+          new IconButton(icon: this.icon, onPressed: () {
+            setState(() {
+              if (this.icon.icon == Icons.search) {
+                this.icon = Icon(Icons.close);
+                appBarTitle = new TextField(
+                  controller: _searchForm,
+                  onChanged: (s) {
+                    getData(search: s);
+                  },
+                  style: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black),
+                  decoration: new InputDecoration(
+                      prefixIcon: Icon(Icons.search, color: globals.useDarkTheme ? Colors.white : Colors.black),
+                      hintText: "Search...",
+                      hintStyle: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black)
+                  ),
+                );
+              } else {
+                getData();
+                this.icon = Icon(Icons.search);
+                appBarTitle = new Text(DemoLocalizations
+                    .of(context)
+                    .trans('server_list'));
+              }
+            });
+          })
+
         ],
       ),
       body: ListView.builder(

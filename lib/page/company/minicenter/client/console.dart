@@ -23,6 +23,9 @@ import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
 
+String socketUrl;
+List<String> logRows = new List<String>();
+
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
   final Send server;
@@ -32,12 +35,18 @@ class SendPage extends StatefulWidget {
 }
 
 class _SendPageState extends State<SendPage> {
+  List<String> toPrint = ["trying to conenct"];
+  SocketIOManager manager;
+  SocketIO socket;
+  bool isProbablyConnected = false;
+
   final _sendController = TextEditingController();
 
   Future postSend() async {
     String _send = await SharedPreferencesHelper.getString("send");
-    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
-    var url = 'https://panel.deploys.io/api/client/servers/${widget.server.id}/command';
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+    var url =
+        'https://panel.minicenter.net/api/client/servers/${widget.server.id}/command';
 
     Map data = {'command': '$_send'};
     //encode Map to JSON
@@ -56,6 +65,101 @@ class _SendPageState extends State<SendPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    manager = SocketIOManager();
+    getServerInfo().then(initSocket);
+  }
+
+  getServerInfo() async {
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
+
+    var url =
+        'https://panel.minicenter.net/api/app/user/console/${widget.server.id}';
+
+    var response = await http.get(url, headers: {
+      "Accept": "Application/vnd.pterodactyl.v1+json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $_api"
+    });
+
+    return response;
+  }
+
+  initSocket(socketData) async {
+    Map data = json.decode(socketData.body);
+
+    if (!data.containsKey('attributes')) {
+      return;
+    }
+
+    data = data['attributes'];
+    print(data['identifier']);
+    socketUrl = "https://" + data['node'] + "/v1/ws/" + data['identifier'];
+
+    setState(() => isProbablyConnected = true);
+    socket = await manager.createInstance(
+        //Socket IO server URI
+        socketUrl,
+        //Query params - can be used for authentication
+        query: {
+          "token": data['daemon_key'],
+        },
+        //Enable or disable platform channel logging
+        enableLogging: false);
+    socket.onConnect((data) {
+      pprint("connected...");
+      pprint(data);
+    });
+    socket.onConnectError(pprint);
+    socket.onConnectTimeout(pprint);
+    socket.onError(pprint);
+    socket.onDisconnect(pprint);
+    socket.on('initial status', (data) {
+      if (data['status'] == 1 || data['status'] == 2) {
+        socket.emit('send server log', null);
+      }
+    });
+    socket.on('status', (data) {});
+    socket.on('server log', (data) {
+      data.toString().split('/\n/\g').forEach((data) => logRows.add(data));
+    });
+
+    socket.on('console', (data) {
+      pprint('console');
+      if (data['line'] != null) {
+        setState(() {
+          data['line'].toString().split('\\n\\g').forEach((data) => {
+                if (data.length > 52)
+                  {
+                    logRows.add(data.substring(0, 51)),
+                    logRows.add(data.substring(52))
+                  }
+                else
+                  {logRows.add(data)}
+              });
+        });
+      }
+    });
+    socket.connect();
+  }
+
+  disconnect() async {
+    await manager.clearInstance(socket);
+    setState(() => {isProbablyConnected = false, logRows.clear()});
+  }
+
+  pprint(data) {
+    setState(() {
+      if (data is Map) {
+        data = json.encode(data);
+      }
+      print(data);
+      toPrint.add(data);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -63,7 +167,10 @@ class _SendPageState extends State<SendPage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            disconnect();
+            Navigator.of(context).pop();
+          },
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
@@ -74,32 +181,19 @@ class _SendPageState extends State<SendPage> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
           children: <Widget>[
-            /*SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                new FlatButton(
-              child: new Text(
-                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-                
-              },
+            SizedBox(height: 10.0),
+            Container(
+              height: 425,
+              color: Colors.black,
+              child: SingleChildScrollView(
+                  child: new Wrap(
+                direction: Axis.vertical,
+                children: <Widget>[getTextWidgets()],
+              )),
             ),
-              ],
-            ),*/
-            SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Text(
-                  DemoLocalizations.of(context).trans('coming_soon'),
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ],
-            ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 10.0),
             AccentColorOverride(
               color: Colors.red,
               child: TextField(
@@ -141,6 +235,19 @@ class _SendPageState extends State<SendPage> {
       ),
     );
   }
+}
+
+Widget getTextWidgets() {
+  if (logRows != null) {
+    return new Row(
+        children: logRows
+            .map((item) => new Text(
+                  item,
+                  style: TextStyle(color: Colors.white),
+                ))
+            .toList());
+  }
+  return new Row(children: []);
 }
 
 class AccentColorOverride extends StatelessWidget {

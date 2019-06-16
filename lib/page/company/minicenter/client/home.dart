@@ -37,11 +37,11 @@ class _MyMiniCenterHomePageState extends State<MyMiniCenterHomePage> {
   int userTotalServers = 0;
 
   Future getDataHome() async {
-    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    String _api = await SharedPreferencesHelper.getString("api_minicenter_Key");
 
     try {
       http.Response response = await http.get(
-        "https://panel.deploys.io/api/client",
+        "https://panel.minicenter.net/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_api"
