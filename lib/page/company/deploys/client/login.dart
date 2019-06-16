@@ -268,7 +268,7 @@ class _LoginDeploysPageState extends State<LoginDeploysPage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/homedeploys', (Route<dynamic> route) => false);
+            '/deploys/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,
