@@ -144,7 +144,6 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("api_planetnode_Key", _apiController.text);
-      sharedPreferences.commit();
       getCredential();
     });
   }
@@ -166,7 +165,7 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
     });
   }
 
-  Future<bool> _navigator() async {
+  Future<void> _navigator() async {
     if (_apiController.text.length != 0) {
       if (_apiController.text.isEmpty) {
         Navigator.of(context).pushNamedAndRemoveUntil(

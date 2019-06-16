@@ -21,7 +21,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
 class User {
   final String api, url;
@@ -143,7 +142,6 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("api_coderslight_Key", _apiController.text);
-      sharedPreferences.commit();
       getCredential();
     });
   }
@@ -165,7 +163,7 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
     });
   }
 
-  Future<bool> _navigator() async {
+  Future<void> _navigator() async {
     if (_apiController.text.length != 0) {
       if (_apiController.text.isEmpty) {
         Navigator.of(context).pushNamedAndRemoveUntil(

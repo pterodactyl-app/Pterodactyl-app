@@ -219,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Future<bool> _navigator() async {
+  Future<void> _navigator() async {
     if (_apiController.text.length != 0 || _urlController.text.length != 0) {
       if (_urlController.text.isEmpty) {
         Navigator.of(context)

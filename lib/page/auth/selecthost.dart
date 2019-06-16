@@ -13,22 +13,15 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import 'package:flutter/material.dart';
-import 'shared_preferences_helper.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
-import 'dart:convert';
-import 'package:pterodactyl_app/main.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
-import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
-import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
 import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
-import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SelectHostPage extends StatefulWidget {

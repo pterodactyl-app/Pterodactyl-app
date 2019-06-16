@@ -140,7 +140,7 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                                   .trans('admin_view_server_installed'),
                               style: TextStyle(color: Colors.blueAccent)),
                           Text(
-                              installed != "true"
+                              installed != true
                                   ? DemoLocalizations.of(context).trans('yes')
                                   : DemoLocalizations.of(context).trans('no'),
                               style: TextStyle(
@@ -289,7 +289,7 @@ class _AdminServerInfoPageState extends State<AdminServerInfoPage> {
                               DemoLocalizations.of(context)
                                   .trans('utilization_cpu'),
                               style: TextStyle(color: Colors.blueAccent)),
-                          Text(cpu.toString() != 0 ? "∞" : "${cpu.toString()}%",
+                          Text(cpu.toString() != null ? "∞" : "${cpu.toString()}%",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],

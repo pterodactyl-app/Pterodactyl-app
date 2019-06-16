@@ -14,12 +14,8 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import '../auth/shared_preferences_helper.dart';
-import 'package:http/http.dart' as http;
+
 import '../../globals.dart' as globals;
-import 'dart:async';
-import 'dart:convert';
-import '../../main.dart';
 
 class ConsoleLogs extends StatefulWidget {
   @override
