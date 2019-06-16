@@ -41,6 +41,8 @@ class _ServerListPageState extends State<ServerListPage> {
   Map data;
   List userData;
 
+  final _searchForm = TextEditingController();
+
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
@@ -86,7 +88,13 @@ class _ServerListPageState extends State<ServerListPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                IconButton(icon: Icon(Icons.search), onPressed: () {})
+                IconButton(icon: Icon(Icons.search), onPressed: () {}),
+                TextField(
+                  controller: _searchForm,
+                  decoration: InputDecoration(
+                  labelText: DemoLocalizations.of(context)
+                  .trans('url_login'),
+                ))
               ],
             ),
           )
