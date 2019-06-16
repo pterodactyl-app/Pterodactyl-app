@@ -109,7 +109,7 @@ class _PlanetNodeServerListPageState extends State<PlanetNodeServerListPage> {
                 );
               } else {
                 getData();
-                icon = Icon(Icons.search);
+                this.icon = Icon(Icons.search);
                 appBarTitle = new Text(DemoLocalizations
                     .of(context)
                     .trans('server_list'));
