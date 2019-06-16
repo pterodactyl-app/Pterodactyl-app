@@ -16,6 +16,13 @@
 
 import 'package:flutter/material.dart';
 
+// AccurateNode
+import 'package:pterodactyl_app/page/company/accuratenode/client/home.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/login.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/servers.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/about.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/settings.dart';
+
 // CodersLight
 import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';
 import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
@@ -55,6 +62,13 @@ import 'package:pterodactyl_app/page/company/revivenode/client/settings.dart';
 /// Till then, we'll have to manually add every route.
 Map companyRoutes() {
   Map c = <String, Map>{};
+  c['accuratenode'] = <String, WidgetBuilder>{
+    '/accuratenode/home': (BuildContext context) => new MyAccurateNodeHomePage(),
+    '/accuratenode/login': (BuildContext context) => new LoginAccurateNodePage(),
+    '/accuratenode/servers': (BuildContext context) => new AccurateNodeServerListPage(),
+    '/accuratenode/about': (BuildContext context) => new AccurateNodeAboutPage(),
+    '/accuratenode/settings': (BuildContext context) => new AccurateNodeSettingsList(),
+  };  
   c['coderslight'] = <String, WidgetBuilder>{
     '/coderslight/home': (BuildContext context) => new MyCodersLightHomePage(),
     '/coderslight/login': (BuildContext context) => new LoginCodersLightPage(),
@@ -101,6 +115,6 @@ Map companyRoutes() {
 List<String> companies() {
   List<String> companies = [];
   companies.addAll(
-      ['deploys', 'coderslight', 'minicenter', 'planetnode', 'revivenode']);
+      ['deploys', 'coderslight', 'minicenter', 'planetnode', 'revivenode', 'accuratenode']);
   return companies;
 }

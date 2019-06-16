@@ -143,6 +143,32 @@ class _SelectHostPageState extends State<SelectHostPage> {
                           children: <Widget>[
                             Image.network(
                                 globals.useDarkTheme
+                                    ? 'https://accuratenode.com/assets/img/icon.png'
+                                    : 'https://accuratenode.com/assets/img/icon.png',
+                              width: 100,
+                              height: 60,
+                            ),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'accuratenode');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+            }),            
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.network(
+                                globals.useDarkTheme
                                     ? 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png'
                                     : 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png',
                               width: 100,
