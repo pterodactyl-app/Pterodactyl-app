@@ -35,11 +35,21 @@ If you found this project useful, then please consider giving it a :star: on Git
 
 
 
-# Donate
+## 💰 Donations
 
-> If you like this project and want to support me found this project helpful or you learned something from the source code and want to thank me, consider buying me a cup of :coffee:
->
-> - [PayPal](https://www.paypal.me/RDTalstra)
+This project needs you! If you would like to support this project's further development, the creator of this project or the continuous maintenance of this project, feel free to donate. Your donation is highly appreciated (and I love food, coffee and beer). Thank you!
+
+**PayPal**
+
+- **[Donate \$5](https://www.paypal.me/RDTalstra/5)**: Thank's for creating this project, here's a coffe :coffee: (or some juice) for you!
+- **[Donate \$10](https://www.paypal.me/RDTalstra/10)**: Wow, I am stunned. Let me take you to the movies!
+- **[Donate \$15](https://www.paypal.me/RDTalstra/15)**: I really appreciate your work, let's grab some lunch!
+- **[Donate \$25](https://www.paypal.me/RDTalstra/25)**: That's some awesome stuff you did right there, dinner is on me!
+- **[Donate \$50](https://www.paypal.me/RDTalstra/50)**: I really really want to support this project, great job!
+- **[Donate \$100](https://www.paypal.me/RDTalstra/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
+- **[Donate \$2799](https://www.paypal.me/RDTalstra/2799)**: Go buddy, buy Macbook Pro for yourself!
+
+Of course, you can also choose what you want to donate, all donations are awesome!
 
 
 ### License
