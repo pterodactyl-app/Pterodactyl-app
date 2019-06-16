@@ -34,12 +34,12 @@ class PartnerList {
       name: "",
       url: "",
       logo: {
-          dark: "",
-          light: ""
+          "dark": "",
+          "light": ""
         },
       color: {
-        primary: "",
-        secondary: ""
+        "primary": "",
+        "secondary": ""
       },
     ),
   ];
