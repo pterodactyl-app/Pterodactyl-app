@@ -53,8 +53,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
-    var url = 'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
+    String _api =
+        await SharedPreferencesHelper.getString("api_coderslight_Key");
+    var url =
+        'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -73,8 +75,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
-    var url = 'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
+    String _api =
+        await SharedPreferencesHelper.getString("api_coderslight_Key");
+    var url =
+        'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -93,8 +97,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
-    var url = 'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
+    String _api =
+        await SharedPreferencesHelper.getString("api_coderslight_Key");
+    var url =
+        'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -113,8 +119,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
-    var url = 'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
+    String _api =
+        await SharedPreferencesHelper.getString("api_coderslight_Key");
+    var url =
+        'https://panel.coderslight.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON
@@ -359,8 +367,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
             StaggeredTile.extent(2, 110.0),
           ],
         ));
-
-        
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {

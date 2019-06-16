@@ -57,9 +57,9 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
         backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: ()  {
+          onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
+                '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -154,7 +154,8 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text = sharedPreferences.getString("api_revicenode_Key");
+          _apiController.text =
+              sharedPreferences.getString("api_revicenode_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();

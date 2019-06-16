@@ -131,16 +131,14 @@ class _SendPageState extends State<SendPage> {
       pprint('console');
       if (data['line'] != null) {
         setState(() {
-          data['line']
-              .toString()
-              .split('\\n\\g')
-              .forEach((data) => {
-                if(data.length > 52) {
-                  logRows.add(data.substring(0, 51)),
-                  logRows.add(data.substring(52))
-                } else {
-                  logRows.add(data)
-                }
+          data['line'].toString().split('\\n\\g').forEach((data) => {
+                if (data.length > 52)
+                  {
+                    logRows.add(data.substring(0, 51)),
+                    logRows.add(data.substring(52))
+                  }
+                else
+                  {logRows.add(data)}
               });
         });
       }
@@ -150,10 +148,7 @@ class _SendPageState extends State<SendPage> {
 
   disconnect() async {
     await manager.clearInstance(socket);
-    setState(() => {
-      isProbablyConnected = false,
-      logRows.clear()
-    });
+    setState(() => {isProbablyConnected = false, logRows.clear()});
   }
 
   pprint(data) {
@@ -196,12 +191,9 @@ class _SendPageState extends State<SendPage> {
               color: Colors.black,
               child: SingleChildScrollView(
                   child: new Wrap(
-                    direction: Axis.vertical,
-                    children: <Widget>[
-                      getTextWidgets()
-                    ],
-                  )
-              ),
+                direction: Axis.vertical,
+                children: <Widget>[getTextWidgets()],
+              )),
             ),
             SizedBox(height: 10.0),
             AccentColorOverride(
@@ -249,7 +241,13 @@ class _SendPageState extends State<SendPage> {
 
 Widget getTextWidgets() {
   if (logRows != null) {
-    return new Row(children: logRows.map((item) => new Text(item, style: TextStyle(color: Colors.white),)).toList());
+    return new Row(
+        children: logRows
+            .map((item) => new Text(
+                  item,
+                  style: TextStyle(color: Colors.white),
+                ))
+            .toList());
   }
   return new Row(children: []);
 }

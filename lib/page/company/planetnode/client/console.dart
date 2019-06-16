@@ -45,7 +45,8 @@ class _SendPageState extends State<SendPage> {
   Future postSend() async {
     String _send = await SharedPreferencesHelper.getString("send");
     String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
-    var url = 'https://panel.planetnode.net/api/client/servers/${widget.server.id}/command';
+    var url =
+        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/command';
 
     Map data = {'command': '$_send'};
     //encode Map to JSON
@@ -73,7 +74,8 @@ class _SendPageState extends State<SendPage> {
   getServerInfo() async {
     String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
 
-    var url = 'https://panel.planetnode.net/api/app/user/console/${widget.server.id}';
+    var url =
+        'https://panel.planetnode.net/api/app/user/console/${widget.server.id}';
 
     var response = await http.get(url, headers: {
       "Accept": "Application/vnd.pterodactyl.v1+json",
@@ -108,7 +110,6 @@ class _SendPageState extends State<SendPage> {
     socket.onConnect((data) {
       pprint("connected...");
       pprint(data);
-//      sendMessage();
     });
     socket.onConnectError(pprint);
     socket.onConnectTimeout(pprint);
@@ -121,18 +122,21 @@ class _SendPageState extends State<SendPage> {
     });
     socket.on('status', (data) {});
     socket.on('server log', (data) {
-      data.toString().split('/\n/\g').forEach((data) => {logRows.add(data)});
+      data.toString().split('/\n/\g').forEach((data) => logRows.add(data));
     });
 
     socket.on('console', (data) {
       pprint('console');
       if (data['line'] != null) {
         setState(() {
-          data['line']
-              .toString()
-              .split('\\n\\g')
-              .forEach((data) => {
-                logRows.add(data)
+          data['line'].toString().split('\\n\\g').forEach((data) => {
+                if (data.length > 52)
+                  {
+                    logRows.add(data.substring(0, 51)),
+                    logRows.add(data.substring(52))
+                  }
+                else
+                  {logRows.add(data)}
               });
         });
       }
@@ -142,7 +146,7 @@ class _SendPageState extends State<SendPage> {
 
   disconnect() async {
     await manager.clearInstance(socket);
-    setState(() => isProbablyConnected = false);
+    setState(() => {isProbablyConnected = false, logRows.clear()});
   }
 
   pprint(data) {
@@ -185,12 +189,9 @@ class _SendPageState extends State<SendPage> {
               color: Colors.black,
               child: SingleChildScrollView(
                   child: new Wrap(
-                    direction: Axis.vertical,
-                    children: <Widget>[
-                      getTextWidgets()
-                    ],
-                  )
-              ),
+                direction: Axis.vertical,
+                children: <Widget>[getTextWidgets()],
+              )),
             ),
             SizedBox(height: 10.0),
             AccentColorOverride(
@@ -238,7 +239,13 @@ class _SendPageState extends State<SendPage> {
 
 Widget getTextWidgets() {
   if (logRows != null) {
-    return new Row(children: logRows.map((item) => new Text(item, style: TextStyle(color: Colors.white),)).toList());
+    return new Row(
+        children: logRows
+            .map((item) => new Text(
+                  item,
+                  style: TextStyle(color: Colors.white),
+                ))
+            .toList());
   }
   return new Row(children: []);
 }

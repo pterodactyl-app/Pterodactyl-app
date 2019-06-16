@@ -22,7 +22,6 @@ import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
 
-
 class User {
   final String id, name;
   const User({
