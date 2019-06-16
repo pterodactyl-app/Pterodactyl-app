@@ -37,7 +37,7 @@ class PartnerList {
           dark: "",
           light: ""
         },
-      colors: {
+      color: {
         primary: "",
         secondary: ""
       },
