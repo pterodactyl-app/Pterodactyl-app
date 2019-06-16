@@ -14,16 +14,21 @@
 * limitations under the License.
 */
 class PartnerList {
-  final String name;
-  final String url;
-  final String logo.dark;
-  final String logo.light;
-  final String colors.primary;
-  final String colors.secondary;
+  String name;
+  String url;
+  Map<String, String> logo;
+  Map<String, String> color;
 
-  PartnerList(
-      {this.name, this.url, this.logo.dark, this.logo.light, this.colors.primary, this.colors.secondary});
 
+
+  PartnerList({String name, String url, Map<String, String> logo, Map<String, String> color}) {
+    this.name = name;
+    this.url = url;
+    this.logo = logo;
+    this.color = color;
+  }
+
+  // Idk what the fuck is happening here
   static final List<PartnerList> partnerList = [
     PartnerList(
       name: "",
