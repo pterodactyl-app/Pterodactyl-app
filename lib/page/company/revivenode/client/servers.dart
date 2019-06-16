@@ -30,14 +30,14 @@ class User {
   });
 }
 
-class ServerListPage extends StatefulWidget {
-  ServerListPage({Key key}) : super(key: key);
+class ReviveNodeServerListPage extends StatefulWidget {
+  ReviveNodeServerListPage({Key key}) : super(key: key);
 
   @override
-  _ServerListPageState createState() => _ServerListPageState();
+  _ReviveNodeServerListPageState createState() => _ReviveNodeServerListPageState();
 }
 
-class _ServerListPageState extends State<ServerListPage> {
+class _ReviveNodeServerListPageState extends State<ReviveNodeServerListPage> {
   Map data;
   List userData;
 

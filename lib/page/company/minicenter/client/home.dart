@@ -137,7 +137,7 @@ class _MyMiniCenterHomePageState extends State<MyMiniCenterHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
+                  .push(MaterialPageRoute(builder: (_) => MiniCenterServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -167,7 +167,7 @@ class _MyMiniCenterHomePageState extends State<MyMiniCenterHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+                  .push(MaterialPageRoute(builder: (_) => MiniCenterSettingsList())),
             ),
             _buildTile(
               Padding(

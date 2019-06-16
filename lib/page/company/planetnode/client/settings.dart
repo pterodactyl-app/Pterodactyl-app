@@ -25,12 +25,12 @@ import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/sponsor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsList extends StatefulWidget {
+class PlanetNodeSettingsList extends StatefulWidget {
   @override
-  SettingsListPageState createState() => new SettingsListPageState();
+  PlanetNodeSettingsListState createState() => new PlanetNodeSettingsListState();
 }
 
-class SettingsListPageState extends State<SettingsList> {
+class PlanetNodeSettingsListState extends State<PlanetNodeSettingsList> {
   String _projectVersion = '';
 
   @override

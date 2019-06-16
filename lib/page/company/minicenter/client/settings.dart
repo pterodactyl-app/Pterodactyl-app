@@ -26,12 +26,12 @@ import 'package:pterodactyl_app/sponsor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-class SettingsList extends StatefulWidget {
+class MiniCenterSettingsList extends StatefulWidget {
   @override
-  SettingsListPageState createState() => new SettingsListPageState();
+  MiniCenterSettingsListState createState() => new MiniCenterSettingsListState();
 }
 
-class SettingsListPageState extends State<SettingsList> {
+class MiniCenterSettingsListState extends State<MiniCenterSettingsList> {
   String _projectVersion = '';
 
   @override

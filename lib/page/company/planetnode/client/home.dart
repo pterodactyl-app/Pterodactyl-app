@@ -137,7 +137,7 @@ class _MyPlanetNodeHomePageState extends State<MyPlanetNodeHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
+                  .push(MaterialPageRoute(builder: (_) => PlanetNodeServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -167,7 +167,7 @@ class _MyPlanetNodeHomePageState extends State<MyPlanetNodeHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+                  .push(MaterialPageRoute(builder: (_) => PlanetNodeSettingsList())),
             ),
             _buildTile(
               Padding(
