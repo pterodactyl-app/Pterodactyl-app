@@ -50,28 +50,9 @@ class _SelectHostPageState extends State<SelectHostPage> {
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
-                  fontSize: 30.0)),
-          //actions: <Widget>[
-          //Container(
-          //margin: EdgeInsets.only(right: 8.0),
-          //child: Row(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          //children: <Widget>[
-          //Text(DemoLocalizations.of(context).trans('logout'),
-          //style: TextStyle(
-          //color:
-          //globals.isDarkTheme ? Colors.white : Colors.blue,
-          //fontWeight: FontWeight.w700,
-          //fontSize: 14.0)),
-          //Icon(
-          //Icons.subdirectory_arrow_left,
-          //color: globals.isDarkTheme ? Colors.white : Colors.black,
-          //)
-          //],
-          //),
-          //)
-          //],
+                  fontSize: 30.0
+              )
+          ),
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -160,9 +141,12 @@ class _SelectHostPageState extends State<SelectHostPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Others',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                            Text('Other',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 23.0
+                                )
+                            ),
                           ],
                         ),
                       ]),
@@ -172,6 +156,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
             }),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),

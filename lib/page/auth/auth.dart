@@ -30,7 +30,7 @@ class SplashState extends State<Splash> {
 
   String company;
   SplashState() {
-    this.company = null;
+    this.company = '';
   }
 
   Future checkSeen() async {
@@ -50,19 +50,18 @@ class SplashState extends State<Splash> {
   }
 
   Future checkAuthentication({isAdmin = false, SharedPreferences prefs}) async {
-
     isAuthenticated(isAdmin: isAdmin).then((bool) => {
-      prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) => {
-        if(this.company == null) {
+      prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) {
+        if(this.company.isEmpty) {
           Navigator.of(context).pushReplacement(
               new MaterialPageRoute(builder: (context) =>
               isAdmin ? new AdminHomePage() : new MyHomePage())
-          )
+          );
         } else {
           Navigator.of(context).pushReplacementNamed(
               isAdmin
-                  ? '/' + this.company + '/admin/home'
-                  : '/' + this.company + '/home')
+                  ? '/' + (this.company.isNotEmpty ? this.company + '/' : '') + 'admin/home'
+                  : '/' + (this.company.isNotEmpty ? this.company + '/' : '') + 'home');
         }
       })
     });
@@ -87,9 +86,7 @@ class SplashState extends State<Splash> {
 
     // Host cannot be empty, otherwise an exception will occur.
     if(_https.isEmpty) {
-      await Navigator.of(context).pushNamedAndRemoveUntil(
-          '/' + (this.company != null ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
-          Route<dynamic> route) => false);
+      await Navigator.of(context).pushNamedAndRemoveUntil('/selecthost', (Route<dynamic> route) => false);
       return false;
     }
 
@@ -107,7 +104,7 @@ class SplashState extends State<Splash> {
       SharedPreferencesHelper.remove('apiKey');
       SharedPreferencesHelper.remove('apiAdminKey');
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/' + (this.company != null ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
+          '/' + (this.company.isNotEmpty ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
           Route<dynamic> route) => false);
     }
 

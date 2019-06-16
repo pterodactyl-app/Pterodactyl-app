@@ -61,8 +61,8 @@ class _LoginPageState extends State<LoginPage> {
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
-            //Navigator.of(context).pushNamedAndRemoveUntil(
-            //'/selecthost', (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+            '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
