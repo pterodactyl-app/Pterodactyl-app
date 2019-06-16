@@ -17,3 +17,4 @@ just the deafult version of the app. we will change the colours and the logos at
 
 ## Custom
 
+if you want a total custom client page and client login please contact by sending a email to this email address: [rubentalstra1211@gmail.com](mailto:rubentalstra1211@gmail.com)
