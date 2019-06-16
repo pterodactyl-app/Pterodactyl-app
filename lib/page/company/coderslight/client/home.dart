@@ -137,7 +137,7 @@ class _MyCodersLightHomePageState extends State<MyCodersLightHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
+                  .push(MaterialPageRoute(builder: (_) => CodersLightServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -167,7 +167,7 @@ class _MyCodersLightHomePageState extends State<MyCodersLightHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+                  .push(MaterialPageRoute(builder: (_) => CodersLightSettingsList())),
             ),
             _buildTile(
               Padding(

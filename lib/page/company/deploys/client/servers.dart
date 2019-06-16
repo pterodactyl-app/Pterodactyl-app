@@ -30,14 +30,14 @@ class User {
   });
 }
 
-class ServerListPage extends StatefulWidget {
-  ServerListPage({Key key}) : super(key: key);
+class DeploysServerListPage extends StatefulWidget {
+  DeploysServerListPage({Key key}) : super(key: key);
 
   @override
-  _ServerListPageState createState() => _ServerListPageState();
+  _DeploysServerListPageState createState() => _DeploysServerListPageState();
 }
 
-class _ServerListPageState extends State<ServerListPage> {
+class _DeploysServerListPageState extends State<DeploysServerListPage> {
   Map data;
   List userData;
 

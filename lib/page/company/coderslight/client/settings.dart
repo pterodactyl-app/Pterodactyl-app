@@ -26,12 +26,12 @@ import 'package:pterodactyl_app/sponsor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-class SettingsList extends StatefulWidget {
+class CodersLightSettingsList extends StatefulWidget {
   @override
   SettingsListPageState createState() => new SettingsListPageState();
 }
 
-class SettingsListPageState extends State<SettingsList> {
+class SettingsListPageState extends State<CodersLightSettingsList> {
   String _projectVersion = '';
 
   @override

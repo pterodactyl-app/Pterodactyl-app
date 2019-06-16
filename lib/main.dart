@@ -232,8 +232,8 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
 //
   };
 
-  companies.forEach((k, v) => {
-  routes.addAll(companies[k])
+  companies.forEach((k, v) {
+    routes.addAll(companies[k]);
   });
 
   return routes;

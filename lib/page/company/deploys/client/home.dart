@@ -137,7 +137,7 @@ class _MyDeploysHomePageState extends State<MyDeploysHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
+                  .push(MaterialPageRoute(builder: (_) => DeploysServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -167,7 +167,7 @@ class _MyDeploysHomePageState extends State<MyDeploysHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+                  .push(MaterialPageRoute(builder: (_) => DeploysSettingsList())),
             ),
             _buildTile(
               Padding(
