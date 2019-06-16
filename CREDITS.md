@@ -9,11 +9,13 @@ For all the people who worked with me on this amazing project.
 
 > - [CodersLight LLC](https://coderslight.com/)
 
+> - [AccurateNode](https://accuratenode.com/)
+
 > - [MiniCenter](https://minicenter.net/)
 
 > - [PlanetNode](https://planetnode.net/)
 
-> - [Revivenode Hosting]()
+> - [ReviveNode Hosting](https://revivenode.com/)
 
 
 ###### Donators:
