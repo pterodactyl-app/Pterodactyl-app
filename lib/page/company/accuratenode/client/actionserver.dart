@@ -53,9 +53,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     var url =
-        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/power';
+        'https://panel.accuratenode.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -74,9 +74,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     var url =
-        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/power';
+        'https://panel.accuratenode.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -95,9 +95,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     var url =
-        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/power';
+        'https://panel.accuratenode.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -116,9 +116,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     var url =
-        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/power';
+        'https://panel.accuratenode.com/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON

@@ -46,10 +46,10 @@ class _StatePageState extends State<StatePage> {
   Timer timer;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
 
     http.Response response = await http.get(
-      "https://panel.planetnode.net/api/client/servers/${widget.server.id}/utilization",
+      "https://panel.accuratenode.com/api/client/servers/${widget.server.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",

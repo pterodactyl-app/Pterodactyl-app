@@ -47,9 +47,9 @@ class _AccurateNodeServerListPageState extends State<AccurateNodeServerListPage>
   final _searchForm = TextEditingController();
 
   Future getData({String search: ''}) async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     http.Response response = await http.get(
-      "https://panel.planetnode.net/api/client",
+      "https://panel.accuratenode.com/api/client",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_api"

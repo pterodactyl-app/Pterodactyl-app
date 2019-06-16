@@ -37,11 +37,11 @@ class _MyAccurateNodeHomePageState extends State<MyAccurateNodeHomePage> {
   int userTotalServers = 0;
 
   Future getDataHome() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
 
     try {
       http.Response response = await http.get(
-        "https://panel.planetnode.net/api/client",
+        "https://panel.accuratenode.com/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer $_api"
@@ -72,7 +72,7 @@ class _MyAccurateNodeHomePageState extends State<MyAccurateNodeHomePage> {
           automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.useDarkTheme ? null : Colors.white,
-          title: Text('PlanetNode Panel',
+          title: Text('AccurateNode Panel',
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,

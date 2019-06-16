@@ -126,7 +126,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
                   ),
                   onPressed: () async {
                     await SharedPreferencesHelper.setString(
-                        "api_planetnode_Key", _apiController.text);
+                        "api_accuratenode_Key", _apiController.text);
                     _navigator();
                   },
                 ),
@@ -143,7 +143,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("api_planetnode_Key", _apiController.text);
+      sharedPreferences.setString("api_accuratenode_Key", _apiController.text);
       getCredential();
     });
   }
@@ -155,7 +155,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       if (checkValue != null) {
         if (checkValue) {
           _apiController.text =
-              sharedPreferences.getString("api_planetnode_Key");
+              sharedPreferences.getString("api_accuratenode_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();
@@ -175,7 +175,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       }
 
       http.Response response = await http.get(
-        "https://panel.planetnode.net/api/client",
+        "https://panel.accuratenode.com/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Authorization": "Bearer ${_apiController.text}"
@@ -269,7 +269,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/planetnode/home', (Route<dynamic> route) => false);
+            '/accuratenode/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,

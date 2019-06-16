@@ -190,7 +190,7 @@ class AccurateNodeSettingsListState extends State<AccurateNodeSettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("api_planetnode_Key");
+                SharedPreferencesHelper.remove("api_accuratenode_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(

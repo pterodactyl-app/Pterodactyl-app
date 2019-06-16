@@ -44,9 +44,9 @@ class _SendPageState extends State<SendPage> {
 
   Future postSend() async {
     String _send = await SharedPreferencesHelper.getString("send");
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
     var url =
-        'https://panel.planetnode.net/api/client/servers/${widget.server.id}/command';
+        'https://panel.accuratenode.com/api/client/servers/${widget.server.id}/command';
 
     Map data = {'command': '$_send'};
     //encode Map to JSON
@@ -72,10 +72,10 @@ class _SendPageState extends State<SendPage> {
   }
 
   getServerInfo() async {
-    String _api = await SharedPreferencesHelper.getString("api_planetnode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_accuratenode_Key");
 
     var url =
-        'https://panel.planetnode.net/api/app/user/console/${widget.server.id}';
+        'https://panel.accuratenode.com/api/app/user/console/${widget.server.id}';
 
     var response = await http.get(url, headers: {
       "Accept": "Application/vnd.pterodactyl.v1+json",
