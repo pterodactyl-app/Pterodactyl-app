@@ -72,7 +72,7 @@ class _MyReviveNodeHomePageState extends State<MyReviveNodeHomePage> {
           automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.useDarkTheme ? null : Colors.white,
-          title: Text('Deploys.io Panel',
+          title: Text('ReviveNode Panel',
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,

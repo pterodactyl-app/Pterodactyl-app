@@ -37,7 +37,7 @@ class _MyCodersLightHomePageState extends State<MyCodersLightHomePage> {
   int userTotalServers = 0;
 
   Future getDataHome() async {
-    String _api = await SharedPreferencesHelper.getString("api_deploys_Key");
+    String _api = await SharedPreferencesHelper.getString("api_coderslight_Key");
 
     try {
       http.Response response = await http.get(
@@ -72,7 +72,7 @@ class _MyCodersLightHomePageState extends State<MyCodersLightHomePage> {
           automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.useDarkTheme ? null : Colors.white,
-          title: Text('Deploys.io Panel',
+          title: Text('CodersLight Panel',
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,

@@ -72,7 +72,7 @@ class _MyMiniCenterHomePageState extends State<MyMiniCenterHomePage> {
           automaticallyImplyLeading: false,
           elevation: 2.0,
           backgroundColor: globals.useDarkTheme ? null : Colors.white,
-          title: Text('Deploys.io Panel',
+          title: Text('MiniCenter Panel',
               style: TextStyle(
                   color: globals.useDarkTheme ? null : Colors.black,
                   fontWeight: FontWeight.w700,
