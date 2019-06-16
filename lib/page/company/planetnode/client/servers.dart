@@ -41,7 +41,6 @@ class _PlanetNodeServerListPageState extends State<PlanetNodeServerListPage> {
 
   Map data;
   List userData;
-  BuildContext context;
 
   dynamic appBarTitle;
 
