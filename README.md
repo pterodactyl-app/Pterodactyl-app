@@ -42,12 +42,12 @@ This project needs you! If you would like to support this project's further deve
 **PayPal**
 
 - **[Donate \$5](https://www.paypal.me/RDTalstra/5)**: Thank's for creating this project, here's a coffee :coffee: (or some juice) for you!
-- **[Donate \$10](https://www.paypal.me/RDTalstra/10)**: Wow, I'm stunned. Let me take you to the movies!
+- **[Donate \$10](https://www.paypal.me/RDTalstra/10)**: Wow, I'm stunned. Let me take you to the movies! :movie_camera:
 - **[Donate \$15](https://www.paypal.me/RDTalstra/15)**: I really appreciate your work, lets grab some lunch!
 - **[Donate \$25](https://www.paypal.me/RDTalstra/25)**: That's some awesome stuff you did right there, dinner is on me!
 - **[Donate \$50](https://www.paypal.me/RDTalstra/50)**: I really really want to support this project, great job!
 - **[Donate \$100](https://www.paypal.me/RDTalstra/100)**: You are the man! This project saved me hours (if not days) of struggle and hard work, simply awesome!
-- **[Donate \$2799](https://www.paypal.me/RDTalstra/2799)**: Go buddy, buy yourself a Macbook Pro!
+- **[Donate \$2799](https://www.paypal.me/RDTalstra/2799)**: Go buddy, buy yourself a Macbook Pro! :computer:
 
 Of course, you can also choose what you want to donate, all donations are awesome!
 
