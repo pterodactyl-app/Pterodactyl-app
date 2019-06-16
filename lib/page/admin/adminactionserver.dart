@@ -299,15 +299,15 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
-                          color: "$suspended" == false ? Colors.amber : Colors.green,
+                          color: suspended == false ? Colors.amber : Colors.green,
                           shape: CircleBorder(),
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Icon("$suspended" == false ? Icons.report : Icons.report_off,
+                            child: Icon(suspended == false ? Icons.report : Icons.report_off,
                                 color: Colors.white, size: 30.0),
                           )),
                       Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text("$suspended" == false ? DemoLocalizations.of(context)
+                      Text(suspended == false ? DemoLocalizations.of(context)
                               .trans('admin_actionserver_suspend_server') : DemoLocalizations.of(context)
                               .trans('admin_actionserver_unsuspend_server'),
                           
@@ -316,7 +316,7 @@ class _AdminActionServerPageState extends State<AdminActionServerPage> {
                     ]),
               ),
               onTap: () {
-                "$suspended" == false ? _suspend() : _unsuspend();
+                suspended == false ? _suspend() : _unsuspend();
               },
             ),
             _buildTile(

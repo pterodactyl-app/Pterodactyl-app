@@ -206,7 +206,7 @@ class _StatePageState extends State<StatePage> {
                           ),
                           Text(
                               "$_stats" == "on"
-                                  ? "${_limitCpu.toString()}" != 0
+                                  ? _limitCpu.toString() != null
                                       ? "$_currentCpu % / ∞ %"
                                       : "$_currentCpu % / ${_limitCpu.toString()} %"
                                   : "$_stats" == "off"

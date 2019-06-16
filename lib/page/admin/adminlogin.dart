@@ -181,7 +181,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       sharedPreferences.setString("adminhttps", dropdownValue);
       sharedPreferences.setString("apiAdminKey", _apiadminController.text);
       sharedPreferences.setString("panelAdminUrl", _urladminController.text);
-      sharedPreferences.commit();
       getCredential();
     });
   }
@@ -207,13 +206,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     });
   }
 
-  Future<bool> _navigator() async {
+  Future<void> _navigator() async {
     if (_apiadminController.text.length != 0 ||
         _urladminController.text.length != 0) {
       if (_urladminController.text.isEmpty) {
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/adminlogin', (Route<dynamic> route) => false);
-        return false;
+        return;
       }
 
       http.Response response = await http.get(

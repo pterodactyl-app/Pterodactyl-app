@@ -165,7 +165,7 @@ class _LoginDeploysPageState extends State<LoginDeploysPage> {
     });
   }
 
-  Future<bool> _navigator() async {
+  Future<void> _navigator() async {
     if (_apiController.text.length != 0) {
       if (_apiController.text.isEmpty) {
         Navigator.of(context).pushNamedAndRemoveUntil(
