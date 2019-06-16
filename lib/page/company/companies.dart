@@ -15,7 +15,6 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:pterodactyl_app/about.dart';
 
 // CodersLight
 import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';

@@ -99,7 +99,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                             Image.network(
                                 globals.useDarkTheme
                                     ? 'https://planetnode.net/templates/planetnode/img/header/logo.png'
-                                    : 'https://planetnode.net/templates/planetnode/img/header/logo.png',
+                                    : 'https://planetnode.net/templates/planetnode/img/header/logo-b.png',
                               width: 100,
                               height: 60,
                             ),
