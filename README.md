@@ -78,7 +78,7 @@ flutter build appbundle --release --target-platform=android-arm64
 License
 -------
 
-    Copyright 2018 Ruben Talstra Yvan Watchman
+    Copyright 2018 Ruben Talstra and Yvan Watchman
 
     Licensed under the GNU General Public License v3.0 (the "License");
     you may not use this file except in compliance with the License.
