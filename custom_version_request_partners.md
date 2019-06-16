@@ -12,7 +12,7 @@ List of options:
 ## Default (Dashboard)
 
 just the deafult version of the app. we will change the colours and the logo's at the login. Everything else will stay the same then.
-if you want add some custom pages to the app your welcome to let us know. and we will arrange it. 
+If you want add some custom pages to the app your welcome to let us know. and we will arrange it. 
 
 ## With Side menu (no Dashboard)
 
