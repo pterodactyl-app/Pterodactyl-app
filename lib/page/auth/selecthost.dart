@@ -185,7 +185,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Column(
