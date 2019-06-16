@@ -61,7 +61,6 @@ Ruben Talstra and Yvan Watchman
 Passionate #Flutter, #Android Developer, #iOS Developer.
 
 <a href="https://play.google.com/store/apps/details?id=nl.rubentalstra.pterodactyl_app"><img src="https://github.com/aritraroy/social-icons/blob/master/play-store-icon.png?raw=true" width="60"></a>
-<a href=""><img src="https://i.pinimg.com/originals/92/3d/d0/923dd092ebf5d55e08be97063316e2c7.png" width="70"></a>
 <a href="https://twitter.com/AppPterodactyl"><img src="https://github.com/aritraroy/social-icons/blob/master/twitter-icon.png?raw=true" width="60"></a>
 <a href=""><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
 <a href=""><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
