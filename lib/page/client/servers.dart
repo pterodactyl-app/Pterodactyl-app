@@ -45,7 +45,7 @@ class _ServerListPageState extends State<ServerListPage> {
   dynamic appBarTitle;
   Icon icon = Icon(Icons.search);
 
-  Future getData() async {
+  Future getData({String search: ''}) async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
@@ -58,7 +58,16 @@ class _ServerListPageState extends State<ServerListPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userData = data["data"];
+      userData = [];
+      if(search.isNotEmpty) {
+        data['data'].forEach((v) {
+          if(v['attributes']['name'].toString().contains(search)) {
+            userData.add(v);
+          }
+        });
+      } else {
+        userData = data["data"];
+      }
     });
   }
 
