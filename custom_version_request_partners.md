@@ -4,15 +4,14 @@ there are a few options where you can choose from or if you have your own sugges
 
 List of options:
 
-1. [Default](#default)
-2. [With Dashboard](#with-dashboard)
-3. [With Side menu (no Dashboard)](#with-side-menu-no-dashboard)
-4. [Custom](#custom)
+1. [Default](#default-dashboard)
+2. [With Side menu (no Dashboard)](#with-side-menu-no-dashboard)
+3. [Custom](#custom)
 
 
-## Default
+## Default (Dashboard)
 
-## With Dashboard
+just the deafult version of the app. we will change the colours and the logos at the login. Everything else will stay the same then.
 
 ## With Side menu (no Dashboard)
 
