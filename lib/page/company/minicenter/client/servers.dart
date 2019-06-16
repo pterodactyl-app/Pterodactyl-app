@@ -30,14 +30,14 @@ class User {
   });
 }
 
-class ServerListPage extends StatefulWidget {
-  ServerListPage({Key key}) : super(key: key);
+class MiniCenterServerListPage extends StatefulWidget {
+  MiniCenterServerListPage({Key key}) : super(key: key);
 
   @override
-  _ServerListPageState createState() => _ServerListPageState();
+  _MiniCenterServerListPageState createState() => _MiniCenterServerListPageState();
 }
 
-class _ServerListPageState extends State<ServerListPage> {
+class _MiniCenterServerListPageState extends State<MiniCenterServerListPage> {
   Map data;
   List userData;
 

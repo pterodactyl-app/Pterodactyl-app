@@ -137,7 +137,7 @@ class _MyReviveNodeHomePageState extends State<MyReviveNodeHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => ServerListPage())),
+                  .push(MaterialPageRoute(builder: (_) => ReviveNodeServerListPage())),
             ),
             _buildTile(
               Padding(
@@ -167,7 +167,7 @@ class _MyReviveNodeHomePageState extends State<MyReviveNodeHomePage> {
                     ]),
               ),
               onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+                  .push(MaterialPageRoute(builder: (_) => ReviveNodeSettingsList())),
             ),
             _buildTile(
               Padding(

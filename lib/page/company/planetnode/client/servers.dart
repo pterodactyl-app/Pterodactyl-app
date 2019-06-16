@@ -30,14 +30,14 @@ class User {
   });
 }
 
-class ServerListPage extends StatefulWidget {
-  ServerListPage({Key key}) : super(key: key);
+class PlanetNodeServerListPage extends StatefulWidget {
+  PlanetNodeServerListPage({Key key}) : super(key: key);
 
   @override
-  _ServerListPageState createState() => _ServerListPageState();
+  _PlanetNodeServerListPageState createState() => _PlanetNodeServerListPageState();
 }
 
-class _ServerListPageState extends State<ServerListPage> {
+class _PlanetNodeServerListPageState extends State<PlanetNodeServerListPage> {
   Map data;
   List userData;
 
