@@ -12,6 +12,8 @@ Client panel
 - Start, stop, restart or kill your server
 - Send commands to your server
 - See the CPU, memory and disk stats that you are using
+- See your Console logs
+- Select your host.
 
 Admin panel
 - Look at your servers
@@ -66,7 +68,7 @@ Passionate #Flutter, #Android Developer, #iOS Developer.
 <a href=""><img src="https://github.com/aritraroy/social-icons/blob/master/linkedin-icon.png?raw=true" width="60"></a>
 
 
-## Useful Links
+## :link: Useful Links
 
 
 Twitter: [Pterodactyl app Twitter](https://twitter.com/AppPterodactyl)
