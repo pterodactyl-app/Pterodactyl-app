@@ -21,6 +21,10 @@ import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
 import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/login.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
+import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
+import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -128,7 +132,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'coderslight');
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginCodersLightPage()));
             }),
             _buildTile(
                 Padding(
@@ -154,7 +158,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'accuratenode');
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginAccurateNodePage()));
             }),            
             _buildTile(
                 Padding(
@@ -180,7 +184,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'revivenode');
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginReviveNodePage()));
             }),             
             _buildTile(
                 Padding(
@@ -205,7 +209,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                 ), onTap: () async {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'minicenter');
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginPlanetNodePage()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginMiniCenterPage()));
             }),                                     
             _buildTile(
                 Padding(
