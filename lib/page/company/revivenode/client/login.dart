@@ -62,7 +62,7 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Client Login',
+        title: Text('Revivenode Client Login',
             style: TextStyle(
                 color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -124,7 +124,7 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
                   ),
                   onPressed: () async {
                     await SharedPreferencesHelper.setString(
-                        "api_revicenode_Key", _apiController.text);
+                        "api_revivenode_Key", _apiController.text);
                     _navigator();
                   },
                 ),
@@ -141,7 +141,7 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("api_revicenode_Key", _apiController.text);
+      sharedPreferences.setString("api_revivenode_Key", _apiController.text);
       getCredential();
     });
   }
@@ -153,7 +153,7 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
       if (checkValue != null) {
         if (checkValue) {
           _apiController.text =
-              sharedPreferences.getString("api_revicenode_Key");
+              sharedPreferences.getString("api_revivenode_Key");
         } else {
           _apiController.clear();
           sharedPreferences.clear();
@@ -267,7 +267,7 @@ class _LoginReviveNodePageState extends State<LoginReviveNodePage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/home_revicenode', (Route<dynamic> route) => false);
+            '/revivenode/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,

@@ -46,7 +46,7 @@ class _StatePageState extends State<StatePage> {
   Timer timer;
 
   Future getData() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
 
     http.Response response = await http.get(
       "https://panel.revivenode.com/api/client/servers/${widget.server.id}/utilization",

@@ -44,7 +44,7 @@ class _SendPageState extends State<SendPage> {
 
   Future postSend() async {
     String _send = await SharedPreferencesHelper.getString("send");
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
     var url =
         'https://panel.revivenode.com/api/client/servers/${widget.server.id}/command';
 
@@ -72,7 +72,7 @@ class _SendPageState extends State<SendPage> {
   }
 
   getServerInfo() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
 
     var url =
         'https://panel.revivenode.com/api/app/user/console/${widget.server.id}';

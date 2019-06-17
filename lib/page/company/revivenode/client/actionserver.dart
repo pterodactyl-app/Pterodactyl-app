@@ -53,7 +53,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
 
   Future postStart() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
     var url =
         'https://panel.revivenode.com/api/client/servers/${widget.server.id}/power';
 
@@ -74,7 +74,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postStop() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
     var url =
         'https://panel.revivenode.com/api/client/servers/${widget.server.id}/power';
 
@@ -95,7 +95,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postRestart() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
     var url =
         'https://panel.revivenode.com/api/client/servers/${widget.server.id}/power';
 
@@ -116,7 +116,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future postKill() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
     var url =
         'https://panel.revivenode.com/api/client/servers/${widget.server.id}/power';
 

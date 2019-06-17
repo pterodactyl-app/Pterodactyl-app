@@ -190,7 +190,7 @@ class ReviveNodeSettingsListState extends State<ReviveNodeSettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("api_deploys_Key");
+                SharedPreferencesHelper.remove("api_revivenode_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(

@@ -63,7 +63,7 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Client Login',
+        title: Text('PlanetNode Client Login',
             style: TextStyle(
                 color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),

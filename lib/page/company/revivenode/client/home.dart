@@ -37,7 +37,7 @@ class _MyReviveNodeHomePageState extends State<MyReviveNodeHomePage> {
   int userTotalServers = 0;
 
   Future getDataHome() async {
-    String _api = await SharedPreferencesHelper.getString("api_revicenode_Key");
+    String _api = await SharedPreferencesHelper.getString("api_revivenode_Key");
 
     try {
       http.Response response = await http.get(
