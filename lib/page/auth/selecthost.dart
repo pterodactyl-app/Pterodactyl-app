@@ -38,8 +38,6 @@ class SelectHostPage extends StatefulWidget {
 
 class _SelectHostPageState extends State<SelectHostPage> {
 
-  Icon icon = Icon(Icons.invert_colors);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +53,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
               )
           ),
           actions: <Widget>[
-            new IconButton(icon: this.icon, onPressed: () {
+            new IconButton(icon: Icon(Icons.invert_colors), onPressed: () {
               handelTheme(!globals.useDarkTheme);
             })
           ],
