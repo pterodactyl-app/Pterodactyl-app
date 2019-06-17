@@ -86,7 +86,7 @@ class _LoginPlanetNodePageState extends State<LoginPlanetNodePage> {
             ),
             SizedBox(height: 50.0),
             AccentColorOverride(
-              color: Color(0xFF442B2D),
+              color: Color(0xFFC5032B),
               child: TextField(
                 controller: _apiController,
                 decoration: InputDecoration(
