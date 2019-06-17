@@ -63,7 +63,7 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Client Login',
+        title: Text('AccurateNode Client Login',
             style: TextStyle(
                 color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -77,8 +77,8 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
               children: <Widget>[
                 Image.network(
                   globals.useDarkTheme
-                      ? 'https://planetnode.net/templates/planetnode/img/header/logo.png'
-                      : 'https://planetnode.net/templates/planetnode/img/header/logo-b.png',
+                      ? 'https://accuratenode.com/assets/img/icon.png'
+                      : 'https://accuratenode.com/assets/img/icon.png',
                   width: 100,
                 ),
                 SizedBox(height: 8.0),

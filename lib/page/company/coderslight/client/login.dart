@@ -62,7 +62,7 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Client Login',
+        title: Text('CodersLight Client Login',
             style: TextStyle(
                 color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -267,7 +267,7 @@ class _LoginCodersLightPageState extends State<LoginCodersLightPage> {
       }
       if (response.statusCode == 200) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            '/home_coderslight', (Route<dynamic> route) => false);
+            '/coderslight/home', (Route<dynamic> route) => false);
       } else {
         showDialog(
             context: context,

@@ -63,7 +63,7 @@ class _LoginDeploysPageState extends State<LoginDeploysPage> {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('Client Login',
+        title: Text('Deploys.io Client Login',
             style: TextStyle(
                 color: globals.useDarkTheme ? null : Colors.black,
                 fontWeight: FontWeight.w700)),
