@@ -15,15 +15,16 @@
 */
 import 'dart:async';
 
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/login.dart';
-import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
-import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
 import 'package:pterodactyl_app/page/company/accuratenode/client/login.dart';
 import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
 import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
+import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
 import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,6 +37,9 @@ class SelectHostPage extends StatefulWidget {
 }
 
 class _SelectHostPageState extends State<SelectHostPage> {
+
+  Icon icon = Icon(Icons.invert_colors);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +54,11 @@ class _SelectHostPageState extends State<SelectHostPage> {
                   fontSize: 30.0
               )
           ),
+          actions: <Widget>[
+            new IconButton(icon: this.icon, onPressed: () {
+              handelTheme(!globals.useDarkTheme);
+            })
+          ],
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -151,6 +160,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                                     : 'https://accuratenode.com/assets/img/icon.png',
                               width: 100,
                               height: 60,
+
                             ),
                           ],
                         ),
@@ -246,6 +256,21 @@ class _SelectHostPageState extends State<SelectHostPage> {
             StaggeredTile.extent(1, 110.0),
           ],
         ));
+  }
+
+  void handelTheme(bool value) async {
+// save new value
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('Value', value);
+    setState(() {
+      globals.useDarkTheme = value;
+      print(globals.useDarkTheme);
+    });
+    if (value == true) {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    } else {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
+    }
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {
