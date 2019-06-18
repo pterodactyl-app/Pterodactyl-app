@@ -280,6 +280,44 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       },
     );
   }
+  void showNoKeyDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "No api key available";
+        String message =
+            "Cannot log you in, key not available.\nTrying to create key...";
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Future<String> _getApiToken(String username, String password) async {
     if(username.isNotEmpty && password.isNotEmpty) {
@@ -301,6 +339,8 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         dynamic data = json.decode(response.body);
         if(data['data'].isNotEmpty) {
           return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
+        } else {
+          showNoKeyDialog();
         }
       } else if(status >= 400 && status <= 403) {
         showNotAuthorizedDialog();
