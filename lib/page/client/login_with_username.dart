@@ -283,6 +283,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
 
   Future<String> _getApiToken(String username, String password) async {
     if(username.isNotEmpty && password.isNotEmpty) {
+      await SharedPreferencesHelper.setString('apiUser', username);
       http.Response response = await http.post(
         "$dropdownValue${_urlController.text}/api/app/user/auth/token",
         headers: {
@@ -327,7 +328,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _userController.text = sharedPreferences.getString("apiKey");
+          _userController.text = sharedPreferences.getString("apiUser");
           _urlController.text = sharedPreferences.getString("panelUrl");
           dropdownValue = sharedPreferences.getString("https");
         } else {
