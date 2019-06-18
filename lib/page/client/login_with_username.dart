@@ -216,8 +216,6 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         }
       );
 
-      print(response.body);
-
       if (response.statusCode == 200) {
         dynamic data = json.decode(response.body);
         if(data['data'].isNotEmpty) {
