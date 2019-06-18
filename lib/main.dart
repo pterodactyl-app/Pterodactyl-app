@@ -17,6 +17,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pterodactyl_app/page/client/login_with_username.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'page/company/companies.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -208,6 +209,7 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
   Map routes = <String, WidgetBuilder>{
     '/home': (BuildContext context) => new MyHomePage(),
     '/login': (BuildContext context) => new LoginPage(),
+    '/login_user': (BuildContext context) => new LoginWithUsernamePage(),
     '/servers': (BuildContext context) => new ServerListPage(),
     '/about': (BuildContext context) => new AboutPage(),
     '/settings': (BuildContext context) => new SettingsList(),
