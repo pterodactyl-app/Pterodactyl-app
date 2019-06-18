@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/login.dart';
+import 'package:pterodactyl_app/page/client/login_with_username.dart';
 import 'package:pterodactyl_app/page/company/accuratenode/client/login.dart';
 import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
@@ -243,8 +244,39 @@ class _SelectHostPageState extends State<SelectHostPage> {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => LoginPage()));
             }),
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Other',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 23.0
+                                )
+                            ),
+                            Text('w/ username',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 23.0
+                                )
+                            ),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => LoginWithUsernamePage()));
+            }),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
