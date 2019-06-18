@@ -203,6 +203,84 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
     );
   }
 
+  void showNotAuthorizedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "401";
+        String message =
+        DemoLocalizations.of(context).trans('login_error_401');
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showNotSupportedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "Not yet supported";
+        String message =
+            "Logging in with username is not yet supported at your host.";
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<String> _getApiToken(String username, String password) async {
     if(username.isNotEmpty && password.isNotEmpty) {
       http.Response response = await http.post(
@@ -216,11 +294,17 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         }
       );
 
+      int status = response.statusCode;
+
       if (response.statusCode == 200) {
         dynamic data = json.decode(response.body);
         if(data['data'].isNotEmpty) {
           return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
         }
+      } else if(status >= 400 || status <= 403) {
+        showNotAuthorizedDialog();
+      } else {
+        showNotSupportedDialog();
       }
     }
     return '';
@@ -265,14 +349,19 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         return false;
       }
 
+      String _token = await SharedPreferencesHelper.getString('apiKey');
+
+      if (_token.isEmpty) {
+        return false;
+      }
+
       http.Response response = await http.get(
         "$dropdownValue${_urlController.text}/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer ${await SharedPreferencesHelper.getString('apiKey')}"
+          "Authorization": "Bearer $_token"
         },
       );
-      print(response.statusCode);
 
       if (response.statusCode == 400) {
         showDialog(
@@ -311,44 +400,11 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                   );
           },
         );
+        return false;
       }
       if (response.statusCode == 401) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            String title = "401";
-            String message =
-                DemoLocalizations.of(context).trans('login_error_401');
-            String btnLabel =
-                DemoLocalizations.of(context).trans('login_error_ok');
-            return Platform.isIOS
-                ? new CupertinoAlertDialog(
-                    title: Text(title),
-                    content: Text(message),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text(btnLabel),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  )
-                : new AlertDialog(
-                    title: Text(title),
-                    content: Text(message),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text(btnLabel),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  );
-          },
-        );
+        showNotAuthorizedDialog();
+        return false;
       }
       if (response.statusCode == 403) {
         showDialog(
@@ -387,6 +443,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                   );
           },
         );
+        return false;
       }
       if (response.statusCode == 404) {
         showDialog(
@@ -434,9 +491,9 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
-            String title = "Need Support";
+            String title = "Not yet supported";
             String message =
-                DemoLocalizations.of(context).trans('login_error_support');
+                "Logging in with username is not yet supported at your host.";
             String btnLabel =
                 DemoLocalizations.of(context).trans('login_error_ok');
             return Platform.isIOS
@@ -468,41 +525,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         );
       }
     } else {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          String title = "Login Error";
-          String message = DemoLocalizations.of(context).trans('login_error');
-          String btnLabel =
-              DemoLocalizations.of(context).trans('login_error_ok');
-          return Platform.isIOS
-              ? new CupertinoAlertDialog(
-                  title: Text(title),
-                  content: Text(message),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text(btnLabel),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                )
-              : new AlertDialog(
-                  title: Text(title),
-                  content: Text(message),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text(btnLabel),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                );
-        },
-      );
+      showNotSupportedDialog();
     }
   }
 }
