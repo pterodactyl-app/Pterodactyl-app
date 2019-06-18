@@ -301,7 +301,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
         if(data['data'].isNotEmpty) {
           return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
         }
-      } else if(status >= 400 || status <= 403) {
+      } else if(status >= 400 && status <= 403) {
         showNotAuthorizedDialog();
       } else {
         showNotSupportedDialog();
