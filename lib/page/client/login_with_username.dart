@@ -335,7 +335,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
 
       int status = response.statusCode;
 
-      if (response.statusCode == 200) {
+      if (status == 200) {
         dynamic data = json.decode(response.body);
         if(data['data'].isNotEmpty) {
           return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
