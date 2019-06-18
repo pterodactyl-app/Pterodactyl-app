@@ -1,6 +1,8 @@
 {
     "url_login": "URL (panel.pterodactyl.app)",
     "api_key_login": "مفتاح الواجهة البرمجية",
+    "api_user_name":"Username",
+    "api_user_pass":"Password",
     "remember_me": "تذكر معلوماتي",
     "clear": "نظف/احذف",
     "next": "التالي",

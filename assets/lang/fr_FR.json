@@ -3,6 +3,8 @@
    "yes":"OUI",
    "url_login":"URL (panel.pterodactyl.app)",
    "api_key_login":"CLÉ API",
+   "api_user_name":"Username",
+   "api_user_pass":"Password",
    "remember_me":"Se souvenir de moi",
    "clear":"EFFACER",
    "next":"SUIVANT",

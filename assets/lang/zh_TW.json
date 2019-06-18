@@ -1,6 +1,8 @@
 {
     "url_login": "控制台地址(panel.pterodactyl.app)",
     "api_key_login": "API KEY",
+    "api_user_name":"Username",
+    "api_user_pass":"Password",
     "remember_me": "記住我",
     "clear": "清空",
     "next": "下一步",

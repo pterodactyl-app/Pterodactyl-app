@@ -1,6 +1,8 @@
 {
     "url_login": "URL (panel.pterodactyl.app)",
     "api_key_login": "API-SCHLÜSSEL",
+    "api_user_name":"Username",
+    "api_user_pass":"Password",
     "remember_me": "Eingeloggt bleiben",
     "clear": "SÄUBERN",
     "next": "NÄCHSTER",

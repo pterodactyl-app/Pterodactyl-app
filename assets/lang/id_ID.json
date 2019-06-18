@@ -1,6 +1,8 @@
 {
     "url_login":"URL (panel.pterodactyl.app)",
     "api_key_login":"API KEY",
+    "api_user_name":"Username",
+    "api_user_pass":"Password",
     "remember_me":"Ingat saya",
     "clear":"KOSONGKAN",
     "next":"BERIKUTNYA",

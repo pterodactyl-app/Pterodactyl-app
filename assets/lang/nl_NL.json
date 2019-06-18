@@ -1,6 +1,8 @@
 {
     "url_login":"URL (panel.pterodactyl.app)",
     "api_key_login":"API Sleutel",
+    "api_user_name":"Gebruikersnaam",
+    "api_user_pass":"Wachtwoord",
     "remember_me":"Onthoud mij",
     "clear":"MAAK LEEG",
     "next":"VOLGENDE",
