@@ -13,15 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:flutter/cupertino.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/page/auth/selecthost.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 
 class User {
   final String api, url;
@@ -39,7 +40,8 @@ class LoginAccurateNodePage extends StatefulWidget {
 bool checkValue = false;
 
 class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
-  final _apiController = TextEditingController();
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
 
   SharedPreferences sharedPreferences;
 
@@ -59,43 +61,50 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/selecthost', (Route<dynamic> route) => false);
+            '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text('AccurateNode Client Login',
-            style: TextStyle(
-                color: globals.useDarkTheme ? null : Colors.black,
-                fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 40.0),
             Column(
               children: <Widget>[
                 Image.network(
                   globals.useDarkTheme
                       ? 'https://accuratenode.com/assets/img/icon.png'
-                      : 'https://accuratenode.com/assets/img/icon.png',
+                      : 'https://cdn.discordapp.com/attachments/579475423977668638/590143718703759360/logo_big.png',
                   width: 100,
                 ),
                 SizedBox(height: 8.0),
               ],
             ),
-            SizedBox(height: 50.0),
+            SizedBox(height: 20.0),
             AccentColorOverride(
-              color: Color(0xFF442B2D),
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _apiController,
+                controller: _userController,
                 decoration: InputDecoration(
                   labelText:
-                      DemoLocalizations.of(context).trans('api_key_login'),
+                  DemoLocalizations.of(context).trans('api_user_name'),
                 ),
               ),
             ),
-            SizedBox(height: 12.0),
+            SizedBox(height: 20.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                controller: _passController,
+                decoration: InputDecoration(
+                  labelText:
+                      DemoLocalizations.of(context).trans('api_user_pass'),
+                ),
+                obscureText: true,
+              ),
+            ),
             new CheckboxListTile(
               value: checkValue,
               onChanged: _onChanged,
@@ -113,7 +122,8 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _apiController.clear();
+                    _userController.clear();
+                    _passController.clear();
                   },
                 ),
                 RaisedButton(
@@ -125,8 +135,9 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
+                    String token = await _getApiToken(_userController.text, _passController.text);
                     await SharedPreferencesHelper.setString(
-                        "api_accuratenode_Key", _apiController.text);
+                        "api_accuratenode_Key", token);
                     _navigator();
                   },
                 ),
@@ -138,12 +149,160 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
     );
   }
 
+  void showNotAuthorizedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "401";
+        String message =
+        DemoLocalizations.of(context).trans('login_error_401');
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showNotSupportedDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "Not yet supported";
+        String message =
+            "Logging in with username is not yet supported at your host.";
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  void showNoKeyDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = "No api key available";
+        String message =
+            "Cannot log you in, key not available.\nTrying to create key...";
+        String btnLabel =
+        DemoLocalizations.of(context).trans('login_error_ok');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+            : new AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(btnLabel),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<String> _getApiToken(String username, String password) async {
+    if(username.isNotEmpty && password.isNotEmpty) {
+      await SharedPreferencesHelper.setString('apiUser_accuratenode', username);
+      http.Response response = await http.post(
+        "https://panel.accuratenode.com/api/app/user/auth/token",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+        },
+        body: {
+          "user": username,
+          "password": password
+        }
+      );
+
+      int status = response.statusCode;
+
+      if (response.statusCode == 200) {
+        dynamic data = json.decode(response.body);
+        if(data['data'].isNotEmpty) {
+          return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
+        } else {
+          showNoKeyDialog();
+        }
+      } else if(status >= 400 && status <= 403) {
+        showNotAuthorizedDialog();
+      } else {
+        showNotSupportedDialog();
+      }
+    }
+    return '';
+  }
+
   _onChanged(bool value) async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
-      sharedPreferences.setString("api_accuratenode_Key", _apiController.text);
+      sharedPreferences.setString("apiPass_accuratenode", _passController.text);
       getCredential();
     });
   }
@@ -154,10 +313,11 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       checkValue = sharedPreferences.getBool("check");
       if (checkValue != null) {
         if (checkValue) {
-          _apiController.text =
-              sharedPreferences.getString("api_accuratenode_Key");
+          _userController.text = sharedPreferences.getString("apiUser_accuratenode");
+          _passController.text = sharedPreferences.getString("apiPass_accuratenode");
         } else {
-          _apiController.clear();
+          _userController.clear();
+          _passController.clear();
           sharedPreferences.clear();
         }
       } else {
@@ -167,10 +327,16 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
   }
 
   Future<void> _navigator() async {
-    if (_apiController.text.length != 0) {
-      if (_apiController.text.isEmpty) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/selecthost', (Route<dynamic> route) => false);
+    if (_userController.text.length != 0 || _passController.text.length != 0) {
+      if (_passController.text.isEmpty) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('accuratenode/login', (Route<dynamic> route) => false);
+        return false;
+      }
+
+      String _token = await SharedPreferencesHelper.getString('api_accuratenode_Key');
+
+      if (_token.isEmpty) {
         return false;
       }
 
@@ -178,139 +344,173 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
         "https://panel.accuratenode.com/api/client",
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer ${_apiController.text}"
+          "Authorization": "Bearer $_token"
         },
       );
-      print(response.statusCode);
 
       if (response.statusCode == 400) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_400'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "400";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_400');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+        return false;
       }
       if (response.statusCode == 401) {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_401'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+        showNotAuthorizedDialog();
+        return false;
       }
       if (response.statusCode == 403) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_403'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "403";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_403');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+        return false;
       }
       if (response.statusCode == 404) {
         showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_404'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
-      }
-      if (response.statusCode == 200) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/accuratenode/home', (Route<dynamic> route) => false);
-      } else {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            child: new CupertinoAlertDialog(
-              content: new Text(
-                DemoLocalizations.of(context).trans('login_error_support'),
-                style: new TextStyle(fontSize: 16.0),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new Text(
-                      DemoLocalizations.of(context).trans('login_error_ok'),
-                      style: TextStyle(color: Colors.black)),
-                )
-              ],
-            ));
-      }
-    } else {
-      showDialog(
           context: context,
           barrierDismissible: false,
-          child: new CupertinoAlertDialog(
-            content: new Text(
-              DemoLocalizations.of(context).trans('login_error'),
-              style: new TextStyle(fontSize: 16.0),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: new Text(
-                    DemoLocalizations.of(context).trans('login_error_ok'),
-                    style: TextStyle(color: Colors.black)),
-              )
-            ],
-          ));
+          builder: (BuildContext context) {
+            String title = "404";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_404');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+      if (response.statusCode == 200) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('accuratenode/home', (Route<dynamic> route) => false);
+      } else {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "Not yet supported";
+            String message =
+                "Logging in with username is not yet supported at your host.";
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+    } else {
+      showNotSupportedDialog();
     }
   }
 }

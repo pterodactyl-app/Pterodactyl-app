@@ -156,7 +156,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                             Image.network(
                                 globals.useDarkTheme
                                     ? 'https://accuratenode.com/assets/img/icon.png'
-                                    : 'https://accuratenode.com/assets/img/icon.png',
+                                    : 'https://cdn.discordapp.com/attachments/579475423977668638/590143718703759360/logo_big.png',
                               width: 100,
                               height: 60,
 
