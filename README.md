@@ -12,7 +12,7 @@ Client panel
 - Start, stop, restart or kill your server
 - Send commands to your server
 - See the CPU, memory and disk stats that you are using
-- See your Console logs
+- See your Console logs.
 - Select your host.
 
 Admin panel
