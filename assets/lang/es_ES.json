@@ -1,8 +1,8 @@
 {
     "url_login":"URL (panel.pterodactyl.app)",
     "api_key_login":"API KEY",
-    "api_user_name":"Username",
-    "api_user_pass":"Password",
+    "api_user_name":"Usuario",
+    "api_user_pass":"Contraseña",
     "remember_me":"Recuerdame",
     "clear":"BORRAR",
     "next":"SIGUIENTE",
@@ -137,8 +137,8 @@
     "login_error_404": "404 Not Found -- El gato especificado no fue encontrado :P.",
     "login_error_support": "Por favor si algo sale mal con la app o con el panel, avisanos.",
     "added_soon": "Esto sera añadido pronto",
-    "login_username_api_not_supported": "Not yet supported",
-    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
-    "login_username_api_no_api_key": "No api key available",
-    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."   
+    "login_username_api_not_supported": "No soportado",
+    "login_username_api_not_supported_error": "Iniciar sesion con usuario no esta soportado todavia en tu hosting.",
+    "login_username_api_no_api_key": "No hay ninguna api key",
+    "login_username_api_no_api_key_error": "No podemos iniciar sesion, clave no disponible.\nIntentando crear clave..."   
 }
