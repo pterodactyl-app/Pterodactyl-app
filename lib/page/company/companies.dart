@@ -33,7 +33,6 @@ import 'package:pterodactyl_app/page/company/coderslight/client/settings.dart';
 // Deploys
 import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
-import 'package:pterodactyl_app/page/company/deploys/client/servers.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/about.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/settings.dart';
 
@@ -79,7 +78,6 @@ Map companyRoutes() {
   c['deploys'] = <String, WidgetBuilder>{
     '/deploys/home': (BuildContext context) => new MyDeploysHomePage(),
     '/deploys/login': (BuildContext context) => new LoginDeploysPage(),
-    '/deploys/servers': (BuildContext context) => new DeploysServerListPage(),
     '/deploys/about': (BuildContext context) => new DeploysAboutPage(),
     '/deploys/settings': (BuildContext context) => new DeploysSettingsList(),
   };
