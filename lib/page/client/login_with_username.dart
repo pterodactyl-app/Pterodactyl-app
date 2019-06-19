@@ -34,7 +34,8 @@ class User {
 
 class LoginWithUsernamePage extends StatefulWidget {
   @override
-  _LoginWithUsernamePageState createState() => new _LoginWithUsernamePageState();
+  _LoginWithUsernamePageState createState() =>
+      new _LoginWithUsernamePageState();
 }
 
 String dropdownValue = 'https://';
@@ -64,7 +65,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             Navigator.of(context).pushNamedAndRemoveUntil(
-            '/selecthost', (Route<dynamic> route) => false);
+                '/selecthost', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back),
         ),
@@ -91,7 +92,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                 controller: _userController,
                 decoration: InputDecoration(
                   labelText:
-                  DemoLocalizations.of(context).trans('api_user_name'),
+                      DemoLocalizations.of(context).trans('api_user_name'),
                 ),
               ),
             ),
@@ -176,9 +177,9 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    String token = await _getApiToken(_userController.text, _passController.text);
-                    await SharedPreferencesHelper.setString(
-                        "apiKey", token);
+                    String token = await _getApiToken(
+                        _userController.text, _passController.text);
+                    await SharedPreferencesHelper.setString("apiKey", token);
                     await SharedPreferencesHelper.setString(
                         "panelUrl", _urlController.text);
                     await SharedPreferencesHelper.setString(
@@ -209,35 +210,33 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = "401";
-        String message =
-        DemoLocalizations.of(context).trans('login_error_401');
-        String btnLabel =
-        DemoLocalizations.of(context).trans('login_error_ok');
+        String message = DemoLocalizations.of(context).trans('login_error_401');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        )
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
             : new AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
       },
     );
   }
@@ -247,102 +246,104 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = "Not yet supported";
-        String message =
-            "Logging in with username is not yet supported at your host.";
-        String btnLabel =
-        DemoLocalizations.of(context).trans('login_error_ok');
+        String title = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported');
+        String message = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported_error');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        )
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
             : new AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
       },
     );
   }
+
   void showNoKeyDialog() {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = "No api key available";
-        String message =
-            "Cannot log you in, key not available.\nTrying to create key...";
-        String btnLabel =
-        DemoLocalizations.of(context).trans('login_error_ok');
+        String title = DemoLocalizations.of(context)
+            .trans('login_username_api_no_api_key');
+        String message = DemoLocalizations.of(context)
+            .trans('login_username_api_no_api_key_error');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        )
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
             : new AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(btnLabel),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabel),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
       },
     );
   }
 
   Future<String> _getApiToken(String username, String password) async {
-    if(username.isNotEmpty && password.isNotEmpty) {
+    if (username.isNotEmpty && password.isNotEmpty) {
       await SharedPreferencesHelper.setString('apiUser', username);
       http.Response response = await http.post(
-        "$dropdownValue${_urlController.text}/api/app/user/auth/token",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-        },
-        body: {
-          "user": username,
-          "password": password
-        }
-      );
+          "$dropdownValue${_urlController.text}/api/app/user/auth/token",
+          headers: {
+            "Accept": "Application/vnd.pterodactyl.v1+json",
+          },
+          body: {
+            "user": username,
+            "password": password
+          });
 
       int status = response.statusCode;
 
       if (status == 200) {
         dynamic data = json.decode(response.body);
-        if(data['data'].isNotEmpty) {
-          return data['data'][0]['token'] != null ? data['data'][0]['token'].toString() : '';
+        if (data['data'].isNotEmpty) {
+          return data['data'][0]['token'] != null
+              ? data['data'][0]['token'].toString()
+              : '';
         } else {
           showNoKeyDialog();
         }
-      } else if(status >= 400 && status <= 403) {
+      } else if (status >= 400 && status <= 403) {
         showNotAuthorizedDialog();
       } else {
         showNotSupportedDialog();
@@ -532,9 +533,10 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
-            String title = "Not yet supported";
-            String message =
-                "Logging in with username is not yet supported at your host.";
+            String title = DemoLocalizations.of(context)
+                .trans('login_username_api_not_supported');
+            String message = DemoLocalizations.of(context)
+                .trans('login_username_api_not_supported_error');
             String btnLabel =
                 DemoLocalizations.of(context).trans('login_error_ok');
             return Platform.isIOS

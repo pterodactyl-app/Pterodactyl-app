@@ -136,5 +136,9 @@
     "login_error_403": "403 Forbidden -- Tu clave es inválida o no tienes acceso a este módulo.",
     "login_error_404": "404 Not Found -- El gato especificado no fue encontrado :P.",
     "login_error_support": "Por favor si algo sale mal con la app o con el panel, avisanos.",
-    "added_soon": "Esto sera añadido pronto"   
+    "added_soon": "Esto sera añadido pronto",
+    "login_username_api_not_supported": "Not yet supported",
+    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
+    "login_username_api_no_api_key": "No api key available",
+    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."   
 }

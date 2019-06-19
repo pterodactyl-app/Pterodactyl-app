@@ -79,7 +79,7 @@ class _LoginDeploysPageState extends State<LoginDeploysPage> {
                     globals.useDarkTheme
                         ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
                         : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                    width: 100),
+                    width: 160),
                 SizedBox(height: 8.0),
               ],
             ),

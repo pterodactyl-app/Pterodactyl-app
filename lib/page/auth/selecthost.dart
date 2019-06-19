@@ -80,7 +80,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                                 globals.useDarkTheme
                                     ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
                                     : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                                width: 100),
+                                width: 130),
                           ],
                         ),
                       ]),
@@ -130,9 +130,8 @@ class _SelectHostPageState extends State<SelectHostPage> {
                             Image.network(
                                 globals.useDarkTheme
                                     ? 'https://avatars2.githubusercontent.com/u/35084758?s=280&v=4'
-                                    : 'https://pbs.twimg.com/profile_images/1041472632984616961/uIjCN238.jpg',
-                              width: 100,
-                              height: 60,
+                                    : 'https://cdn.discordapp.com/attachments/575721214643798036/589462220119736340/CodersLightDiscordLogo-transparent.png',
+                              width: 62,
                             ),
                           ],
                         ),
@@ -156,9 +155,8 @@ class _SelectHostPageState extends State<SelectHostPage> {
                             Image.network(
                                 globals.useDarkTheme
                                     ? 'https://accuratenode.com/assets/img/icon.png'
-                                    : 'https://accuratenode.com/assets/img/icon.png',
-                              width: 100,
-                              height: 60,
+                                    : 'https://cdn.discordapp.com/attachments/579475423977668638/590143718703759360/logo_big.png',
+                              width: 135,
 
                             ),
                           ],
@@ -184,8 +182,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                                 globals.useDarkTheme
                                     ? 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png'
                                     : 'https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png',
-                              width: 100,
-                              height: 60,
+                              width: 62,
                             ),
                           ],
                         ),
@@ -206,11 +203,12 @@ class _SelectHostPageState extends State<SelectHostPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('MiniCenter',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 23.0
-                                )
+                            Image.network(
+                                globals.useDarkTheme
+                                    ? 'https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png'
+                                    : 'https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png',
+                              width: 100,
+                              height: 60,
                             ),
                           ],
                         ),
