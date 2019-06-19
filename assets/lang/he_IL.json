@@ -136,5 +136,9 @@
     "login_error_403": "403 .אסורה הכניסה -- המפתח שלך אינו חוקי או שאין לו גישה למקום זה",
     "login_error_404": "404 .לא נמצא -- הדבר אשר חיפשת לא נמצא",
     "login_error_support": ".בבקשה תפנה לתמיכה, נמצא משהו לא בסדר עם האפליקציה או לוח הבקרה שלך",
-    "added_soon": ".בעתיד פה יוספו דברים"
+    "added_soon": ".בעתיד פה יוספו דברים",
+    "login_username_api_not_supported": "Not yet supported",
+    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
+    "login_username_api_no_api_key": "No api key available",
+    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."
 }

@@ -133,5 +133,9 @@
     "login_error_403": "403被禁止 -- 您的Key无效或者无权访问所给出的端点.",
     "login_error_404": "404找不到 -- 指定的东西找不到.",
     "login_error_support": "如果您的APP活面板有什么错误,请向客服询问以获得帮助.",
-    "added_soon": "即将到来"
+    "added_soon": "即将到来",
+    "login_username_api_not_supported": "Not yet supported",
+    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
+    "login_username_api_no_api_key": "No api key available",
+    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."
 }

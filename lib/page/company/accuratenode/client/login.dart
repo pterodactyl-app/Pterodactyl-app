@@ -193,11 +193,11 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = "Not yet supported";
-        String message =
-            "Logging in with username is not yet supported at your host.";
-        String btnLabel =
-        DemoLocalizations.of(context).trans('login_error_ok');
+        String title = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported');
+        String message = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported_error');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
           title: Text(title),
@@ -231,11 +231,11 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = "No api key available";
-        String message =
-            "Cannot log you in, key not available.\nTrying to create key...";
-        String btnLabel =
-        DemoLocalizations.of(context).trans('login_error_ok');
+        String title = DemoLocalizations.of(context)
+            .trans('login_username_api_no_api_key');
+        String message = DemoLocalizations.of(context)
+            .trans('login_username_api_no_api_key_error');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
           title: Text(title),
@@ -476,11 +476,11 @@ class _LoginAccurateNodePageState extends State<LoginAccurateNodePage> {
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
-            String title = "Not yet supported";
-            String message =
-                "Logging in with username is not yet supported at your host.";
-            String btnLabel =
-                DemoLocalizations.of(context).trans('login_error_ok');
+            String title = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported');
+        String message = DemoLocalizations.of(context)
+            .trans('login_username_api_not_supported_error');
+        String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
             return Platform.isIOS
                 ? new CupertinoAlertDialog(
                     title: Text(title),

@@ -136,5 +136,9 @@
     "login_error_403": "403 Forbidden -- Your key is invalid or it doesn't have access to said endpoint.",
     "login_error_404": "404 Not Found -- The specified kitten could not be found.",
     "login_error_support": "Please ask for support there is something wrong, with the app or your panel.",
-    "added_soon": "this will be added soon"     
+    "added_soon": "this will be added soon",
+    "login_username_api_not_supported": "Not yet supported",
+    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
+    "login_username_api_no_api_key": "No api key available",
+    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."     
 }
