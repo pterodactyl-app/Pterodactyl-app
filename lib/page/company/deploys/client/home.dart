@@ -14,13 +14,6 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
-import 'package:pterodactyl_app/page/company/deploys/client/actionserver.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/home/menu_page.dart';
 import 'package:pterodactyl_app/page/company/deploys/client/home/zoom_scaffold.dart';
 
