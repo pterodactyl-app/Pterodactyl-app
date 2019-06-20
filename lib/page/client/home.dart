@@ -1,7 +1,23 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter/material.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
@@ -20,26 +36,38 @@ class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers = 0;
   
-  Future getData() async {
+  Future getDataHome() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    http.Response response = await http.get(
-      "$_url/api/client",
-      headers: {
-        "Accept": "Application/vnd.pterodactyl.v1+json",
-        "Authorization": "Bearer $_api"
-      },
-    );
-    data = json.decode(response.body);
-    setState(() {
-      userTotalServers = data["meta"]["pagination"]["total"];
-    });
+    String _https = await SharedPreferencesHelper.getString("https");
+
+    try {
+      http.Response response = await http.get(
+        "$_https$_url/api/client",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer $_api"
+        },
+      );
+
+      data = await json.decode(response.body);
+      setState(() {
+        userTotalServers = data["meta"]["pagination"]["total"];
+      });
+
+    } on SocketException catch(e) {
+      print('Error occured: ' + e.message);
+      print(_url);
+      print(_https);
+      print('End debug');
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
+
+    getDataHome();
   }
 
   @override

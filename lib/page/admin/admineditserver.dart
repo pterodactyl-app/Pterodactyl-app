@@ -20,45 +20,52 @@ import '../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
+import 'adminactionserver.dart';
 
-class AdminCreateUserPage extends StatefulWidget {
-  AdminCreateUserPage({Key key}) : super(key: key);
+class AdminEditServerPage extends StatefulWidget {
+  AdminEditServerPage({Key key, this.server}) : super(key: key);
+  final EditServer server;
 
   @override
-  _AdminCreateUserPageState createState() => _AdminCreateUserPageState();
+  _AdminEditServerPageState createState() => _AdminEditServerPageState();
 }
 
-class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
-  final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _firstnameController = TextEditingController();
-  final _lastnameController = TextEditingController();
-  final _passwordController = TextEditingController();
+class _AdminEditServerPageState extends State<AdminEditServerPage> {
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _cpuController = TextEditingController();
+  final _diskController = TextEditingController();
+  final _memoryController = TextEditingController();
+  final _startupcommandController = TextEditingController();
 
-  Future postSend() async {
-    //-----create---//
-    String _usermane = await SharedPreferencesHelper.getString("username");
-    String _email = await SharedPreferencesHelper.getString("email");
-    String _firstname = await SharedPreferencesHelper.getString("first_name");
-    String _lastname = await SharedPreferencesHelper.getString("last_name");
-    String _password = await SharedPreferencesHelper.getString("password");
-    //-----login----//
+  Future editServer() async {
+    //use for edit server info//
+    String _name = await SharedPreferencesHelper.getString("name");
+    String _description = await SharedPreferencesHelper.getString("description");
+    String _cpu = await SharedPreferencesHelper.getString("cpu");
+    String _disk = await SharedPreferencesHelper.getString("disk");
+    String _memory = await SharedPreferencesHelper.getString("memory");
+    String _startupcommand = await SharedPreferencesHelper.getString("startupcommand");
+    //login//
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
-    var url = '$_adminhttps$_urladmin/api/application/users';
+    var url =
+        '$_adminhttps$_urladmin/api/application/servers/${widget.server.adminid}/details';
 
     Map data = {
-      "username": "$_usermane",
-      "email": "$_email",
-      "first_name": "$_firstname",
-      "last_name": "$_lastname",
-      "password": "$_password"
+      "name": _name,
+      "description": _description,
+      "memory": _memory,
+      "disk": _disk,
+      "cpu": _cpu,
+      "STARTUP": _startupcommand,
+      "user": "${widget.server.adminuser}"
     };
     //encode Map to JSON
     var body = json.encode(data);
 
-    var response = await http.post(url,
+    var response = await http.patch(url,
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
@@ -67,6 +74,7 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
         body: body);
     print("${response.statusCode}");
     print("${response.body}");
+    return response;
   }
 
   @override
@@ -77,19 +85,12 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
         backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
-          onPressed: () {
-            Navigator.of(context).pop();
-            SharedPreferencesHelper.remove("username");
-            SharedPreferencesHelper.remove("email");
-            SharedPreferencesHelper.remove("first_name");
-            SharedPreferencesHelper.remove("last_name");
-            SharedPreferencesHelper.remove("password");
-          },
+          onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(
-            DemoLocalizations.of(context).trans('admin_create_user_title'),
+            'Edit server information',
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -100,93 +101,95 @@ class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
           children: <Widget>[
             SizedBox(height: 20.0),
             AccentColorOverride(
-              color: Colors.red,
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _usernameController,
+                controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: ('username'),
+                  labelText: widget.server.adminname,
                 ),
               ),
             ),
             SizedBox(height: 12.0),
             AccentColorOverride(
-              color: Colors.red,
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _emailController,
+                controller: _descriptionController,
                 decoration: InputDecoration(
-                  labelText: ('email'),
+                  labelText: widget.server.admindescription
                 ),
               ),
             ),
             SizedBox(height: 12.0),
             AccentColorOverride(
-              color: Colors.red,
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _firstnameController,
+                controller: _memoryController,
                 decoration: InputDecoration(
-                  labelText: ('first name'),
+                  labelText: widget.server.adminmemory,
                 ),
               ),
             ),
             SizedBox(height: 12.0),
             AccentColorOverride(
-              color: Colors.red,
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _lastnameController,
+                controller: _diskController,
                 decoration: InputDecoration(
-                  labelText: ('last name'),
+                  labelText: widget.server.admindisk,
                 ),
               ),
             ),
             SizedBox(height: 12.0),
             AccentColorOverride(
-              color: Colors.red,
+              color: Color(0xFFC5032B),
               child: TextField(
-                controller: _passwordController,
+                controller: _cpuController,
                 decoration: InputDecoration(
-                  labelText: ('password'),
+                  labelText: widget.server.admincpu
+                ),
+              ),
+            ),
+            SizedBox(height: 12.0),
+            AccentColorOverride(
+              color: Color(0xFFC5032B),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: _startupcommandController,
+                decoration: InputDecoration(
+                  labelText: widget.server.adminstartupcommand,
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _usernameController.clear();
-                    _emailController.clear();
-                    _firstnameController.clear();
-                    _lastnameController.clear();
-                    _passwordController.clear();
-                    SharedPreferencesHelper.remove("username");
-                    SharedPreferencesHelper.remove("email");
-                    SharedPreferencesHelper.remove("first_name");
-                    SharedPreferencesHelper.remove("last_name");
-                    SharedPreferencesHelper.remove("password");
+                    _nameController.clear();
+                    _descriptionController.clear();
+                    _cpuController.clear();
+                    _diskController.clear();
+                    _memoryController.clear();
+                    _startupcommandController.clear();
                   },
                 ),
                 RaisedButton(
-                  child: Text(DemoLocalizations.of(context)
-                      .trans('admin_create_user_create_a_user')),
+                  child: Text('Edit Server'),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "username", _usernameController.text);
-                    await SharedPreferencesHelper.setString(
-                        "email", _emailController.text);
-                    await SharedPreferencesHelper.setString(
-                        "first_name", _firstnameController.text);
-                    await SharedPreferencesHelper.setString(
-                        "last_name", _lastnameController.text);
-                    await SharedPreferencesHelper.setString(
-                        "password", _passwordController.text);
-                    postSend();
+                    await SharedPreferencesHelper.setString("name", _nameController.text);
+                    await SharedPreferencesHelper.setString("description", _descriptionController.text);
+                    await SharedPreferencesHelper.setString("cpu", _cpuController.text);
+                    await SharedPreferencesHelper.setString("disk", _diskController.text);
+                    await SharedPreferencesHelper.setString("memory", _memoryController.text);
+                    await SharedPreferencesHelper.setString("startupcommand", _startupcommandController.text);
+                    editServer();
                   },
                 ),
               ],

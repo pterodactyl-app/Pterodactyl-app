@@ -1,3 +1,18 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +26,8 @@ import 'actionserver.dart';
 import '../../main.dart';
 
 class StatePage extends StatefulWidget {
-  StatePage({Key key, this.info}) : super(key: key);
-  final Stats info;
+  StatePage({Key key, this.server}) : super(key: key);
+  final Stats server;
 
   @override
   _StatePageState createState() => _StatePageState();
@@ -21,34 +36,54 @@ class StatePage extends StatefulWidget {
 class _StatePageState extends State<StatePage> {
   Map data;
   String _stats;
-  int _memory;
-  List<double> _cpu;
-  int _disk;
+  int _memorycurrent;
+  int _memorylimit;
+  List<double> _cpu = [0.0].toList();
+  double _currentCpu;
+  int _limitCpu;
+  int _diskcurrent;
+  int _disklimit;
+  Timer timer;
 
   Future getData() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+
     http.Response response = await http.get(
-      "$_url/api/client/servers/${widget.info.id}/utilization",
+      "$_https$_url/api/client/servers/${widget.server.id}/utilization",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Content-Type": "application/json",
         "Authorization": "Bearer $_api"
       },
     );
+
+    List<double> parseCpu(cpu) {
+      List<double> result = [];
+      cpu.forEach((f) => result.add(f.toDouble()));
+      return result;
+    }
+
     data = json.decode(response.body);
+
     setState(() {
-      _stats = data["attributes"]['state'];
-      _memory = data["attributes"]['memory']['current'];
-      _cpu = data["attributes"]['cpu']['cores'];
-      _disk = data["attributes"]['disk']['current'];
+      _stats = data["attributes"]["state"];
+      _memorycurrent = data["attributes"]["memory"]["current"];
+      _memorylimit = data["attributes"]["memory"]["limit"];
+      _cpu = parseCpu(data["attributes"]["cpu"]["cores"]);
+      _currentCpu = data["attributes"]["cpu"]["current"].toDouble();
+      _limitCpu = data["attributes"]["cpu"]["limit"];
+      _diskcurrent = data["attributes"]["disk"]["current"];
+      _disklimit = data["attributes"]["disk"]["limit"];
     });
   }
 
   @override
   void initState() {
-    super.initState();
     getData();
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 3), (Timer t) => getData());
   }
 
   @override
@@ -59,33 +94,17 @@ class _StatePageState extends State<StatePage> {
           backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.isDarkTheme ? Colors.white : Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              timer.cancel();
+            },
             icon: Icon(
               Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black,
             ),
           ),
           title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
-              style: TextStyle(
-                  color: globals.isDarkTheme ? Colors.white : Colors.black,
-                  fontWeight: FontWeight.w700)),
-          // actions: <Widget>
-          // [
-          //   Container
-          //   (
-          //     margin: EdgeInsets.only(right: 8.0),
-          //     child: Row
-          //     (
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: <Widget>
-          //       [
-          //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-          //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-          //       ],
-          //     ),
-          //   )
-          // ],
+              style: TextStyle(fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -104,67 +123,58 @@ class _StatePageState extends State<StatePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("State: $_stats",
+                          Text("Status:",
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text(
+                              "$_stats" == "on"
+                                  ? DemoLocalizations.of(context)
+                                      .trans('utilization_stats_online')
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
                               style: TextStyle(
-                                  color: globals.isDarkTheme
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.0))
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
                       Material(
-                          color: _stats != null ? Colors.green : Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.whatshot,
-                                color: Colors.white, size: 30.0),
-                          )))
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.play_arrow
+                                    : "$_stats" == "off"
+                                        ? Icons.stop
+                                        : "$_stats" == "starting"
+                                            ? Icons.loop
+                                            : "$_stats" == "stopping"
+                                                ? Icons.pause
+                                                : Icons.data_usage,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
                     ]),
               ),
-            ),
-            _buildTile(
-              Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_performance_memory'),
-                                  style: TextStyle(color: Colors.redAccent)),
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_memory'),
-                                  style: TextStyle(
-                                      color: globals.isDarkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0)),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                      Sparkline(
-                        data: _memory != null ? _memory : [0],
-                        lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
-                      )
-                    ],
-                  )),
+              //onTap: () {},
             ),
             _buildTile(
               Padding(
@@ -184,7 +194,7 @@ class _StatePageState extends State<StatePage> {
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_performance_cpu'),
-                                  style: TextStyle(color: Colors.redAccent)),
+                                  style: TextStyle(color: Colors.blueAccent)),
                               Text(
                                   DemoLocalizations.of(context)
                                       .trans('utilization_cpu'),
@@ -196,64 +206,171 @@ class _StatePageState extends State<StatePage> {
                                       fontSize: 20.0)),
                             ],
                           ),
+                          Text(
+                              "$_stats" == "on"
+                                  ? "${_limitCpu.toString()}" != 0
+                                      ? "$_currentCpu % / ∞ %"
+                                      : "$_currentCpu % / ${_limitCpu.toString()} %"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : DemoLocalizations.of(context)
+                                          .trans('utilization_stats_Loading'),
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0)),
                         ],
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 4.0)),
                       Sparkline(
-                        data: _cpu != null ? _cpu : [0],
+                        data: _cpu.isNotEmpty ? _cpu : [0.0],
                         lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
+                        lineGradient: new LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.green[800], Colors.green[200]],
+                        ),
                       )
                     ],
                   )),
             ),
             _buildTile(
               Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_performance_disk'),
-                                  style: TextStyle(color: Colors.redAccent)),
-                              Text(
-                                  DemoLocalizations.of(context)
-                                      .trans('utilization_disk'),
-                                  style: TextStyle(
-                                      color: globals.isDarkTheme
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0)),
-                            ],
-                          ),
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_memory'),
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text(
+                              "$_stats" == "on"
+                                  ? "$_memorycurrent MB / $_memorylimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
                         ],
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                      Sparkline(
-                        data: _disk != null ? _disk : [0],
-                        lineWidth: 5.0,
-                        lineColor: Colors.greenAccent,
-                      )
-                    ],
-                  )),
+                      Material(
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.memory
+                                    : "$_stats" == "off"
+                                        ? Icons.memory
+                                        : "$_stats" == "starting"
+                                            ? Icons.memory
+                                            : "$_stats" == "stopping"
+                                                ? Icons.memory
+                                                : Icons.data_usage,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
+                    ]),
+              ),
+              //onTap: () {},
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                              DemoLocalizations.of(context)
+                                  .trans('utilization_disk'),
+                              style: TextStyle(color: Colors.blueAccent)),
+                          Text(
+                              "$_stats" == "on"
+                                  ? "$_diskcurrent MB / $_disklimit MB"
+                                  : "$_stats" == "off"
+                                      ? DemoLocalizations.of(context)
+                                          .trans('utilization_stats_offline')
+                                      : "$_stats" == "starting"
+                                          ? DemoLocalizations.of(context).trans(
+                                              'utilization_stats_starting')
+                                          : "$_stats" == "stopping"
+                                              ? DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_stopping')
+                                              : DemoLocalizations.of(context)
+                                                  .trans(
+                                                      'utilization_stats_Loading'),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 20.0))
+                        ],
+                      ),
+                      Material(
+                          color: "$_stats" == "on"
+                              ? Colors.green
+                              : "$_stats" == "off"
+                                  ? Colors.red
+                                  : "$_stats" == "starting"
+                                      ? Colors.blue
+                                      : "$_stats" == "stopping"
+                                          ? Colors.red
+                                          : Colors.amber,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(
+                                "$_stats" == "on"
+                                    ? Icons.sd_storage
+                                    : "$_stats" == "off"
+                                        ? Icons.sd_storage
+                                        : "$_stats" == "starting"
+                                            ? Icons.sd_storage
+                                            : "$_stats" == "stopping"
+                                                ? Icons.sd_storage
+                                                : Icons.data_usage,
+                                color: Colors.white,
+                                size: 30.0),
+                          )),
+                    ]),
+              ),
+              //onTap: () {},
             ),
           ],
           staggeredTiles: [
             StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 220.0),
-            StaggeredTile.extent(2, 220.0),
-            StaggeredTile.extent(2, 220.0),
+            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(2, 110.0),
           ],
         ));
   }

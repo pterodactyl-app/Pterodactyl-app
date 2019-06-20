@@ -1,3 +1,18 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../auth/shared_preferences_helper.dart';
@@ -17,11 +32,13 @@ class AdminLoginPage extends StatefulWidget {
   _AdminLoginPageState createState() => new _AdminLoginPageState();
 }
 
+String dropdownValue = 'https://';
+
+bool checkValue = false;
+
 class _AdminLoginPageState extends State<AdminLoginPage> {
   final _apiadminController = TextEditingController();
   final _urladminController = TextEditingController();
-
-  bool checkValue = false;
 
   SharedPreferences sharedPreferences;
 
@@ -49,7 +66,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 50.0),
             AccentColorOverride(
               color: Color(0xFF442B2D),
               child: TextField(
@@ -61,13 +78,40 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               ),
             ),
             SizedBox(height: 12.0),
-            AccentColorOverride(
-              color: Color(0xFFC5032B),
-              child: TextField(
-                controller: _urladminController,
-                decoration: InputDecoration(
-                  labelText: DemoLocalizations.of(context).trans('url_login'),
-                ),
+            SizedBox(
+              height: 60.0,
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  DropdownButton<String>(
+                    value: dropdownValue,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
+                    items: <String>['https://', 'http://']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                  AccentColorOverride(
+                      color: Color(0xFFC5032B),
+                      child: new Flexible(
+                        child: TextField(
+                          controller: _urladminController,
+                          decoration: InputDecoration(
+                            labelText: DemoLocalizations.of(context)
+                                .trans('url_login'),
+                          ),
+                        ),
+                      )),
+                ],
               ),
             ),
             new CheckboxListTile(
@@ -104,6 +148,8 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         "apiAdminKey", _apiadminController.text);
                     await SharedPreferencesHelper.setString(
                         "panelAdminUrl", _urladminController.text);
+                    await SharedPreferencesHelper.setString(
+                        "adminhttps", dropdownValue);
                     _navigator();
                   },
                 ),
@@ -128,6 +174,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     setState(() {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
+      sharedPreferences.setString("adminhttps", dropdownValue);
       sharedPreferences.setString("apiAdminKey", _apiadminController.text);
       sharedPreferences.setString("panelAdminUrl", _urladminController.text);
       sharedPreferences.commit();
@@ -144,6 +191,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
           _apiadminController.text = sharedPreferences.getString("apiAdminKey");
           _urladminController.text =
               sharedPreferences.getString("panelAdminUrl");
+          dropdownValue = sharedPreferences.getString("adminhttps");
         } else {
           _apiadminController.clear();
           _urladminController.clear();

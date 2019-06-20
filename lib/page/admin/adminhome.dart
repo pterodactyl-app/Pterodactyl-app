@@ -1,3 +1,18 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -31,14 +46,16 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   Future getData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
     http.Response response = await http.get(
-      "$_urladmin/api/application/servers",
+      "$_adminhttps$_urladmin/api/application/servers",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
       userTotalServers = data["meta"]["pagination"]["total"];
@@ -48,38 +65,47 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Future getNodesData() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/nodes",
+      "$_adminhttps$_urladmin/api/application/nodes",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
-      totalNodes = data["meta"]["pagination"]["total"];
+      if (data.containsKey('meta')) {
+        totalNodes = data["meta"]["pagination"]["total"];
+      }
     });
   }
 
   Future getUsers() async {
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
     http.Response response = await http.get(
-      "$_urladmin/api/application/users",
+      "$_adminhttps$_urladmin/api/application/users",
       headers: {
         "Accept": "Application/vnd.pterodactyl.v1+json",
         "Authorization": "Bearer $_apiadmin"
       },
     );
+
     data = json.decode(response.body);
     setState(() {
-      totalUsers = data["meta"]["pagination"]["total"];
+      if (data.containsKey('meta')) {
+        totalUsers = data["meta"]["pagination"]["total"];
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
+
     getData();
     getNodesData();
     getUsers();

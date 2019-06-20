@@ -1,18 +1,3 @@
-/*
-* Copyright 2018 Ruben Talstra and Yvan Watchman
-*
-* Licensed under the GNU General Public License v3.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*    https://www.gnu.org/licenses/gpl-3.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
 import 'package:flutter/material.dart';
 import '../auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
@@ -21,14 +6,12 @@ import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
 
-class AdminCreateUserPage extends StatefulWidget {
-  AdminCreateUserPage({Key key}) : super(key: key);
-
+class AdminCreateServerPage extends StatefulWidget {
   @override
-  _AdminCreateUserPageState createState() => _AdminCreateUserPageState();
+  _AdminCreateServerPageState createState() => new _AdminCreateServerPageState();
 }
 
-class _AdminCreateUserPageState extends State<AdminCreateUserPage> {
+class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _firstnameController = TextEditingController();

@@ -20,13 +20,14 @@ Then you copy this code:
 
 ```json
 {
-    "url_login":"URL (example https://panel.pterodactyl.app)",
+    "url_login":"URL (panel.pterodactyl.app)",
     "api_key_login":"API KEY",
     "remember_me":"Remember me",
     "clear":"CLEAR",
     "next":"NEXT",
     "login_error":"username or password \ncan't be empty",
     "login_error_ok":"OK",
+    "login_admin_account": "Do you have a Admin account? tap here then",   
     "dashboard":"Dashboard",
     "logout":"Logout",
     "logout_sub":"Disconnect",
@@ -38,7 +39,7 @@ Then you copy this code:
     "alerts":"Alerts",
     "alerts_sub":"All ",
     "coming_soon":"Coming Soon",
-    "coming_soon_sub":"Coming Soon",
+    "coming_soon_sub":"Soon™️",
     "server_list":"Server List",
     "total_disk":"Total Disk:",
     "total_ram":"Total Ram:",
@@ -47,7 +48,7 @@ Then you copy this code:
     "action_restart":"Restart",
     "action_kill":"Kill",
     "action_stats": "Stats",
-    "action_file": "File List (coming panel 0.8)",
+    "action_file": "File List",
     "dark_mode":"Dark mode",
     "dark_mode_sub":"Black and Grey Theme",
     "cores":"Cores",
@@ -58,7 +59,7 @@ Then you copy this code:
     "notifications":"Enable notifications",
     "notifications_sub":"Get notifications in the main menu",
     "delete_data": "Delete all the data",
-    "delete_data_sub": "This button delete all the data of the app!",
+    "delete_data_sub": "This button deletes all the data of the app!",
     "utilization_stats": "Stats",
     "utilization_stats_on": "State: $_stats",
     "utilization_performance_memory": "PERFORMANCE REPORT",
@@ -67,7 +68,7 @@ Then you copy this code:
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "PERFORMANCE REPORT",
     "utilization_disk": "Disk",
-    
+
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Dont have an Admin account? Tap here then",
     "admin_homepanel": "Admin Panel",
@@ -85,7 +86,7 @@ Then you copy this code:
     "admin_alert_unsuspend_server_info": "You give the owner of this server his access back to his server do you want that?",
     "no": "NO",
     "yes": "YES",
-    "admin_allocations_list": "List specific node allocations",
+    "admin_nodestotalallocations": "Total Allocations",
     "admin_allocations_id": "ID",
     "admin_allocations_assigned": "assigned",
     "admin_allocations_port": "Port",
@@ -102,7 +103,29 @@ Then you copy this code:
     "admin_nodes_nodes": "Nodes",
     "admin_server_list":"Admin server list",
     "admin_user_list_list": "Admin user list",
-    "admin_user_list_user": "USER"  
+    "admin_user_list_user": "USER",
+
+    "admin_view_server": "View Server",
+    "admin_view_server_identifier": "Identifier:", 
+    "admin_view_server_installed": "Installed:", 
+    "admin_view_server_name": "Name:",
+    "admin_view_server_description": "Description:",
+    "admin_view_server_suspended": "Suspended:",
+    "admin_view_server_startup_command": "Startup Command:",
+    "firstname": "First name:",
+    "lastname": "Last name:",
+    "email": "Email:",
+    "uuid": "uuid:",
+    "id": "ID:",
+    "language": "Language:",
+    "rootadmin": "Root admin:",
+    "2fa": "2FA",
+    "created_at": "Created at:",
+    "updated_at": "Updated at:",
+    "admin_actionserver_view_server_info": "View Server info",
+    "admin_actionserver_edit_server_info": "Edit Server info",
+    "utilization_stats_offline": "Server is offline",
+    "utilization_stats_online": "Server is online" 
 }
 ```
 And change to the languge you are working on. 

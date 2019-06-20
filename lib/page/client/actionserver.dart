@@ -1,5 +1,21 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import '../../globals.dart' as globals;
 import '../auth/shared_preferences_helper.dart';
@@ -39,7 +55,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'start'};
     //encode Map to JSON
@@ -60,7 +77,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postStop() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'stop'};
     //encode Map to JSON
@@ -81,7 +99,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postRestart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'restart'};
     //encode Map to JSON
@@ -102,7 +121,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Future postKill() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
-    var url = '$_url/api/client/servers/${widget.server.id}/power';
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
 
     Map data = {'signal': 'kill'};
     //encode Map to JSON
@@ -138,23 +158,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
               style: TextStyle(
                   color: globals.isDarkTheme ? Colors.white : Colors.black,
                   fontWeight: FontWeight.w700)),
-          // actions: <Widget>
-          // [
-          //   Container
-          //   (
-          //     margin: EdgeInsets.only(right: 8.0),
-          //     child: Row
-          //     (
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: <Widget>
-          //       [
-          //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-          //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-          //       ],
-          //     ),
-          //   )
-          // ],
         ),
         body: StaggeredGridView.count(
           crossAxisCount: 2,
@@ -165,30 +168,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.play_arrow,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_start'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_start'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -198,30 +193,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_stop'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.stop,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_stop'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -231,30 +218,23 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Material(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.refresh,
                                 color: Colors.white, size: 30.0),
-                          ))),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_restart'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      )
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(
+                          DemoLocalizations.of(context).trans('action_restart'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -264,30 +244,22 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_kill'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 18.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
+                          shape: CircleBorder(),
+                          child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.offline_bolt,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_kill'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
@@ -297,36 +269,28 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_stats'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.amber,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.show_chart,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_stats'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
               onTap: () {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      new StatePage(info: Stats(id: widget.server.id)),
+                      new StatePage(server: Stats(id: widget.server.id)),
                 );
                 Navigator.of(context).push(route);
               },
@@ -334,32 +298,27 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _buildTile(
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                              DemoLocalizations.of(context)
-                                  .trans('action_file'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
-                        ],
-                      ),
                       Material(
                           color: Colors.green,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
                             child: Icon(Icons.folder_open,
                                 color: Colors.white, size: 30.0),
-                          )))
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_file'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
                     ]),
               ),
+              onTap: () {
+                _filelist();
+              },
             ),
             _buildTile(
               Padding(
@@ -399,12 +358,12 @@ class _ActionServerPageState extends State<ActionServerPage> {
             ),
           ],
           staggeredTiles: [
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(2, 110.0),
-            StaggeredTile.extent(2, 110.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
+            StaggeredTile.extent(1, 150.0),
             StaggeredTile.extent(2, 110.0),
           ],
         ));
@@ -423,5 +382,26 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     print('Not set yet');
                   },
             child: child));
+  }
+
+  _filelist() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: new CupertinoAlertDialog(
+          content: new Text(
+            "this will be soon added",
+            style: new TextStyle(fontSize: 16.0),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: new Text(DemoLocalizations.of(context).trans('yes'),
+                  style: TextStyle(color: Colors.black)),
+            )
+          ],
+        ));
   }
 }

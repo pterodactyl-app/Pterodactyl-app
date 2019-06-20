@@ -14,33 +14,60 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import '../auth/shared_preferences_helper.dart';
+import '../../auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart' as globals;
+import '../../../globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
-import 'actionserver.dart';
+import '../../../main.dart';
+import 'admincreateserverallocations.dart';
 
-class SendPage extends StatefulWidget {
-  SendPage({Key key, this.server}) : super(key: key);
-  final Send server;
+class AdminCreateServerSendPage extends StatefulWidget {
+  AdminCreateServerSendPage({Key key, this.server}) : super(key: key);
+  final Allocations server;
 
   @override
-  _SendPageState createState() => _SendPageState();
+  _AdminCreateServerSendPageState createState() =>
+      new _AdminCreateServerSendPageState();
 }
 
-class _SendPageState extends State<SendPage> {
-  final _sendController = TextEditingController();
+class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
+  Map data;
+
+  final _databasesController = TextEditingController();
 
   Future postSend() async {
-    String _send = await SharedPreferencesHelper.getString("send");
-    String _api = await SharedPreferencesHelper.getString("apiKey");
-    String _url = await SharedPreferencesHelper.getString("panelUrl");
-    String _https = await SharedPreferencesHelper.getString("https");
-    var url = '$_https$_url/api/client/servers/${widget.server.id}/command';
+    //-----login----//
+    String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
+    String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
+    String _adminhttps = await SharedPreferencesHelper.getString("adminhttps");
+    var url = '$_adminhttps$_urladmin/api/application/servers';
 
-    Map data = {'command': '$_send'};
+    Map data = {
+      "name": widget.server.servername,
+      "user": widget.server.userid,
+      "nest": widget.server.nestid,
+      "egg": widget.server.eggid,
+      "docker_image": widget.server.dockerimage,
+      "startup": widget.server.startup,
+      "limits": {
+        "memory": widget.server.limitmemory,
+        "swap": widget.server.limitswap,
+        "disk": widget.server.disklimit,
+        "io": widget.server.iolimit,
+        "cpu": widget.server.cpulimit
+      },
+      "feature_limits": {
+        "databases": _databasesController.text,
+        "allocations": widget.server.allocationsid
+      },
+      "deploy": {
+        "locations": [widget.server.locationsid],
+        "dedicated_ip": false,
+        "port_range": [widget.server.port]
+      },
+      "start_on_completion": true
+    };
     //encode Map to JSON
     var body = json.encode(data);
 
@@ -48,12 +75,11 @@ class _SendPageState extends State<SendPage> {
         headers: {
           "Accept": "Application/vnd.pterodactyl.v1+json",
           "Content-Type": "application/json",
-          "Authorization": "Bearer $_api"
+          "Authorization": "Bearer $_apiadmin"
         },
         body: body);
     print("${response.statusCode}");
     print("${response.body}");
-    return response;
   }
 
   @override
@@ -64,11 +90,13 @@ class _SendPageState extends State<SendPage> {
         backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
         leading: IconButton(
           color: globals.isDarkTheme ? Colors.white : Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           icon: Icon(Icons.arrow_back,
               color: globals.isDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(DemoLocalizations.of(context).trans('console'),
+        title: Text("Create server 8/8",
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
@@ -77,61 +105,33 @@ class _SendPageState extends State<SendPage> {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            /*SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                new FlatButton(
-              child: new Text(
-                  'Click here for Console',style: Theme.of(context).textTheme.headline,),
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-                
-              },
-            ),
-              ],
-            ),*/
-            SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Text(
-                  DemoLocalizations.of(context).trans('coming_soon'),
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ],
-            ),
-            SizedBox(height: 80.0),
+            SizedBox(height: 20.0),
             AccentColorOverride(
               color: Colors.red,
               child: TextField(
-                controller: _sendController,
+                controller: _databasesController,
                 decoration: InputDecoration(
-                  labelText: (DemoLocalizations.of(context)
-                      .trans('type_command_here')),
+                  labelText: ('databases limit'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text(DemoLocalizations.of(context).trans('clear')),
+                  child: Text('Clear'),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _sendController.clear();
-                  },
+                    _databasesController.clear();                  },
                 ),
                 RaisedButton(
-                  child:
-                      Text(DemoLocalizations.of(context).trans('send_command')),
+                  child: Text('Create server'),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
-                  onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "send", _sendController.text);
+                  onPressed: () {
                     postSend();
                   },
                 ),

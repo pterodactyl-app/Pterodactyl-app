@@ -1,3 +1,18 @@
+/*
+* Copyright 2018 Ruben Talstra and Yvan Watchman
+*
+* Licensed under the GNU General Public License v3.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    https://www.gnu.org/licenses/gpl-3.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -69,23 +84,6 @@ class SettingsListPageState extends State<SettingsList> {
             style: TextStyle(
                 color: globals.isDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
-        // actions: <Widget>
-        // [
-        //   Container
-        //   (
-        //     margin: EdgeInsets.only(right: 8.0),
-        //     child: Row
-        //     (
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       crossAxisAlignment: CrossAxisAlignment.center,
-        //       children: <Widget>
-        //       [
-        //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
-        //         Icon(Icons.arrow_drop_down, color: Colors.black54)
-        //       ],
-        //     ),
-        //   )
-        // ],
       ),
       body: SingleChildScrollView(
           child: SafeArea(
@@ -190,6 +188,7 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferencesHelper.remove("panelUrl");
                 SharedPreferencesHelper.remove("apiKey");
+                SharedPreferencesHelper.remove("https");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
                 Navigator.of(context).pushNamedAndRemoveUntil(
