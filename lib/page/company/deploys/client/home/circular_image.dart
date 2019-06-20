@@ -15,13 +15,7 @@ class CircularImage extends StatelessWidget {
       height: _height,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          image: DecorationImage(image: image),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              color: Colors.black45,
-            )
-          ]),
+          image: DecorationImage(image: image)),
     );
   }
 }
