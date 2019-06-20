@@ -13,16 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
-import '../auth/shared_preferences_helper.dart';
-import '../../main.dart';
-import '../../sponsor.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/sponsor.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsList extends StatefulWidget {
@@ -56,16 +56,19 @@ class SettingsListPageState extends State<SettingsList> {
     });
   }
 
-  void handelTheme(bool value) {
+  void handelTheme(bool value) async {
+// save new value
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('Value', value);
     setState(() {
-      globals.isDarkTheme = value;
-      globals.isDarkTheme = globals.isDarkTheme;
-      if (globals.isDarkTheme) {
-        DynamicTheme.of(context).setBrightness(Brightness.dark);
-      } else {
-        DynamicTheme.of(context).setBrightness(Brightness.light);
-      }
+      globals.useDarkTheme = value;
+      print(globals.useDarkTheme);
     });
+    if (value == true) {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    } else {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
+    }
   }
 
   @override
@@ -73,16 +76,16 @@ class SettingsListPageState extends State<SettingsList> {
     return new Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('settings'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SingleChildScrollView(
@@ -104,7 +107,7 @@ class SettingsListPageState extends State<SettingsList> {
               ),
               //trailing: Switch(
               //onChanged: handelTheme,
-              //value: globals.isDarkTheme,
+              //value: globals.useDarkTheme,
               //),
             ),
             Divider(
@@ -121,9 +124,10 @@ class SettingsListPageState extends State<SettingsList> {
                 DemoLocalizations.of(context).trans('dark_mode_sub'),
               ),
               trailing: Switch(
-                onChanged: handelTheme,
-                value: globals.isDarkTheme,
-              ),
+                  value: globals.useDarkTheme,
+                  onChanged: (bool switchValue) {
+                    handelTheme(switchValue);
+                  }),
             ),
             Divider(
               height: 20.0,
@@ -173,8 +177,17 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                prefs.remove('first_name');
+                prefs.remove('last_name');
+                prefs.remove('email');
+                if (prefs.containsKey('apiUser') &&
+                    await prefs.get('apiUser') != null) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login_user', (Route<dynamic> route) => false);
+                } else {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login', (Route<dynamic> route) => false);
+                }
               },
             ),
             Divider(
@@ -186,11 +199,8 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("panelUrl");
-                SharedPreferencesHelper.remove("apiKey");
-                SharedPreferencesHelper.remove("https");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
+                prefs.clear();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               },

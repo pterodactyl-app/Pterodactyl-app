@@ -15,11 +15,11 @@
 */
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../auth/shared_preferences_helper.dart';
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import '../../main.dart';
+import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
 
 class User {
@@ -41,7 +41,11 @@ class _ServerListPageState extends State<ServerListPage> {
   Map data;
   List userData;
 
-  Future getData() async {
+  final _searchForm = TextEditingController();
+  dynamic appBarTitle;
+  Icon icon = Icon(Icons.search);
+
+  Future getData({String search: ''}) async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
     String _https = await SharedPreferencesHelper.getString("https");
@@ -54,7 +58,16 @@ class _ServerListPageState extends State<ServerListPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userData = data["data"];
+      userData = [];
+      if(search.isNotEmpty) {
+        data['data'].forEach((v) {
+          if(v['attributes']['name'].toString().contains(search)) {
+            userData.add(v);
+          }
+        });
+      } else {
+        userData = data["data"];
+      }
     });
   }
 
@@ -69,27 +82,40 @@ class _ServerListPageState extends State<ServerListPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text(DemoLocalizations.of(context).trans('server_list'),
-            style: TextStyle(
-                color: globals.isDarkTheme ? null : Colors.black,
-                fontWeight: FontWeight.w700)),
+        title: (this.appBarTitle != null ? this.appBarTitle : new Text(DemoLocalizations.of(context).trans('server_list'))),
         actions: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                IconButton(icon: Icon(Icons.search), onPressed: () {})
-              ],
-            ),
-          )
+          new IconButton(icon: this.icon, onPressed: () {
+            setState(() {
+              if (this.icon.icon == Icons.search) {
+                this.icon = Icon(Icons.close);
+                appBarTitle = new TextField(
+                  controller: _searchForm,
+                  onChanged: (s) {
+                    getData(search: s);
+                  },
+                  style: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black),
+                  decoration: new InputDecoration(
+                      prefixIcon: Icon(Icons.search, color: globals.useDarkTheme ? Colors.white : Colors.black),
+                      hintText: "Search...",
+                      hintStyle: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black)
+                  ),
+                );
+              } else {
+                getData();
+                this.icon = Icon(Icons.search);
+                appBarTitle = new Text(DemoLocalizations
+                    .of(context)
+                    .trans('server_list'));
+              }
+            });
+          })
+
         ],
       ),
       body: ListView.builder(
@@ -113,8 +139,8 @@ class _ServerListPageState extends State<ServerListPage> {
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme
-                                  ? Colors.grey[700]
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
                                   : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
@@ -177,7 +203,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                 DemoLocalizations.of(context)
                                                     .trans('total_ram'),
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),
@@ -203,7 +229,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                 DemoLocalizations.of(context)
                                                     .trans('total_disk'),
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),

@@ -68,16 +68,16 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text(DemoLocalizations.of(context).trans('admin_user_list_list'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
         actions: <Widget>[
           Container(
@@ -104,7 +104,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: SizedBox.fromSize(
-                      size: Size.fromHeight(140.0),
+                      size: Size.fromHeight(150.0),
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
@@ -114,8 +114,8 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme
-                                  ? Colors.grey[700]
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
                                   : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
@@ -151,7 +151,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                             Text(
                                                 '${userData[index]["attributes"]["first_name"]} ${userData[index]["attributes"]["last_name"]}',
                                                 style: TextStyle(
-                                                    color: globals.isDarkTheme
+                                                    color: globals.useDarkTheme
                                                         ? Colors.white
                                                         : Colors.black,
                                                     fontWeight: FontWeight.w700,
@@ -184,7 +184,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                           children: <Widget>[
                                             Text('Superuser',
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),
@@ -219,7 +219,7 @@ class _AdminUsersListPageState extends State<AdminUsersListPage> {
                                             ),
                                             Text('2FA',
                                                 style: TextStyle(
-                                                  color: globals.isDarkTheme
+                                                  color: globals.useDarkTheme
                                                       ? Colors.white
                                                       : Colors.black,
                                                 )),

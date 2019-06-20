@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import '../auth/check_update.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -104,32 +105,60 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   @override
   void initState() {
+    try {
+      versionCheck(context);
+    } catch (e) {
+      print(e);
+    }
+
     super.initState();
+    firebaseCloudMessagingListeners();
 
     getData();
     getNodesData();
     getUsers();
-    firebaseCloudMessagingListeners();
+  }
+
+  void showNotification(msg) {
+    print(msg);
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: new Text(msg['title']),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: null,
+                child: new Text(msg['body']),
+              ),
+            ],
+          );
+        }
+    );
   }
 
   void firebaseCloudMessagingListeners() {
     if (Platform.isIOS) iOSPermission();
 
-    _firebaseMessaging.getToken().then((token) {
-      print(token);
-    });
-
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('on message $message');
+        showNotification(message['notification']);
       },
       onResume: (Map<String, dynamic> message) async {
         print('on resume $message');
+        showNotification(message['notification']);
       },
       onLaunch: (Map<String, dynamic> message) async {
         print('on launch $message');
       },
     );
+
+    _firebaseMessaging.getToken().then((token) {
+      assert(token != null);
+      print(token);
+    });
+
   }
 
   void iOSPermission() {
@@ -148,7 +177,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
         data: (brightness) => ThemeData(
               primarySwatch: Colors.blue,
               primaryColorBrightness:
-                  globals.isDarkTheme ? Brightness.dark : Brightness.light,
+                  globals.useDarkTheme ? Brightness.dark : Brightness.light,
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
@@ -157,34 +186,32 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 automaticallyImplyLeading: false,
                 elevation: 2.0,
                 backgroundColor:
-                    globals.isDarkTheme ? Colors.transparent : Colors.white,
+                    globals.useDarkTheme ? Colors.transparent : Colors.white,
                 title: Text(
                     DemoLocalizations.of(context).trans('admin_homepanel'),
                     style: TextStyle(
-                        color: globals.isDarkTheme ? null : Colors.black,
+                        color: globals.useDarkTheme ? null : Colors.black,
                         fontWeight: FontWeight.w700,
                         fontSize: 30.0)),
-                //actions: <Widget>[
-                //Container(
-                //margin: EdgeInsets.only(right: 8.0),
-                //child: Row(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                //children: <Widget>[
-                //Text(DemoLocalizations.of(context).trans('logout'),
-                //style: TextStyle(
-                //color:
-                //globals.isDarkTheme ? Colors.white : Colors.blue,
-                //fontWeight: FontWeight.w700,
-                //fontSize: 14.0)),
-                //Icon(
-                //Icons.subdirectory_arrow_left,
-                //color: globals.isDarkTheme ? Colors.white : Colors.black,
-                //)
-                //],
-                //),
-                //)
-                //],
+                actions: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.person),
+                          tooltip: 'Client Panel',
+                          onPressed: () {
+                            // Implement navigation to shopping cart page here...
+                            print('Shopping cart opened.');
+                          },
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
               body: StaggeredGridView.count(
                 crossAxisCount: 2,
@@ -312,7 +339,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.settings_applications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 10.0)),
                             Text(
                                 DemoLocalizations.of(context).trans('settings'),
                                 style: TextStyle(
@@ -322,7 +349,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 DemoLocalizations.of(context)
                                     .trans('settings_sub'),
                                 style: TextStyle(
-                                  color: globals.isDarkTheme
+                                  color: globals.useDarkTheme
                                       ? Colors.white70
                                       : Colors.black45,
                                 )),
@@ -346,7 +373,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   child: Icon(Icons.notifications,
                                       color: Colors.white, size: 30.0),
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                            Padding(padding: EdgeInsets.only(bottom: 10.0)),
                             Text(DemoLocalizations.of(context).trans('alerts'),
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700,
@@ -355,7 +382,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 DemoLocalizations.of(context)
                                     .trans('alerts_sub'),
                                 style: TextStyle(
-                                  color: globals.isDarkTheme
+                                  color: globals.useDarkTheme
                                       ? Colors.white70
                                       : Colors.black45,
                                 )),
@@ -368,11 +395,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ),
                 ],
                 staggeredTiles: [
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(2, 110.0),
-                  StaggeredTile.extent(1, 180.0),
-                  StaggeredTile.extent(1, 180.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(2, 114.0),
+                  StaggeredTile.extent(1, 187.0),
+                  StaggeredTile.extent(1, 187.0),
                 ],
               ));
         });
@@ -382,7 +409,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
+        shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

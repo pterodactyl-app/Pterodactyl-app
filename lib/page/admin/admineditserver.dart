@@ -41,11 +41,13 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
   Future editServer() async {
     //use for edit server info//
     String _name = await SharedPreferencesHelper.getString("name");
-    String _description = await SharedPreferencesHelper.getString("description");
+    String _description =
+        await SharedPreferencesHelper.getString("description");
     String _cpu = await SharedPreferencesHelper.getString("cpu");
     String _disk = await SharedPreferencesHelper.getString("disk");
     String _memory = await SharedPreferencesHelper.getString("memory");
-    String _startupcommand = await SharedPreferencesHelper.getString("startupcommand");
+    String _startupcommand =
+        await SharedPreferencesHelper.getString("startupcommand");
     //login//
     String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
     String _urladmin = await SharedPreferencesHelper.getString("panelAdminUrl");
@@ -82,17 +84,16 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text(
-            'Edit server information',
+        title: Text('Edit server information',
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
@@ -114,9 +115,8 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
               color: Color(0xFFC5032B),
               child: TextField(
                 controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText: widget.server.admindescription
-                ),
+                decoration:
+                    InputDecoration(labelText: widget.server.admindescription),
               ),
             ),
             SizedBox(height: 12.0),
@@ -144,9 +144,7 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
               color: Color(0xFFC5032B),
               child: TextField(
                 controller: _cpuController,
-                decoration: InputDecoration(
-                  labelText: widget.server.admincpu
-                ),
+                decoration: InputDecoration(labelText: widget.server.admincpu),
               ),
             ),
             SizedBox(height: 12.0),
@@ -177,18 +175,24 @@ class _AdminEditServerPageState extends State<AdminEditServerPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Edit Server'),
+                  child: Text(DemoLocalizations.of(context).trans('admin_edit_user')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
-                    await SharedPreferencesHelper.setString("name", _nameController.text);
-                    await SharedPreferencesHelper.setString("description", _descriptionController.text);
-                    await SharedPreferencesHelper.setString("cpu", _cpuController.text);
-                    await SharedPreferencesHelper.setString("disk", _diskController.text);
-                    await SharedPreferencesHelper.setString("memory", _memoryController.text);
-                    await SharedPreferencesHelper.setString("startupcommand", _startupcommandController.text);
+                    await SharedPreferencesHelper.setString(
+                        "name", _nameController.text);
+                    await SharedPreferencesHelper.setString(
+                        "description", _descriptionController.text);
+                    await SharedPreferencesHelper.setString(
+                        "cpu", _cpuController.text);
+                    await SharedPreferencesHelper.setString(
+                        "disk", _diskController.text);
+                    await SharedPreferencesHelper.setString(
+                        "memory", _memoryController.text);
+                    await SharedPreferencesHelper.setString(
+                        "startupcommand", _startupcommandController.text);
                     editServer();
                   },
                 ),

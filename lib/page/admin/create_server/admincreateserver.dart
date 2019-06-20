@@ -54,7 +54,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
     );
     data = json.decode(response.body);
     setState(() {
-      userID = data["data"]["attributes"]["id"].toString() as int;
+      userID = data["data"]["attributes"]["id"];
     });
   }
 
@@ -63,9 +63,9 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
             SharedPreferencesHelper.remove("username");
@@ -75,11 +75,11 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
             SharedPreferencesHelper.remove("password");
           },
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text('Create server 1/8',
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_1_8'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
@@ -92,7 +92,7 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
               child: TextField(
                 controller: _servernameController,
                 decoration: InputDecoration(
-                  labelText: ('Server name'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_server_name'),
                 ),
               ),
             ),
@@ -102,14 +102,14 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: ('email of the user'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_email'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
@@ -119,12 +119,13 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Next'),
+                  child: Text(DemoLocalizations.of(context).trans('next')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () async {
+                    getData();
                     var route = new MaterialPageRoute(
                         builder: (BuildContext context) =>
                             new AdminCreateServerNestPage(
@@ -132,7 +133,6 @@ class _AdminCreateServerPageState extends State<AdminCreateServerPage> {
                                     userid: "$userID",
                                     servername: _servernameController.text)));
                     Navigator.of(context).push(route);
-                    //getData();
                     print(userID);
                   },
                 ),

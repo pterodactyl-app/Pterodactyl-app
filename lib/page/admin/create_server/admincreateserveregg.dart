@@ -76,16 +76,16 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("select an egg 3/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_3_8'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: ListView.builder(
@@ -110,8 +110,8 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme
-                                  ? Colors.grey[700]
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
                                   : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
@@ -163,7 +163,7 @@ class _AdminCreateServerEggsPageState extends State<AdminCreateServerEggsPage> {
                                                     '${userData[index]["attributes"]["author"]}',
                                                     style: TextStyle(
                                                         color:
-                                                            globals.isDarkTheme
+                                                            globals.useDarkTheme
                                                                 ? Colors.white
                                                                 : Colors.black,
                                                         fontWeight:

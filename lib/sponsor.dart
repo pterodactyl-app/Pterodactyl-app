@@ -14,8 +14,8 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import 'globals.dart' as globals;
-import 'page/auth/sponsorlist.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/page/auth/sponsorlist.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SponsorPage extends StatefulWidget {
@@ -29,23 +29,23 @@ class _SponsorPageState extends State<SponsorPage> {
     return Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
         title: Text('Sponsor List',
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: SponsorList.dummyData.length,
+          itemCount: SponsorList.sponsorList.length,
           itemBuilder: (context, index) {
-            SponsorList _model = SponsorList.dummyData[index];
+            SponsorList _model = SponsorList.sponsorList[index];
             return GestureDetector(
               child: Column(
                 children: <Widget>[

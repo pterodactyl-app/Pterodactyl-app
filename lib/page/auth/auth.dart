@@ -15,13 +15,11 @@
 */
 import 'dart:async';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/page/admin/adminhome.dart';
-import 'package:pterodactyl_app/page/admin/adminlogin.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -30,114 +28,104 @@ class Splash extends StatefulWidget {
 
 class SplashState extends State<Splash> {
 
-  BuildContext context;
-
-  Future checkFirstSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var bool2 = prefs.getBool('seen');
-    bool _seen = (bool2 ?? false);
-    if (_seen) {
-      if (await isAuthenticated()) {
-        Navigator.of(context).pushReplacement(
-            new MaterialPageRoute(builder: (context) => new MyHomePage()));
-      }
-    } else {
-      prefs.setBool('seen', true);
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new LoginPage()));
-    }
+  String company;
+  SplashState() {
+    this.company = '';
   }
 
-  Future admincheckFirstSeen() async {
+  Future checkSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seenadmin = (prefs.getBool('seenadmin') ?? false);
 
-    if (_seenadmin && await isAuthenticated(isAdmin: true)) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new AdminHomePage()));
-    } else {
-      prefs.setBool('seenadmin', true);
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new AdminLoginPage()));
+    this.company = prefs.get('company') != null
+        ? prefs.getString('company')
+        : '';
+
+    if(prefs.containsKey('seen_admin') && prefs.getBool('seen_admin')) {
+      checkAuthentication(isAdmin: true, prefs: prefs);
+      return;
     }
+
+    checkAuthentication(prefs: prefs);
+
+  }
+
+  Future checkAuthentication({isAdmin = false, SharedPreferences prefs}) async {
+    isAuthenticated(isAdmin: isAdmin).then((bool) => {
+      prefs.setBool('seen_' + (isAdmin ? 'admin' : 'client'), true).then((bool) {
+        if(this.company.isEmpty) {
+          Navigator.of(context).pushReplacement(
+              new MaterialPageRoute(builder: (context) =>
+              isAdmin ? new AdminHomePage() : new MyHomePage())
+          );
+        } else {
+          Navigator.of(context).pushReplacementNamed(
+              isAdmin
+                  ? '/' + (this.company.isNotEmpty ? this.company + '/' : '') + 'admin/home'
+                  : '/' + (this.company.isNotEmpty ? this.company + '/' : '') + 'home');
+        }
+      })
+    });
   }
 
   Future<bool> isAuthenticated({isAdmin = false}) async {
+    String _api, _https, _url, _route;
     if (isAdmin) {
-      String _apiadmin = await SharedPreferencesHelper.getString("apiAdminKey");
-      String _adminhttps =
-          await SharedPreferencesHelper.getString("adminhttps");
-      String _urladmin =
-          await SharedPreferencesHelper.getString("panelAdminUrl");
+      // Set authentication check route
+      _route = "/application/servers";
+      _api = await SharedPreferencesHelper.getString("apiAdminKey");
+      _https = await SharedPreferencesHelper.getString("adminhttps");
+      _url = await SharedPreferencesHelper.getString("panelAdminUrl");
 
-      if(_urladmin.isEmpty) {
-        SharedPreferencesHelper.remove('apiAdminKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminlogin', (Route<dynamic> route) => false);
-        return false;
-      }
-
-      http.Response response = await http.get(
-        "$_adminhttps$_urladmin/api/application/servers",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer $_apiadmin"
-        },
-      );
-
-      if (response.statusCode == 401) {
-        // Todo fix Navigation context for logging out if key isn't available
-        SharedPreferencesHelper.remove('apiAdminKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/adminlogin', (Route<dynamic> route) => false);
-        return false;
-      } else {
-        return true;
-      }
     } else {
-      String _apikey = await SharedPreferencesHelper.getString("apiKey");
-      String _adminhttps = await SharedPreferencesHelper.getString("https");
-      String _urladmin = await SharedPreferencesHelper.getString("panelUrl");
-
-      if(_urladmin.isEmpty) {
-        SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/login', (Route<dynamic> route) => false);
-        return false;
-      }
-
-      http.Response response = await http.get(
-        "$_adminhttps$_urladmin/api/client",
-        headers: {
-          "Accept": "Application/vnd.pterodactyl.v1+json",
-          "Authorization": "Bearer $_apikey"
-        },
-      );
-
-      print(response.statusCode);
-
-      if (response.statusCode == 401) {
-        // Todo fix Navigation context for logging out if key isn't available
-        SharedPreferencesHelper.remove('apiKey');
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-        return false;
-      } else {
-        return true;
-      }
+      // Set authentication check route
+      _route = "/client";
+      _api = await SharedPreferencesHelper.getString("apiKey");
+      _https = await SharedPreferencesHelper.getString("https");
+      _url = await SharedPreferencesHelper.getString("panelUrl");
     }
+
+    // Host cannot be empty, otherwise an exception will occur.
+    if(_https.isEmpty) {
+      await Navigator.of(context).pushNamedAndRemoveUntil('/selecthost', (Route<dynamic> route) => false);
+      return false;
+    }
+
+    http.Response response = await http.get(
+      "$_https$_url/api$_route",
+      headers: {
+        "Accept": "Application/vnd.pterodactyl.v1+json",
+        "Authorization": "Bearer $_api"
+      },
+    );
+    print(response);
+
+    if (response.statusCode == 401) {
+      // Todo fix Navigation context for logging out if key isn't available
+      SharedPreferencesHelper.remove('apiKey');
+      SharedPreferencesHelper.remove('apiAdminKey');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/' + (this.company.isNotEmpty ? this.company + '/' : '') + (isAdmin ? 'admin' : '') + 'login', (
+          Route<dynamic> route) => false);
+    }
+
+  return true;
+
+  }
+
+  Future<bool> isCompanyLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey('company');
   }
 
   @override
   void initState() {
-    super.initState();
-    checkFirstSeen();
-    admincheckFirstSeen();
+    super.initState();    
+
+    checkSeen();
   }
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     return new Scaffold(
       body: new Center(
         child: new Text('Loading...'),

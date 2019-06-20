@@ -23,7 +23,7 @@ class SponsorList {
   SponsorList(
       {this.avatarUrl, this.name, this.donation, this.message, this.link});
 
-  static final List<SponsorList> dummyData = [
+  static final List<SponsorList> sponsorList = [
     SponsorList(
       avatarUrl:
           "https://s3-eu-west-1.amazonaws.com/tpd/logos/5c033220e32b98000128f214/0x0.png",
@@ -35,7 +35,7 @@ class SponsorList {
     SponsorList(
       avatarUrl: "https://i.coderslight.com/CodersLight_Logo.png",
       name: "CodersLight LLC",
-      donation: "\$ 25.00 CAD",
+      donation: "\$25.00 CAD",
       message: "https://coderslight.com/",
       link: "https://coderslight.com/",
     ),
@@ -43,14 +43,14 @@ class SponsorList {
       avatarUrl:
           "https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/minicenter_logo.png",
       name: "MiniCenter",
-      donation: "\$ 21.53 CAD",
+      donation: "\$21.53 CAD",
       message: "https://www.minicenter.net/",
       link: "https://www.minicenter.net/",
     ),
     SponsorList(
       avatarUrl:
           "https://pbs.twimg.com/profile_images/1010254773826793472/vjxA9idJ_400x400.jpg",
-      name: "deploys.io",
+      name: "Deploys.io",
       donation: "Website and WebHost",
       message: "https://deploys.io/",
       link:
@@ -65,9 +65,39 @@ class SponsorList {
     ),
     SponsorList(
       avatarUrl:
+          "",
+      name: "MyServerPlanet",
+      donation: "\$15.00 CAD",
+      message: "MyServerPlanet started in 2014 set out to sell affordable reseller hosting with WHMCS included - MyServerPlanet sells WHMCS resellers for £12.50/month.",
+      link: "https://myserverplanet.com/",
+    ),  
+    SponsorList(
+      avatarUrl:
+          "",
+      name: "Gabriel",
+      donation: "\$10.00 USD",
+      message: "",
+      link: "",
+    ),    
+    SponsorList(
+      avatarUrl: "https://cdn.discordapp.com/attachments/581892189341089822/581897822589157377/SBL2kBlack_ThatDarkGreenShit-DarkBlue_grad.png",
+      name: "Sam Walsh",
+      donation: "€8,00 EURO",
+      message: "<3",
+      link: "https://samjw.xyz",
+    ),
+    SponsorList(
+      avatarUrl: "",
+      name: "FalixNodes (ItzAwesome)",
+      donation: "£3.00 GBP",
+      message: "Monthly Supporter <3",
+      link: "https://falixnodes.host/",
+    ),
+    SponsorList(
+      avatarUrl:
           "https://pbs.twimg.com/profile_images/1104864471581949952/q4wO6V9c_400x400.jpg",
       name: "Skoali",
-      donation: "€ 5,00 EURO",
+      donation: "€5,00 EURO",
       message: "https://skoali.fr/",
       link: "https://skoali.fr/",
     ),
@@ -75,7 +105,7 @@ class SponsorList {
       avatarUrl:
           "https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/discord2.png",
       name: "AccurateNode",
-      donation: "€ 5,00 EURO",
+      donation: "€5,00 EURO",
       message: "https://accuratenode.com/",
       link: "https://accuratenode.com/",
     ),

@@ -17,28 +17,48 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pterodactyl_app/page/client/login_with_username.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'page/company/companies.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'globals.dart' as globals;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'page/auth/auth.dart';
+import 'package:pterodactyl_app/page/auth/auth.dart';
+import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
-import 'page/client/login.dart';
-import 'page/client/home.dart';
-import 'page/client/servers.dart';
-import 'page/client/settings.dart';
+import 'package:pterodactyl_app/page/client/login.dart';
+import 'package:pterodactyl_app/page/client/home.dart';
+import 'package:pterodactyl_app/page/client/servers.dart';
 
-import 'about.dart';
+import 'package:pterodactyl_app/page/client/settings.dart';
+import 'package:pterodactyl_app/about.dart';
 
-import 'page/admin/adminlogin.dart';
-import 'page/admin/adminhome.dart';
-import 'page/admin/adminsettings.dart';
-//import 'page/admin/adminservers.dart';
-//import 'page/admin/adminnodes.dart';
-//import 'page/admin/adminallocations.dart';
-//import 'page/admin/adminactionserver.dart';
-//import 'page/admin/adminactionnodes.dart';
+import 'package:pterodactyl_app/page/admin/adminlogin.dart';
+import 'package:pterodactyl_app/page/admin/adminhome.dart';
+//import 'package:pterodactyl_app/page/admin/adminservers.dart';
+//import 'package:pterodactyl_app/page/admin/adminnodes.dart';
+//import 'package:pterodactyl_app/page/admin/adminallocations.dart';
+//import 'package:pterodactyl_app/page/admin/adminactionserver.dart';
+//import 'package:pterodactyl_app/page/admin/adminactionnodes.dart';
 
+
+//companies
+import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/minicenter/client/home.dart';
+import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/planetnode/client/home.dart';
+import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
+
+import 'package:pterodactyl_app/page/company/revivenode/client/home.dart';
+import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
+//
 
 class DemoLocalizations {
   DemoLocalizations(this.locale);
@@ -52,8 +72,8 @@ class DemoLocalizations {
   Map<String, String> _sentences;
 
   Future<bool> load() async {
-    String data = await rootBundle
-        .loadString('assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
+    String data = await rootBundle.loadString(
+        'assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
     Map<String, dynamic> _result = json.decode(data);
 
     this._sentences = new Map();
@@ -85,7 +105,11 @@ class DemoLocalizationsDelegate
         'it',
         'se',
         'zh',
-        'si'
+        'si',
+        'es',
+        'id',
+        'ar',
+        'he'
       ].contains(locale.languageCode);
 
   @override
@@ -105,19 +129,23 @@ class DemoLocalizationsDelegate
     return localizations;
   }
 
+
+
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    Map<String, WidgetBuilder> routes = getRoutes(companyRoutes());
     return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => ThemeData(
               primarySwatch: Colors.blue,
               primaryColorBrightness:
-                  globals.isDarkTheme ? Brightness.dark : Brightness.light,
+                  globals.useDarkTheme ? Brightness.dark : Brightness.light,
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
@@ -134,9 +162,20 @@ class MyApp extends StatelessWidget {
               const Locale('se', 'SE'),
               const Locale('it', 'IT'),
               const Locale('pl', 'PL'),
-              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'), // 'zh_Hans_CN'
-              const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'), // 'zh_Hant_TW'
+              const Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hans',
+                  countryCode: 'CN'), // 'zh_Hans_CN'
+              const Locale.fromSubtags(
+                  languageCode: 'zh',
+                  scriptCode: 'Hant',
+                  countryCode: 'TW'), // 'zh_Hant_TW'
               const Locale('si', 'SI'),
+              const Locale('es', 'ES'),
+              const Locale('id', 'ID'),
+              const Locale('he', 'IL'),
+              const Locale('ar', 'AE'),
+              const Locale('he', 'IL'),
             ],
             localizationsDelegates: [
               const DemoLocalizationsDelegate(),
@@ -146,7 +185,7 @@ class MyApp extends StatelessWidget {
             localeResolutionCallback:
                 (Locale locale, Iterable<Locale> supportedLocales) {
               for (Locale supportedLocale in supportedLocales) {
-                if(!Platform.isIOS) {
+                if (!Platform.isIOS) {
                   if (supportedLocale.languageCode == locale.languageCode ||
                       supportedLocale.countryCode == locale.countryCode) {
                     return supportedLocale;
@@ -160,23 +199,50 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: theme,
             home: new Splash(),
-            routes: <String, WidgetBuilder>{
-              '/home': (BuildContext context) => new MyHomePage(),
-              '/login': (BuildContext context) => new LoginPage(),
-              '/servers': (BuildContext context) => new ServerListPage(),
-              '/about': (BuildContext context) => new AboutPage(),
-              '/settings': (BuildContext context) => new SettingsList(),
-
-              '/adminhome': (BuildContext context) => new AdminHomePage(),
-              '/adminlogin': (BuildContext context) => new AdminLoginPage(),
-              '/adminsettings': (BuildContext context) => new AdminSettingsList(),
-              
-            },
+            routes: routes,
           );
         });
   }
 }
 
-void main() {
+Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
+  Map routes = <String, WidgetBuilder>{
+    '/home': (BuildContext context) => new MyHomePage(),
+    '/login': (BuildContext context) => new LoginPage(),
+    '/login_user': (BuildContext context) => new LoginWithUsernamePage(),
+    '/servers': (BuildContext context) => new ServerListPage(),
+    '/about': (BuildContext context) => new AboutPage(),
+    '/settings': (BuildContext context) => new SettingsList(),
+    '/adminhome': (BuildContext context) => new AdminHomePage(),
+    '/adminlogin': (BuildContext context) => new AdminLoginPage(),
+    '/selecthost': (BuildContext context) => new SelectHostPage(),
+//Companies
+    '/home_deploys': (BuildContext context) => new MyDeploysHomePage(),
+    '/login_deploys': (BuildContext context) => new LoginDeploysPage(),
+
+    '/home_coderslight': (BuildContext context) => new MyCodersLightHomePage(),
+    '/login_coderslight': (BuildContext context) => new LoginCodersLightPage(),
+
+    '/home_minicenter': (BuildContext context) => new MyMiniCenterHomePage(),
+    '/login_minicenter': (BuildContext context) => new LoginMiniCenterPage(),
+
+    '/home_planetnode': (BuildContext context) => new MyPlanetNodeHomePage(),
+    '/login_planetnode': (BuildContext context) => new LoginPlanetNodePage(),
+
+    '/home_revicenode': (BuildContext context) => new MyReviveNodeHomePage(),
+    '/login_revicenode': (BuildContext context) => new LoginReviveNodePage(),
+//
+  };
+
+  companies.forEach((k, v) {
+    routes.addAll(companies[k]);
+  });
+
+  return routes;
+}
+
+Future main() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  globals.useDarkTheme = (prefs.getBool('Value') ?? false);
   runApp(new MyApp());
 }

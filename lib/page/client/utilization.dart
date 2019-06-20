@@ -17,13 +17,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart' as globals;
-import '../auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 
 import 'dart:async';
 import 'dart:convert';
 import 'actionserver.dart';
-import '../../main.dart';
+import 'package:pterodactyl_app/main.dart';
 
 class StatePage extends StatefulWidget {
   StatePage({Key key, this.server}) : super(key: key);
@@ -91,16 +91,16 @@ class _StatePageState extends State<StatePage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+          backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
           leading: IconButton(
-            color: globals.isDarkTheme ? Colors.white : Colors.black,
+            color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () {
               Navigator.of(context).pop();
               timer.cancel();
             },
             icon: Icon(
               Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black,
+              color: globals.useDarkTheme ? Colors.white : Colors.black,
             ),
           ),
           title: Text(DemoLocalizations.of(context).trans('utilization_stats'),
@@ -199,7 +199,7 @@ class _StatePageState extends State<StatePage> {
                                   DemoLocalizations.of(context)
                                       .trans('utilization_cpu'),
                                   style: TextStyle(
-                                      color: globals.isDarkTheme
+                                      color: globals.useDarkTheme
                                           ? Colors.white
                                           : Colors.black,
                                       fontWeight: FontWeight.w700,
@@ -208,7 +208,7 @@ class _StatePageState extends State<StatePage> {
                           ),
                           Text(
                               "$_stats" == "on"
-                                  ? "${_limitCpu.toString()}" != 0
+                                  ? _limitCpu.toString() != null
                                       ? "$_currentCpu % / ∞ %"
                                       : "$_currentCpu % / ${_limitCpu.toString()} %"
                                   : "$_stats" == "off"
@@ -379,7 +379,7 @@ class _StatePageState extends State<StatePage> {
     return Material(
         elevation: 14.0,
         borderRadius: BorderRadius.circular(12.0),
-        shadowColor: globals.isDarkTheme ? Colors.grey[700] : Color(0x802196F3),
+        shadowColor: globals.useDarkTheme ? Colors.blueGrey : Color(0x802196F3),
         child: InkWell(
             // Do onTap() if it isn't null, otherwise do print()
             onTap: onTap != null

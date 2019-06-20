@@ -13,11 +13,15 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import '../auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../main.dart';
+import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/globals.dart' as globals;
 
 class User {
   final String api, url;
@@ -51,24 +55,36 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+        leading: IconButton(
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+            '/selecthost', (Route<dynamic> route) => false);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            SizedBox(height: 80.0),
+            SizedBox(height: 40.0),
             Column(
               children: <Widget>[
                 Image.asset('assets/images/pterodactyl_icon.png', width: 100),
                 SizedBox(height: 8.0),
                 Text(
-                  'PTERODACTYL APP',
+                  'CLIENT LOGIN',
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
             ),
             SizedBox(height: 50.0),
             AccentColorOverride(
-              color: Color(0xFF442B2D),
+              color: Color(0xFFC5032B),
               child: TextField(
                 controller: _apiController,
                 decoration: InputDecoration(
@@ -85,9 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  SizedBox(height: 2.0),
                   DropdownButton<String>(
                     value: dropdownValue,
+                    isDense: true,
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
@@ -97,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value, style: TextStyle(fontSize: 18.0)),
                       );
                     }).toList(),
                   ),
@@ -179,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
       sharedPreferences.setString("apiKey", _apiController.text);
       sharedPreferences.setString("panelUrl", _urlController.text);
       sharedPreferences.setString("https", dropdownValue);
-      sharedPreferences.commit();
       getCredential();
     });
   }
@@ -204,30 +219,252 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  _navigator() {
+  Future<void> _navigator() async {
     if (_apiController.text.length != 0 || _urlController.text.length != 0) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-    } else {
-      showDialog(
+      if (_urlController.text.isEmpty) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+        return false;
+      }
+
+      http.Response response = await http.get(
+        "$dropdownValue${_urlController.text}/api/client",
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Authorization": "Bearer ${_apiController.text}"
+        },
+      );
+      print(response.statusCode);
+
+      if (response.statusCode == 400) {
+        showDialog(
           context: context,
           barrierDismissible: false,
-          child: new CupertinoAlertDialog(
-            content: new Text(
-              DemoLocalizations.of(context).trans('login_error'),
-              style: new TextStyle(fontSize: 16.0),
-            ),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: new Text(
-                    DemoLocalizations.of(context).trans('login_error_ok'),
-                    style: TextStyle(color: Colors.black)),
-              )
-            ],
-          ));
+          builder: (BuildContext context) {
+            String title = "400";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_400');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+      if (response.statusCode == 401) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "401";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_401');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+      if (response.statusCode == 403) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "403";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_403');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+      if (response.statusCode == 404) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "404";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_404');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+      if (response.statusCode == 200) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      } else {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            String title = "Need Support";
+            String message =
+                DemoLocalizations.of(context).trans('login_error_support');
+            String btnLabel =
+                DemoLocalizations.of(context).trans('login_error_ok');
+            return Platform.isIOS
+                ? new CupertinoAlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  )
+                : new AlertDialog(
+                    title: Text(title),
+                    content: Text(message),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(btnLabel),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+          },
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          String title = "Login Error";
+          String message = DemoLocalizations.of(context).trans('login_error');
+          String btnLabel =
+              DemoLocalizations.of(context).trans('login_error_ok');
+          return Platform.isIOS
+              ? new CupertinoAlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(btnLabel),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                )
+              : new AlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(btnLabel),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+        },
+      );
     }
   }
 }

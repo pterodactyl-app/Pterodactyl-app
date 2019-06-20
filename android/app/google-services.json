@@ -30,6 +30,13 @@
             {
               "client_id": "880686270115-4lhv23d7fs5d27i2a0k6983rcusu2an5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "880686270115-vebqc84ibn0eof88ol9keckm9sjuac1d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "nl.rubentalstra.pterodactylapp"
+              }
             }
           ]
         }

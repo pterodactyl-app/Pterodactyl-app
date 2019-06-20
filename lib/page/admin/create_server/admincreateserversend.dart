@@ -87,18 +87,18 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("Create server 8/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_8_8'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: SafeArea(
@@ -111,22 +111,23 @@ class _AdminCreateServerSendPageState extends State<AdminCreateServerSendPage> {
               child: TextField(
                 controller: _databasesController,
                 decoration: InputDecoration(
-                  labelText: ('databases limit'),
+                  labelText: DemoLocalizations.of(context).trans('admin_create_server_database_limit'),
                 ),
               ),
             ),
             ButtonBar(
               children: <Widget>[
                 FlatButton(
-                  child: Text('Clear'),
+                  child: Text(DemoLocalizations.of(context).trans('clear')),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),
                   onPressed: () {
-                    _databasesController.clear();                  },
+                    _databasesController.clear();
+                  },
                 ),
                 RaisedButton(
-                  child: Text('Create server'),
+                  child: Text(DemoLocalizations.of(context).trans('admin_create_server')),
                   elevation: 8.0,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),

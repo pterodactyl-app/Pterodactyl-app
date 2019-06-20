@@ -62,10 +62,12 @@ class AdminCreateServerAllocationsPage extends StatefulWidget {
   final Nodes server;
 
   @override
-  _AdminCreateServerAllocationsPageState createState() => _AdminCreateServerAllocationsPageState();
+  _AdminCreateServerAllocationsPageState createState() =>
+      _AdminCreateServerAllocationsPageState();
 }
 
-class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllocationsPage> {
+class _AdminCreateServerAllocationsPageState
+    extends State<AdminCreateServerAllocationsPage> {
   Map data;
   List userData;
 
@@ -98,22 +100,21 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: globals.isDarkTheme ? null : Colors.transparent,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
         leading: IconButton(
-          color: globals.isDarkTheme ? Colors.white : Colors.black,
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back,
-              color: globals.isDarkTheme ? Colors.white : Colors.black),
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
-        title: Text("Select an allocation 7/8",
+        title: Text(DemoLocalizations.of(context).trans('admin_create_server_7_8'),
             style: TextStyle(
-                color: globals.isDarkTheme ? Colors.white : Colors.black,
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
       ),
       body: ListView.builder(
         itemCount: userData == null ? 0 : userData.length,
         itemBuilder: (BuildContext context, int index) {
-
           return InkWell(
               child: Padding(
             padding: EdgeInsets.only(bottom: 16.0),
@@ -133,8 +134,8 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                             child: Material(
                               elevation: 14.0,
                               borderRadius: BorderRadius.circular(12.0),
-                              shadowColor: globals.isDarkTheme
-                                  ? Colors.grey[700]
+                              shadowColor: globals.useDarkTheme
+                                  ? Colors.blueGrey
                                   : Color(0x802196F3),
                               child: InkWell(
                                 onTap: () {
@@ -142,9 +143,13 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                                     builder: (BuildContext context) =>
                                         new AdminCreateServerSendPage(
                                             server: Allocations(
-                                          allocationsid: userData[index]["attributes"]["id"].toString(),
-                                          locationsid: widget.server.locationsid,
-                                          limitmemory: widget.server.limitmemory,
+                                          allocationsid: userData[index]
+                                                  ["attributes"]["id"]
+                                              .toString(),
+                                          locationsid:
+                                              widget.server.locationsid,
+                                          limitmemory:
+                                              widget.server.limitmemory,
                                           limitswap: widget.server.limitswap,
                                           disklimit: widget.server.disklimit,
                                           iolimit: widget.server.iolimit,
@@ -152,11 +157,14 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                                           userid: widget.server.userid,
                                           nestid: widget.server.nestid,
                                           eggid: widget.server.eggid,
-                                          dockerimage: widget.server.dockerimage,
+                                          dockerimage:
+                                              widget.server.dockerimage,
                                           startup: widget.server.startup,
                                           nodeid: widget.server.nodeid,
                                           servername: widget.server.servername,
-                                          port: userData[index]["attributes"]["port"].toString(),
+                                          port: userData[index]["attributes"]
+                                                  ["port"]
+                                              .toString(),
                                         )),
                                   );
                                   Navigator.of(context).push(route);
@@ -178,109 +186,122 @@ class _AdminCreateServerAllocationsPageState extends State<AdminCreateServerAllo
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                      '${userData[index]["attributes"]["alias"]}',
-                                      style:
-                                          TextStyle(color: Colors.blueAccent)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                          'IP: ${userData[index]['attributes']['ip']}',
-                                          style: TextStyle(
-                                              color: globals.isDarkTheme
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18.0)),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                                '${userData[index]["attributes"]["alias"]}',
+                                                style: TextStyle(
+                                                    color: Colors.blueAccent)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                Text(
+                                                    'IP: ${userData[index]['attributes']['ip']}',
+                                                    style: TextStyle(
+                                                        color:
+                                                            globals.useDarkTheme
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 18.0)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
 
-                              /// Infos
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('admin_allocations_id'),
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: 18.0,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["id"]}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('admin_allocations_assigned'),
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: 18.0,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["assigned"]}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                      DemoLocalizations.of(context)
-                                          .trans('admin_allocations_port'),
-                                      style: TextStyle(
-                                        color: globals.isDarkTheme
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontSize: 18.0,
-                                      )),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(4.0),
-                                        child: Text(
-                                            '${userData[index]["attributes"]["port"]}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                        /// Infos
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                                DemoLocalizations.of(context)
+                                                    .trans(
+                                                        'admin_allocations_id'),
+                                                style: TextStyle(
+                                                  color: globals.useDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 18.0,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.green,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["id"]}',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                                DemoLocalizations.of(context).trans(
+                                                    'admin_allocations_assigned'),
+                                                style: TextStyle(
+                                                  color: globals.useDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 18.0,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.green,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["assigned"]}',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                                DemoLocalizations.of(context)
+                                                    .trans(
+                                                        'admin_allocations_port'),
+                                                style: TextStyle(
+                                                  color: globals.useDarkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 18.0,
+                                                )),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                color: Colors.green,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                      '${userData[index]["attributes"]["port"]}',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
