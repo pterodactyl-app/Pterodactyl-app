@@ -177,6 +177,9 @@ class SettingsListPageState extends State<SettingsList> {
               onTap: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('seen');
+                prefs.remove('first_name');
+                prefs.remove('last_name');
+                prefs.remove('email');
                 if (prefs.containsKey('apiUser') &&
                     await prefs.get('apiUser') != null) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -196,13 +199,8 @@ class SettingsListPageState extends State<SettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("panelUrl");
-                SharedPreferencesHelper.remove("apiUser");
-                SharedPreferencesHelper.remove("apiKey");
-                SharedPreferencesHelper.remove("https");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
-                prefs.remove('company');
+                prefs.clear();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               },
