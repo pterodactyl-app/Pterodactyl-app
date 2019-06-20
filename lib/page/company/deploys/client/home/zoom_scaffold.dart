@@ -18,9 +18,11 @@ class User {
 
 class ZoomScaffold extends StatefulWidget {
   final Widget menuScreen;
+  final Layout contentScreen;
 
   ZoomScaffold({
     this.menuScreen,
+    this.contentScreen,
   });
 
   @override
@@ -88,7 +90,7 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+          backgroundColor: globals.useDarkTheme ? null : Colors.grey[200],
           leading: IconButton(
             color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () => menuController.toggle(),
@@ -134,7 +136,9 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
                 })
           ],
         ),
-        body: ListView.builder(
+        body: new Container(
+     color: globals.useDarkTheme ? Colors.grey[900] : Colors.grey[200],
+    child: ListView.builder(         
           itemCount: userData == null ? 0 : userData.length,
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
@@ -291,6 +295,7 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
             ));
           },
         ),
+      ),     
       ),
     ));
   }
@@ -407,6 +412,14 @@ class ZoomScaffoldMenuControllerState
 
 typedef Widget ZoomScaffoldBuilder(
     BuildContext context, MenuController menuController);
+
+class Layout {
+  final WidgetBuilder contentBuilder;
+
+  Layout({
+    this.contentBuilder,
+  });
+}
 
 class MenuController extends ChangeNotifier {
   final TickerProvider vsync;

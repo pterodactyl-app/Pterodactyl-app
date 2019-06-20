@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 import 'package:pterodactyl_app/page/company/deploys/client/home/circular_image.dart';
+import 'package:pterodactyl_app/page/company/deploys/client/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:pterodactyl_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,17 +33,24 @@ class MenuScreen extends StatelessWidget {
 */
 
   final String imageUrl =
-      "https://celebritypets.net/wp-content/uploads/2016/12/Adriana-Lima.jpg";
+      "https://s3-eu-west-1.amazonaws.com/tpd/logos/5aa8567e43efc80001d1319e/0x0.png";
 
   @override
   Widget build(BuildContext context) {
     return Container(
+        decoration: BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
+      colors: [const Color(0xFF5E72E4), const Color(0xFF825EE4)], // whitish to gray
+    ),
+  ),
       padding: EdgeInsets.only(
           top: 62,
           left: 32,
           bottom: 8,
           right: MediaQuery.of(context).size.width / 2.9),
-      color: Color(0xff454dff),
+      
       child: Column(
         children: <Widget>[
           Row(
@@ -79,7 +87,7 @@ class MenuScreen extends StatelessWidget {
                   'https://deploys.io/tickets/new?utm_source=ruben-app&utm_medium=app&utm_campaign=sidebar&utm_term=ticket&utm_content=sidebar');
             },
             leading: Icon(
-              Icons.home,
+              Icons.question_answer,
               color: Colors.white,
               size: 20,
             ),
@@ -92,7 +100,7 @@ class MenuScreen extends StatelessWidget {
                   'https://deploys.io/client/?utm_source=ruben-app&utm_medium=app&utm_campaign=sidebar&utm_term=client&utm_content=sidebar');
             },
             leading: Icon(
-              Icons.home,
+              Icons.open_in_new,
               color: Colors.white,
               size: 20,
             ),
@@ -105,7 +113,7 @@ class MenuScreen extends StatelessWidget {
                   'https://panel.deploys.io/?utm_source=ruben-app&utm_medium=app&utm_campaign=sidebar&utm_term=panel&utm_content=sidebar');
             },
             leading: Icon(
-              Icons.home,
+              Icons.open_in_new,
               color: Colors.white,
               size: 20,
             ),
@@ -118,7 +126,7 @@ class MenuScreen extends StatelessWidget {
                   'https://panel.deploys.io/?utm_source=ruben-app&utm_medium=app&utm_campaign=sidebar&utm_term=cpanel&utm_content=sidebar');
             },
             leading: Icon(
-              Icons.home,
+              Icons.open_in_new,
               color: Colors.white,
               size: 20,
             ),
@@ -131,7 +139,7 @@ class MenuScreen extends StatelessWidget {
                   'https://panel.deploys.io/?utm_source=ruben-app&utm_medium=app&utm_campaign=sidebar&utm_term=website&utm_content=sidebar');
             },
             leading: Icon(
-              Icons.home,
+              Icons.open_in_new,
               color: Colors.white,
               size: 20,
             ),
@@ -140,7 +148,8 @@ class MenuScreen extends StatelessWidget {
           ),
           Spacer(),
           ListTile(
-            onTap: () {},
+            onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => DeploysSettingsList())),
             leading: Icon(
               Icons.settings,
               color: Colors.white,
@@ -157,12 +166,12 @@ class MenuScreen extends StatelessWidget {
                   '/selecthost', (Route<dynamic> route) => false);
             },
             leading: Icon(
-              Icons.subdirectory_arrow_left,
+              Icons.lock_open,
               color: Colors.white,
               size: 20,
             ),
             title: Text(DemoLocalizations.of(context).trans('logout'),
-                style: TextStyle(fontSize: 14)),
+                style: TextStyle(fontSize: 14, color: Colors.white)),
           ),
         ],
       ),

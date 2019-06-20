@@ -170,18 +170,6 @@ class SettingsListPageState extends State<DeploysSettingsList> {
             Divider(
               height: 20.0,
             ),
-            new ListTile(
-              leading: Icon(Icons.subdirectory_arrow_left),
-              title: Text(DemoLocalizations.of(context).trans('logout')),
-              subtitle:
-                  new Text(DemoLocalizations.of(context).trans('logout_sub')),
-              onTap: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('company');
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/selecthost', (Route<dynamic> route) => false);
-              },
-            ),
             Divider(
               height: 20.0,
             ),
