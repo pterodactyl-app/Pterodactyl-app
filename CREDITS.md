@@ -94,6 +94,14 @@ For all the people who worked with me on this amazing project.
 
 > - `@appomatrix#9639`
 > - `@Yvan#9877`
+> - `@W - J#0129`
+> - `@Wiz⚡#1265`
+
+
+###### Module (addon) Coders:
+
+> - `@Yvan#9877`
+> - `@patricknasci#9500`
 
 
 ###### Contributors:
