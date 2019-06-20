@@ -337,6 +337,11 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       if (status == 200) {
         dynamic data = json.decode(response.body);
         if (data['data'].isNotEmpty) {
+          if (data['user'].isNotEmpty) {
+            await SharedPreferencesHelper.setString('first_name', data['user']['name']);
+            await SharedPreferencesHelper.setString('last_name', data['user']['surname']);
+            await SharedPreferencesHelper.setString('email', data['user']['email']);
+          }
           return data['data'][0]['token'] != null
               ? data['data'][0]['token'].toString()
               : '';

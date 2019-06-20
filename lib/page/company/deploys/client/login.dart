@@ -143,7 +143,6 @@ class _LoginDeploysPageState extends State<LoginDeploysPage> {
       checkValue = value;
       sharedPreferences.setBool("check", checkValue);
       sharedPreferences.setString("api_deploys_Key", _apiController.text);
-      sharedPreferences.commit();
       getCredential();
     });
   }
