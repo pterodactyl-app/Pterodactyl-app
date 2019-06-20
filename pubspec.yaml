@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: any
   convert: ^2.1.1
+  simple_gravatar: any
   flutter_sparkline: any
   flutter_staggered_grid_view: any
   shared_preferences: any
