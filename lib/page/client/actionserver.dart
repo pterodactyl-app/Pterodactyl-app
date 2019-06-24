@@ -15,6 +15,9 @@
 */
 import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:titled_navigation_bar/titled_navigation_bar.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -52,6 +55,7 @@ class ActionServerPage extends StatefulWidget {
 
 class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
+  bool dialVisible = true;
 
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
@@ -141,6 +145,63 @@ class _ActionServerPageState extends State<ActionServerPage> {
     return response;
   }
 
+  void setDialVisible(bool value) {
+    setState(() {
+      dialVisible = value;
+    });
+  }
+
+  SpeedDial buildSpeedDial() {
+    return SpeedDial(
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      visible: dialVisible,
+      curve: Curves.bounceIn,
+      children: [
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.play), color: Colors.white),
+          backgroundColor: Colors.green,
+          onTap: () {
+            postStart();
+          },
+          label: DemoLocalizations.of(context).trans('action_start'),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.greenAccent,
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.stop), color: Colors.white),
+          backgroundColor: Colors.deepOrange,
+          onTap: () {
+            _stop();
+          },
+          label: DemoLocalizations.of(context).trans('action_stop'),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.deepOrangeAccent,
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.redo), color: Colors.white),
+          backgroundColor: Colors.blue,
+          onTap: () {
+            _restart();
+          },
+          label: DemoLocalizations.of(context).trans('action_restart'),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.blueAccent,
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.skull), color: Colors.white),
+          backgroundColor: Colors.deepOrange,
+          onTap: () {
+            _kill();
+          },
+          label: DemoLocalizations.of(context).trans('action_kill'),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.deepOrangeAccent,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,213 +222,123 @@ class _ActionServerPageState extends State<ActionServerPage> {
                   fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12.0,
-          mainAxisSpacing: 12.0,
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          children: <Widget>[
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisCount: 2,
+      crossAxisSpacing: 12.0,
+      mainAxisSpacing: 12.0,
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      children: <Widget>[
+        _buildTile(
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Material(
+                      color: Colors.amber,
+                      shape: CircleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Icon(Icons.show_chart,
+                            color: Colors.white, size: 30.0),
+                      )),
+                  Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                  Text(DemoLocalizations.of(context).trans('action_stats'),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 23.0)),
+                ]),
+          ),
+          onTap: () {
+            var route = new MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  new StatePage(server: Stats(id: widget.server.id)),
+            );
+            Navigator.of(context).push(route);
+          },
+        ),
+        _buildTile(
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Material(
+                      color: Colors.green,
+                      shape: CircleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Icon(Icons.folder_open,
+                            color: Colors.white, size: 30.0),
+                      )),
+                  Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                  Text(DemoLocalizations.of(context).trans('action_file'),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 23.0)),
+                ]),
+          ),
+          onTap: () {
+            _filelist();
+          },
+        ),
+        _buildTile(
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Material(
-                          color: Colors.green,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.play_arrow,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(DemoLocalizations.of(context).trans('action_start'),
+                      Text(DemoLocalizations.of(context).trans('console'),
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                postStart();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.red,
-                          shape: CircleBorder(),
+                              fontWeight: FontWeight.w700, fontSize: 20.0))
+                    ],
+                  ),
+                  Material(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.stop,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(DemoLocalizations.of(context).trans('action_stop'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                _stop();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.blue,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.refresh,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(
-                          DemoLocalizations.of(context).trans('action_restart'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                _restart();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.red,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.offline_bolt,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(DemoLocalizations.of(context).trans('action_kill'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                _kill();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.amber,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.show_chart,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(DemoLocalizations.of(context).trans('action_stats'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                var route = new MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      new StatePage(server: Stats(id: widget.server.id)),
-                );
-                Navigator.of(context).push(route);
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Material(
-                          color: Colors.green,
-                          shape: CircleBorder(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.folder_open,
-                                color: Colors.white, size: 30.0),
-                          )),
-                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                      Text(DemoLocalizations.of(context).trans('action_file'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 23.0)),
-                    ]),
-              ),
-              onTap: () {
-                _filelist();
-              },
-            ),
-            _buildTile(
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(DemoLocalizations.of(context).trans('console'),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 20.0))
-                        ],
-                      ),
-                      Material(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(24.0),
-                          child: Center(
-                              child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.code,
-                                color: Colors.white, size: 30.0),
-                          )))
-                    ]),
-              ),
-              onTap: () {
-                var route = new MaterialPageRoute(
-                  builder: (BuildContext context) => new SendPage(
-                      server:
-                          Send(id: widget.server.id, name: widget.server.name)),
-                );
-                Navigator.of(context).push(route);
-              },
-            ),
-          ],
-          staggeredTiles: [
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(1, 161.0),
-            StaggeredTile.extent(2, 110.0),
-          ],
-        ));
+                        padding: EdgeInsets.all(16.0),
+                        child:
+                            Icon(Icons.code, color: Colors.white, size: 30.0),
+                      )))
+                ]),
+          ),
+          onTap: () {
+            var route = new MaterialPageRoute(
+              builder: (BuildContext context) => new SendPage(
+                  server: Send(id: widget.server.id, name: widget.server.name)),
+            );
+            Navigator.of(context).push(route);
+          },
+        ),
+      ],
+      staggeredTiles: [
+        StaggeredTile.extent(1, 161.0),
+        StaggeredTile.extent(1, 161.0),
+        StaggeredTile.extent(2, 110.0),
+      ],
+    ),
+        floatingActionButton: buildSpeedDial(),
+        bottomNavigationBar: TitledBottomNavigationBar(
+            initialIndex: 1,
+            currentIndex: 2, // Use this to update the Bar giving a position
+            onTap: (index) {
+              print("Selected Index: $index");
+            },
+            items: [
+              TitledNavigationBarItem(
+                  title:
+                      DemoLocalizations.of(context).trans('utilization_stats'),
+                  icon: FontAwesomeIcons.chartBar),
+              TitledNavigationBarItem(
+                  title: DemoLocalizations.of(context).trans('console'),
+                  icon: FontAwesomeIcons.terminal),
+            ]));
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {

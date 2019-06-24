@@ -11,7 +11,7 @@ description: A Pterodactyl Mobile App.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 4.3.8+53
+version: 4.3.8+54
 authors:
   - Ruben Talstra <rubentalstra1211@outlook.com>
   - Yvan Watchman <ywatchman@cyberfusion.nl>
@@ -29,7 +29,6 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: any
   convert: ^2.1.1
-  simple_gravatar: any
   flutter_sparkline: any
   flutter_staggered_grid_view: any
   shared_preferences: any
@@ -41,6 +40,9 @@ dependencies:
   url_launcher: any
   firebase_remote_config: any
   adhara_socket_io: any
+  simple_gravatar: any
+  flutter_speed_dial: any
+  titled_navigation_bar: any
 
   dbutils:
     git:

@@ -15,6 +15,7 @@
 */
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
@@ -285,13 +286,13 @@ class _StatePageState extends State<StatePage> {
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
                                 "$_stats" == "on"
-                                    ? Icons.memory
+                                    ? Icon(FontAwesomeIcons.memory)
                                     : "$_stats" == "off"
-                                        ? Icons.memory
+                                        ? Icon(FontAwesomeIcons.memory)
                                         : "$_stats" == "starting"
-                                            ? Icons.memory
+                                            ? Icon(FontAwesomeIcons.memory)
                                             : "$_stats" == "stopping"
-                                                ? Icons.memory
+                                                ? Icon(FontAwesomeIcons.memory)
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
@@ -350,13 +351,13 @@ class _StatePageState extends State<StatePage> {
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
                                 "$_stats" == "on"
-                                    ? Icons.sd_storage
+                                    ? Icon(FontAwesomeIcons.hdd)
                                     : "$_stats" == "off"
-                                        ? Icons.sd_storage
+                                        ? Icon(FontAwesomeIcons.hdd)
                                         : "$_stats" == "starting"
-                                            ? Icons.sd_storage
+                                            ? Icon(FontAwesomeIcons.hdd)
                                             : "$_stats" == "stopping"
-                                                ? Icons.sd_storage
+                                                ? Icon(FontAwesomeIcons.hdd)
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
