@@ -16,6 +16,7 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
@@ -24,6 +25,8 @@ import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'actionserver.dart';
+import 'servers.dart';
+import 'console.dart';
 import 'package:pterodactyl_app/main.dart';
 
 class StatePage extends StatefulWidget {
@@ -373,7 +376,42 @@ class _StatePageState extends State<StatePage> {
             StaggeredTile.extent(2, 110.0),
             StaggeredTile.extent(2, 110.0),
           ],
-        ));
+        ),
+        bottomNavigationBar: TitledBottomNavigationBar(
+            initialIndex: 0,
+            currentIndex: 2, // Use this to update the Bar giving a position
+            onTap: _navigate,
+            items: [
+              TitledNavigationBarItem(
+                  title:
+                      "Info",
+                  icon: FontAwesomeIcons.info),
+              TitledNavigationBarItem(
+                  title:
+                      DemoLocalizations.of(context).trans('utilization_stats'),
+                  icon: FontAwesomeIcons.chartBar),
+              TitledNavigationBarItem(
+                  title: DemoLocalizations.of(context).trans('console'),
+                  icon: FontAwesomeIcons.terminal),
+            ])
+        );
+  }
+
+  Future _navigate(int index) async {
+    if(index == 0) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new ActionServerPage(
+              server: User(id: widget.server.id, name: widget.server.name))
+          ), (Route<dynamic> route) => false);
+    }
+    if(index == 2) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new SendPage(
+              server: Send(id: widget.server.id, name: widget.server.name))
+          ), (Route<dynamic> route) => false);
+    }
   }
 
   Widget _buildTile(Widget child, {Function() onTap}) {

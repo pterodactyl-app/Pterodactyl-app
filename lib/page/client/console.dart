@@ -25,6 +25,7 @@ import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/page/client/servers.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 import 'actionserver.dart';
+import 'utilization.dart';
 
 String socketUrl;
 List<String> logRows = new List<String>();
@@ -248,12 +249,16 @@ class _SendPageState extends State<SendPage> {
       ),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
-            currentIndex: 1, // Use this to update the Bar giving a position
+            currentIndex: 2, // Use this to update the Bar giving a position
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
                   title:
-                  DemoLocalizations.of(context).trans('utilization_stats'),
+                      "Info",
+                  icon: FontAwesomeIcons.info),
+              TitledNavigationBarItem(
+                  title:
+                      DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
                   title: DemoLocalizations.of(context).trans('console'),
@@ -268,6 +273,13 @@ class _SendPageState extends State<SendPage> {
           new MaterialPageRoute(builder: (BuildContext context) =>
           new ActionServerPage(
               server: User(id: widget.server.id, name: widget.server.name))
+          ), (Route<dynamic> route) => false);
+    }
+    if(index == 1) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new StatePage(
+              server: Stats(id: widget.server.id))
           ), (Route<dynamic> route) => false);
     }
   }
