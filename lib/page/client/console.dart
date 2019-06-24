@@ -15,16 +15,27 @@
 */
 import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/client/servers.dart';
+import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 import 'actionserver.dart';
 
 String socketUrl;
 List<String> logRows = new List<String>();
+
+//class User {
+//  final String id, name;
+//  const User({
+//    this.id,
+//    this.name,
+//  });
+//}
 
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
@@ -235,7 +246,30 @@ class _SendPageState extends State<SendPage> {
           ],
         ),
       ),
+        bottomNavigationBar: TitledBottomNavigationBar(
+            initialIndex: 0,
+            currentIndex: 1, // Use this to update the Bar giving a position
+            onTap: _navigate,
+            items: [
+              TitledNavigationBarItem(
+                  title:
+                  DemoLocalizations.of(context).trans('utilization_stats'),
+                  icon: FontAwesomeIcons.chartBar),
+              TitledNavigationBarItem(
+                  title: DemoLocalizations.of(context).trans('console'),
+                  icon: FontAwesomeIcons.terminal),
+            ])
     );
+  }
+
+  Future _navigate(int index) async {
+    if(index == 0) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new ActionServerPage(
+              server: User(id: widget.server.id, name: widget.server.name))
+          ), (Route<dynamic> route) => false);
+    }
   }
 }
 

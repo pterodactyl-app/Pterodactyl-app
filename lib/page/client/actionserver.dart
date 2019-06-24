@@ -57,6 +57,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
   Map data;
   bool dialVisible = true;
 
+  BuildContext context;
+
   Future postStart() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
@@ -204,6 +206,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -325,11 +328,9 @@ class _ActionServerPageState extends State<ActionServerPage> {
     ),
         floatingActionButton: buildSpeedDial(),
         bottomNavigationBar: TitledBottomNavigationBar(
-            initialIndex: 1,
-            currentIndex: 2, // Use this to update the Bar giving a position
-            onTap: (index) {
-              print("Selected Index: $index");
-            },
+            initialIndex: 0,
+            currentIndex: 0, // Use this to update the Bar giving a position
+            onTap: _navigate,
             items: [
               TitledNavigationBarItem(
                   title:
@@ -354,6 +355,16 @@ class _ActionServerPageState extends State<ActionServerPage> {
                     print('Not set yet');
                   },
             child: child));
+  }
+
+  Future _navigate(int index) async {
+    if(index == 1) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new SendPage(
+              server: Send(id: widget.server.id, name: widget.server.name))
+          ), (Route<dynamic> route) => false);
+    }
   }
 
   _restart() {
