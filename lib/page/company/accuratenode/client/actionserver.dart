@@ -18,32 +18,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/Server.dart';
+import 'package:pterodactyl_app/models/Stats.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
-import 'console.dart';
-import 'servers.dart';
-import 'utilization.dart';
-
-class Send {
-  final String id, name;
-  const Send({
-    this.id,
-    this.name,
-  });
-}
-
-class Stats {
-  final String id;
-  const Stats({
-    this.id,
-  });
-}
+import 'package:pterodactyl_app/page/company/accuratenode/client/console.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/utilization.dart';
 
 class ActionServerPage extends StatefulWidget {
   ActionServerPage({Key key, this.server}) : super(key: key);
-  final User server;
+  final Server server;
 
   @override
   _ActionServerPageState createState() => _ActionServerPageState();
@@ -347,7 +333,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) => new SendPage(
                       server:
-                          Send(id: widget.server.id, name: widget.server.name)),
+                          Server(id: widget.server.id, name: widget.server.name)),
                 );
                 Navigator.of(context).push(route);
               },

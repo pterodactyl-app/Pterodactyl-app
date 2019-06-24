@@ -20,7 +20,6 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/sponsor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';

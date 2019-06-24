@@ -24,14 +24,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 
-class User {
-  final String api, url;
-  const User({
-    this.api,
-    this.url,
-  });
-}
-
 class LoginAccurateNodePage extends StatefulWidget {
   @override
   _LoginAccurateNodePageState createState() => new _LoginAccurateNodePageState();
