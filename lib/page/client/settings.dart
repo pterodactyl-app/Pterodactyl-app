@@ -296,64 +296,20 @@ class ActionsRow extends StatelessWidget {
 }
 
 class Settings extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+
+  Widget _buildSettingsItem(IconData icon, String iconBgColor, String title, String description, {Function onTap: null}) {
+// ignore: avoid_init_to_null
     return Division(
-      style: settingsStyle,
-      child: Column(
-        children: <Widget>[
-          SettingsItem(FontAwesomeIcons.bell, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
-              DemoLocalizations.of(context).trans('notifications_sub')),
-          SettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
-              DemoLocalizations.of(context).trans('dark_mode_sub')),
-
-
-          SettingsItem(
-              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub')),
-          SettingsItem(
-              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub')),
-
-        ],
-      ),
-    );
-  }
-
-  final StyleClass settingsStyle = StyleClass();
-}
-
-class SettingsItem extends StatefulWidget {
-  final IconData icon;
-  final String iconBgColor;
-  final String title;
-  final String description;
-
-  SettingsItem(this.icon, this.iconBgColor, this.title, this.description);
-
-  @override
-  _SettingsItemState createState() => _SettingsItemState();
-}
-
-class _SettingsItemState extends State<SettingsItem> {
-  bool pressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Division(
-        style: settingsItemStyle
-          .elevation(pressed ? 0 : 50, color: Colors.grey)
-          .scale(pressed ? 0.95 : 1.0),
-        gesture: GestureClass()
-          .onTapDown((details) => setState(() => pressed = true))
-          .onTapUp((details) => setState(() => pressed = false))
-          .onTapCancel(() => setState(() => pressed = false)),
+        style: settingsItemStyle,
+        gesture: onTap != null ? GestureClass().onTap(onTap) : null,
         child: Row(
           children: <Widget>[
             Division(
               style: StyleClass()
-                .backgroundColor(widget.iconBgColor)
+                .backgroundColor(iconBgColor)
                 .add(settingsItemIconStyle),
               child: Icon(
-                widget.icon,
+                icon,
                 color: Colors.white,
                 size: 20,
               ),
@@ -366,14 +322,14 @@ class _SettingsItemState extends State<SettingsItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  widget.title,
+                  title,
                   style: itemTitleTextStyle,
                 ),
                 SizedBox(
                   height: 5,
                 ),
                 Text(
-                  widget.description,
+                  description,
                   style: itemDescriptionTextStyle,
                 ),
               ],
@@ -381,6 +337,58 @@ class _SettingsItemState extends State<SettingsItem> {
           ],
         ));
   }
+
+
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Division(
+      style: settingsStyle,
+      child: Column(
+        children: <Widget>[
+          _buildSettingsItem(FontAwesomeIcons.bell, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
+              DemoLocalizations.of(context).trans('notifications_sub'), onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new SponsorPage()
+                )
+            )),
+          _buildSettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
+              DemoLocalizations.of(context).trans('dark_mode_sub'), onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new SponsorPage()
+                )
+            )),
+
+
+          _buildSettingsItem(
+              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub'), onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new SponsorPage()
+                )
+            )),
+          _buildSettingsItem(
+              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub'), onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new SponsorPage()
+                )
+            )),
+
+        ],
+      ),
+    );
+  }
+
+  final StyleClass settingsStyle = StyleClass();
+
+
+
 
   final StyleClass settingsItemStyle = StyleClass()
     .alignChild('center')
