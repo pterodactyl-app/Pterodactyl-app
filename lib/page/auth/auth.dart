@@ -97,7 +97,6 @@ class SplashState extends State<Splash> {
         "Authorization": "Bearer $_api"
       },
     );
-    print(response);
 
     if (response.statusCode == 401) {
       // Todo fix Navigation context for logging out if key isn't available
