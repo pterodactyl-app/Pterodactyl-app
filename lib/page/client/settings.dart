@@ -148,7 +148,7 @@ final String imageUrl =
               height: 5,
             ),
             Text(
-              'Creative builder',
+              '\$email',
               style: nameDescriptionTextStyle,
             )
           ],
