@@ -300,7 +300,7 @@ class Settings extends StatelessWidget {
           SettingsItem(
               Icons.lock, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub')),
           SettingsItem(
-              Icons.menu, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub')),
+              Icons.delete_sweep, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub')),
 
         ],
       ),
