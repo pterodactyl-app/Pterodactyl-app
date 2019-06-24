@@ -293,7 +293,7 @@ class Settings extends StatelessWidget {
         children: <Widget>[
           SettingsItem(Icons.notifications, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
               DemoLocalizations.of(context).trans('notifications_sub')),
-          SettingsItem(Icons.question_answer, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
+          SettingsItem(Icons.invert_colors, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
               DemoLocalizations.of(context).trans('dark_mode_sub')),
 
 
