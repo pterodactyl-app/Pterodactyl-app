@@ -260,12 +260,23 @@ class ActionsRow extends StatelessWidget {
         _buildActionsItem('Sponsors', FontAwesomeIcons.handHoldingUsd, onTap: () =>
             Navigator.of(context).push(
                 new MaterialPageRoute(
-                    builder: (BuildContext context) => new MyHomePage() // Example
+                    builder: (BuildContext context) => new SponsorPage()
                 )
             )),
-        _buildActionsItem('Partners', FontAwesomeIcons.handshake),
-        _buildActionsItem('Website', FontAwesomeIcons.link),
-        _buildActionsItem(DemoLocalizations.of(context).trans('license'), FontAwesomeIcons.certificate),
+        _buildActionsItem('Partners', FontAwesomeIcons.handshake, 
+/*
+        onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new PartnerPage()
+                )
+            )
+*/
+            ),
+        _buildActionsItem('Website', FontAwesomeIcons.link, onTap: () =>
+            launch('https://pterodactyl-app.com/')),
+        _buildActionsItem(DemoLocalizations.of(context).trans('license'), FontAwesomeIcons.certificate, onTap: () =>
+            launch('https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE')),
       ],
     );
   }
