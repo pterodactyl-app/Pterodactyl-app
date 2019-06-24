@@ -286,13 +286,13 @@ class _StatePageState extends State<StatePage> {
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
                                 "$_stats" == "on"
-                                    ? Icon(FontAwesomeIcons.memory)
+                                    ? FontAwesomeIcons.memory
                                     : "$_stats" == "off"
-                                        ? Icon(FontAwesomeIcons.memory)
+                                        ? FontAwesomeIcons.memory
                                         : "$_stats" == "starting"
-                                            ? Icon(FontAwesomeIcons.memory)
+                                            ? FontAwesomeIcons.memory
                                             : "$_stats" == "stopping"
-                                                ? Icon(FontAwesomeIcons.memory)
+                                                ? FontAwesomeIcons.memory
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
@@ -351,13 +351,13 @@ class _StatePageState extends State<StatePage> {
                             padding: const EdgeInsets.all(16.0),
                             child: Icon(
                                 "$_stats" == "on"
-                                    ? Icon(FontAwesomeIcons.hdd)
+                                    ? FontAwesomeIcons.hdd
                                     : "$_stats" == "off"
-                                        ? Icon(FontAwesomeIcons.hdd)
+                                        ? FontAwesomeIcons.hdd
                                         : "$_stats" == "starting"
-                                            ? Icon(FontAwesomeIcons.hdd)
+                                            ? FontAwesomeIcons.hdd
                                             : "$_stats" == "stopping"
-                                                ? Icon(FontAwesomeIcons.hdd)
+                                                ? FontAwesomeIcons.hdd
                                                 : Icons.data_usage,
                                 color: Colors.white,
                                 size: 30.0),
