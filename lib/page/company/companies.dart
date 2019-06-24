@@ -105,10 +105,6 @@ Map companyRoutes() {
   return c;
 }
 
-//'/coderslight/home': (BuildContext context) => new MyCodersLightHomePage(),
-//'/minicenter/home': (BuildContext context) => new MyMiniCenterHomePage(),
-//'/planetnode/home': (BuildContext context) => new MyPlanetNodeHomePage(),
-//'/revivenode/home': (BuildContext context) => new MyReviveNodeHomePage(),
 
 List<String> companies() {
   List<String> companies = [];

@@ -20,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/client/home.dart';
 import 'package:pterodactyl_app/sponsor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -227,8 +228,10 @@ final String imageUrl =
 }
 
 class ActionsRow extends StatelessWidget {
-  Widget _buildActionsItem(String title, IconData icon) {
+  // ignore: avoid_init_to_null
+  Widget _buildActionsItem(String title, IconData icon, {Function onTap: null}) {
     return Division(
+      gesture: onTap != null ? GestureClass().onTap(onTap) : null,
       style: actionsItemStyle,
       child: Column(
         children: <Widget>[
@@ -254,7 +257,12 @@ class ActionsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        _buildActionsItem('Sponsors', FontAwesomeIcons.handHoldingUsd),
+        _buildActionsItem('Sponsors', FontAwesomeIcons.handHoldingUsd, onTap: () =>
+            Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => new MyHomePage() // Example
+                )
+            )),
         _buildActionsItem('Partners', FontAwesomeIcons.handshake),
         _buildActionsItem('Website', FontAwesomeIcons.link),
         _buildActionsItem(DemoLocalizations.of(context).trans('license'), FontAwesomeIcons.certificate),
