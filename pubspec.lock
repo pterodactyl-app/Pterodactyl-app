@@ -111,6 +111,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -289,6 +296,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.4"
+  titled_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: titled_navigation_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
   typed_data:
     dependency: transitive
     description:
