@@ -29,14 +29,6 @@ import 'actionserver.dart';
 String socketUrl;
 List<String> logRows = new List<String>();
 
-//class User {
-//  final String id, name;
-//  const User({
-//    this.id,
-//    this.name,
-//  });
-//}
-
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
   final Send server;
