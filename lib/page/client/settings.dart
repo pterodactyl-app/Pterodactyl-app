@@ -149,7 +149,7 @@ final String imageUrl =
               height: 5,
             ),
             Text(
-              'Creative builder',
+              '\$email',
               style: nameDescriptionTextStyle,
             )
           ],
@@ -291,16 +291,16 @@ class Settings extends StatelessWidget {
       style: settingsStyle,
       child: Column(
         children: <Widget>[
-          SettingsItem(Icons.notifications, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
+          SettingsItem(FontAwesomeIcons.bell, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
               DemoLocalizations.of(context).trans('notifications_sub')),
-          SettingsItem(Icons.invert_colors, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
+          SettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
               DemoLocalizations.of(context).trans('dark_mode_sub')),
 
 
           SettingsItem(
-              Icons.lock, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub')),
+              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub')),
           SettingsItem(
-              Icons.delete_sweep, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub')),
+              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub')),
 
         ],
       ),
