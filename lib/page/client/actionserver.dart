@@ -15,8 +15,8 @@
 */
 import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:pterodactyl_app/models/Server.dart';
-import 'package:pterodactyl_app/models/Stats.dart';
+import 'package:pterodactyl_app/models/server.dart';
+import 'package:pterodactyl_app/models/stats.dart';
 import 'package:pterodactyl_app/page/client/console.dart';
 import 'package:pterodactyl_app/page/client/utilization.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
