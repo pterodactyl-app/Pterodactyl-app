@@ -15,18 +15,18 @@
 */
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:pterodactyl_app/models/server.dart';
+import 'package:pterodactyl_app/models/stats.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
-import 'package:pterodactyl_app/models/stats.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 
 import 'dart:async';
 import 'dart:convert';
 import 'actionserver.dart';
-import 'servers.dart';
 import 'console.dart';
 import 'package:pterodactyl_app/main.dart';
 
@@ -403,14 +403,14 @@ class _StatePageState extends State<StatePage> {
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new ActionServerPage(
-              server: User(id: widget.server.id, name: widget.server.name))
+              server: Server(id: widget.server.id, name: widget.server.name))
           ), (Route<dynamic> route) => false);
     }
     if(index == 2) {
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new SendPage(
-              server: Send(id: widget.server.id, name: widget.server.name))
+              server: Server(id: widget.server.id, name: widget.server.name))
           ), (Route<dynamic> route) => false);
     }
   }

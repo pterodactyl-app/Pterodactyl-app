@@ -34,21 +34,6 @@ import 'console.dart';
 import 'servers.dart';
 import 'utilization.dart';
 
-class Send {
-  final String id, name;
-  const Send({
-    this.id,
-    this.name,
-  });
-}
-
-class Stats {
-  final String id, name;
-  const Stats({
-    this.id,
-    this.name,
-  });
-}
 
 class ActionServerPage extends StatefulWidget {
   ActionServerPage({Key key, this.server}) : super(key: key);

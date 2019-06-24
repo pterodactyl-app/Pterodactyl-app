@@ -66,6 +66,13 @@ packages:
       url: "git://github.com/AndriousSolutions/dbutils.git"
     source: git
     version: "0.2.0"
+  division:
+    dependency: "direct main"
+    description:
+      name: division
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   dynamic_theme:
     dependency: "direct main"
     description:
