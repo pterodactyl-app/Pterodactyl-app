@@ -30,6 +30,25 @@ import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
+import 'console.dart';
+import 'servers.dart';
+import 'utilization.dart';
+
+class Send {
+  final String id, name;
+  const Send({
+    this.id,
+    this.name,
+  });
+}
+
+class Stats {
+  final String id, name;
+  const Stats({
+    this.id,
+    this.name,
+  });
+}
 
 class ActionServerPage extends StatefulWidget {
   ActionServerPage({Key key, this.server}) : super(key: key);
@@ -224,35 +243,6 @@ class _ActionServerPageState extends State<ActionServerPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Material(
-                      color: Colors.amber,
-                      shape: CircleBorder(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Icon(Icons.show_chart,
-                            color: Colors.white, size: 30.0),
-                      )),
-                  Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                  Text(DemoLocalizations.of(context).trans('action_stats'),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 23.0)),
-                ]),
-          ),
-          onTap: () {
-            var route = new MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  new StatePage(server: Stats(id: widget.server.id)),
-            );
-            Navigator.of(context).push(route);
-          },
-        ),
-        _buildTile(
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Material(
                       color: Colors.green,
                       shape: CircleBorder(),
                       child: Padding(
@@ -270,46 +260,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _filelist();
           },
         ),
-        _buildTile(
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(DemoLocalizations.of(context).trans('console'),
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 20.0))
-                    ],
-                  ),
-                  Material(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(24.0),
-                      child: Center(
-                          child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child:
-                            Icon(Icons.code, color: Colors.white, size: 30.0),
-                      )))
-                ]),
-          ),
-          onTap: () {
-            var route = new MaterialPageRoute(
-              builder: (BuildContext context) => new SendPage(
-                  server: Server(id: widget.server.id, name: widget.server.name)),
-            );
-            Navigator.of(context).push(route);
-          },
-        ),
       ],
       staggeredTiles: [
         StaggeredTile.extent(1, 161.0),
         StaggeredTile.extent(1, 161.0),
-        StaggeredTile.extent(2, 110.0),
       ],
     ),
         floatingActionButton: buildSpeedDial(),
@@ -318,6 +272,10 @@ class _ActionServerPageState extends State<ActionServerPage> {
             currentIndex: 0, // Use this to update the Bar giving a position
             onTap: _navigate,
             items: [
+              TitledNavigationBarItem(
+                  title:
+                      "Info",
+                  icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
@@ -345,6 +303,13 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   Future _navigate(int index) async {
     if(index == 1) {
+      Navigator.of(this.context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (BuildContext context) =>
+          new StatePage(
+              server: Stats(id: widget.server.id))
+          ), (Route<dynamic> route) => false);
+    }
+    if(index == 2) {
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new SendPage(
