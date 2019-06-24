@@ -106,10 +106,6 @@ class SettingsListPageState extends State<CodersLightSettingsList> {
               subtitle: Text(
                 DemoLocalizations.of(context).trans('notifications_sub'),
               ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.useDarkTheme,
-              //),
             ),
             Divider(
               height: 20.0,

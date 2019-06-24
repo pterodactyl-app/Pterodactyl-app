@@ -23,14 +23,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
-class User {
-  final String api, url;
-  const User({
-    this.api,
-    this.url,
-  });
-}
-
 class LoginDeploysPage extends StatefulWidget {
   @override
   _LoginDeploysPageState createState() => new _LoginDeploysPageState();

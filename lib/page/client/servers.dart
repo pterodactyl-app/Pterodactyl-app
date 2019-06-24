@@ -16,20 +16,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:pterodactyl_app/models/Server.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'actionserver.dart';
-
-class User {
-  final String id, name;
-  const User({
-    this.id,
-    this.name,
-  });
-}
 
 class ServerListPage extends StatefulWidget {
   ServerListPage({Key key}) : super(key: key);
@@ -148,7 +141,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                   var route = new MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         new ActionServerPage(
-                                            server: User(
+                                            server: Server(
                                                 id: userData[index]
                                                         ["attributes"]
                                                     ["identifier"],

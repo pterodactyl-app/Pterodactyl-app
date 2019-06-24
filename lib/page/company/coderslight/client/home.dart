@@ -21,9 +21,9 @@ import 'dart:io';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'servers.dart';
-import 'settings.dart';
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/servers.dart';
+import 'package:pterodactyl_app/page/company/coderslight/client/settings.dart';
 
 class MyCodersLightHomePage extends StatefulWidget {
   MyCodersLightHomePage({Key key}) : super(key: key);

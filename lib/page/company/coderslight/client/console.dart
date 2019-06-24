@@ -15,20 +15,20 @@
 */
 import 'package:adhara_socket_io/adhara_socket_io.dart';
 import 'package:flutter/material.dart';
+import 'package:pterodactyl_app/models/Server.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
-import 'actionserver.dart';
 
 String socketUrl;
 List<String> logRows = new List<String>();
 
 class SendPage extends StatefulWidget {
   SendPage({Key key, this.server}) : super(key: key);
-  final Send server;
+  final Server server;
 
   @override
   _SendPageState createState() => _SendPageState();

@@ -20,6 +20,7 @@ import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/Stats.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 
 import 'dart:async';

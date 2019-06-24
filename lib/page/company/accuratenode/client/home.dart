@@ -21,9 +21,9 @@ import 'dart:io';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
-import 'servers.dart';
-import 'settings.dart';
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/servers.dart';
+import 'package:pterodactyl_app/page/company/accuratenode/client/settings.dart';
 
 class MyAccurateNodeHomePage extends StatefulWidget {
   MyAccurateNodeHomePage({Key key}) : super(key: key);
