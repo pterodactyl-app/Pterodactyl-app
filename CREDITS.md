@@ -17,6 +17,7 @@ For all the people who worked with me on this amazing project.
 
 > - [ReviveNode Hosting](https://revivenode.com/)
 
+> - [RoyaleHosting](http://royalehosting.nl/)
 
 ###### Donators:
 
