@@ -31,7 +31,7 @@ import 'package:division/division.dart';
 
 class SettingsList extends StatefulWidget {
   SettingsList({Key key, this.settings}) : super(key: key);
-  final Settingsinfo settings;
+  final SettingsInfo settings;
 
   @override
   SettingsListPageState createState() => new SettingsListPageState();
@@ -98,12 +98,8 @@ class SettingsListPageState extends State<SettingsList> {
 
 }
 
-
-
-
 class UserCard extends StatelessWidget {
-
-  static final gravatar = Gravatar('zeprofdecoding@gmail.com');
+  static final gravatar = Gravatar(settings.email);
   final String imageUrl = gravatar.imageUrl(
     size: 64,
     defaultImage: GravatarImage.retro,
@@ -111,30 +107,27 @@ class UserCard extends StatelessWidget {
     fileExtension: true,
   );
 
-
-
   Widget _buildUserRow() {
     return Row(
       children: <Widget>[
         Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: CircularImage(
-                  NetworkImage(imageUrl),
-                ),
-              ),
-
+          padding: const EdgeInsets.only(right: 16),
+          child: CircularImage(
+            NetworkImage(imageUrl),
+          ),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              '\$name',
+              settings.name,
               style: nameTextStyle,
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              '\$email',
+              settings.email,
               style: nameDescriptionTextStyle,
             )
           ],
@@ -149,9 +142,9 @@ class UserCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildUserStatsItem(10, 'Owns'),
-          _buildUserStatsItem(2, 'Sub-user'),
-          _buildUserStatsItem(4, 'Schedules'),
+          _buildUserStatsItem(settings.servers, 'Owns'),
+          _buildUserStatsItem(settings.subServers, 'Sub-user'),
+          _buildUserStatsItem(settings.schedules, 'Schedules'),
         ],
       ),
     );
@@ -189,19 +182,19 @@ class UserCard extends StatelessWidget {
   //Styling
 
   final StyleClass userCardStyle = StyleClass()
-    .height(175)
-    .padding(horizontal: 20.0, vertical: 10)
-    .align('center')
-    .backgroundColor('#3977FF')
-    .borderRadius(all: 20.0)
-    .elevation(10, color: '#3977FF');
+      .height(175)
+      .padding(horizontal: 20.0, vertical: 10)
+      .align('center')
+      .backgroundColor('#3977FF')
+      .borderRadius(all: 20.0)
+      .elevation(10, color: '#3977FF');
 
   final StyleClass userImageStyle = StyleClass()
-    .height(50)
-    .width(50)
-    .margin(right: 10.0)
-    .borderRadius(all: 30)
-    .backgroundColor('ffffff');
+      .height(50)
+      .width(50)
+      .margin(right: 10.0)
+      .borderRadius(all: 30)
+      .backgroundColor('ffffff');
 
   final StyleClass userStatsStyle = StyleClass().margin(vertical: 10.0);
 
