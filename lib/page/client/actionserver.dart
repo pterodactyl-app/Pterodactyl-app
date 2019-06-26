@@ -151,44 +151,44 @@ class _ActionServerPageState extends State<ActionServerPage> {
       curve: Curves.bounceIn,
       children: [
         SpeedDialChild(
-          child: Icon((FontAwesomeIcons.play), color: Colors.white),
-          backgroundColor: Colors.green,
+          child: Icon((FontAwesomeIcons.plug), color: Colors.white),
+          backgroundColor: Color(0xFF2dce89),
           onTap: () {
             postStart();
           },
           label: DemoLocalizations.of(context).trans('action_start'),
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.greenAccent,
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFF2dce89),
         ),
         SpeedDialChild(
-          child: Icon((FontAwesomeIcons.stop), color: Colors.white),
-          backgroundColor: Colors.deepOrange,
+          child: Icon((FontAwesomeIcons.ban), color: Colors.white),
+          backgroundColor: Color(0xFFf5365c),
           onTap: () {
             _stop();
           },
           label: DemoLocalizations.of(context).trans('action_stop'),
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.deepOrangeAccent,
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFFf5365c),
         ),
         SpeedDialChild(
           child: Icon((FontAwesomeIcons.redo), color: Colors.white),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFF5e72e4),
           onTap: () {
             _restart();
           },
           label: DemoLocalizations.of(context).trans('action_restart'),
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.blueAccent,
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFF5e72e4),
         ),
         SpeedDialChild(
           child: Icon((FontAwesomeIcons.skull), color: Colors.white),
-          backgroundColor: Colors.deepOrange,
+          backgroundColor: Color(0xFFf5365c),
           onTap: () {
             _kill();
           },
           label: DemoLocalizations.of(context).trans('action_kill'),
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.deepOrangeAccent,
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFFf5365c),
         ),
       ],
     );
