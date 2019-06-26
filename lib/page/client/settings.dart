@@ -108,6 +108,8 @@ class SettingsListPageState extends State<SettingsList> {
     )
     );
   }
+
+
 }
 
 
@@ -357,12 +359,9 @@ class Settings extends StatelessWidget {
                 )
             )),
           _buildSettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
-              DemoLocalizations.of(context).trans('dark_mode_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              DemoLocalizations.of(context).trans('dark_mode_sub'), onTap: () {
+              handelTheme(!globals.useDarkTheme);
+            }),
 
 
           _buildSettingsItem(
@@ -383,6 +382,8 @@ class Settings extends StatelessWidget {
         ],
       ),
     );
+
+    
   }
 
   final StyleClass settingsStyle = StyleClass();
@@ -409,6 +410,9 @@ class Settings extends StatelessWidget {
 
   final TextStyle itemDescriptionTextStyle = TextStyle(
       color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 12);
+
+
+      
 }
 
 
