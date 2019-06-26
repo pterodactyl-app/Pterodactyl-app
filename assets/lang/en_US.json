@@ -50,6 +50,10 @@
     "utilization_performance_disk": "PERFORMANCE REPORT",
     "utilization_disk": "Disk",
 
+    "action_stop_warning": "Are you sure you want to stop this server?",
+    "action_restart_warning": "Are you sure you want to restart your server?",
+    "action_kill_warning": "Are you sure you want to kill your server? Nothing will be saved!",
+    
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Dont have an Admin account? Tap here then",
     "admin_homepanel": "Admin Panel",
