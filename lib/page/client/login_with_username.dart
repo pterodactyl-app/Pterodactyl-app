@@ -100,6 +100,7 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
+                obscureText: true,
                 controller: _passController,
                 decoration: InputDecoration(
                   labelText:
