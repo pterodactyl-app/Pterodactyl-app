@@ -191,13 +191,11 @@ class _SendPageState extends State<SendPage> {
         body: SafeArea(
           child: ListView(
             children: <Widget>[
-              SizedBox(height: 10.0),
           ResponsiveContainer(
-            heightPercent: 76.0, //value percent of screen total height
+            heightPercent: 73.0, //value percent of screen total height
             widthPercent: 100.0,  //value percent of screen total width
             child:
             Container(
-                height: 700,
                 color: Colors.black,
                 child: SingleChildScrollView(
                     child: new Wrap(
@@ -227,6 +225,7 @@ class _SendPageState extends State<SendPage> {
                 ),
                 controller: _sendController,
               ),
+              
             ],
           ),
         ),
