@@ -57,6 +57,10 @@
    "utilization_stats_starting":"Le serveur démarre",
    "utilization_stats_stopping":"Le serveur s'arrête",
    "utilization_stats_Loading":"Récupération des données",
+   
+   "action_stop_warning": "Êtes-vous sûr de vouloir arrêter ce serveur ?",
+   "action_restart_warning": "Êtes-vous sûr de vouloir redémarrer votre serveur ?",
+   "action_kill_warning": "Êtes-vous sûr de vouloir arrêter de force votre serveur ? Rien ne sera sauvegardé !",
   
    "admin_login":"Connexion administrateur",
    "admin_noadminaccount":"Vous n'avez pas de compte administrateur ? Cliquez ici !",
