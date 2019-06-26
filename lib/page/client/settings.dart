@@ -277,7 +277,7 @@ class ActionsRow extends StatelessWidget {
   final StyleClass actionsItemStyle = StyleClass().margin(vertical: 20.0);
 
   final TextStyle actionsItemTextStyle =
-      TextStyle(color: Colors.black.withOpacity(0.8), fontSize: 12);
+      TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black.withOpacity(0.8), fontSize: 12);
 }
 
 class Settings extends StatelessWidget {
@@ -399,7 +399,7 @@ class Settings extends StatelessWidget {
     .height(70)
     .margin(vertical: 10)
     .borderRadius(all: 15)
-    .backgroundColor('#ffffff')
+    .backgroundColor(globals.useDarkTheme ? Colors.black26 : Colors.white)
     .ripple(true)
     .animate(300, Curves.easeOut);
 
@@ -412,7 +412,7 @@ class Settings extends StatelessWidget {
       TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
 
   final TextStyle itemDescriptionTextStyle = TextStyle(
-      color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 12);
+      color: globals.useDarkTheme ? Colors.white30 : Colors.black26, fontWeight: FontWeight.bold, fontSize: 12);
 
 
       

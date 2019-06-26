@@ -177,7 +177,7 @@ class _SendPageState extends State<SendPage> {
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
             disconnect();
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
           },
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),

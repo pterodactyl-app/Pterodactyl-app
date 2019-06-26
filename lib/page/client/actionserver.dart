@@ -203,7 +203,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
           backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
           leading: IconButton(
             color: globals.useDarkTheme ? Colors.white : Colors.black,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/home', (Route<dynamic> route) => false),
             icon: Icon(
               Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black,
