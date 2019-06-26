@@ -179,18 +179,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     ]),
               ),
               onTap: () {
-                                  var route = new MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        new SettingsList(
-                                            settings: Settingsinfo(
-                                                servers: userTotalServers.toString(), 
-                    subServers: '4',
-                    schedules: '2',
-                    name: 'Ruben',
-                    email: 'rubentalstra1211@gmail.com')),
-                                  );
-                                  Navigator.of(context).push(route);
-                                },
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new SettingsList(
+                      settings: SettingsInfo(
+                          servers: userTotalServers.toString(),
+                          subServers: '4',
+                          schedules: '2',
+                          name: 'Arnaud Lier',
+                          email: 'zeprofdecoding@gmail.com')),
+                );
+                Navigator.of(context).push(route);
+              },
             ),
             _buildTile(
               Padding(
