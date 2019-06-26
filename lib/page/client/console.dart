@@ -26,6 +26,7 @@ import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/page/client/actionserver.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
+import 'package:responsive_container/responsive_container.dart';
 import 'actionserver.dart';
 import 'utilization.dart';
 
@@ -167,115 +168,89 @@ class _SendPageState extends State<SendPage> {
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
-        leading: IconButton(
-          color: globals.useDarkTheme ? Colors.white : Colors.black,
-          onPressed: () {
-            disconnect();
-            Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-          },
-          icon: Icon(Icons.arrow_back,
-              color: globals.useDarkTheme ? Colors.white : Colors.black),
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+          leading: IconButton(
+            color: globals.useDarkTheme ? Colors.white : Colors.black,
+            onPressed: () {
+              disconnect();
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.arrow_back,
+                color: globals.useDarkTheme ? Colors.white : Colors.black),
+          ),
+          title: Text(DemoLocalizations.of(context).trans('console'),
+              style: TextStyle(
+                  color: globals.useDarkTheme ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.w700)),
         ),
-        title: Text(DemoLocalizations.of(context).trans('console'),
-            style: TextStyle(
-                color: globals.useDarkTheme ? Colors.white : Colors.black,
-                fontWeight: FontWeight.w700)),
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 12.0),
-          children: <Widget>[
-            SizedBox(height: 10.0),
+        body: SafeArea(
+          child: ListView(
+            children: <Widget>[
+              SizedBox(height: 10.0),
+          ResponsiveContainer(
+            heightPercent: 76.0, //value percent of screen total height
+            widthPercent: 100.0,  //value percent of screen total width
+            child:
             Container(
-              height: 425,
-              color: Colors.black,
-              child: SingleChildScrollView(
-                  child: new Wrap(
-                direction: Axis.vertical,
-                children: <Widget>[getTextWidgets()],
-              )),
-            ),
-            SizedBox(height: 10.0),
-            AccentColorOverride(
-              color: Colors.red,
-              child: TextField(
-                onSubmitted: (text) async {
-                    await SharedPreferencesHelper.setString(
-                        "send", _sendController.text);
-                    postSend();
-                    _sendController.clear();
-                },
-                controller: _sendController,
-                decoration: InputDecoration(
-                  labelText: (DemoLocalizations.of(context)
-                      .trans('type_command_here')),
-                ),
+                height: 700,
+                color: Colors.black,
+                child: SingleChildScrollView(
+                    child: new Wrap(
+                  direction: Axis.vertical,
+                  children: <Widget>[getTextWidgets()],
+                )),
               ),
-            ),
-            ButtonBar(
-              children: <Widget>[
-                  FlatButton(
-                    color: Colors.blue,
-                    child: Text(DemoLocalizations.of(context).trans('clear'),
-                        style: TextStyle(color: Colors.white)),
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                    onPressed: () {
-                      _sendController.clear();
-                    },
-                  ),
-                  FlatButton(
-                    color: Colors.green,
-                    child: Text(
-                        DemoLocalizations.of(context).trans('send_command'),
-                        style: TextStyle(color: Colors.white)),
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                    onPressed: () async {
-                      await SharedPreferencesHelper.setString(
-                          "send", _sendController.text);
-                      postSend();
-                      _sendController.clear();
-                    },
-                  ),
-              ],
-            ),
-          ],
         ),
-      ),
+              SizedBox(height: 1.0),
+              TextField(
+                onSubmitted: (text) async {
+                  await SharedPreferencesHelper.setString(
+                      "send", _sendController.text);
+                  postSend();
+                  _sendController.clear();
+                },
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  border:InputBorder.none,
+                  filled:true,
+                  fillColor: Colors.black,
+                  hintStyle: TextStyle(color: Colors.white),
+                  prefixStyle: TextStyle(color: Colors.white),
+                  hintText: DemoLocalizations.of(context)
+                      .trans('type_command_here'),
+                  prefixText:'container:~/\$ ',
+                ),
+                controller: _sendController,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: buildSpeedDial(),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
             currentIndex: 2, // Use this to update the Bar giving a position
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
-                  title:
-                      "Info",
-                  icon: FontAwesomeIcons.info),
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  title: "Info", icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
-            ])
-    );
+            ]));
   }
+
 
   Future _navigate(int index) async {
     if(index == 0) {
