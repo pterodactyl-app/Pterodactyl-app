@@ -24,6 +24,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
+import 'package:logger/logger.dart';
 import 'package:pterodactyl_app/page/auth/auth.dart';
 import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
@@ -245,4 +246,28 @@ Future main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   globals.useDarkTheme = (prefs.getBool('Value') ?? false);
   runApp(new MyApp());
+  demo();
+}
+
+var logger = Logger(
+  printer: PrettyPrinter(),
+);
+
+var loggerNoStack = Logger(
+  printer: PrettyPrinter(methodCount: 0),
+);
+
+
+void demo() {
+  logger.d("Log message with 2 methods");
+
+  loggerNoStack.i("Info message");
+
+  loggerNoStack.w("Just a warning!");
+
+  logger.e("Error! Something bad happened", "Test Error");
+
+  loggerNoStack.v({"key": 5, "value": "something"});
+
+  print("Test\nTest2");
 }

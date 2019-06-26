@@ -286,6 +286,7 @@ class ActionsRow extends StatelessWidget {
 
 class Settings extends StatelessWidget {
 
+
   void handleTheme(bool value, BuildContext context) async {
 // save new value
     final sharedPreferences = await SharedPreferences.getInstance();
@@ -385,6 +386,11 @@ class Settings extends StatelessWidget {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               }),
+          _buildSettingsItem(FontAwesomeIcons.mobile, '#5FD0D3', DemoLocalizations.of(context).trans('app_version'),
+              '_projectVersion', 
+            onTap: () {
+              
+            }),
 
         ],
       ),

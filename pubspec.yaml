@@ -45,6 +45,8 @@ dependencies:
   titled_navigation_bar: any
   division: any
   responsive_container: any
+  logger: any
+
 
   dbutils:
     git:
