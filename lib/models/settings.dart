@@ -14,9 +14,9 @@
 * limitations under the License.
 */
 
-class Settingsinfo {
+class SettingsInfo {
   final String servers, subServers, schedules, name, email;
-  const Settingsinfo({
+  const SettingsInfo({
     this.servers,
     this.subServers,
     this.schedules,
