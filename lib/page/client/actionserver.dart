@@ -145,6 +145,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
 
   SpeedDial buildSpeedDial() {
     return SpeedDial(
+      backgroundColor: globals.useDarkTheme ? Colors.blue : null,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(size: 22.0),
       visible: dialVisible,
@@ -259,14 +260,17 @@ class _ActionServerPageState extends State<ActionServerPage> {
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       "Info",
-                  icon: FontAwesomeIcons.info),
+                  icon: FontAwesomeIcons.info,
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
             ]));
