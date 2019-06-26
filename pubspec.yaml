@@ -44,6 +44,7 @@ dependencies:
   flutter_speed_dial: any
   titled_navigation_bar: any
   division: any
+  responsive_container: any
 
   dbutils:
     git:
