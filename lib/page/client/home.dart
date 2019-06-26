@@ -182,9 +182,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 var route = new MaterialPageRoute(
                   builder: (BuildContext context) => new SettingsList(
                       settings: SettingsInfo(
-                          servers: userTotalServers.toString(),
-                          subServers: '4',
-                          schedules: '2',
+                          servers: userTotalServers,
+                          subServer: 4,
+                          schedules: 2,
                           name: 'Arnaud Lier',
                           email: 'zeprofdecoding@gmail.com')),
                 );

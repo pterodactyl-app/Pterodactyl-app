@@ -30,16 +30,19 @@ import 'package:pterodactyl_app/page/client/settings/circular_image.dart';
 import 'package:division/division.dart';
 
 class SettingsList extends StatefulWidget {
-  SettingsList({Key key, this.settings}) : super(key: key);
+  SettingsList({Key key,  this.settings}) : super(key: key);
   final SettingsInfo settings;
 
   @override
-  SettingsListPageState createState() => new SettingsListPageState();
+  SettingsListPageState createState() => new SettingsListPageState(this.settings);
 }
 
 class SettingsListPageState extends State<SettingsList> {
   String _projectVersion = '';
 
+  SettingsListPageState(this.settings);
+
+  SettingsInfo settings;
 
   @override
   initState() {
@@ -85,7 +88,7 @@ class SettingsListPageState extends State<SettingsList> {
       child: Division(
         child: Column(
           children: <Widget>[
-            UserCard(),
+            UserCard(this.settings),
             ActionsRow(),
             Settings(),
           ],
@@ -100,15 +103,19 @@ class SettingsListPageState extends State<SettingsList> {
 
 class UserCard extends StatelessWidget {
 
+  UserCard(this.settings);
 
-  
-  static final gravatar = Gravatar(/*settings.email*/'zeprofdecoding@gmail.com');
-  final String imageUrl = gravatar.imageUrl(
-    size: 64,
-    defaultImage: GravatarImage.retro,
-    rating: GravatarRating.pg,
-    fileExtension: true,
-  );
+  SettingsInfo settings;
+
+  String getGravatarUrl() {
+    Gravatar gravatar = new Gravatar(this.settings.email);
+    return gravatar.imageUrl(
+      size: 64,
+      defaultImage: GravatarImage.retro,
+      rating: GravatarRating.pg,
+      fileExtension: true,
+    );
+  }
 
   Widget _buildUserRow() {
     return Row(
@@ -116,21 +123,21 @@ class UserCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: CircularImage(
-            NetworkImage(imageUrl),
+            NetworkImage(getGravatarUrl()),
           ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              /*settings.name*/'Arnaud Lier',
+              settings.name,
               style: nameTextStyle,
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              /*settings.email*/'zeprofdecoding@gmail.com',
+              settings.email,
               style: nameDescriptionTextStyle,
             )
           ],
@@ -145,9 +152,9 @@ class UserCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildUserStatsItem(/*settings.servers*/4, 'Owns'),
-          _buildUserStatsItem(/*settings.subServers*/3, 'Sub-user'),
-          _buildUserStatsItem(/*settings.schedules*/1, 'Schedules'),
+          _buildUserStatsItem(this.settings.servers, 'Owns'),
+          _buildUserStatsItem(this.settings.subServer, 'Sub-user'),
+          _buildUserStatsItem(this.settings.schedules, 'Schedules'),
         ],
       ),
     );
@@ -206,6 +213,7 @@ class UserCard extends StatelessWidget {
 
   final TextStyle nameDescriptionTextStyle =
       TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 12.0);
+
 }
 
 class ActionsRow extends StatelessWidget {

@@ -15,10 +15,11 @@
 */
 
 class SettingsInfo {
-  final String servers, subServers, schedules, name, email;
+  final String name, email;
+  final int servers, subServer, schedules;
   const SettingsInfo({
     this.servers,
-    this.subServers,
+    this.subServer,
     this.schedules,
     this.name,
     this.email,
