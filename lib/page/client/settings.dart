@@ -99,7 +99,10 @@ class SettingsListPageState extends State<SettingsList> {
 }
 
 class UserCard extends StatelessWidget {
-  static final gravatar = Gravatar(settings.email);
+
+
+  
+  static final gravatar = Gravatar(/*settings.email*/'zeprofdecoding@gmail.com');
   final String imageUrl = gravatar.imageUrl(
     size: 64,
     defaultImage: GravatarImage.retro,
@@ -120,14 +123,14 @@ class UserCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              settings.name,
+              /*settings.name*/'Arnaud Lier',
               style: nameTextStyle,
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              settings.email,
+              /*settings.email*/'zeprofdecoding@gmail.com',
               style: nameDescriptionTextStyle,
             )
           ],
@@ -142,9 +145,9 @@ class UserCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildUserStatsItem(settings.servers, 'Owns'),
-          _buildUserStatsItem(settings.subServers, 'Sub-user'),
-          _buildUserStatsItem(settings.schedules, 'Schedules'),
+          _buildUserStatsItem(/*settings.servers*/4, 'Owns'),
+          _buildUserStatsItem(/*settings.subServers*/3, 'Sub-user'),
+          _buildUserStatsItem(/*settings.schedules*/1, 'Schedules'),
         ],
       ),
     );
