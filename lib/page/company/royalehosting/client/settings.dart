@@ -26,12 +26,12 @@ import 'package:pterodactyl_app/sponsor.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
-class CodersLightSettingsList extends StatefulWidget {
+class RoyaleHostingSettingsList extends StatefulWidget {
   @override
-  _CodersLightSettingsListState createState() => new _CodersLightSettingsListState();
+  RoyaleHostingSettingsListState createState() => new RoyaleHostingSettingsListState();
 }
 
-class _CodersLightSettingsListState extends State<CodersLightSettingsList> {
+class RoyaleHostingSettingsListState extends State<RoyaleHostingSettingsList> {
   String _projectVersion = '';
 
   @override
@@ -187,7 +187,7 @@ class _CodersLightSettingsListState extends State<CodersLightSettingsList> {
               subtitle: new Text(
                   DemoLocalizations.of(context).trans('delete_data_sub')),
               onTap: () async {
-                SharedPreferencesHelper.remove("api_coderslight_Key");
+                SharedPreferencesHelper.remove("api_royalehosting_Key");
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.remove('company');
                 Navigator.of(context).pushNamedAndRemoveUntil(

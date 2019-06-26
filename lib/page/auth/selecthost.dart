@@ -27,6 +27,7 @@ import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
 import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
 import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
 import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
+import 'package:pterodactyl_app/page/company/royalehosting/client/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -217,7 +218,33 @@ class _SelectHostPageState extends State<SelectHostPage> {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.setString('company', 'minicenter');
               Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginMiniCenterPage()));
-            }),                                     
+            }),
+            _buildTile(
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Image.network(
+                                globals.useDarkTheme
+                                    ? 'https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png'
+                                    : 'https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png',
+                              width: 100,
+                              height: 60,
+                            ),
+                          ],
+                        ),
+                      ]),
+                ), onTap: () async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setString('company', 'royalehosting');
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => LoginRoyaleHostingPage()));
+            }),                                                  
             _buildTile(
                 Padding(
                   padding: const EdgeInsets.all(24.0),
@@ -274,6 +301,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
             }),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),

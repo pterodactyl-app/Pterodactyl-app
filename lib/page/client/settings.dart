@@ -303,7 +303,8 @@ class Settings extends StatelessWidget {
 // ignore: avoid_init_to_null
     return Division(
         style: settingsItemStyle,
-        gesture: onTap != null ? GestureClass().onTap(onTap) : null,
+        child: InkWell(
+        onTap: onTap,
         child: Row(
           children: <Widget>[
             Division(
@@ -337,7 +338,7 @@ class Settings extends StatelessWidget {
               ],
             )
           ],
-        ));
+        )));
   }
 
 
@@ -352,32 +353,39 @@ class Settings extends StatelessWidget {
       child: Column(
         children: <Widget>[
           _buildSettingsItem(FontAwesomeIcons.bell, '#5FD0D3', DemoLocalizations.of(context).trans('notifications'),
-              DemoLocalizations.of(context).trans('notifications_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              DemoLocalizations.of(context).trans('notifications_sub'), 
+            onTap: () {
+              
+            }),
           _buildSettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
               DemoLocalizations.of(context).trans('dark_mode_sub'), onTap: () {
-              handelTheme(!globals.useDarkTheme);
+              //handelTheme(!globals.useDarkTheme);
             }),
 
 
           _buildSettingsItem(
-              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub'), onTap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('seen');
+                prefs.remove('first_name');
+                prefs.remove('last_name');
+                prefs.remove('email');
+                if (prefs.containsKey('apiUser') &&
+                    await prefs.get('apiUser') != null) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login_user', (Route<dynamic> route) => false);
+                } else {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login', (Route<dynamic> route) => false);
+                }
+              },),
           _buildSettingsItem(
-              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub'), onTap: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.clear();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
+              }),
 
         ],
       ),
