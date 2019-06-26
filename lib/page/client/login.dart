@@ -86,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
             AccentColorOverride(
               color: Color(0xFFC5032B),
               child: TextField(
+                obscureText: true,
                 controller: _apiController,
                 decoration: InputDecoration(
                   labelText:
