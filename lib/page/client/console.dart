@@ -205,6 +205,12 @@ class _SendPageState extends State<SendPage> {
             AccentColorOverride(
               color: Colors.red,
               child: TextField(
+                onSubmitted: (text) async {
+                    await SharedPreferencesHelper.setString(
+                        "send", _sendController.text);
+                    postSend();
+                    _sendController.clear();
+                },
                 controller: _sendController,
                 decoration: InputDecoration(
                   labelText: (DemoLocalizations.of(context)
@@ -237,6 +243,7 @@ class _SendPageState extends State<SendPage> {
                       await SharedPreferencesHelper.setString(
                           "send", _sendController.text);
                       postSend();
+                      _sendController.clear();
                     },
                   ),
               ],
