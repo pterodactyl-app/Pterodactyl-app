@@ -380,18 +380,21 @@ class _StatePageState extends State<StatePage> {
         ),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
-            currentIndex: 2, // Use this to update the Bar giving a position
+            currentIndex: 1, // Use this to update the Bar giving a position
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       "Info",
                   icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
             ])
@@ -400,6 +403,7 @@ class _StatePageState extends State<StatePage> {
 
   Future _navigate(int index) async {
     if(index == 0) {
+      timer.cancel();
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new ActionServerPage(
@@ -407,6 +411,7 @@ class _StatePageState extends State<StatePage> {
           ), (Route<dynamic> route) => false);
     }
     if(index == 2) {
+      timer.cancel();
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new SendPage(

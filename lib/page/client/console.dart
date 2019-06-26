@@ -167,6 +167,9 @@ class _SendPageState extends State<SendPage> {
     });
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -257,14 +260,17 @@ class _SendPageState extends State<SendPage> {
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       "Info",
                   icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
+                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
             ])

@@ -263,7 +263,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
                 backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       "Info",
-                  icon: FontAwesomeIcons.info,
+                  icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
                 backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
