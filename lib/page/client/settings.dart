@@ -61,23 +61,6 @@ class SettingsListPageState extends State<SettingsList> {
     });
   }
 
-  void handelTheme(bool value) async {
-// save new value
-    final sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool('Value', value);
-    setState(() {
-      globals.useDarkTheme = value;
-      print(globals.useDarkTheme);
-    });
-    if (value == true) {
-      DynamicTheme.of(context).setBrightness(Brightness.dark);
-    } else {
-      DynamicTheme.of(context).setBrightness(Brightness.light);
-    }
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -299,6 +282,18 @@ class ActionsRow extends StatelessWidget {
 
 class Settings extends StatelessWidget {
 
+  void handleTheme(bool value, BuildContext context) async {
+// save new value
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool('Value', value);
+    globals.useDarkTheme = value;
+    if (value == true) {
+      DynamicTheme.of(context).setBrightness(Brightness.dark);
+    } else {
+      DynamicTheme.of(context).setBrightness(Brightness.light);
+    }
+  }
+  
   Widget _buildSettingsItem(IconData icon, String iconBgColor, String title, String description, {Function onTap: null}) {
 // ignore: avoid_init_to_null
     return Division(
@@ -359,7 +354,7 @@ class Settings extends StatelessWidget {
             }),
           _buildSettingsItem(FontAwesomeIcons.adjust, '#BFACAA', DemoLocalizations.of(context).trans('dark_mode'),
               DemoLocalizations.of(context).trans('dark_mode_sub'), onTap: () {
-              //handelTheme(!globals.useDarkTheme);
+              handleTheme(!globals.useDarkTheme, context);
             }),
 
 
@@ -422,129 +417,3 @@ class Settings extends StatelessWidget {
 
       
 }
-
-
-
-
-/*
-SingleChildScrollView(
-          child: SafeArea(
-        child: ListBody(
-          children: <Widget>[
-            Container(
-              height: 10.0,
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.notifications,
-              ),
-              title: Text(
-                DemoLocalizations.of(context).trans('notifications'),
-              ),
-              subtitle: Text(
-                DemoLocalizations.of(context).trans('notifications_sub'),
-              ),
-              //trailing: Switch(
-              //onChanged: handelTheme,
-              //value: globals.useDarkTheme,
-              //),
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.color_lens,
-              ),
-              title: Text(
-                DemoLocalizations.of(context).trans('dark_mode'),
-              ),
-              subtitle: Text(
-                DemoLocalizations.of(context).trans('dark_mode_sub'),
-              ),
-              trailing: Switch(
-                  value: globals.useDarkTheme,
-                  onChanged: (bool switchValue) {
-                    handelTheme(switchValue);
-                  }),
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: Icon(Icons.insert_drive_file),
-              title: Text(DemoLocalizations.of(context).trans('license')),
-              subtitle:
-                  new Text(DemoLocalizations.of(context).trans('license_sub')),
-              onTap: () {
-                launch(
-                    'https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE');
-              },
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: Icon(Icons.euro_symbol),
-              title: Text('Sponsors'),
-              subtitle: new Text('Everyone who sponsored this project'),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => SponsorPage()));
-              },
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: new Icon(Icons.info),
-              title: Text(DemoLocalizations.of(context).trans('app_version')),
-              subtitle: new Text(_projectVersion),
-              //onTap: () {
-              //Navigator.of(context)
-              //.push(MaterialPageRoute(builder: (_) => LicencePage()));
-              //},
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: Icon(Icons.subdirectory_arrow_left),
-              title: Text(DemoLocalizations.of(context).trans('logout')),
-              subtitle:
-                  new Text(DemoLocalizations.of(context).trans('logout_sub')),
-              onTap: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove('seen');
-                prefs.remove('first_name');
-                prefs.remove('last_name');
-                prefs.remove('email');
-                if (prefs.containsKey('apiUser') &&
-                    await prefs.get('apiUser') != null) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/login_user', (Route<dynamic> route) => false);
-                } else {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      '/login', (Route<dynamic> route) => false);
-                }
-              },
-            ),
-            Divider(
-              height: 20.0,
-            ),
-            new ListTile(
-              leading: Icon(Icons.delete_forever, color: Colors.red),
-              title: Text(DemoLocalizations.of(context).trans('delete_data')),
-              subtitle: new Text(
-                  DemoLocalizations.of(context).trans('delete_data_sub')),
-              onTap: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.clear();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
-              },
-            ),
-          ],
-        ),
-      )),
-*/
