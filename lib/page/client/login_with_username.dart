@@ -106,7 +106,6 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                   labelText:
                       DemoLocalizations.of(context).trans('api_user_pass'),
                 ),
-                obscureText: true,
               ),
             ),
             SizedBox(height: 12.0),
