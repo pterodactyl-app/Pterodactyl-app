@@ -13,13 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/models/stats.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
@@ -39,6 +42,7 @@ class StatePage extends StatefulWidget {
 }
 
 class _StatePageState extends State<StatePage> {
+  bool dialVisible = true;
   Map data;
   String _stats;
   int _memorycurrent;
@@ -84,11 +88,159 @@ class _StatePageState extends State<StatePage> {
     });
   }
 
+
+  Future postStart() async {
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'start'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postStop() async {
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'stop'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postRestart() async {
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'restart'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+  Future postKill() async {
+    String _api = await SharedPreferencesHelper.getString("apiKey");
+    String _url = await SharedPreferencesHelper.getString("panelUrl");
+    String _https = await SharedPreferencesHelper.getString("https");
+    var url = '$_https$_url/api/client/servers/${widget.server.id}/power';
+
+    Map data = {'signal': 'kill'};
+    //encode Map to JSON
+    var body = json.encode(data);
+
+    var response = await http.post(url,
+        headers: {
+          "Accept": "Application/vnd.pterodactyl.v1+json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $_api"
+        },
+        body: body);
+    print("${response.statusCode}");
+    print("${response.body}");
+    return response;
+  }
+
+
   @override
   void initState() {
     getData();
     super.initState();
     timer = Timer.periodic(Duration(seconds: 3), (Timer t) => getData());
+  }
+
+  void setDialVisible(bool value) {
+    setState(() {
+      dialVisible = value;
+    });
+  }
+
+  SpeedDial buildSpeedDial() {
+    return SpeedDial(
+      backgroundColor: globals.useDarkTheme ? Colors.blue : null,
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      visible: dialVisible,
+      curve: Curves.bounceIn,
+      children: [
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.plug), color: Colors.white),
+          backgroundColor: Color(0xFF2dce89),
+          onTap: () {
+            postStart();
+          },
+          label: DemoLocalizations.of(context).trans('action_start'),
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFF2dce89),
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.ban), color: Colors.white),
+          backgroundColor: Color(0xFFf5365c),
+          onTap: () {
+            _stop();
+          },
+          label: DemoLocalizations.of(context).trans('action_stop'),
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFFf5365c),
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.redo), color: Colors.white),
+          backgroundColor: Color(0xFF5e72e4),
+          onTap: () {
+            _restart();
+          },
+          label: DemoLocalizations.of(context).trans('action_restart'),
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFF5e72e4),
+        ),
+        SpeedDialChild(
+          child: Icon((FontAwesomeIcons.skull), color: Colors.white),
+          backgroundColor: Color(0xFFf5365c),
+          onTap: () {
+            _kill();
+          },
+          label: DemoLocalizations.of(context).trans('action_kill'),
+          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelBackgroundColor: Color(0xFFf5365c),
+        ),
+      ],
+    );
   }
 
   @override
@@ -378,6 +530,7 @@ class _StatePageState extends State<StatePage> {
             StaggeredTile.extent(2, 110.0),
           ],
         ),
+                floatingActionButton: buildSpeedDial(),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
             currentIndex: 1, // Use this to update the Bar giving a position
@@ -419,6 +572,164 @@ class _StatePageState extends State<StatePage> {
           ), (Route<dynamic> route) => false);
     }
   }
+
+ _restart() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_restart');
+        String message = "Are you sure you want to restart your server?";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postRestart();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postRestart();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  _stop() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_stop');
+        String message = "are you sure you want to stop this server.";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postStop();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postStop();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  _kill() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        String title = DemoLocalizations.of(context).trans('action_kill');
+        String message =
+            "Are you sure you want to kill your server, nothing will be saved.";
+        String btnLabelNo = DemoLocalizations.of(context).trans('no');
+        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postKill();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            : new AlertDialog(
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(btnLabelNo),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(btnLabelYes),
+                    onPressed: () {
+                      postKill();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
 
   Widget _buildTile(Widget child, {Function() onTap}) {
     return Material(

@@ -224,7 +224,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
       children: <Widget>[
         _buildTile(
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(24.0),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
