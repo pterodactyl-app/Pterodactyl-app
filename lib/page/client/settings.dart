@@ -365,19 +365,36 @@ class Settings extends StatelessWidget {
 
 
           _buildSettingsItem(
-              FontAwesomeIcons.signOutAlt, '#F468B7', DemoLocalizations.of(context).trans('logout'), DemoLocalizations.of(context).trans('logout_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              FontAwesomeIcons.signOutAlt,
+              '#F468B7',
+              DemoLocalizations.of(context).trans('logout'),
+              DemoLocalizations.of(context).trans('logout_sub'),
+              onTap: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.remove('seen');
+            prefs.remove('first_name');
+            prefs.remove('last_name');
+            prefs.remove('email');
+            if (prefs.containsKey('apiUser') &&
+                await prefs.get('apiUser') != null) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login_user', (Route<dynamic> route) => false);
+            } else {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login', (Route<dynamic> route) => false);
+            }
+          }),
           _buildSettingsItem(
-              FontAwesomeIcons.trashAlt, '#FEC85C', DemoLocalizations.of(context).trans('delete_data'), DemoLocalizations.of(context).trans('delete_data_sub'), onTap: () =>
-            Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => new SponsorPage()
-                )
-            )),
+              FontAwesomeIcons.trashAlt,
+              '#FEC85C',
+              DemoLocalizations.of(context).trans('delete_data'),
+              DemoLocalizations.of(context).trans('delete_data_sub'),
+              onTap: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.clear();
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/login', (Route<dynamic> route) => false);
+          }),
 
         ],
       ),
