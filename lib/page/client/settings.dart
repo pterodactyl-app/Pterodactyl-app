@@ -38,7 +38,7 @@ class SettingsList extends StatefulWidget {
 }
 
 class SettingsListPageState extends State<SettingsList> {
-  String _projectVersion = '';
+  static String _projectVersion = '';
 
   SettingsListPageState(this.settings);
 
@@ -386,11 +386,12 @@ class Settings extends StatelessWidget {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/login', (Route<dynamic> route) => false);
               }),
-          _buildSettingsItem(FontAwesomeIcons.mobile, '#5FD0D3', DemoLocalizations.of(context).trans('app_version'),
-              '_projectVersion', 
-            onTap: () {
-              
-            }),
+          _buildSettingsItem(
+              FontAwesomeIcons.mobile,
+              '#5FD0D3',
+              DemoLocalizations.of(context).trans('app_version'),
+              SettingsListPageState._projectVersion,
+              onTap: () {}),
 
         ],
       ),
