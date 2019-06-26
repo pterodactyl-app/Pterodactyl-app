@@ -230,7 +230,6 @@ class _SendPageState extends State<SendPage> {
             ],
           ),
         ),
-        floatingActionButton: buildSpeedDial(),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
             currentIndex: 2, // Use this to update the Bar giving a position
