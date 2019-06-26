@@ -206,6 +206,7 @@ class _SendPageState extends State<SendPage> {
         ),
               SizedBox(height: 1.0),
               TextField(
+                autofocus: true,
                 onSubmitted: (text) async {
                   await SharedPreferencesHelper.setString(
                       "send", _sendController.text);
