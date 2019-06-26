@@ -214,28 +214,31 @@ class _SendPageState extends State<SendPage> {
             ),
             ButtonBar(
               children: <Widget>[
-                FlatButton(
-                  child: Text(DemoLocalizations.of(context).trans('clear')),
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  FlatButton(
+                    color: Colors.blue,
+                    child: Text(DemoLocalizations.of(context).trans('clear'),
+                        style: TextStyle(color: Colors.white)),
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                    onPressed: () {
+                      _sendController.clear();
+                    },
                   ),
-                  onPressed: () {
-                    _sendController.clear();
-                  },
-                ),
-                RaisedButton(
-                  child:
-                      Text(DemoLocalizations.of(context).trans('send_command')),
-                  elevation: 8.0,
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  FlatButton(
+                    color: Colors.green,
+                    child: Text(
+                        DemoLocalizations.of(context).trans('send_command'),
+                        style: TextStyle(color: Colors.white)),
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                    onPressed: () async {
+                      await SharedPreferencesHelper.setString(
+                          "send", _sendController.text);
+                      postSend();
+                    },
                   ),
-                  onPressed: () async {
-                    await SharedPreferencesHelper.setString(
-                        "send", _sendController.text);
-                    postSend();
-                  },
-                ),
               ],
             ),
           ],
