@@ -579,7 +579,7 @@ class _StatePageState extends State<StatePage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_restart');
-        String message = "Are you sure you want to restart your server?";
+        String message = DemoLocalizations.of(context).trans('action_restart_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
@@ -631,7 +631,7 @@ class _StatePageState extends State<StatePage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_stop');
-        String message = "are you sure you want to stop this server.";
+        String message = DemoLocalizations.of(context).trans('action_stop_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
@@ -683,8 +683,7 @@ class _StatePageState extends State<StatePage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_kill');
-        String message =
-            "Are you sure you want to kill your server, nothing will be saved.";
+        String message = DemoLocalizations.of(context).trans('action_kill_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
