@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:pterodactyl_app/models/settings.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
@@ -25,6 +26,8 @@ import 'package:pterodactyl_app/main.dart';
 import 'package:pterodactyl_app/page/auth/check_update.dart';
 import 'package:pterodactyl_app/page/client/servers.dart';
 import 'package:pterodactyl_app/page/client/settings.dart';
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -175,8 +178,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           )),
                     ]),
               ),
-              onTap: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => SettingsList())),
+              onTap: () {
+                                  var route = new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        new SettingsList(
+                                            settings: Settingsinfo(
+                                                servers: userTotalServers.toString(), 
+                    subServers: '4',
+                    schedules: '2',
+                    name: 'Ruben',
+                    email: 'rubentalstra1211@gmail.com')),
+                                  );
+                                  Navigator.of(context).push(route);
+                                },
             ),
             _buildTile(
               Padding(

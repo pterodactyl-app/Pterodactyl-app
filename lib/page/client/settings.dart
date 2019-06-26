@@ -20,16 +20,19 @@ import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/page/client/home.dart';
 import 'package:pterodactyl_app/sponsor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pterodactyl_app/models/settings.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:pterodactyl_app/page/client/settings/circular_image.dart';
 import 'package:division/division.dart';
 
 class SettingsList extends StatefulWidget {
+  SettingsList({Key key, this.settings}) : super(key: key);
+  final Settingsinfo settings;
+
   @override
   SettingsListPageState createState() => new SettingsListPageState();
 }
@@ -97,20 +100,17 @@ class SettingsListPageState extends State<SettingsList> {
 
 
 
+
 class UserCard extends StatelessWidget {
 
-/*
-  final gravatar = Gravatar('hello@example.com');
+  static final gravatar = Gravatar('zeprofdecoding@gmail.com');
   final String imageUrl = gravatar.imageUrl(
-    size: 100,
+    size: 64,
     defaultImage: GravatarImage.retro,
     rating: GravatarRating.pg,
     fileExtension: true,
   );
-*/
 
-final String imageUrl =
-      "https://s3-eu-west-1.amazonaws.com/tpd/logos/5aa8567e43efc80001d1319e/0x0.png";
 
 
   Widget _buildUserRow() {
@@ -151,7 +151,7 @@ final String imageUrl =
         children: <Widget>[
           _buildUserStatsItem(10, 'Owns'),
           _buildUserStatsItem(2, 'Sub-user'),
-          _buildUserStatsItem(4, 'schedules'),
+          _buildUserStatsItem(4, 'Schedules'),
         ],
       ),
     );
