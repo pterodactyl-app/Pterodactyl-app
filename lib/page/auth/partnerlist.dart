@@ -16,14 +16,16 @@
 class PartnerList {
   String name;
   String url;
+  String message;
   Map<String, String> logo;
   Map<String, String> color;
 
 
 
-  PartnerList({String name, String url, Map<String, String> logo, Map<String, String> color}) {
+  PartnerList({String name, String url, String message, Map<String, String> logo, Map<String, String> color}) {
     this.name = name;
     this.url = url;
+    this.message = message;
     this.logo = logo;
     this.color = color;
   }
@@ -33,6 +35,7 @@ class PartnerList {
     PartnerList(
       name: "Deploys.io",
       url: "https://deploys.io/",
+      message: "",
       logo: {
           "dark": "https://deploys.io/img/deploys.io/logo/text/light.png",
           "light": "https://deploys.io/img/deploys.io/logo/text/dark.png"
@@ -45,6 +48,7 @@ class PartnerList {
     PartnerList(
       name: "CodersLight LLC",
       url: "https://coderslight.com/",
+      message: "",
       logo: {
           "dark": "https://avatars2.githubusercontent.com/u/35084758?s=280&v=4",
           "light": "https://cdn.discordapp.com/attachments/575721214643798036/589462220119736340/CodersLightDiscordLogo-transparent.png"
@@ -57,6 +61,7 @@ class PartnerList {
     PartnerList(
       name: "AccurateNode",
       url: "https://accuratenode.com/",
+      message: "",
       logo: {
           "dark": "https://accuratenode.com/assets/img/icon.png",
           "light": "https://cdn.discordapp.com/attachments/579475423977668638/590143718703759360/logo_big.png"
@@ -69,6 +74,7 @@ class PartnerList {
     PartnerList(
       name: "MiniCenter",
       url: "https://minicenter.net/",
+      message: "",
       logo: {
           "dark": "https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png",
           "light": "https://cdn.discordapp.com/attachments/487345256065662978/535521341340909588/image0.png"
@@ -81,6 +87,7 @@ class PartnerList {
     PartnerList(
       name: "PlanetNode",
       url: "https://planetnode.net/",
+      message: "",
       logo: {
           "dark": "https://planetnode.net/templates/planetnode/img/header/logo.png",
           "light": "https://planetnode.net/templates/planetnode/img/header/logo-b.png"
@@ -93,6 +100,7 @@ class PartnerList {
     PartnerList(
       name: "ReviveNode Hosting",
       url: "https://revivenode.com/",
+      message: "",
       logo: {
           "dark": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png",
           "light": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png"
@@ -105,18 +113,7 @@ class PartnerList {
     PartnerList(
       name: "RoyaleHosting",
       url: "http://royalehosting.nl/",
-      logo: {
-          "dark": "",
-          "light": ""
-        },
-      color: {
-        "primary": "",
-        "secondary": ""
-      },
-    ),
-    PartnerList(
-      name: "",
-      url: "",
+      message: "",
       logo: {
           "dark": "",
           "light": ""
