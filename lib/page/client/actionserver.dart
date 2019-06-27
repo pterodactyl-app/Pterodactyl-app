@@ -296,7 +296,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
       Navigator.of(this.context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (BuildContext context) =>
           new StatePage(
-              server: Stats(id: widget.server.id))
+              server: Stats(id: widget.server.id, name: widget.server.name))
           ), (Route<dynamic> route) => false);
     }
     if(index == 2) {
