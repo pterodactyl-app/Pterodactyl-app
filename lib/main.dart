@@ -44,23 +44,6 @@ import 'package:pterodactyl_app/page/admin/adminhome.dart';
 //import 'package:pterodactyl_app/page/admin/adminactionnodes.dart';
 
 
-//companies
-import 'package:pterodactyl_app/page/company/deploys/client/home.dart';
-import 'package:pterodactyl_app/page/company/deploys/client/login.dart';
-
-import 'package:pterodactyl_app/page/company/coderslight/client/home.dart';
-import 'package:pterodactyl_app/page/company/coderslight/client/login.dart';
-
-import 'package:pterodactyl_app/page/company/minicenter/client/home.dart';
-import 'package:pterodactyl_app/page/company/minicenter/client/login.dart';
-
-import 'package:pterodactyl_app/page/company/planetnode/client/home.dart';
-import 'package:pterodactyl_app/page/company/planetnode/client/login.dart';
-
-import 'package:pterodactyl_app/page/company/revivenode/client/home.dart';
-import 'package:pterodactyl_app/page/company/revivenode/client/login.dart';
-//
-
 class DemoLocalizations {
   DemoLocalizations(this.locale);
 
@@ -217,22 +200,6 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
     '/adminhome': (BuildContext context) => new AdminHomePage(),
     '/adminlogin': (BuildContext context) => new AdminLoginPage(),
     '/selecthost': (BuildContext context) => new SelectHostPage(),
-//Companies
-    '/home_deploys': (BuildContext context) => new MyDeploysHomePage(),
-    '/login_deploys': (BuildContext context) => new LoginDeploysPage(),
-
-    '/home_coderslight': (BuildContext context) => new MyCodersLightHomePage(),
-    '/login_coderslight': (BuildContext context) => new LoginCodersLightPage(),
-
-    '/home_minicenter': (BuildContext context) => new MyMiniCenterHomePage(),
-    '/login_minicenter': (BuildContext context) => new LoginMiniCenterPage(),
-
-    '/home_planetnode': (BuildContext context) => new MyPlanetNodeHomePage(),
-    '/login_planetnode': (BuildContext context) => new LoginPlanetNodePage(),
-
-    '/home_revicenode': (BuildContext context) => new MyReviveNodeHomePage(),
-    '/login_revicenode': (BuildContext context) => new LoginReviveNodePage(),
-//
   };
 
   companies.forEach((k, v) {
@@ -250,13 +217,14 @@ Future main() async {
 }
 
 var logger = Logger(
-  printer: PrettyPrinter(),
+  filter: null, // Use the default LogFilter (-> only log in debug mode)
+  printer: PrettyPrinter(), // Use the PrettyPrinter to format and print log
+  output: null, // Use the default LogOutput (-> send everything to console)
 );
 
 var loggerNoStack = Logger(
   printer: PrettyPrinter(methodCount: 0),
 );
-
 
 void demo() {
   logger.d("Log message with 2 methods");
@@ -268,6 +236,8 @@ void demo() {
   logger.e("Error! Something bad happened", "Test Error");
 
   loggerNoStack.v({"key": 5, "value": "something"});
+
+  logger.wtf("What a terrible failure log");
 
   print("Test\nTest2");
 }

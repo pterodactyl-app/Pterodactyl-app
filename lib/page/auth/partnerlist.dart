@@ -37,8 +37,8 @@ class PartnerList {
       url: "https://deploys.io/",
       message: "",
       logo: {
-          "dark": "https://deploys.io/img/deploys.io/logo/text/light.png",
-          "light": "https://deploys.io/img/deploys.io/logo/text/dark.png"
+          "dark": "https://pbs.twimg.com/profile_images/1010254773826793472/vjxA9idJ_400x400.jpg",
+          "light": "https://pbs.twimg.com/profile_images/1010254773826793472/vjxA9idJ_400x400.jpg"
         },
       color: {
         "primary": "#5e72e4 #825ee4 (Gradient)",
@@ -115,8 +115,8 @@ class PartnerList {
       url: "http://royalehosting.nl/",
       message: "",
       logo: {
-          "dark": "",
-          "light": ""
+          "dark": "https://cdn.discordapp.com/attachments/578493714410766356/593450984941027330/logo.png",
+          "light": "https://cdn.discordapp.com/attachments/578493714410766356/593450857039659052/0x0.png"
         },
       color: {
         "primary": "",
