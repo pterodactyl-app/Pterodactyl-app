@@ -213,7 +213,7 @@ Future main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   globals.useDarkTheme = (prefs.getBool('Value') ?? false);
   runApp(new MyApp());
-  demo();
+//  demo();
 }
 
 var logger = Logger(
