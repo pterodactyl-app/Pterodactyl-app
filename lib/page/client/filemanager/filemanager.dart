@@ -21,7 +21,9 @@ import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
 
-///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file. it takes a [Server] as a parameter, currently this server is used only for setting the AppBar tooltip text. but the plan is to extend it and get files located on that server for the [FileManager] to work.
+///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.
+///It takes a [Server] as a parameter, currently this server is used only for setting the AppBar tooltip text.
+///but the plan is to extend it and get files located on that server for the [FileManager] to work.
 class FileManager extends StatefulWidget {
   final Server server;
 
