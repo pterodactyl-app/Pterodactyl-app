@@ -31,6 +31,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'console.dart';
+import 'filemanager/filemanager.dart';
 import 'servers.dart';
 import 'utilization.dart';
 
@@ -244,7 +245,12 @@ class _ActionServerPageState extends State<ActionServerPage> {
                 ]),
           ),
           onTap: () {
-            _filelist();
+            var route = MaterialPageRoute(
+              builder: (BuildContext context) => FileManager(
+                server: widget.server
+              )
+            );
+            Navigator.of(context).push(route);
           },
         ),
       ],
