@@ -469,41 +469,4 @@ class _ActionServerPageState extends State<ActionServerPage> {
       },
     );
   }
-
-  _filelist() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context).trans('action_file');
-        String message = DemoLocalizations.of(context).trans('added_soon');
-        String btnLabelYes = DemoLocalizations.of(context).trans('yes');
-        return Platform.isIOS
-            ? new CupertinoAlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            : new AlertDialog(
-                title: Text(title),
-                content: Text(message),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(btnLabelYes),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-      },
-    );
-  }
 }
