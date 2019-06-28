@@ -43,8 +43,12 @@ class FileActions {
       case "py":
       case "cpp":
       case "c":
+      case "css":
       case "java":
+      case "js":
+      case "json":
         return FileType.Text;
+      case "gif":
       case "jpeg":
       case "png":
       case "jpg":
