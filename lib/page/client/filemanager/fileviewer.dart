@@ -48,20 +48,33 @@ class _FileViewerState extends State<FileViewer> {
           style: TextStyle(
             color: Colors.black,
           ),
-            ),
+        ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.delete,
-            ),
-            onPressed: _delete,
-          ),
-          if (widget.file.type == FileType.Text)
-            IconButton(
-              icon: Icon(
-                Icons.edit,
+          Tooltip(
+              message: "Delete this file",
+              decoration: BoxDecoration(
+                color: Colors.white,
               ),
-              onPressed: _edit,
+              showDuration: Duration(milliseconds: 1000),
+              child: IconButton(
+                icon: Icon(
+                  Icons.delete,
+                ),
+                onPressed: _delete,
+              )),
+          if (widget.file.type == FileType.Text)
+            Tooltip(
+              message: "Edit this file",
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              showDuration: Duration(milliseconds: 1000),
+              child: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                ),
+                onPressed: _edit,
+              ),
             ),
         ],
       ),
@@ -75,73 +88,70 @@ class _FileViewerState extends State<FileViewer> {
         color: Colors.grey,
       ),
       child: PhotoView(
-        backgroundDecoration: BoxDecoration(
-          color: Colors.grey
-        ),
+        backgroundDecoration: BoxDecoration(color: Colors.grey),
         maxScale: 2.00,
         // MediaQuery.of(context).size.longestSide,
         minScale: 0.3,
-        imageProvider:
-
-        AssetImage(
-          widget.file.url, //Using asset image since we are getting the sample image thats alreay located on the device.
+        imageProvider: AssetImage(
+          widget.file
+              .url, //Using asset image since we are getting the sample image thats alreay located on the device.
         ),
-        
+
         // NetworkImage(
         //   widget.file.url, //we may need this in real world version of this app
         // ),
 
         enableRotation: false,
-
       ),
     );
   }
 
   Widget _showText() {
     return FutureBuilder(
-      future: rootBundle.loadString(widget.file.url),
-
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(!snapshot.hasData) return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-              SizedBox(
-                height: 10,
+        future: rootBundle.loadString(widget.file.url),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData)
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("Loading file"),
+                ],
               ),
-              Text("Loading file"),
-            ],
-          ),
-        );
-        if(snapshot.hasData) return Container(
-          height: double.infinity,
-          width: double.infinity,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.grey,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Scrollbar(
-            child: SingleChildScrollView(
+            );
+          if (snapshot.hasData)
+            return Container(
+              height: double.infinity,
+              width: double.infinity,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+              ),
               child: Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  snapshot.data + "\n\n\n\n\n\n\n\n\n\n", //"\n" are here to give a little padding at the bottom
-                  style: TextStyle(
-                    color: Colors.black,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        snapshot.data +
+                            "\n\n\n\n\n\n\n\n\n\n", //"\n" are here to give a little padding at the bottom
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
-      );
-      }
-    );
+            );
+        });
   }
 
   void _delete() {
@@ -153,14 +163,14 @@ class _FileViewerState extends State<FileViewer> {
             title: Text("Are you sure?"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Flexible(
-                    child: Text(
-                      "Do you really want to delete this ${widget.file.type == FileType.Folder ? "folder" : "file"}: ${widget.file.name}",
-                      ),
-                  )
-                ],
-              ),
+              children: <Widget>[
+                Flexible(
+                  child: Text(
+                    "Do you really want to delete this ${widget.file.type == FileType.Folder ? "folder" : "file"}: ${widget.file.name}",
+                  ),
+                )
+              ],
+            ),
             actions: <Widget>[
               FlatButton(
                 child: Text("NO"),
@@ -169,7 +179,10 @@ class _FileViewerState extends State<FileViewer> {
               FlatButton(
                 child: Text("Yes, delete it."),
                 onPressed: () {
-                  Navigator.of(context)..pop()..pop(true); //popping this page with true means the previous page will process functions to delete it. MUST use only when needed.
+                  Navigator.of(context)
+                    ..pop()
+                    ..pop(
+                        true); //popping this page with true means the previous page will process functions to delete it. MUST use only when needed.
                 },
               )
             ],

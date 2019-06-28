@@ -17,35 +17,45 @@
 import 'filemanager.dart';
 
 ///All backend logic of filemanager is processed in this class (currently faked);;
-class FileActions{
-
-  Future<Map> getFile(String fileDirectory) async{
-    return await Future.delayed(Duration(seconds: 3)).then((data) => sampleData[fileDirectory]);
-  }
-  
-  deleteFile(FileData file) async{
-    return await Future.delayed(Duration(seconds: 2)).then((_) => null); //null = not successfull
+class FileActions {
+  Future<Map> getFile(String fileDirectory) async {
+    return await Future.delayed(Duration(seconds: 3))
+        .then((data) => sampleData[fileDirectory]);
   }
 
-  updateFile(FileData file, String newFile) async{
+  deleteFile(FileData file) async {
+    return await Future.delayed(Duration(seconds: 2))
+        .then((_) => null); //null = not successfull
+  }
+
+  updateFile(FileData file, String newFile) async {
     return await Future.delayed(Duration(seconds: 2)).then((_) => "success!");
   }
 
-  FileType checkType(String name){
+  FileType checkType(String name) {
     String _extension = _ext(name);
-    switch(_extension){
 
+    //you can add more extension names here to support them too in the text editor.
+    switch (_extension) {
       case "txt":
-      return FileType.Text;
+      case "text":
+      case "html":
+      case "py":
+      case "cpp":
+      case "c":
+      case "java":
+        return FileType.Text;
       case "jpeg":
-      return FileType.Image;
+      case "png":
+      case "jpg":
+        return FileType.Image;
 
-      default: 
-      return FileType.Other;
+      default:
+        return FileType.Other;
     }
   }
-  
-   static String _ext(String path) {
+
+  static String _ext(String path) {
     int index = path.lastIndexOf('.');
     if (index < 0 || index + 1 >= path.length) return path;
     return path.substring(index + 1).toLowerCase();
@@ -54,34 +64,28 @@ class FileActions{
 
 //ALL sample data>>>>>>>
 Map sampleData = {
-
-  SampleAddresses.root : {
-    "directories" : [
-      {
-      "address" : SampleAddresses.newFolder,
-      "name" : "New folder"
-      }
+  SampleAddresses.root: {
+    "directories": [
+      {"address": SampleAddresses.newFolder, "name": "New folder"}
     ],
-    "files" : []
+    "files": []
   },
-
-  SampleAddresses.newFolder : {
-    "directories" : [],
-    "files" : [
+  SampleAddresses.newFolder: {
+    "directories": [],
+    "files": [
       {
-        "address" : SampleAddresses.textFile,
-        "name" : "Text File.txt",
-    },
+        "address": SampleAddresses.textFile,
+        "name": "Text File.txt",
+      },
       {
-        "address" : SampleAddresses.image,
-        "name" : "Image.Jpeg",
-    }
+        "address": SampleAddresses.image,
+        "name": "Image.Jpeg",
+      }
     ]
   },
-
 };
 
-class SampleAddresses{
+class SampleAddresses {
   static const String root = "api.example.com/root";
   static const String newFolder = "api.example.com/root/newFolder";
 

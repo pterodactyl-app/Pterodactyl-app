@@ -81,6 +81,10 @@ class _FileManagerState extends State<FileManager> {
         backgroundColor: Colors.white,
         title: Tooltip(
           message: "${widget.server.name}",
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          showDuration: Duration(milliseconds: 1000),
           child: Text(
             "File Manager",
             style: TextStyle(
@@ -91,63 +95,53 @@ class _FileManagerState extends State<FileManager> {
       ),
       body: Column(
         children: <Widget>[
-          
           ListTile(
             title: RichText(
-              
-              text: TextSpan(
-                children: [
+              text: TextSpan(children: [
+                TextSpan(
+                    text: "./",
+                    style: TextStyle(color: Colors.black, fontSize: 18)),
+                for (var directory in directoryNames.keys)
                   TextSpan(
-                    text: "./", 
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18
-                      )),
-                  for (var directory in directoryNames.keys) TextSpan(
                     text: directoryNames[directory] + "/",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15
-                    ),
+                    style: TextStyle(color: Colors.black, fontSize: 15),
                   )
-                  
-                ]
-              ),
+              ]),
             ),
           ),
-
           if (currentDirectory != rootDirectory)
             Tooltip(
                 message: "Go back to previous folder",
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                showDuration: Duration(milliseconds: 1000),
                 child: ListTile(
                   title: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.baseline,
-                    children: [
-                    RotatedBox(
-                        quarterTurns: 1,
-                        child: Icon(
-                          Icons.subdirectory_arrow_left,
-
-                          )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "back",
-                        style: TextStyle(
-                          textBaseline: TextBaseline.alphabetic
+                      // crossAxisAlignment: CrossAxisAlignment.baseline,
+                      children: [
+                        RotatedBox(
+                            quarterTurns: 1,
+                            child: Icon(
+                              Icons.subdirectory_arrow_left,
+                            )),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            "back",
+                            style: TextStyle(
+                                textBaseline: TextBaseline.alphabetic),
+                          ),
                         ),
-                        ),
-                    ),
-                  ]),
+                      ]),
                   onTap: _navigateBack,
                 )),
           Expanded(
             child: FutureBuilder(
               future: files.containsKey(currentDirectory)
                   ? null
-                  : fileActions
-                      .getFile(currentDirectory)
-                      .then((data) => setState(()=> files[currentDirectory] = data)),
+                  : fileActions.getFile(currentDirectory).then(
+                      (data) => setState(() => files[currentDirectory] = data)),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (files.containsKey(currentDirectory)) {
                   if (files[currentDirectory]["directories"].isEmpty &&
@@ -205,9 +199,9 @@ class _FileManagerState extends State<FileManager> {
 
   void _navigateBack() {
     setState(() {
-     directoryNames.remove(currentDirectory);
-     currentDirectory = directoryTree.last;
-     directoryTree.remove(directoryTree.last);
+      directoryNames.remove(currentDirectory);
+      currentDirectory = directoryTree.last;
+      directoryTree.remove(directoryTree.last);
     });
   }
 
@@ -231,7 +225,8 @@ class _FileManagerState extends State<FileManager> {
     return ListTile(
       leading: Icon(dataTypeIcon(data.type)),
       title: Text(data.name),
-      trailing: isFileProcessing[currentDirectory] != null && isFileProcessing[currentDirectory].contains(index)
+      trailing: isFileProcessing[currentDirectory] != null &&
+              isFileProcessing[currentDirectory].contains(index)
           ? SizedBox(
               child: CircularProgressIndicator(),
               height: 20,
@@ -243,7 +238,7 @@ class _FileManagerState extends State<FileManager> {
             ),
       onTap: data.type == FileType.Other
           ? () {}
-          : () async{
+          : () async {
               if (data.type == FileType.Folder) {
                 setState(() {
                   directoryTree.add(currentDirectory);
@@ -257,9 +252,8 @@ class _FileManagerState extends State<FileManager> {
                         file: data,
                       ));
               bool result = await Navigator.of(context).push(route);
-                if (result == true) _deleteFile(data, currentDirectory, index);
-              },
-
+              if (result == true) _deleteFile(data, currentDirectory, index);
+            },
       onLongPress: data.type == FileType.Other
           ? () {}
           : () {
@@ -286,7 +280,7 @@ class _FileManagerState extends State<FileManager> {
                           ));
                   Navigator.of(context).push(route).then((delete) {
                     if (delete == true)
-                     _deleteFile(file, currentDirectory, index);
+                      _deleteFile(file, currentDirectory, index);
                   });
                 },
               ),
@@ -315,27 +309,26 @@ class _FileManagerState extends State<FileManager> {
                           return AlertDialog(
                             title: Text("Are you sure?"),
                             content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Text(
-                                      "Do you want to delete this ${file.type == FileType.Folder ? "folder" : "file"}: ${file.name}",
-                                      ),
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
+                                    "Do you want to delete this ${file.type == FileType.Folder ? "folder" : "file"}: ${file.name}",
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
+                            ),
                             actions: <Widget>[
                               FlatButton(
                                 child: Text("NO"),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               FlatButton(
-                                child: Text("Yes, delete it."),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  _deleteFile(file, currentDirectory, index);
-                                }
-                              )
+                                  child: Text("Yes, delete it."),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    _deleteFile(file, currentDirectory, index);
+                                  })
                             ],
                           );
                         });
@@ -355,32 +348,33 @@ class _FileManagerState extends State<FileManager> {
         _onFileDelete(directory, index);
       }
       if (e == null) {
-
         setState(() => isFileProcessing[directory].remove(index));
       }
 
-      fileManagerScaffoldKey.currentState.showSnackBar(SnackBar(
+      fileManagerScaffoldKey.currentState.showSnackBar(
+        SnackBar(
           content: e != null
               ? Row(
                   children: <Widget>[
                     Icon(Icons.delete),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text("File deleted!")
                   ],
                 )
               : Row(
                   children: <Widget>[
                     Icon(Icons.error),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text("An error occured, Please try again later.")
                   ],
                 ),
-                
-                duration: Duration(seconds: 1),
-                
-                ),
-
-                );
+          duration: Duration(seconds: 1),
+        ),
+      );
     });
   }
 
@@ -394,7 +388,7 @@ class _FileManagerState extends State<FileManager> {
     isFileProcessing[directory].remove(index);
     // files[directory][whichOne].removeAt(index);
     //
-      setState(() {});
+    setState(() {});
   }
 }
 
