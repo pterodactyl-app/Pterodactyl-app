@@ -48,11 +48,19 @@ class FileActions {
       case "js":
       case "json":
         return FileType.Text;
+      case "ico":
       case "gif":
       case "jpeg":
       case "png":
       case "jpg":
+      case "webp":
         return FileType.Image;
+      case "zip":
+      case "rar":
+      case "gzip":
+      case "tar":
+      case "7z":
+        return FileType.Archive;
 
       default:
         return FileType.Other;

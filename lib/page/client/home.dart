@@ -39,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Map data;
   int userTotalServers = 0;
+  String name, email;
 
   Future getDataHome() async {
     String _api = await SharedPreferencesHelper.getString("apiKey");
@@ -55,6 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
       data = await json.decode(response.body);
+
+      name = await SharedPreferencesHelper.getString('first_name')
+          + ' ' +await SharedPreferencesHelper.getString('last_name');
+      email = await SharedPreferencesHelper.getString('email');
+
       setState(() {
         userTotalServers = data["meta"]["pagination"]["total"];
       });
@@ -185,8 +191,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           servers: userTotalServers,
                           subServer: 4,
                           schedules: 2,
-                          name: 'Arnaud Lier',
-                          email: 'zeprofdecoding@gmail.com')),
+                          name: name,
+                          email: email)),
                 );
                 Navigator.of(context).push(route);
               },
