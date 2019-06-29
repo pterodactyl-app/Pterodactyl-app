@@ -57,6 +57,9 @@ class FileActions {
         return FileType.Image;
       case "zip":
       case "rar":
+      case "gzip":
+      case "tar":
+      case "7z":
         return FileType.Archive;
 
       default:
