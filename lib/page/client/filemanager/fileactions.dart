@@ -55,6 +55,9 @@ class FileActions {
       case "jpg":
       case "webp":
         return FileType.Image;
+      case "zip":
+      case "rar":
+        return FileType.Archive;
 
       default:
         return FileType.Other;
