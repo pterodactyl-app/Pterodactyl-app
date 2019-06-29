@@ -46,6 +46,8 @@ class FileActions {
     return;
   }
 
+  String getApiKey()=> _apiKey;
+
   Future<dynamic> getDirectory(String directory) async{
     
       final folders = List<FileData>();
@@ -178,7 +180,7 @@ class FileHttpHelper{
   static const String directory = "list?directory=/";
   ///add before the path of the file that you want to update, [content in body] required. use with [POST].
   static const String updateFile = "write?file=";
-  ///add this after the base url, [name] and [path] required;
+  ///add this after the base url, [name] and [path] required parameters, use with [POST];
   static const String createDirectory = "new-folder";
 }
 

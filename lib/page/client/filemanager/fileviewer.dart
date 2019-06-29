@@ -105,7 +105,10 @@ class _FileViewerState extends State<FileViewer> {
         imageProvider: 
 
         NetworkImage(
-          widget.fileData.directory, //TODO
+          widget.fileData.directory,
+          headers: {
+            "Authorization" : "Bearer ${widget.fileActions.getApiKey()}",
+          }
         ),
 
         enableRotation: false,
