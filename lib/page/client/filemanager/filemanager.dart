@@ -219,6 +219,8 @@ class _FileManagerState extends State<FileManager> {
         return Icons.image;
       case FileType.Other:
         return Icons.insert_drive_file;
+      case FileType.Archive:
+        return Icons.archive;
 
       default:
         return Icons.insert_drive_file;
@@ -266,6 +268,7 @@ class _FileManagerState extends State<FileManager> {
         break;
       case FileType.Text:
       case FileType.Image:
+      case FileType.Archive:
         Navigator.of(context)
             .push(MaterialPageRoute(
                 builder: (BuildContext context) => FileViewer(
