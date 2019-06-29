@@ -412,5 +412,6 @@ enum FileType {
   Text,
   Image,
   Folder,
+  Archive,
   Other,
 }
