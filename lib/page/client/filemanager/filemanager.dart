@@ -41,40 +41,31 @@ class _FileManagerState extends State<FileManager> {
   final fileManagerScaffoldKey = GlobalKey<ScaffoldState>();
 
   ///[FileActions] will contain all the backend functions to get a file, update a file or delete a file from the server.
-  final fileActions = FileActions();
+  FileActions fileActions;
+  final downloadedDirectories = Map<String, Directory>();
 
-  ///All the files that are downloaded from the server will stay here.
-  ///It will act as a cache memory when the user returns to previous directory or stores the next downloaded directory when the user selects a new directory that is not yet present in here.
-  final files = Map<String, Map>();
-
-  ///A directory, according to my idea: an api address like "api.example.com/example/example" where a JSON file is located.
-  ///
-  ///This JSON file will contain a key "directories" that will have a list of JSON object that will contain 2 key-value pairs : (a)"address" : other such address that direct to another such JSON file and (b) "name" name of that JSON file (Folder name shown to the users).
-  ///
-  ///This JSON file will also contain another key "files" that will have a list of a JSON object that will also contain 2 key-value pairs" (a)"address" : address of that file and (b) "name" : name of the file (with extension);
-  ///
-  ///directoryTree contains the urls of all the folders opened, empty if current directory is the root.
   final directoryTree = List<String>();
   final directoryNames = Map<String, String>();
 
   ///This is the initial directory that gives the intial JSON file to start off.
-  String rootDirectory =
-      SampleAddresses.root; //we are replacing with sampleData here.
-  ///This is the current directory (adddress of the current JSON file). it updates whenever the user navigate back or forth in the directory tree.  initialized to root. make sense.
-  String currentDirectory = SampleAddresses.root;
+  ///This is the current directory (adddress of the current JSON file). it updates whenever the user navigate back or forth in the directory tree.  initialized to the root directory.
+  String currentDirectory = "";
 
   ///more like "is file on this index being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particulatr FileListTile;
   final isFileProcessing = Map<String, List<int>>();
 
-  String directoriesVsFiles(int directoriesLength, int filesLength, int index) {
-    if (index > directoriesLength - 1) {
-      return "files";
-    } else
-      return "directories";
-  }
 
   FileType _checkFileType(String name) {
     return fileActions.checkType(name); //Check
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    fileActions = FileActions(widget.server);
+    () async {
+      await fileActions.initialize();
+    }();
   }
 
   @override
@@ -96,7 +87,7 @@ class _FileManagerState extends State<FileManager> {
       body: Column(
         children: <Widget>[
           _makeDirectoryPathText(),
-          if (currentDirectory != rootDirectory) _makeBackListTile(),
+          if (currentDirectory != "") _makeBackListTile(),
           Expanded(
             child: _makeFileListTiles(),
           ),
@@ -147,38 +138,26 @@ class _FileManagerState extends State<FileManager> {
 
   Widget _makeFileListTiles() {
     return FutureBuilder(
-      future: files.containsKey(currentDirectory)
+      future: downloadedDirectories.containsKey(currentDirectory)
           ? null
           : fileActions
-              .getFile(currentDirectory)
-              .then((data) => setState(() => files[currentDirectory] = data)),
+              .getDirectory(currentDirectory)
+              .then((data) => setState(() => downloadedDirectories[currentDirectory] = data)),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (files.containsKey(currentDirectory)) {
-          if (files[currentDirectory]["directories"].isEmpty &&
-              files[currentDirectory]["files"].isEmpty) {
+        if (downloadedDirectories.containsKey(currentDirectory)) {
+          if (downloadedDirectories[currentDirectory].folders.isEmpty &&
+              downloadedDirectories[currentDirectory].files.isEmpty) {
             return Center(
               child: Text("[EMPTY]"),
             );
           } else {
             return ListView.builder(
               padding: EdgeInsets.all(0.0),
-              itemCount: files[currentDirectory]["directories"].length +
-                  files[currentDirectory]["files"].length,
+              itemCount: downloadedDirectories[currentDirectory].folders.length +
+                  downloadedDirectories[currentDirectory].files.length,
               itemBuilder: (BuildContext context, int index) {
-                String whichOne = directoriesVsFiles(
-                    files[currentDirectory]["directories"].length,
-                    files[currentDirectory]["files"].length,
-                    index);
                 return makeFileListTile(
-                    FileData(
-                      name: files[currentDirectory][whichOne][index]["name"],
-                      type: whichOne == "directories"
-                          ? FileType.Folder
-                          : _checkFileType(files[currentDirectory][whichOne]
-                              [index]["name"]), //TODO
-                      url: files[currentDirectory][whichOne][index]["address"],
-                      path: directoryTree,
-                    ),
+                  index <= (downloadedDirectories[currentDirectory].folders.length -1) ? downloadedDirectories[currentDirectory].folders[index] : downloadedDirectories[currentDirectory].files[index - downloadedDirectories[currentDirectory].folders.length],
                     index);
               },
             );
@@ -262,8 +241,8 @@ class _FileManagerState extends State<FileManager> {
       case FileType.Folder:
         setState(() {
           directoryTree.add(currentDirectory);
-          directoryNames[fileData.url] = fileData.name;
-          currentDirectory = fileData.url;
+          directoryNames[fileData.directory] = fileData.name;
+          currentDirectory = fileData.directory;
         });
         break;
       case FileType.Text:
@@ -272,6 +251,7 @@ class _FileManagerState extends State<FileManager> {
             .push(MaterialPageRoute(
                 builder: (BuildContext context) => FileViewer(
                       fileData: fileData,
+                      fileActions: fileActions,
                     )))
             .then((delete) => delete == true
                 ? _deleteFile(fileData, currentDirectory, index)
@@ -292,6 +272,7 @@ class _FileManagerState extends State<FileManager> {
                     .push(MaterialPageRoute(
                         builder: (BuildContext context) => FileViewer(
                               fileData: fileData,
+                              fileActions: fileActions,
                             )))
                     .then((delete) {
                   if (delete == true) {
@@ -304,6 +285,7 @@ class _FileManagerState extends State<FileManager> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => TextEditorPage(
                             fileData: fileData,
+                            fileActions: fileActions,
                           )));
                 }),
               bottomSheetListTile(context, Icons.delete, "Delete", onTap: () {
@@ -339,8 +321,6 @@ class _FileManagerState extends State<FileManager> {
     );
   }
 
-//This function need [fileActions.deleteFile] to work. The FileData of the file is passed on to that function, FYI FileData contains a variable ["path"]. path is just a a list of strings that contain urls of all the past directories that lead to the folder of this file, and filedata also contains its own URL, maybe you can manipulate/delete the file directly with this URL ? so we can get rid of paths.
-
   _deleteFile(FileData fileData, String directory, int index) async {
     isFileProcessing[directory] = List<int>();
     setState(() => isFileProcessing[directory].add(index));
@@ -371,7 +351,6 @@ class _FileManagerState extends State<FileManager> {
     });
   }
 
-//This is an extra step for updating the UI upon a file deletion, i have commented it for now because we are just testing it.
   _onFileDelete(directory, index) {
     //   String whichOne = directoriesVsFiles(
     //       files[directory]["directories"].length,
@@ -388,13 +367,21 @@ class _FileManagerState extends State<FileManager> {
 class FileData {
   final FileType type;
   final String name;
-  final String url;
+  final String directory;
+  final int date;
+  final String mime;
+  final String size;
+  final String extension;
   final List<String> path;
   FileData({
     @required this.type,
     @required this.name,
-    this.url,
+    this.directory,
     this.path,
+    this.date,
+    this.mime,
+    this.size,
+    this.extension,
   });
 }
 

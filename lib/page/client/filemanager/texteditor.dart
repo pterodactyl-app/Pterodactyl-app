@@ -24,9 +24,11 @@ import 'filemanager.dart';
 
 class TextEditorPage extends StatefulWidget {
   final FileData fileData;
+  final FileActions fileActions;
 
   const TextEditorPage({
     @required this.fileData,
+    @required this.fileActions,
   });
 
   @override
@@ -57,8 +59,6 @@ class _TextEditorPageState extends State<TextEditorPage> {
     setState(
         () => _uncommitedChanges = textEditorController.text != _stableFile);
   }
-
-  FileActions fileActions = FileActions();
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
         body: FutureBuilder(
           future: _stableFile == null
               ? rootBundle
-                  .loadString(widget.fileData.url)
+                  .loadString(widget.fileData.directory) //TODO
                   .then((data) => _stableFile = data)
                   .then((data) => textEditorController.text = data)
               : null,
@@ -181,7 +181,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
   Future<void> _updateChanges(String value) async {
     setState(() => _isUpdating = true);
 
-    fileActions.updateFile(widget.fileData, value).then((result) {
+    widget.fileActions.updateFile(widget.fileData, value).then((result) {
       if (result == true) {
         _stableFile = value;
         textEditorController.text = value;

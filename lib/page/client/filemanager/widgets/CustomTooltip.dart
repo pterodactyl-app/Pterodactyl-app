@@ -14,21 +14,21 @@
 * limitations under the License.
 */
 
-import 'package:flutter/material.dart' as prefix0;
-import 'package:pterodactyl_app/widgets/tooltip/tooltip.dart';
+import 'package:flutter/material.dart';
+import 'package:pterodactyl_app/widgets/tooltip/tooltip.dart' as tooltip;
 
-prefix0.Widget customTooltip({String message, prefix0.Widget child}){
-  return Tooltip(
+Widget customTooltip({String message, Widget child}){
+  return tooltip.Tooltip(
     message: message,
     child: child,
     showDuration: Duration(milliseconds: 1000),
-    decoration: prefix0.BoxDecoration(
-      color: prefix0.Colors.white.withOpacity(1),
-      border: prefix0.Border.all(
+    decoration: BoxDecoration(
+      color: Colors.white.withOpacity(1),
+      border: Border.all(
         width: 1,
-        color: prefix0.Colors.black,
+        color: Colors.black,
       ),
-      borderRadius: prefix0.BorderRadius.circular(3),
+      borderRadius: BorderRadius.circular(3),
     ),
   );
 }

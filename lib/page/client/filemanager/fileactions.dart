@@ -14,13 +14,95 @@
 * limitations under the License.
 */
 
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:pterodactyl_app/models/server.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
 import 'filemanager.dart';
 
 ///All backend logic of filemanager is processed in this class (currently faked);;
 class FileActions {
-  Future<Map> getFile(String fileDirectory) async {
-    return await Future.delayed(Duration(seconds: 3))
-        .then((data) => sampleData[fileDirectory]);
+
+  final Server server;
+  FileActions(this.server);
+
+  String _apiKey;
+  String _panelUrl;
+  String _https;
+
+  String _baseUrl;
+
+  ////Not needed while testing: Must call this function once on the instance of this class before using anything in this class
+  Future<void> initialize() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _apiKey = prefs.getString("apiKey");
+    _panelUrl = prefs.getString("panelUrl");
+    _https = prefs.getString("https");
+
+    _baseUrl = (_https + _panelUrl + "api/app/user/files/${server.id}/");
+    return;
+  }
+
+  Future<dynamic> getDirectory(String directory) async{
+    
+      final folders = List<FileData>();
+      final files = List<FileData>();
+
+    try {
+      http.Response response = await http.get(
+        _baseUrl + FileHttpHelper.directory + directory,
+        headers: {
+          "Accept" : "application/json",
+          "Authorization" : "Bearer $_apiKey",
+        }
+        );
+      var data = await json.decode(response.body);
+      for(var object in data["contents"]["folders"]){
+        folders.add(
+          FileData(
+            name: object["entry"],
+            type: FileType.Folder,
+            date: object["date"],
+            mime: object["mime"],
+            size: object["size"],
+            directory: object["directory"],
+            )
+          );
+      }
+      for(var object in data["contents"]["files"]){
+        files.add(
+          FileData(
+            name: object["entry"],
+            type: checkType(object["extension"]),
+            date: object["date"],
+            directory: object["entry"],
+            extension: object["extension"],
+            mime: object["mime"],
+            size: object["size"],
+            //TODO: check if directory is extended upon opening more directories
+          )
+        );
+      }
+      return Directory(
+        folders: folders,
+        files: files,
+      );
+    } on SocketException catch (e) {
+      print('Error occured: ' + e.message);
+      print(_panelUrl);
+      print(_https);
+      print('End debug');
+      return null;
+    }
+  }
+
+  Future<dynamic> getFile(FileData fileData) async {
+
+    var data = await http.get(_baseUrl + FileHttpHelper.file);
+
   }
 
   Future<bool> deleteFile(FileData file) async {
@@ -32,11 +114,15 @@ class FileActions {
     return await Future.delayed(Duration(seconds: 2)).then((_) => true); //true = successful
   }
 
-  FileType checkType(String name) {
-    String _extension = _ext(name);
+  Future<bool> createDirectory(String name, String path) async{
+
+  }
+
+  FileType checkType(String extension) {
+    // String extension = _getExtension(name);
 
     //you can add more extension names here to support them too in the text editor.
-    switch (_extension) {
+    switch (extension) {
       case "txt":
       case "text":
       case "html":
@@ -67,41 +153,32 @@ class FileActions {
     }
   }
 
-  static String _ext(String path) {
-    int index = path.lastIndexOf('.');
-    if (index < 0 || index + 1 >= path.length) return path;
-    return path.substring(index + 1).toLowerCase();
-  }
+  // static String _getExtension(String fullName) {
+  //   int index = fullName.lastIndexOf('.');
+  //   if (index < 0 || index + 1 >= fullName.length) return fullName;
+  //   return fullName.substring(index + 1).toLowerCase();
+  // }
+
 }
 
-//ALL sample data>>>>>>>
-Map sampleData = {
-  SampleAddresses.root: {
-    "directories": [
-      {"address": SampleAddresses.newFolder, "name": "New folder"}
-    ],
-    "files": []
-  },
-  SampleAddresses.newFolder: {
-    "directories": [],
-    "files": [
-      {
-        "address": SampleAddresses.textFile,
-        "name": "Text File.txt",
-      },
-      {
-        "address": SampleAddresses.image,
-        "name": "Image.Jpeg",
-      }
-    ]
-  },
-};
+class Directory {
 
-class SampleAddresses {
-  static const String root = "api.example.com/root";
-  static const String newFolder = "api.example.com/root/newFolder";
+  @required final List folders;
+  @required final List files;
+  Directory({this.folders, this.files});
 
-  //asset address as a sample address, in the real world version of this app, these will also be web addresses
-  static const String textFile = "assets/sampleData/textFile.txt";
-  static const String image = "assets/sampleData/image.jpeg";
 }
+
+class FileHttpHelper{
+  ///add before the path of the file that you want to fetch, use with [GET].
+  static const String file = "content?file=";
+  ///add before the the path of file/folder that you want to delete, use with [DELETE].
+  static const String delete = "delete?file=";
+  ///add before the path of directory that you want to fetch. use with [GET].
+  static const String directory = "list?directory=/";
+  ///add before the path of the file that you want to update, [content in body] required. use with [POST].
+  static const String updateFile = "write?file=";
+  ///add this after the base url, [name] and [path] required;
+  static const String createDirectory = "new-folder";
+}
+

@@ -28,8 +28,10 @@ import 'texteditor.dart';
 ///FileViewer is used by FileManager to show files before editing.
 class FileViewer extends StatefulWidget {
   final FileData fileData;
+  final FileActions fileActions;
   const FileViewer({
     @required this.fileData,
+    @required this.fileActions,
   });
 
   @override
@@ -37,7 +39,6 @@ class FileViewer extends StatefulWidget {
 }
 
 class _FileViewerState extends State<FileViewer> {
-  final fileActions = FileActions();
   final fileViewerScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -101,14 +102,11 @@ class _FileViewerState extends State<FileViewer> {
         maxScale: 2.00,
         // MediaQuery.of(context).size.longestSide,
         minScale: 0.3,
-        imageProvider: AssetImage(
-          widget.fileData
-              .url, //Using asset image since we are getting the sample image thats alreay located on the device.
-        ),
+        imageProvider: 
 
-        // NetworkImage(
-        //   widget.fileData.url, //we may need this in real world version of this app
-        // ),
+        NetworkImage(
+          widget.fileData.directory, //TODO
+        ),
 
         enableRotation: false,
       ),
@@ -117,7 +115,7 @@ class _FileViewerState extends State<FileViewer> {
 
   Widget _showText() {
     return FutureBuilder(
-        future: rootBundle.loadString(widget.fileData.url),
+        future: rootBundle.loadString(widget.fileData.directory), //TODO
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData)
             return Center(
@@ -170,6 +168,7 @@ class _FileViewerState extends State<FileViewer> {
     var route = MaterialPageRoute(
         builder: (BuildContext context) => TextEditorPage(
               fileData: widget.fileData,
+              fileActions: widget.fileActions,
             ));
     Navigator.of(context).push(route);
   }
