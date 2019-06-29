@@ -255,6 +255,7 @@ class _FileManagerState extends State<FileManager> {
   void _handleFileListTileOnTap(FileData fileData, int index) async {
     switch (fileData.type) {
       case FileType.Other:
+      case FileType.Archive:
         break;
       case FileType.Folder:
         setState(() {
