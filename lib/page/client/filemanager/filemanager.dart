@@ -268,7 +268,6 @@ class _FileManagerState extends State<FileManager> {
         break;
       case FileType.Text:
       case FileType.Image:
-      case FileType.Archive:
         Navigator.of(context)
             .push(MaterialPageRoute(
                 builder: (BuildContext context) => FileViewer(
