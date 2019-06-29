@@ -265,6 +265,7 @@ class _FileManagerState extends State<FileManager> {
         break;
       case FileType.Text:
       case FileType.Image:
+      case FileType.Archive:
         Navigator.of(context)
             .push(MaterialPageRoute(
                 builder: (BuildContext context) => FileViewer(
@@ -273,9 +274,6 @@ class _FileManagerState extends State<FileManager> {
             .then((delete) => delete == true
                 ? _deleteFile(fileData, currentDirectory, index)
                 : () {});
-        break;
-      case FileType.Archive:
-        print('lol no');
     }
   }
 
