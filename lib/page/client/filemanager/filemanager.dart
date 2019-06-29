@@ -273,6 +273,9 @@ class _FileManagerState extends State<FileManager> {
             .then((delete) => delete == true
                 ? _deleteFile(fileData, currentDirectory, index)
                 : () {});
+        break;
+      case FileType.Archive:
+        print('lol no');
     }
   }
 
