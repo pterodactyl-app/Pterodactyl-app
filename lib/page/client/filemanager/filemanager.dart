@@ -54,11 +54,6 @@ class _FileManagerState extends State<FileManager> {
   ///more like "is file on this index being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particulatr FileListTile;
   final isFileProcessing = Map<String, List<int>>();
 
-
-  FileType _checkFileType(String name) {
-    return fileActions.checkType(name); //Check
-  }
-
   @override
   void initState(){
     super.initState();

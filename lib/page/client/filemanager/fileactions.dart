@@ -82,7 +82,7 @@ class FileActions {
             extension: object["extension"],
             mime: object["mime"],
             size: object["size"],
-            //TODO: check if directory is extended upon opening more directories
+            //TODO:
           )
         );
       }
@@ -101,20 +101,20 @@ class FileActions {
 
   Future<dynamic> getFile(FileData fileData) async {
 
-    var data = await http.get(_baseUrl + FileHttpHelper.file);
+    var data = await http.get(_baseUrl + FileHttpHelper.file); //TODO
 
   }
 
   Future<bool> deleteFile(FileData file) async {
     return await Future.delayed(Duration(seconds: 2))
-        .then((_) => null); //null = not successfull
+        .then((_) => null); //TODO
   }
 
   Future<bool> updateFile(FileData file, String newFile) async {
-    return await Future.delayed(Duration(seconds: 2)).then((_) => true); //true = successful
+    return await Future.delayed(Duration(seconds: 2)).then((_) => true); //TODO
   }
 
-  Future<bool> createDirectory(String name, String path) async{
+  Future<bool> createDirectory(String name, String path) async{ //TODO
 
   }
 
