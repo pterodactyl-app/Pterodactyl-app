@@ -14,8 +14,9 @@
 * limitations under the License.
 */
 
-import 'package:flutter/material.dart' show AlertDialog, AppBar, AsyncSnapshot, BoxDecoration, BuildContext, Center, CircularProgressIndicator, Colors, Column, EdgeInsets, Expanded, FlatButton, Flexible, FutureBuilder, GlobalKey, Icon, IconData, Icons, ListTile, ListView, MainAxisAlignment, MainAxisSize, MaterialPageRoute, Navigator, Padding, RichText, RotatedBox, Row, Scaffold, ScaffoldState, SizedBox, SnackBar, State, StatefulWidget, Text, TextBaseline, TextSpan, TextStyle, Widget, required, showDialog, showModalBottomSheet;
-import 'package:pterodactyl_app/widgets/tooltip/tooltip.dart';
+import 'package:flutter/material.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
@@ -82,12 +83,8 @@ class _FileManagerState extends State<FileManager> {
       key: fileManagerScaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Tooltip(
+        title: customTooltip(
           message: "${widget.server.name}",
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          showDuration: Duration(milliseconds: 1000),
           child: Text(
             "File Manager",
             style: TextStyle(
@@ -98,105 +95,109 @@ class _FileManagerState extends State<FileManager> {
       ),
       body: Column(
         children: <Widget>[
-          ListTile(
-            title: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                    text: "./",
-                    style: TextStyle(color: Colors.black, fontSize: 18)),
-                for (var directory in directoryNames.keys)
-                  TextSpan(
-                    text: directoryNames[directory] + "/",
-                    style: TextStyle(color: Colors.black, fontSize: 15),
-                  )
-              ]),
-            ),
-          ),
-          if (currentDirectory != rootDirectory)
-            Tooltip(
-                message: "Go back to previous folder",
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                showDuration: Duration(milliseconds: 1000),
-                child: ListTile(
-                  title: Row(
-                      // crossAxisAlignment: CrossAxisAlignment.baseline,
-                      children: [
-                        RotatedBox(
-                            quarterTurns: 1,
-                            child: Icon(
-                              Icons.subdirectory_arrow_left,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            "back",
-                            style: TextStyle(
-                                textBaseline: TextBaseline.alphabetic),
-                          ),
-                        ),
-                      ]),
-                  onTap: _navigateBack,
-                )),
+          _makeDirectoryPathText(),
+          if (currentDirectory != rootDirectory) _makeBackListTile(),
           Expanded(
-            child: FutureBuilder(
-              future: files.containsKey(currentDirectory)
-                  ? null
-                  : fileActions.getFile(currentDirectory).then(
-                      (data) => setState(() => files[currentDirectory] = data)),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (files.containsKey(currentDirectory)) {
-                  if (files[currentDirectory]["directories"].isEmpty &&
-                      files[currentDirectory]["files"].isEmpty) {
-                    return Center(
-                      child: Text("[EMPTY]"),
-                    );
-                  } else {
-                    return ListView.builder(
-                      padding: EdgeInsets.all(0.0),
-                      itemCount: files[currentDirectory]["directories"].length +
-                          files[currentDirectory]["files"].length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String whichOne = directoriesVsFiles(
-                            files[currentDirectory]["directories"].length,
-                            files[currentDirectory]["files"].length,
-                            index);
-                        return makeFileListTile(
-                            FileData(
-                              name: files[currentDirectory][whichOne][index]
-                                  ["name"],
-                              type: whichOne == "directories"
-                                  ? FileType.Folder
-                                  : _checkFileType(files[currentDirectory]
-                                      [whichOne][index]["name"]), //TODO
-                              url: files[currentDirectory][whichOne][index]
-                                  ["address"],
-                              path: directoryTree,
-                            ),
-                            index);
-                      },
-                    );
-                  }
-                }
-
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("Loading files")
-                    ],
-                  ),
-                );
-              },
-            ),
-          )
+            child: _makeFileListTiles(),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _makeDirectoryPathText() {
+    return ListTile(
+      title: RichText(
+        text: TextSpan(children: [
+          TextSpan(
+              text: "./", style: TextStyle(color: Colors.black, fontSize: 18)),
+          for (var directory in directoryNames.keys)
+            TextSpan(
+              text: directoryNames[directory] + "/",
+              style: TextStyle(color: Colors.black, fontSize: 15),
+            )
+        ]),
+      ),
+    );
+  }
+
+  Widget _makeBackListTile() {
+    return customTooltip(
+        message: "Go back to previous folder",
+        child: ListTile(
+          title: Row(
+              // crossAxisAlignment: CrossAxisAlignment.baseline,
+              children: [
+                RotatedBox(
+                    quarterTurns: 1,
+                    child: Icon(
+                      Icons.subdirectory_arrow_left,
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    "back",
+                    style: TextStyle(textBaseline: TextBaseline.alphabetic),
+                  ),
+                ),
+              ]),
+          onTap: _navigateBack,
+        ));
+  }
+
+  Widget _makeFileListTiles() {
+    return FutureBuilder(
+      future: files.containsKey(currentDirectory)
+          ? null
+          : fileActions
+              .getFile(currentDirectory)
+              .then((data) => setState(() => files[currentDirectory] = data)),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (files.containsKey(currentDirectory)) {
+          if (files[currentDirectory]["directories"].isEmpty &&
+              files[currentDirectory]["files"].isEmpty) {
+            return Center(
+              child: Text("[EMPTY]"),
+            );
+          } else {
+            return ListView.builder(
+              padding: EdgeInsets.all(0.0),
+              itemCount: files[currentDirectory]["directories"].length +
+                  files[currentDirectory]["files"].length,
+              itemBuilder: (BuildContext context, int index) {
+                String whichOne = directoriesVsFiles(
+                    files[currentDirectory]["directories"].length,
+                    files[currentDirectory]["files"].length,
+                    index);
+                return makeFileListTile(
+                    FileData(
+                      name: files[currentDirectory][whichOne][index]["name"],
+                      type: whichOne == "directories"
+                          ? FileType.Folder
+                          : _checkFileType(files[currentDirectory][whichOne]
+                              [index]["name"]), //TODO
+                      url: files[currentDirectory][whichOne][index]["address"],
+                      path: directoryTree,
+                    ),
+                    index);
+              },
+            );
+          }
+        }
+
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Loading files")
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -224,157 +225,143 @@ class _FileManagerState extends State<FileManager> {
     }
   }
 
-  Widget makeFileListTile(FileData data, int index) {
+  Widget makeFileListTile(FileData fileData, int index) {
     return ListTile(
-      leading: Icon(dataTypeIcon(data.type)),
-      title: Text(data.name),
-      trailing: isFileProcessing[currentDirectory] != null &&
-              isFileProcessing[currentDirectory].contains(index)
-          ? SizedBox(
-              child: CircularProgressIndicator(),
-              height: 20,
-              width: 20,
-            )
-          : SizedBox(
-              height: 30,
-              width: 30,
-            ),
-      onTap: data.type == FileType.Other
-          ? () {}
-          : () async {
-              if (data.type == FileType.Folder) {
-                setState(() {
-                  directoryTree.add(currentDirectory);
-                  directoryNames[data.url] = data.name;
-                  currentDirectory = data.url;
-                });
-                return;
-              }
-              var route = MaterialPageRoute<bool>(
-                  builder: (BuildContext context) => FileViewer(
-                        file: data,
-                      ));
-              bool result = await Navigator.of(context).push(route);
-              if (result == true) _deleteFile(data, currentDirectory, index);
-            },
-      onLongPress: data.type == FileType.Other
-          ? () {}
-          : () {
-              makeAndShowBottomSheet(data, index);
-            },
+      leading: Icon(dataTypeIcon(fileData.type)),
+      title: Text(fileData.name),
+      trailing: _showProgressIndicator(index),
+      onTap: () => _handleFileListTileOnTap(fileData, index),
+      onLongPress: () {
+        if (fileData.type != FileType.Other)
+          _makeAndShowBottomSheet(context, fileData, index);
+      },
     );
   }
 
-  makeAndShowBottomSheet(FileData file, int index) {
+  Widget _showProgressIndicator(int index) {
+    return isFileProcessing[currentDirectory] != null &&
+            isFileProcessing[currentDirectory].contains(index)
+        ? SizedBox(
+            child: CircularProgressIndicator(),
+            height: 20,
+            width: 20,
+          )
+        : SizedBox(
+            height: 30,
+            width: 30,
+          );
+  }
+
+  void _handleFileListTileOnTap(FileData fileData, int index) async {
+    switch (fileData.type) {
+      case FileType.Other:
+        break;
+      case FileType.Folder:
+        setState(() {
+          directoryTree.add(currentDirectory);
+          directoryNames[fileData.url] = fileData.name;
+          currentDirectory = fileData.url;
+        });
+        break;
+      case FileType.Text:
+      case FileType.Image:
+        Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (BuildContext context) => FileViewer(
+                      fileData: fileData,
+                    )))
+            .then((delete) => delete == true
+                ? _deleteFile(fileData, currentDirectory, index)
+                : () {});
+    }
+  }
+
+  _makeAndShowBottomSheet(BuildContext context, FileData fileData, int index) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              ListTile(
-                leading: Icon(dataTypeIcon(file.type)),
-                title: Text("View"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  var route = MaterialPageRoute(
-                      builder: (BuildContext context) => FileViewer(
-                            file: file,
-                          ));
-                  Navigator.of(context).push(route).then((delete) {
-                    if (delete == true)
-                      _deleteFile(file, currentDirectory, index);
-                  });
-                },
-              ),
-              if (file.type == FileType.Text)
-                ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text("Edit"),
+              bottomSheetListTile(context, dataTypeIcon(fileData.type), "View",
                   onTap: () {
-                    Navigator.of(context).pop();
-                    var route = MaterialPageRoute(
-                        builder: (BuildContext context) => TextEditorPage(
-                              file: file,
-                            ));
-                    Navigator.of(context).push(route);
-                  },
-                ),
-              ListTile(
-                  leading: Icon(Icons.delete),
-                  title: Text("Delete"),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Are you sure?"),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Flexible(
-                                  child: Text(
-                                    "Do you want to delete this ${file.type == FileType.Folder ? "folder" : "file"}: ${file.name}",
-                                  ),
-                                ),
-                              ],
-                            ),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text("NO"),
-                                onPressed: () => Navigator.of(context).pop(),
-                              ),
-                              FlatButton(
-                                  child: Text("Yes, delete it."),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    _deleteFile(file, currentDirectory, index);
-                                  })
-                            ],
-                          );
-                        });
-                  })
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (BuildContext context) => FileViewer(
+                              fileData: fileData,
+                            )))
+                    .then((delete) {
+                  if (delete == true) {
+                    _deleteFile(fileData, currentDirectory, index);
+                  }
+                });
+              }),
+              if (fileData.type == FileType.Text)
+                bottomSheetListTile(context, Icons.edit, "Edit", onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => TextEditorPage(
+                            fileData: fileData,
+                          )));
+                }),
+              bottomSheetListTile(context, Icons.delete, "Delete", onTap: () {
+                showReusableDialog(
+                  context,
+                  "Are you sure?",
+                  "Do you really want to delete this ${fileData.type == FileType.Folder ? "folder" : "file"}: ${fileData.name}",
+                  button1Text: "NO",
+                  button1Function: () {},
+                  button2Text: "Yes, delete it.",
+                  button2Function: () =>
+                      _deleteFile(fileData, currentDirectory, index),
+                );
+              }),
             ],
           );
         });
   }
 
+  Widget bottomSheetListTile(BuildContext context, IconData icon, String title,
+      {Function onTap}) {
+    return ListTile(
+      leading: Icon(
+        icon,
+      ),
+      title: Text(
+        title,
+      ),
+      onTap: () {
+        Navigator.of(context).pop();
+        onTap();
+      },
+    );
+  }
+
 //This function need [fileActions.deleteFile] to work. The FileData of the file is passed on to that function, FYI FileData contains a variable ["path"]. path is just a a list of strings that contain urls of all the past directories that lead to the folder of this file, and filedata also contains its own URL, maybe you can manipulate/delete the file directly with this URL ? so we can get rid of paths.
 
-  _deleteFile(FileData file, String directory, int index) async {
+  _deleteFile(FileData fileData, String directory, int index) async {
     isFileProcessing[directory] = List<int>();
     setState(() => isFileProcessing[directory].add(index));
-    await fileActions.deleteFile(file).then((e) {
-      if (e != null) {
+    await fileActions.deleteFile(fileData).then((result) {
+      if (result == true) {
         _onFileDelete(directory, index);
-      }
-      if (e == null) {
+      } else{
         setState(() => isFileProcessing[directory].remove(index));
       }
 
       fileManagerScaffoldKey.currentState.showSnackBar(
         SnackBar(
-          content: e != null
-              ? Row(
-                  children: <Widget>[
-                    Icon(Icons.delete),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("File deleted!")
-                  ],
-                )
-              : Row(
-                  children: <Widget>[
-                    Icon(Icons.error),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("An error occured, Please try again later.")
-                  ],
-                ),
+          content: Row(
+            children: <Widget>[
+              Icon(
+                result == true ? Icons.delete : Icons.error,
+              ),
+              SizedBox(width: 10),
+              Text(
+                result == true ? "File deleted"
+                    : "An error occured, Please try again later.",
+              ),
+            ],
+          ),
           duration: Duration(seconds: 1),
         ),
       );

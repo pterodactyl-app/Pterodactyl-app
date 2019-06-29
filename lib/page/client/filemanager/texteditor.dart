@@ -14,18 +14,19 @@
 * limitations under the License.
 */
 
-import 'package:flutter/material.dart' show AlertDialog, AlwaysScrollableScrollPhysics, AppBar, AsyncSnapshot, BoxDecoration, BuildContext, Center, CircularProgressIndicator, Colors, Column, Container, CrossAxisAlignment, EdgeInsets, FlatButton, Flexible, FutureBuilder, GlobalKey, Icon, IconButton, Icons, InputBorder, InputDecoration, MainAxisSize, Navigator, PageStorageKey, Row, Scaffold, ScaffoldState, Scrollbar, SingleChildScrollView, SizedBox, SnackBar, State, StatefulWidget, Text, TextEditingController, TextField, TextInputType, TextStyle, Widget, WillPopScope, required, showDialog;
-import 'package:pterodactyl_app/widgets/tooltip/tooltip.dart';
+import 'package:flutter/material.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:flutter/services.dart';
 
 import 'fileactions.dart';
 import 'filemanager.dart';
 
 class TextEditorPage extends StatefulWidget {
-  final FileData file;
+  final FileData fileData;
 
   const TextEditorPage({
-    @required this.file,
+    @required this.fileData,
   });
 
   @override
@@ -33,7 +34,7 @@ class TextEditorPage extends StatefulWidget {
 }
 
 class _TextEditorPageState extends State<TextEditorPage> {
-  ///This is either the original version of the file or the last updated modified version of the file.
+  ///This is either the original version of the file text or the last updated modified version of the file.
   String _stableFile;
 
   ///It is used when the current file is edited but not updated.
@@ -63,48 +64,24 @@ class _TextEditorPageState extends State<TextEditorPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return _uncommitedChanges
-            ? showDialog(
-                context: context,
-                barrierDismissible: true,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Are you sure?"),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Flexible(
-                          child: Text(
-                            "Discard changes and exit.",
-                          ),
-                        ),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("NO"),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      FlatButton(
-                        child: Text("Yes"),
-                        onPressed: () => Navigator.of(context)..pop()..pop(),
-                      )
-                    ],
-                  );
-                })
-            : true;
+        _uncommitedChanges
+            ? showReusableDialog(
+              context,
+              "Are you sure?",
+              "Discard changes and exit.",
+              button1Text: "NO",
+              button1Function: (){},
+              button2Text: "Yes, discard changes.",
+              button2Function: () => Navigator.of(context).pop(),
+              )
+            : Navigator.of(context).pop();
       },
       child: Scaffold(
         key: textEditorScaffoldKey,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Tooltip(
-            message: widget.file.name,
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            showDuration: Duration(milliseconds: 1000),
+          title: customTooltip(
+            message: widget.fileData.name,
             child: Text(
               "Editor",
               style: TextStyle(
@@ -117,23 +94,15 @@ class _TextEditorPageState extends State<TextEditorPage> {
               _isUpdating
                   ? IconButton(
                       onPressed: () {},
-                      icon: Tooltip(
+                      icon: customTooltip(
                         message: "Saving and updating file",
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                        ),
-                        showDuration: Duration(milliseconds: 1000),
                         child: SizedBox(
                             height: 30,
                             width: 30,
                             child: CircularProgressIndicator()),
                       ))
-                  : Tooltip(
+                  : customTooltip(
                       message: "Save and update file",
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      showDuration: Duration(milliseconds: 1000),
                       child: IconButton(
                         icon: Icon(Icons.save),
                         onPressed: () =>
@@ -145,11 +114,11 @@ class _TextEditorPageState extends State<TextEditorPage> {
         body: FutureBuilder(
           future: _stableFile == null
               ? rootBundle
-                  .loadString(widget.file.url)
+                  .loadString(widget.fileData.url)
                   .then((data) => _stableFile = data)
                   .then((data) => textEditorController.text = data)
               : null,
-          // fileActions.getFile(widget.file.url).then((data) => _stableFile = data).then((data) => textEditorController.text = data)
+          // fileActions.getFile(widget.fileData.url).then((data) => _stableFile = data).then((data) => textEditorController.text = data)
           // : null,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (_stableFile == null) {
@@ -157,6 +126,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
                   child: Column(
                 children: [
                   CircularProgressIndicator(),
+                  SizedBox(height: 10,),
                   Text("Loading file"),
                 ],
               ));
@@ -174,17 +144,25 @@ class _TextEditorPageState extends State<TextEditorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: Scrollbar(
-                  //TODO: see if directly adding scrollbar to textfield works.
-                  child: SingleChildScrollView(
+                child: _makeTextEditor(),
+                ),
+              
+            );
+          },
+        ),
+        resizeToAvoidBottomPadding: true,
+      ),
+    );
+  }
+
+  Widget _makeTextEditor(){
+    return Scrollbar(
                     key: PageStorageKey("lol"),
                     child: TextField(
-                      // expands: true,
                       scrollPhysics: AlwaysScrollableScrollPhysics(),
                       autocorrect: false,
                       maxLines: 20,
                       scrollPadding: EdgeInsets.all(20),
-                      // minLines: null,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                       ),
@@ -195,23 +173,16 @@ class _TextEditorPageState extends State<TextEditorPage> {
                       controller: textEditorController,
                       autofocus: true,
                     ),
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-        resizeToAvoidBottomPadding: true,
-      ),
-    );
+                  );
+
   }
 
   ///Updates the changes (currently faked and doesnt update the asset file just updates the editor)
   Future<void> _updateChanges(String value) async {
     setState(() => _isUpdating = true);
 
-    fileActions.updateFile(widget.file, value).then((e) {
-      if (e != null) {
+    fileActions.updateFile(widget.fileData, value).then((result) {
+      if (result == true) {
         _stableFile = value;
         textEditorController.text = value;
         _uncommitedChanges = _stableFile != textEditorController.text;
@@ -222,11 +193,9 @@ class _TextEditorPageState extends State<TextEditorPage> {
       textEditorScaffoldKey.currentState.showSnackBar(SnackBar(
         content: Row(
           children: [
-            Icon(e != null ? Icons.cloud_done : Icons.error),
-            SizedBox(
-              width: 10,
-            ),
-            Text(e != null
+            Icon(result == true ? Icons.cloud_done : Icons.error),
+            SizedBox(width: 10),
+            Text(result == true
                 ? "File updated!"
                 : "An error occured, please try again later."),
           ],

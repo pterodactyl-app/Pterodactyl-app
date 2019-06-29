@@ -23,13 +23,13 @@ class FileActions {
         .then((data) => sampleData[fileDirectory]);
   }
 
-  deleteFile(FileData file) async {
+  Future<bool> deleteFile(FileData file) async {
     return await Future.delayed(Duration(seconds: 2))
         .then((_) => null); //null = not successfull
   }
 
-  updateFile(FileData file, String newFile) async {
-    return await Future.delayed(Duration(seconds: 2)).then((_) => "success!");
+  Future<bool> updateFile(FileData file, String newFile) async {
+    return await Future.delayed(Duration(seconds: 2)).then((_) => true); //true = successful
   }
 
   FileType checkType(String name) {
