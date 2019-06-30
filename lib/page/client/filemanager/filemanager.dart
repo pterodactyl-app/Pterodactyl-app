@@ -16,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/ErrorSnackbar.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
@@ -23,7 +24,6 @@ import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
-
 
 ///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.
 ///It takes a [Server] as a parameter, currently this server is used only for setting the AppBar tooltip text.
@@ -57,6 +57,9 @@ class _FileManagerState extends State<FileManager> {
   ///more like "is file on this index being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particulatr FileListTile;
   final isFileProcessing = Map<String, List<int>>();
 
+  ///true when a new file or a new directory is being created
+  bool isCreatingNewFile = false;
+
   final _createTextController = TextEditingController();
 
   @override
@@ -89,10 +92,18 @@ class _FileManagerState extends State<FileManager> {
                 color: globals.useDarkTheme ? Colors.white : Colors.black,
                 fontWeight: FontWeight.w700)),
         actions: <Widget>[
-          CustomTooltip(
-            message: "Create",
-            child: _makePopupMenu(),
-          )
+          isCreatingNewFile
+              ? IconButton(
+                  onPressed: () {},
+                  icon: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator()),
+                )
+              : CustomTooltip(
+                  message: "Create",
+                  child: _makePopupMenu(),
+                )
         ],
       ),
       body: Column(
@@ -109,6 +120,7 @@ class _FileManagerState extends State<FileManager> {
 
   Widget _makePopupMenu() {
     return PopupMenuButton<String>(
+      child: Icon(Icons.add),
       onSelected: _popupMenuAction,
       itemBuilder: (BuildContext context) {
         return FileManagerPopupMenu.choices.map((String choice) {
@@ -225,10 +237,11 @@ class _FileManagerState extends State<FileManager> {
   void _popupMenuAction(String choice) {
     if (choice == FileManagerPopupMenu.NewFolder)
       _createNewFolder(currentDirectory);
-    else if (choice == FileManagerPopupMenu.NewFile) _createNewFile("");
+    else if (choice == FileManagerPopupMenu.NewFile)
+      _createNewFile(currentDirectory);
   }
 
-  void _createNewFolder(String inDirectory) {
+  void _createNewFolder(String directory) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -236,9 +249,24 @@ class _FileManagerState extends State<FileManager> {
           return CreateDialog(
             controller: _createTextController,
             title: "Create new folder",
-            onSubmitted: () {
-              fileActions.createDirectory(FileData(name: "hello", directory: inDirectory));
-            }, //TODO
+            onSubmitted: () async {
+              setState(() => isCreatingNewFile = true);
+
+              bool result = await fileActions.createDirectory(FileData(
+                  name: _createTextController.text, directory: directory));
+
+              result
+                  ? downloadedDirectories[directory].folders.add(FileData(
+                        directory: directory,
+                        name: _createTextController.text,
+                        date: ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
+                      ))
+                  : fileManagerScaffoldKey.currentState
+                      .showSnackBar(ErrorSnackbar());
+
+              _createTextController.text = "";
+              setState(() => isCreatingNewFile = false);
+            },
           );
         });
   }
@@ -252,7 +280,8 @@ class _FileManagerState extends State<FileManager> {
             controller: _createTextController,
             title: "Create new file",
             onSubmitted: () {
-              fileActions.writeFile(FileData(name: "hello.txt", directory: inDirectory), "hey");
+              fileActions.writeFile(
+                  FileData(name: "hello.txt", directory: inDirectory), "hey");
             }, //TODO
           );
         });
@@ -412,22 +441,22 @@ class _FileManagerState extends State<FileManager> {
       }
 
       fileManagerScaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content: Row(
-            children: <Widget>[
-              Icon(
-                result == true ? Icons.delete : Icons.error,
-              ),
-              SizedBox(width: 10),
-              Text(
-                result == true
-                    ? "File deleted"
-                    : "An error occured, Please try again later.",
-              ),
-            ],
-          ),
-          duration: Duration(seconds: 1),
-        ),
+        result
+            ? SnackBar(
+                content: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.delete,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "File deleted",
+                    ),
+                  ],
+                ),
+                duration: Duration(seconds: 1),
+              )
+            : ErrorSnackbar(),
       );
     });
   }

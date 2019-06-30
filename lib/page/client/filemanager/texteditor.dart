@@ -16,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/ErrorSnackbar.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:flutter/services.dart';
 
@@ -66,16 +67,16 @@ class _TextEditorPageState extends State<TextEditorPage> {
       onWillPop: () async {
         _uncommitedChanges
             ? showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  builder: (BuildContext context) => ReusableDialog(
-              "Are you sure?",
-              "Discard changes and exit.",
-              button1Text: "NO",
-              button1Function: (){},
-              button2Text: "Yes, discard changes.",
-              button2Function: () => Navigator.of(context).pop(),
-              ))
+                context: context,
+                barrierDismissible: true,
+                builder: (BuildContext context) => ReusableDialog(
+                      "Are you sure?",
+                      "Discard changes and exit.",
+                      button1Text: "NO",
+                      button1Function: () {},
+                      button2Text: "Yes, discard changes.",
+                      button2Function: () => Navigator.of(context).pop(),
+                    ))
             : Navigator.of(context).pop();
       },
       child: Scaffold(
@@ -128,7 +129,9 @@ class _TextEditorPageState extends State<TextEditorPage> {
                   child: Column(
                 children: [
                   CircularProgressIndicator(),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text("Loading file"),
                 ],
               ));
@@ -147,8 +150,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
                   color: Colors.white,
                 ),
                 child: _makeTextEditor(),
-                ),
-              
+              ),
             );
           },
         ),
@@ -157,26 +159,25 @@ class _TextEditorPageState extends State<TextEditorPage> {
     );
   }
 
-  Widget _makeTextEditor(){
+  Widget _makeTextEditor() {
     return Scrollbar(
-                    key: PageStorageKey("lol"),
-                    child: TextField(
-                      scrollPhysics: AlwaysScrollableScrollPhysics(),
-                      autocorrect: false,
-                      maxLines: 20,
-                      scrollPadding: EdgeInsets.all(20),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                      controller: textEditorController,
-                      autofocus: true,
-                    ),
-                  );
-
+      key: PageStorageKey("lol"),
+      child: TextField(
+        scrollPhysics: AlwaysScrollableScrollPhysics(),
+        autocorrect: false,
+        maxLines: 20,
+        scrollPadding: EdgeInsets.all(20),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+        ),
+        keyboardType: TextInputType.multiline,
+        style: TextStyle(
+          color: Colors.black,
+        ),
+        controller: textEditorController,
+        autofocus: true,
+      ),
+    );
   }
 
   ///Updates the changes (currently faked and doesnt update the asset file just updates the editor)
@@ -192,18 +193,18 @@ class _TextEditorPageState extends State<TextEditorPage> {
 
       setState(() => _isUpdating = false);
 
-      textEditorScaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Row(
-          children: [
-            Icon(result == true ? Icons.cloud_done : Icons.error),
-            SizedBox(width: 10),
-            Text(result == true
-                ? "File updated!"
-                : "An error occured, please try again later."),
-          ],
-        ),
-        duration: Duration(seconds: 1),
-      ));
+      textEditorScaffoldKey.currentState.showSnackBar(result
+          ? SnackBar(
+              content: Row(
+                children: [
+                  Icon(Icons.cloud_done),
+                  SizedBox(width: 10),
+                  Text("File updated!"),
+                ],
+              ),
+              duration: Duration(seconds: 1),
+            )
+          : ErrorSnackbar());
     });
   }
 }

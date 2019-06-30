@@ -80,19 +80,18 @@ class _FileViewerState extends State<FileViewer> {
   }
 
   void _delete() {
-    
     showDialog(
-                  context: context,
-                  barrierDismissible: true,
-                  builder: (BuildContext context) => ReusableDialog(
-      "Are you sure?",
-      "Do you really want to delete this ${widget.fileData.type == FileType.Folder ? "folder" : "file"}: ${widget.fileData.name}",
-      button1Text: "NO",
-      button1Function: () {},
-      button2Text: "Yes, delete it.",
-      button2Function: () => Navigator.of(context).pop(true),
-      //popping this page with true means the previous page will process functions to delete it. MUST use only when needed.
-    ));
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => ReusableDialog(
+              "Are you sure?",
+              "Do you really want to delete this ${widget.fileData.type == FileType.Folder ? "folder" : "file"}: ${widget.fileData.name}",
+              button1Text: "NO",
+              button1Function: () {},
+              button2Text: "Yes, delete it.",
+              button2Function: () => Navigator.of(context).pop(true),
+              //popping this page with true means the previous page will process functions to delete it. MUST use only when needed.
+            ));
   }
 
   Widget _showImage() {
@@ -105,14 +104,9 @@ class _FileViewerState extends State<FileViewer> {
         maxScale: 2.00,
         // MediaQuery.of(context).size.longestSide,
         minScale: 0.3,
-        imageProvider: 
-
-        NetworkImage(
-          widget.fileData.directory,
-          headers: {
-            "Authorization" : "Bearer ${widget.fileActions.getApiKey()}",
-          }
-        ),
+        imageProvider: NetworkImage(widget.fileData.directory, headers: {
+          "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
+        }),
 
         enableRotation: false,
       ),
