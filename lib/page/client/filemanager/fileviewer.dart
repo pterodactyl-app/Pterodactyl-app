@@ -104,11 +104,11 @@ class _FileViewerState extends State<FileViewer> {
         maxScale: 2.00,
         minScale: 0.3,
         imageProvider: NetworkImage(
-          widget.fileActions.getCompletetApiAddress(widget.fileData.directory),
-          headers: {
-          "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
-        }),
-
+            widget.fileActions
+                .getCompletetApiAddress(widget.fileData.directory),
+            headers: {
+              "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
+            }),
         enableRotation: false,
       ),
     );
@@ -116,9 +116,9 @@ class _FileViewerState extends State<FileViewer> {
 
   Widget _showText() {
     return FutureBuilder(
-        future: rootBundle.loadString(widget.fileData.directory), //TODO
+        future: widget.fileActions.getFile(widget.fileData),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData)
+          if (snapshot.hasData) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +131,9 @@ class _FileViewerState extends State<FileViewer> {
                 ],
               ),
             );
-          if (snapshot.hasData) return _textContainer(snapshot.data);
+          } else {
+            return _textContainer(snapshot.data);
+          }
         });
   }
 

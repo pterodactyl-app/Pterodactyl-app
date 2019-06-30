@@ -27,7 +27,10 @@ class CreateDialog extends StatelessWidget {
       actions: <Widget>[
         FlatButton(
           child: Text("Create"),
-          onPressed: onSubmitted, //TODO
+          onPressed: (){
+            Navigator.of(context).pop();
+            onSubmitted();
+          },
         )
       ],
     );

@@ -58,7 +58,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
 
   textEditorListener() {
     setState(
-        () => _uncommitedChanges = textEditorController.text != _stableFile);
+        () => _uncommitedChanges = textEditorController.text != _stableFile); //TODO
   }
 
   @override
@@ -116,13 +116,9 @@ class _TextEditorPageState extends State<TextEditorPage> {
         ),
         body: FutureBuilder(
           future: _stableFile == null
-              ? rootBundle
-                  .loadString(widget.fileData.directory) //TODO
-                  .then((data) => _stableFile = data)
-                  .then((data) => textEditorController.text = data)
-              : null,
-          // fileActions.getFile(widget.fileData.url).then((data) => _stableFile = data).then((data) => textEditorController.text = data)
-          // : null,
+              ? 
+          widget.fileActions.getFile(widget.fileData).then((data) => _stableFile = data).then((data) => textEditorController.text = data)
+          : null,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (_stableFile == null) {
               return Center(
@@ -149,7 +145,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: _makeTextEditor(),
+                child: _makeTextField(),
               ),
             );
           },
@@ -159,9 +155,9 @@ class _TextEditorPageState extends State<TextEditorPage> {
     );
   }
 
-  Widget _makeTextEditor() {
+  Widget _makeTextField() {
     return Scrollbar(
-      key: PageStorageKey("lol"),
+      key: PageStorageKey("something"),
       child: TextField(
         scrollPhysics: AlwaysScrollableScrollPhysics(),
         autocorrect: false,
@@ -180,21 +176,16 @@ class _TextEditorPageState extends State<TextEditorPage> {
     );
   }
 
-  ///Updates the changes (currently faked and doesnt update the asset file just updates the editor)
-  Future<void> _updateChanges(String value) async {
+  ///Updates the changes
+  Future<void> _updateChanges(String newData) async {
     setState(() => _isUpdating = true);
 
-    widget.fileActions.writeFile(widget.fileData, value).then((result) {
+    await widget.fileActions.writeFile(widget.fileData, newData).then((result) {
       if (result == true) {
-        _stableFile = value;
-        textEditorController.text = value;
+        _stableFile = newData;
         _uncommitedChanges = _stableFile != textEditorController.text;
-      }
-
-      setState(() => _isUpdating = false);
-
-      textEditorScaffoldKey.currentState.showSnackBar(result
-          ? SnackBar(
+        textEditorScaffoldKey.currentState.showSnackBar(
+          SnackBar(
               content: Row(
                 children: [
                   Icon(Icons.cloud_done),
@@ -204,7 +195,13 @@ class _TextEditorPageState extends State<TextEditorPage> {
               ),
               duration: Duration(seconds: 1),
             )
-          : ErrorSnackbar());
+        );
+      } else {
+      textEditorScaffoldKey.currentState.showSnackBar(ErrorSnackbar());
+      }
+
+      setState(() => _isUpdating = false);
+
     });
   }
 }
