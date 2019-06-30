@@ -15,6 +15,7 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/ErrorSnackbar.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
@@ -313,18 +314,26 @@ class _FileManagerState extends State<FileManager> {
   IconData dataTypeIcon(FileType type) {
     switch (type) {
       case FileType.Folder:
-        return Icons.folder;
+        return FontAwesomeIcons.folder;
       case FileType.Text:
-        return Icons.description;
+        return FontAwesomeIcons.file;
       case FileType.Image:
-        return Icons.image;
-      case FileType.Other:
-        return Icons.insert_drive_file;
+        return FontAwesomeIcons.fileImage;
       case FileType.Archive:
-        return Icons.archive;
+        return FontAwesomeIcons.archive;
+      case FileType.Java:
+        return FontAwesomeIcons.java;
+      case FileType.Python:
+        return FontAwesomeIcons.python;
+      case FileType.HTML:
+        return FontAwesomeIcons.html5;
+      case FileType.JavaScript:
+        return FontAwesomeIcons.jsSquare;
+      case FileType.Other:
+        return FontAwesomeIcons.file;
 
       default:
-        return Icons.insert_drive_file;
+        return FontAwesomeIcons.file;
     }
   }
 
@@ -357,8 +366,12 @@ class _FileManagerState extends State<FileManager> {
 
   void _handleFileListTileOnTap(FileData fileData, int index) async {
     switch (fileData.type) {
-      case FileType.Other:
       case FileType.Archive:
+      case FileType.Java:
+      case FileType.Python:
+      case FileType.HTML:
+      case FileType.JavaScript:
+      case FileType.Other:
         return;
       case FileType.Folder:
         setState(() {
@@ -519,5 +532,9 @@ enum FileType {
   Image,
   Folder,
   Archive,
+  Java,
+  Python,
+  HTML,
+  JavaScript,
   Other,
 }
