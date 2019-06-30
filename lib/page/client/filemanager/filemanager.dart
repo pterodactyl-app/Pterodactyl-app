@@ -21,6 +21,7 @@ import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dart';
 
 ///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.
 ///It takes a [Server] as a parameter, currently this server is used only for setting the AppBar tooltip text.
@@ -225,23 +226,10 @@ class _FileManagerState extends State<FileManager> {
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Create new folder"),
-            content: Container(
-              child: TextField(
-                autofocus: true,
-                maxLines: 1,
-                autocorrect: false,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Create"),
-                onPressed: () {}, //TODO
-              )
-            ],
+          return CreateDialog(
+            controller: _createTextController,
+            title: "Create new folder",
+            onSubmitted: (){}, //TODO
           );
         });
   }
@@ -251,23 +239,10 @@ class _FileManagerState extends State<FileManager> {
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Create new file"),
-            content: Container(
-              child: TextField(
-                autofocus: true,
-                maxLines: 1,
-                autocorrect: false,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Create"),
-                onPressed: () {}, //TODO
-              )
-            ],
+          return CreateDialog(
+            controller: _createTextController,
+            title: "Create new file",
+            onSubmitted: (){}, //TODO
           );
         });
   }
