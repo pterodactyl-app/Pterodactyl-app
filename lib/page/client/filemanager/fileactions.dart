@@ -35,7 +35,7 @@ class FileActions {
 
   String _baseUrl;
 
-  ////Not needed while testing: Must call this function once on the instance of this class before using anything in this class
+  ///Must call this function once on the instance of this class before using anything in this class
   Future<void> initialize() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _apiKey = prefs.getString("apiKey");
@@ -103,21 +103,84 @@ class FileActions {
 
   Future<dynamic> getFile(FileData fileData) async {
 
-    var data = await http.get(_baseUrl + FileHttpHelper.file); //TODO
+    try {
+      http.Response response = await http.get(
+        _baseUrl + FileHttpHelper.file + "${fileData.directory +"/"+ fileData.name}" ,
+        headers: {
+          "Authorization" : "Bearer $_apiKey",
+        }
+        );
+      return response.body.toString();
+
+    } on SocketException catch (e) {
+      print('Error occured: ' + e.message);
+      print(_panelUrl);
+      print(_https);
+      print('End debug');
+      return null;
+    }
+  }
+
+  Future<bool> deleteFile(FileData fileData) async {
+    
+    try {
+      await http.delete(
+        _baseUrl + FileHttpHelper.delete + "${fileData.directory +"/"+ fileData.name}" ,
+        headers: {
+          "Authorization" : "Bearer $_apiKey",
+        }
+        );
+      return true;
+
+    } on SocketException catch (e) {
+      print('Error occured: ' + e.message);
+      print(_panelUrl);
+      print(_https);
+      print('End debug');
+      return false;
+    }
+  }
+
+  Future<bool> writeFile(FileData fileData, String data) async {
+        
+    try {
+      await http.post(
+        _baseUrl + FileHttpHelper.writeFile + "${fileData.directory +"/"+ fileData.name}" ,
+        headers: {
+          "Authorization" : "Bearer $_apiKey",
+        },
+        body: data,
+        );
+      return true;
+
+    } on SocketException catch (e) {
+      print('Error occured: ' + e.message);
+      print(_panelUrl);
+      print(_https);
+      print('End debug');
+      return false;
+    }
 
   }
 
-  Future<bool> deleteFile(FileData file) async {
-    return await Future.delayed(Duration(seconds: 2))
-        .then((_) => null); //TODO
-  }
+  Future<bool> createDirectory(FileData fileData) async{
+        
+    try {
+      await http.post(
+        _baseUrl + FileHttpHelper.createDirectory + "?name=${fileData.name}&directory=${fileData.directory}" ,
+        headers: {
+          "Authorization" : "Bearer $_apiKey",
+        },
+        );
+      return true;
 
-  Future<bool> updateFile(FileData file, String newFile) async {
-    return await Future.delayed(Duration(seconds: 2)).then((_) => true); //TODO
-  }
-
-  Future<bool> createDirectory(String name, String path) async{ //TODO
-
+    } on SocketException catch (e) {
+      print('Error occured: ' + e.message);
+      print(_panelUrl);
+      print(_https);
+      print('End debug');
+      return false;
+    }
   }
 
   FileType checkType(String extension) {
@@ -178,8 +241,8 @@ class FileHttpHelper{
   static const String delete = "delete?file=";
   ///add before the path of directory that you want to fetch. use with [GET].
   static const String directory = "list?directory=/";
-  ///add before the path of the file that you want to update, [content in body] required. use with [POST].
-  static const String updateFile = "write?file=";
+  ///add before the path of the file that you want to update or create, [content in body] required. use with [POST].
+  static const String writeFile = "write?file=";
   ///add this after the base url, [name] and [path] required parameters, use with [POST];
   static const String createDirectory = "new-folder";
 }

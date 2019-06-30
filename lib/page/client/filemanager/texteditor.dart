@@ -183,7 +183,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
   Future<void> _updateChanges(String value) async {
     setState(() => _isUpdating = true);
 
-    widget.fileActions.updateFile(widget.fileData, value).then((result) {
+    widget.fileActions.writeFile(widget.fileData, value).then((result) {
       if (result == true) {
         _stableFile = value;
         textEditorController.text = value;
