@@ -223,7 +223,7 @@ class _FileManagerState extends State<FileManager> {
   void _popupMenuAction(String choice) {
     if (choice == FileManagerPopupMenu.NewFolder)
       _createNewFolder(currentDirectory);
-    else if (choice == FileManagerPopupMenu.NewFile) _createNewFile();
+    else if (choice == FileManagerPopupMenu.NewFile) _createNewFile("");
   }
 
   void _createNewFolder(String inDirectory) {
@@ -234,12 +234,14 @@ class _FileManagerState extends State<FileManager> {
           return CreateDialog(
             controller: _createTextController,
             title: "Create new folder",
-            onSubmitted: (){}, //TODO
+            onSubmitted: () {
+              fileActions.createDirectory(FileData(name: "hello", directory: inDirectory));
+            }, //TODO
           );
         });
   }
 
-  void _createNewFile() {
+  void _createNewFile(String inDirectory) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -247,7 +249,9 @@ class _FileManagerState extends State<FileManager> {
           return CreateDialog(
             controller: _createTextController,
             title: "Create new file",
-            onSubmitted: (){}, //TODO
+            onSubmitted: () {
+              fileActions.writeFile(FileData(name: "hello.txt", directory: inDirectory), "hey");
+            }, //TODO
           );
         });
   }
