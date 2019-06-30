@@ -65,22 +65,24 @@ class _TextEditorPageState extends State<TextEditorPage> {
     return WillPopScope(
       onWillPop: () async {
         _uncommitedChanges
-            ? showReusableDialog(
-              context,
+            ? showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) => ReusableDialog(
               "Are you sure?",
               "Discard changes and exit.",
               button1Text: "NO",
               button1Function: (){},
               button2Text: "Yes, discard changes.",
               button2Function: () => Navigator.of(context).pop(),
-              )
+              ))
             : Navigator.of(context).pop();
       },
       child: Scaffold(
         key: textEditorScaffoldKey,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: customTooltip(
+          title: CustomTooltip(
             message: widget.fileData.name,
             child: Text(
               "Editor",
@@ -94,14 +96,14 @@ class _TextEditorPageState extends State<TextEditorPage> {
               _isUpdating
                   ? IconButton(
                       onPressed: () {},
-                      icon: customTooltip(
+                      icon: CustomTooltip(
                         message: "Saving and updating file",
                         child: SizedBox(
                             height: 30,
                             width: 30,
                             child: CircularProgressIndicator()),
                       ))
-                  : customTooltip(
+                  : CustomTooltip(
                       message: "Save and update file",
                       child: IconButton(
                         icon: Icon(Icons.save),

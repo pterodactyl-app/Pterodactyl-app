@@ -54,7 +54,7 @@ class _FileViewerState extends State<FileViewer> {
           ),
         ),
         actions: <Widget>[
-          customTooltip(
+          CustomTooltip(
             message: "Delete this file",
             child: IconButton(
               icon: Icon(
@@ -64,7 +64,7 @@ class _FileViewerState extends State<FileViewer> {
             ),
           ),
           if (widget.fileData.type == FileType.Text)
-            customTooltip(
+            CustomTooltip(
               message: "Edit this file",
               child: IconButton(
                 icon: Icon(
@@ -80,8 +80,11 @@ class _FileViewerState extends State<FileViewer> {
   }
 
   void _delete() {
-    showReusableDialog(
-      context,
+    
+    showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) => ReusableDialog(
       "Are you sure?",
       "Do you really want to delete this ${widget.fileData.type == FileType.Folder ? "folder" : "file"}: ${widget.fileData.name}",
       button1Text: "NO",
@@ -89,7 +92,7 @@ class _FileViewerState extends State<FileViewer> {
       button2Text: "Yes, delete it.",
       button2Function: () => Navigator.of(context).pop(true),
       //popping this page with true means the previous page will process functions to delete it. MUST use only when needed.
-    );
+    ));
   }
 
   Widget _showImage() {

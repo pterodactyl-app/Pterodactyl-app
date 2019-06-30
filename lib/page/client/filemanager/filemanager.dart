@@ -54,8 +54,10 @@ class _FileManagerState extends State<FileManager> {
   ///more like "is file on this index being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particulatr FileListTile;
   final isFileProcessing = Map<String, List<int>>();
 
+  final _createTextController = TextEditingController();
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     fileActions = FileActions(widget.server);
     () async {
@@ -69,7 +71,7 @@ class _FileManagerState extends State<FileManager> {
       key: fileManagerScaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: customTooltip(
+        title: CustomTooltip(
           message: "${widget.server.name}",
           child: Text(
             "File Manager",
@@ -78,6 +80,12 @@ class _FileManagerState extends State<FileManager> {
             ),
           ),
         ),
+        actions: <Widget>[
+          CustomTooltip(
+            message: "Create",
+            child: _makePopupMenu(),
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -88,6 +96,28 @@ class _FileManagerState extends State<FileManager> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _makePopupMenu() {
+    return PopupMenuButton<String>(
+      onSelected: _popupMenuAction,
+      itemBuilder: (BuildContext context) {
+        return FileManagerPopupMenu.choices.map((String choice) {
+          return PopupMenuItem<String>(
+            value: choice,
+            child: Row(
+              children: <Widget>[
+                Icon(choice == FileManagerPopupMenu.NewFolder
+                    ? Icons.create_new_folder
+                    : Icons.note_add),
+                SizedBox(width: 8),
+                Text(choice),
+              ],
+            ),
+          );
+        }).toList();
+      },
     );
   }
 
@@ -108,7 +138,7 @@ class _FileManagerState extends State<FileManager> {
   }
 
   Widget _makeBackListTile() {
-    return customTooltip(
+    return CustomTooltip(
         message: "Go back to previous folder",
         child: ListTile(
           title: Row(
@@ -135,9 +165,8 @@ class _FileManagerState extends State<FileManager> {
     return FutureBuilder(
       future: downloadedDirectories.containsKey(currentDirectory)
           ? null
-          : fileActions
-              .getDirectory(currentDirectory)
-              .then((data) => setState(() => downloadedDirectories[currentDirectory] = data)),
+          : fileActions.getDirectory(currentDirectory).then((data) =>
+              setState(() => downloadedDirectories[currentDirectory] = data)),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (downloadedDirectories.containsKey(currentDirectory)) {
           if (downloadedDirectories[currentDirectory].folders.isEmpty &&
@@ -148,11 +177,21 @@ class _FileManagerState extends State<FileManager> {
           } else {
             return ListView.builder(
               padding: EdgeInsets.all(0.0),
-              itemCount: downloadedDirectories[currentDirectory].folders.length +
-                  downloadedDirectories[currentDirectory].files.length,
+              itemCount:
+                  downloadedDirectories[currentDirectory].folders.length +
+                      downloadedDirectories[currentDirectory].files.length,
               itemBuilder: (BuildContext context, int index) {
                 return makeFileListTile(
-                  index <= (downloadedDirectories[currentDirectory].folders.length -1) ? downloadedDirectories[currentDirectory].folders[index] : downloadedDirectories[currentDirectory].files[index - downloadedDirectories[currentDirectory].folders.length],
+                    index <=
+                            (downloadedDirectories[currentDirectory]
+                                    .folders
+                                    .length -
+                                1)
+                        ? downloadedDirectories[currentDirectory].folders[index]
+                        : downloadedDirectories[currentDirectory].files[index -
+                            downloadedDirectories[currentDirectory]
+                                .folders
+                                .length],
                     index);
               },
             );
@@ -173,6 +212,64 @@ class _FileManagerState extends State<FileManager> {
         );
       },
     );
+  }
+
+  void _popupMenuAction(String choice) {
+    if (choice == FileManagerPopupMenu.NewFolder)
+      _createNewFolder(currentDirectory);
+    else if (choice == FileManagerPopupMenu.NewFile) _createNewFile();
+  }
+
+  void _createNewFolder(String inDirectory) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Create new folder"),
+            content: Container(
+              child: TextField(
+                autofocus: true,
+                maxLines: 1,
+                autocorrect: false,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Create"),
+                onPressed: () {}, //TODO
+              )
+            ],
+          );
+        });
+  }
+
+  void _createNewFile() {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Create new file"),
+            content: Container(
+              child: TextField(
+                autofocus: true,
+                maxLines: 1,
+                autocorrect: false,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Create"),
+                onPressed: () {}, //TODO
+              )
+            ],
+          );
+        });
   }
 
   void _navigateBack() {
@@ -284,16 +381,18 @@ class _FileManagerState extends State<FileManager> {
                           )));
                 }),
               bottomSheetListTile(context, Icons.delete, "Delete", onTap: () {
-                showReusableDialog(
-                  context,
-                  "Are you sure?",
-                  "Do you really want to delete this ${fileData.type == FileType.Folder ? "folder" : "file"}: ${fileData.name}",
-                  button1Text: "NO",
-                  button1Function: () {},
-                  button2Text: "Yes, delete it.",
-                  button2Function: () =>
-                      _deleteFile(fileData, currentDirectory, index),
-                );
+                showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (BuildContext context) => ReusableDialog(
+                          "Are you sure?",
+                          "Do you really want to delete this ${fileData.type == FileType.Folder ? "folder" : "file"}: ${fileData.name}",
+                          button1Text: "NO",
+                          button1Function: () {},
+                          button2Text: "Yes, delete it.",
+                          button2Function: () =>
+                              _deleteFile(fileData, currentDirectory, index),
+                        ));
               }),
             ],
           );
@@ -322,7 +421,7 @@ class _FileManagerState extends State<FileManager> {
     await fileActions.deleteFile(fileData).then((result) {
       if (result == true) {
         _onFileDelete(directory, index);
-      } else{
+      } else {
         setState(() => isFileProcessing[directory].remove(index));
       }
 
@@ -335,7 +434,8 @@ class _FileManagerState extends State<FileManager> {
               ),
               SizedBox(width: 10),
               Text(
-                result == true ? "File deleted"
+                result == true
+                    ? "File deleted"
                     : "An error occured, Please try again later.",
               ),
             ],
@@ -378,6 +478,16 @@ class FileData {
     this.size,
     this.extension,
   });
+}
+
+class FileManagerPopupMenu {
+  static const String NewFolder = "New folder";
+  static const String NewFile = "New file";
+
+  static const List<String> choices = [
+    NewFolder,
+    NewFile,
+  ];
 }
 
 enum FileType {

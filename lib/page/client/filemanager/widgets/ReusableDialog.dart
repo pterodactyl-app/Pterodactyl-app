@@ -16,12 +16,28 @@
 
 import 'package:flutter/material.dart';
 
-void showReusableDialog(BuildContext context, String title, String description, {String button1Text, Function button1Function, String button2Text, Function button2Function}){
-    showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return AlertDialog(
+class ReusableDialog extends StatelessWidget {
+  final String title;
+  final String description;
+  final String button1Text;
+  final Function button1Function;
+  final String button2Text;
+  final Function button2Function;
+
+  const ReusableDialog(
+    this.title,
+    this.description,
+    {
+      this.button1Text,
+      this.button1Function,
+      this.button2Text,
+      this.button2Function,
+    }
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
             title: Text(
               title,
               ),
@@ -53,5 +69,5 @@ void showReusableDialog(BuildContext context, String title, String description, 
                   })
             ],
           );
-        });
   }
+}

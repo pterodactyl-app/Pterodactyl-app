@@ -17,8 +17,17 @@
 import 'package:flutter/material.dart';
 import 'package:pterodactyl_app/widgets/tooltip/tooltip.dart' as tooltip;
 
-Widget customTooltip({String message, Widget child}){
-  return tooltip.Tooltip(
+class CustomTooltip extends StatelessWidget {
+  final String message;
+  final Widget child;
+  const CustomTooltip({
+    @required this.message,
+    @required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return tooltip.Tooltip(
     message: message,
     child: child,
     showDuration: Duration(milliseconds: 1000),
@@ -31,4 +40,5 @@ Widget customTooltip({String message, Widget child}){
       borderRadius: BorderRadius.circular(3),
     ),
   );
+  }
 }
