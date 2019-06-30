@@ -255,14 +255,17 @@ class _FileManagerState extends State<FileManager> {
               bool result = await fileActions.createDirectory(FileData(
                   name: _createTextController.text, directory: directory));
 
-              result
-                  ? downloadedDirectories[directory].folders.add(FileData(
-                        directory: directory,
-                        name: _createTextController.text,
-                        date: ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
-                      ))
-                  : fileManagerScaffoldKey.currentState
-                      .showSnackBar(ErrorSnackbar());
+              if (result == true) {
+                downloadedDirectories[directory].folders.add(FileData(
+                      directory: directory,
+                      name: _createTextController.text,
+                      date: ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
+                      type: FileType.Folder,
+                    ));
+              } else {
+                fileManagerScaffoldKey.currentState
+                    .showSnackBar(ErrorSnackbar());
+              }
 
               _createTextController.text = "";
               setState(() => isCreatingNewFile = false);
@@ -271,7 +274,7 @@ class _FileManagerState extends State<FileManager> {
         });
   }
 
-  void _createNewFile(String inDirectory) {
+  void _createNewFile(String directory) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -279,10 +282,33 @@ class _FileManagerState extends State<FileManager> {
           return CreateDialog(
             controller: _createTextController,
             title: "Create new file",
-            onSubmitted: () {
-              fileActions.writeFile(
-                  FileData(name: "hello.txt", directory: inDirectory), "hey");
-            }, //TODO
+            onSubmitted: () async {
+              setState(() => isCreatingNewFile = true);
+              bool result = await fileActions.writeFile(
+                  FileData(
+                      name: _createTextController.text, directory: directory),
+                  "");
+              if (result == true) {
+                FileData fileData = FileData(
+                  directory: directory,
+                  name: _createTextController.text,
+                  date: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+                  type: FileType.Text,
+                );
+                downloadedDirectories[directory].files.add(fileData);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => TextEditorPage(
+                          fileActions: fileActions,
+                          fileData: fileData,
+                        )));
+              } else {
+                fileManagerScaffoldKey.currentState
+                    .showSnackBar(ErrorSnackbar());
+              }
+
+              _createTextController.text = "";
+              setState(() => isCreatingNewFile = false);
+            },
           );
         });
   }
