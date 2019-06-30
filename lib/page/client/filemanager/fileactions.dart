@@ -48,7 +48,7 @@ class FileActions {
 
   String getApiKey()=> _apiKey;
   ///for images
-  String getCompletetApiAddress(String directory) => _baseUrl + FileHttpHelper.file + directory;
+  String getCompleteApiAddress(String directory) => _baseUrl + FileHttpHelper.file + directory;
 
   Future<dynamic> getDirectory(String directory) async{
     
@@ -245,7 +245,7 @@ class FileHttpHelper{
   static const String directory = "list?directory=/";
   ///add before the path of the file that you want to update or create, [content in body] required. use with [POST].
   static const String writeFile = "write?file=";
-  ///add this after the base url, [name] and [path] required parameters, use with [POST];
+  ///add this after the base url, add [name] and [path] parameters after this, use with [POST];
   static const String createDirectory = "new-folder";
 }
 

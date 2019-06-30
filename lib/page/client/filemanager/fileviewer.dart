@@ -105,7 +105,7 @@ class _FileViewerState extends State<FileViewer> {
         minScale: 0.3,
         imageProvider: NetworkImage(
             widget.fileActions
-                .getCompletetApiAddress(widget.fileData.directory),
+                .getCompleteApiAddress(widget.fileData.directory),
             headers: {
               "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
             }),
