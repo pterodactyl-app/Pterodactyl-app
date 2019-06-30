@@ -46,7 +46,7 @@ dependencies:
   division: any
   responsive_container: any
   logger: any
-  photo_view: any
+  photo_view: 0.4.0
 
 
   dbutils:
