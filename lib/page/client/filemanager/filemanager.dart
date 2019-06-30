@@ -71,16 +71,21 @@ class _FileManagerState extends State<FileManager> {
     return Scaffold(
       key: fileManagerScaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: CustomTooltip(
-          message: "${widget.server.name}",
-          child: Text(
-            "File Manager",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
+        elevation: 0.0,
+        backgroundColor: globals.useDarkTheme ? null : Colors.transparent,
+        leading: IconButton(
+          color: globals.useDarkTheme ? Colors.white : Colors.black,
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/home', (Route<dynamic> route) => false);
+          },
+          icon: Icon(Icons.arrow_back,
+              color: globals.useDarkTheme ? Colors.white : Colors.black),
         ),
+        title: Text('File Manager',
+            style: TextStyle(
+                color: globals.useDarkTheme ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w700)),
         actions: <Widget>[
           CustomTooltip(
             message: "Create",
