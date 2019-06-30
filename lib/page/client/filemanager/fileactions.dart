@@ -191,13 +191,9 @@ class FileActions {
     switch (extension) {
       case "txt":
       case "text":
-      case "html":
-      case "py":
       case "cpp":
       case "c":
       case "css":
-      case "java":
-      case "js":
       case "json":
         return FileType.Text;
       case "ico":
@@ -213,6 +209,14 @@ class FileActions {
       case "tar":
       case "7z":
         return FileType.Archive;
+      case "html":
+        return FileType.HTML;
+      case "py":
+        return FileType.Python;
+      case "js":
+        return FileType.JavaScript;
+      case "java":
+        return FileType.Java;
 
       default:
         return FileType.Other;
