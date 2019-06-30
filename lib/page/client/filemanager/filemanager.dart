@@ -462,41 +462,36 @@ class _FileManagerState extends State<FileManager> {
     await fileActions.deleteFile(fileData).then((result) {
       if (result == true) {
         _onFileDelete(directory, index);
+        fileManagerScaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Row(
+            children: <Widget>[
+              Icon(
+                Icons.delete,
+              ),
+              SizedBox(width: 10),
+              Text(
+                "File deleted",
+              ),
+            ],
+          ),
+          duration: Duration(seconds: 1),
+        ));
       } else {
         setState(() => isFileProcessing[directory].remove(index));
+        fileManagerScaffoldKey.currentState.showSnackBar(
+          ErrorSnackbar(),
+        );
       }
-
-      fileManagerScaffoldKey.currentState.showSnackBar(
-        result
-            ? SnackBar(
-                content: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.delete,
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "File deleted",
-                    ),
-                  ],
-                ),
-                duration: Duration(seconds: 1),
-              )
-            : ErrorSnackbar(),
-      );
     });
   }
 
-  _onFileDelete(directory, index) {
-    //   String whichOne = directoriesVsFiles(
-    //       files[directory]["directories"].length,
-    //       files[directory]["files"].length,
-    //       index);
-    //
-    isFileProcessing[directory].remove(index);
-    // files[directory][whichOne].removeAt(index);
-    //
-    setState(() {});
+  _onFileDelete(String directory, int index) {
+    if(index <= downloadedDirectories[directory].folders.length-1){
+      downloadedDirectories[directory].folders.removeAt(index);
+    } else {
+    downloadedDirectories[directory].files.removeAt(index - downloadedDirectories[directory].folders.length);
+    }
+    setState(() => isFileProcessing[directory].remove(index));
   }
 }
 
