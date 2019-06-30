@@ -216,6 +216,7 @@ class FileActions {
       case "js":
         return FileType.JavaScript;
       case "java":
+      case "jar":
         return FileType.Java;
 
       default:
