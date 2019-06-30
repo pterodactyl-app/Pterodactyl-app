@@ -143,7 +143,7 @@ class _FileManagerState extends State<FileManager> {
       title: RichText(
         text: TextSpan(children: [
           TextSpan(
-              text: (directoryTree.isNotEmpty ? ("../" + directoryTree.last).replaceAll("//", "/") : "../"), style: TextStyle(color: Colors.black, fontSize: 15)),
+              text: (directoryTree.isNotEmpty ? ("../" + currentDirectory).replaceAll("//", "/") : "../"), style: TextStyle(color: Colors.black, fontSize: 15)),
         ]),
       ),
     );
