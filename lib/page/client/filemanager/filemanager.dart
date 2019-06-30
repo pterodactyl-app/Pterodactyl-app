@@ -26,8 +26,7 @@ import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dar
 import 'package:pterodactyl_app/globals.dart' as globals;
 
 ///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.
-///It takes a [Server] as a parameter, currently this server is used only for setting the AppBar tooltip text.
-///but the plan is to extend it and get files located on that server for the [FileManager] to work.
+///It takes a [Server] as a parameter, it is needed for the [FileManager] to work on that [Server].
 class FileManager extends StatefulWidget {
   final Server server;
 
@@ -43,21 +42,18 @@ class _FileManagerState extends State<FileManager> {
   ///for showing messages using a SnackBar at the bottom of the screen
   final fileManagerScaffoldKey = GlobalKey<ScaffoldState>();
 
-  ///[FileActions] will contain all the backend functions to get a file, update a file or delete a file from the server.
+  ///[FileActions] contains all the backend functions.
   FileActions fileActions;
   final downloadedDirectories = Map<String, Directory>();
 
   final directoryTree = List<String>();
-  final directoryNames = Map<String, String>();
 
-  ///This is the initial directory that gives the intial JSON file to start off.
-  ///This is the current directory (adddress of the current JSON file). it updates whenever the user navigate back or forth in the directory tree.  initialized to the root directory.
-  String currentDirectory = "";
+  ///it gets updated whenever the user navigate back or forth in the directory tree using filemanager. initialized to the root directory.
+  String currentDirectory = "/";
 
-  ///more like "is file on this index being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particulatr FileListTile;
+  ///more like "is file on this index of this directory being processed?" by checking whether the currentDirectory (as a key of this map) contains that particular index of that particular FileListTile;
   final isFileProcessing = Map<String, List<int>>();
 
-  ///true when a new file or a new directory is being created
   bool isCreatingNewFile = false;
 
   final _createTextController = TextEditingController();
@@ -109,7 +105,7 @@ class _FileManagerState extends State<FileManager> {
       body: Column(
         children: <Widget>[
           _makeDirectoryPathText(),
-          if (currentDirectory != "") _makeBackListTile(),
+          if (currentDirectory != "/") _makeBackListTile(),
           Expanded(
             child: _makeFileListTiles(),
           ),
@@ -146,12 +142,7 @@ class _FileManagerState extends State<FileManager> {
       title: RichText(
         text: TextSpan(children: [
           TextSpan(
-              text: "./", style: TextStyle(color: Colors.black, fontSize: 18)),
-          for (var directory in directoryNames.keys)
-            TextSpan(
-              text: directoryNames[directory] + "/",
-              style: TextStyle(color: Colors.black, fontSize: 15),
-            )
+              text: "/" + (directoryTree.isNotEmpty ? directoryTree.last : ""), style: TextStyle(color: Colors.black, fontSize: 15)),
         ]),
       ),
     );
@@ -162,7 +153,6 @@ class _FileManagerState extends State<FileManager> {
         message: "Go back to previous folder",
         child: ListTile(
           title: Row(
-              // crossAxisAlignment: CrossAxisAlignment.baseline,
               children: [
                 RotatedBox(
                     quarterTurns: 1,
@@ -315,7 +305,6 @@ class _FileManagerState extends State<FileManager> {
 
   void _navigateBack() {
     setState(() {
-      directoryNames.remove(currentDirectory);
       currentDirectory = directoryTree.last;
       directoryTree.remove(directoryTree.last);
     });
@@ -370,14 +359,13 @@ class _FileManagerState extends State<FileManager> {
     switch (fileData.type) {
       case FileType.Other:
       case FileType.Archive:
-        break;
+        return;
       case FileType.Folder:
         setState(() {
           directoryTree.add(currentDirectory);
-          directoryNames[fileData.directory] = fileData.name;
           currentDirectory = fileData.directory;
         });
-        break;
+        return;
       case FileType.Text:
       case FileType.Image:
         Navigator.of(context)
@@ -486,10 +474,12 @@ class _FileManagerState extends State<FileManager> {
   }
 
   _onFileDelete(String directory, int index) {
-    if(index <= downloadedDirectories[directory].folders.length-1){
+    if (index <= downloadedDirectories[directory].folders.length - 1) {
       downloadedDirectories[directory].folders.removeAt(index);
     } else {
-    downloadedDirectories[directory].files.removeAt(index - downloadedDirectories[directory].folders.length);
+      downloadedDirectories[directory]
+          .files
+          .removeAt(index - downloadedDirectories[directory].folders.length);
     }
     setState(() => isFileProcessing[directory].remove(index));
   }

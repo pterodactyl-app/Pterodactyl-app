@@ -42,7 +42,7 @@ class FileActions {
     _panelUrl = prefs.getString("panelUrl");
     _https = prefs.getString("https");
 
-    _baseUrl = (_https + _panelUrl + "api/app/user/files/${server.id}/");
+    _baseUrl = (_https + _panelUrl + "/api/app/user/files/${server.id}/");
     return;
   }
 
@@ -50,7 +50,7 @@ class FileActions {
   ///for images
   String getCompleteApiAddress(String directory) => _baseUrl + FileHttpHelper.file + directory;
 
-  Future<dynamic> getDirectory(String directory) async{
+  Future<Directory> getDirectory(String directory) async{
     
       final folders = List<FileData>();
       final files = List<FileData>();
@@ -86,7 +86,6 @@ class FileActions {
             extension: object["extension"],
             mime: object["mime"],
             size: object["size"],
-            //TODO:
           )
         );
       }
@@ -242,7 +241,7 @@ class FileHttpHelper{
   ///add before the the path of file/folder that you want to delete, use with [DELETE].
   static const String delete = "delete?file=";
   ///add before the path of directory that you want to fetch. use with [GET].
-  static const String directory = "list?directory=/";
+  static const String directory = "list?directory=";
   ///add before the path of the file that you want to update or create, [content in body] required. use with [POST].
   static const String writeFile = "write?file=";
   ///add this after the base url, add [name] and [path] parameters after this, use with [POST];
