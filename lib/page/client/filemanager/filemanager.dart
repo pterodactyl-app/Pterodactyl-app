@@ -538,4 +538,5 @@ enum FileType {
   HTML,
   JavaScript,
   Other,
+  JSON,
 }
