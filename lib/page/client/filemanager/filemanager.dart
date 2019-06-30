@@ -368,9 +368,6 @@ class _FileManagerState extends State<FileManager> {
     switch (fileData.type) {
       case FileType.Archive:
       case FileType.Java:
-      case FileType.Python:
-      case FileType.HTML:
-      case FileType.JavaScript:
       case FileType.Other:
         return;
       case FileType.Folder:
@@ -379,6 +376,10 @@ class _FileManagerState extends State<FileManager> {
           currentDirectory = fileData.directory + fileData.name;
         });
         return;
+      case FileType.Python:
+      case FileType.HTML:
+      case FileType.JavaScript:
+      case FileType.JSON:
       case FileType.Text:
       case FileType.Image:
         Navigator.of(context)
