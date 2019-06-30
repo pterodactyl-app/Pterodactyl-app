@@ -47,6 +47,8 @@ class FileActions {
   }
 
   String getApiKey()=> _apiKey;
+  ///for images
+  String getCompletetApiAddress(String directory) => _baseUrl + FileHttpHelper.file + directory;
 
   Future<dynamic> getDirectory(String directory) async{
     

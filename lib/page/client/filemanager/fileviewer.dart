@@ -102,9 +102,10 @@ class _FileViewerState extends State<FileViewer> {
       child: PhotoView(
         backgroundDecoration: BoxDecoration(color: Colors.grey),
         maxScale: 2.00,
-        // MediaQuery.of(context).size.longestSide,
         minScale: 0.3,
-        imageProvider: NetworkImage(widget.fileData.directory, headers: {
+        imageProvider: NetworkImage(
+          widget.fileActions.getCompletetApiAddress(widget.fileData.directory),
+          headers: {
           "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
         }),
 
