@@ -118,7 +118,7 @@ class _FileViewerState extends State<FileViewer> {
     return FutureBuilder(
         future: widget.fileActions.getFile(widget.fileData),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
+          if (!snapshot.hasData) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

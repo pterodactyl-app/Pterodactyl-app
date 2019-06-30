@@ -206,7 +206,7 @@ class _FileManagerState extends State<FileManager> {
               },
             );
           }
-        }
+        } else
 
         return Center(
           child: Column(
