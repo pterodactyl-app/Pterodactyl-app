@@ -376,7 +376,7 @@ class _FileManagerState extends State<FileManager> {
       case FileType.Folder:
         setState(() {
           directoryTree.add(currentDirectory);
-          currentDirectory = fileData.directory + fileData.name;
+          currentDirectory = fileData.directory;
         });
         return;
       case FileType.Text:
