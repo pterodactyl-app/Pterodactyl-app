@@ -453,12 +453,10 @@ class FileData {
   final String mime;
   final String size;
   final String extension;
-  final List<String> path;
   FileData({
-    @required this.type,
     @required this.name,
-    this.directory,
-    this.path,
+    @required this.directory,
+    this.type,
     this.date,
     this.mime,
     this.size,
