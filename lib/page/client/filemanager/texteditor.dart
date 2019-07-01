@@ -177,7 +177,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
     );
   }
 
-  ///Updates the changes
+  ///Updates the changes on the servers
   Future<void> _updateChanges(String newData) async {
     setState(() => _isUpdating = true);
 
