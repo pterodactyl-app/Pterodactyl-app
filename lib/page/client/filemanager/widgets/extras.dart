@@ -25,6 +25,15 @@ showComingSoonDialog(BuildContext context) {
         return Platform.isIOS
             ? new CupertinoAlertDialog(
                 title: Text("COMING SOON"),
+                content: Container(
+                  child: TextField(
+                    autofocus: true,
+                    maxLines: 1,
+                    autocorrect: false,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                  ),
+                ),                
                 actions: <Widget>[
                   FlatButton(
                     child: Text("OK"),
