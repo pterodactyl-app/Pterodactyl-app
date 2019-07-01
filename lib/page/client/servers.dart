@@ -107,7 +107,7 @@ class _ServerListPageState extends State<ServerListPage> {
                               color: globals.useDarkTheme
                                   ? Colors.white
                                   : Colors.black),
-                          hintText: "Rechercher...",
+                          hintText: DemoLocalizations.of(context).trans('search'),
                           hintStyle: new TextStyle(
                               color: globals.useDarkTheme
                                   ? Colors.white
