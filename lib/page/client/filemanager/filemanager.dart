@@ -185,7 +185,7 @@ class _FileManagerState extends State<FileManager> {
 
   Widget _makeFileListTiles() {
     return FutureBuilder(
-      future: downloadedDirectories.containsKey(currentDirectory)
+      future: downloadedDirectories.containsKey(currentDirectory) && downloadedDirectories[currentDirectory] != null
           ? null
           : fileActions.getDirectory(currentDirectory).then((data) =>
               setState(() => downloadedDirectories[currentDirectory] = data)),
