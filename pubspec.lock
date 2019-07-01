@@ -21,7 +21,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -234,7 +234,14 @@ packages:
       name: photo_view
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.0"
+    version: "0.3.3"
+  pinput:
+    dependency: "direct main"
+    description:
+      name: pinput
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.8"
   platform:
     dependency: transitive
     description:
@@ -248,7 +255,7 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.2"
   responsive_container:
     dependency: "direct main"
     description:
@@ -330,7 +337,14 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.5"
+    version: "0.2.4"
+  timeago:
+    dependency: "direct main"
+    description:
+      name: timeago
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.17"
   titled_navigation_bar:
     dependency: "direct main"
     description:
@@ -361,4 +375,4 @@ packages:
     version: "2.0.8"
 sdks:
   dart: ">=2.2.2 <3.0.0"
-  flutter: ">=1.5.9-pre.94 <2.0.0"
+  flutter: ">=1.5.0 <2.0.0"

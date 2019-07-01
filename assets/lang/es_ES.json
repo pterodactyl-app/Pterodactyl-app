@@ -140,5 +140,19 @@
     "login_username_api_not_supported": "No soportado",
     "login_username_api_not_supported_error": "Iniciar sesion con usuario no esta soportado todavia en tu hosting.",
     "login_username_api_no_api_key": "No hay ninguna api key",
-    "login_username_api_no_api_key_error": "No podemos iniciar sesion, clave no disponible.\nIntentando crear clave..."   
+    "login_username_api_no_api_key_error": "No podemos iniciar sesion, clave no disponible.\nIntentando crear clave...",
+    
+    "info": "Info",
+    "project_version_failed": "Failed to get project version.",
+    "settings_ows": "Owns",
+    "settings_sub_user": "Sub-user",
+    "settings_schedules": "Schedules",
+    "settings_donators": "Donators",
+    "settings_partners": "Partners",
+    "settings_website": "Website",
+    "client_login": "CLIENT LOGIN",
+    "update_title": "New Update Available",
+    "update_message": "There is a newer version of app available please update it now.",
+    "update_btnLabel": "Update Now",
+    "search": "Search..."
 }

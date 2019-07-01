@@ -146,5 +146,19 @@
    "login_username_api_not_supported": "Not yet supported",
    "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
    "login_username_api_no_api_key": "No api key available",
-   "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."
+   "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key...",
+
+   "info": "Info",
+   "project_version_failed": "Failed to get project version.",
+   "settings_ows": "Owns",
+   "settings_sub_user": "Sub-user",
+   "settings_schedules": "Schedules",
+   "settings_donators": "Donators",
+   "settings_partners": "Partners",
+   "settings_website": "Website",
+   "client_login": "CLIENT LOGIN",
+   "update_title": "New Update Available",
+   "update_message": "There is a newer version of app available please update it now.",
+   "update_btnLabel": "Update Now",
+   "search": "Search..."
 }

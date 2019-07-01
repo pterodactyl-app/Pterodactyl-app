@@ -25,6 +25,7 @@ import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dart';
 import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/page/client/filemanager/widgets/readTimestamp.dart';
 
 ///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.
 ///It takes a [Server] as a parameter, it is needed for the [FileManager] to work on that [Server].
@@ -117,17 +118,25 @@ class _FileManagerState extends State<FileManager> {
 
   Widget _makePopupMenu() {
     return PopupMenuButton<String>(
-      child: Icon(Icons.add),
+      child: Padding(
+        padding: EdgeInsets.only(right: 8),
+        child: Icon(Icons.add),
+      ),
       onSelected: _popupMenuAction,
+      offset: Offset(0, 0),
+      padding: EdgeInsets.all(0.0),
       itemBuilder: (BuildContext context) {
         return FileManagerPopupMenu.choices.map((String choice) {
           return PopupMenuItem<String>(
             value: choice,
             child: Row(
               children: <Widget>[
-                Icon(choice == FileManagerPopupMenu.NewFolder
-                    ? Icons.create_new_folder
-                    : Icons.note_add),
+                if (choice == FileManagerPopupMenu.NewFolder)
+                  Icon(Icons.create_new_folder),
+                if (choice == FileManagerPopupMenu.NewFile)
+                  Icon(Icons.note_add),
+                if (choice == FileManagerPopupMenu.Upload)
+                  Icon(Icons.file_upload),
                 SizedBox(width: 8),
                 Text(choice),
               ],
@@ -143,7 +152,10 @@ class _FileManagerState extends State<FileManager> {
       title: RichText(
         text: TextSpan(children: [
           TextSpan(
-              text: (directoryTree.isNotEmpty ? ("../" + currentDirectory).replaceAll("//", "/") : "../"), style: TextStyle(color: Colors.black, fontSize: 15)),
+              text: (directoryTree.isNotEmpty
+                  ? ("../" + currentDirectory).replaceAll("//", "/")
+                  : "../"),
+              style: TextStyle(color: Colors.black, fontSize: 15)),
         ]),
       ),
     );
@@ -153,21 +165,20 @@ class _FileManagerState extends State<FileManager> {
     return CustomTooltip(
         message: "Go back to previous folder",
         child: ListTile(
-          title: Row(
-              children: [
-                RotatedBox(
-                    quarterTurns: 1,
-                    child: Icon(
-                      Icons.subdirectory_arrow_left,
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "back",
-                    style: TextStyle(textBaseline: TextBaseline.alphabetic),
-                  ),
-                ),
-              ]),
+          title: Row(children: [
+            RotatedBox(
+                quarterTurns: 1,
+                child: Icon(
+                  Icons.subdirectory_arrow_left,
+                )),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text(
+                "back",
+                style: TextStyle(textBaseline: TextBaseline.alphabetic),
+              ),
+            ),
+          ]),
           onTap: _navigateBack,
         ));
   }
@@ -208,19 +219,18 @@ class _FileManagerState extends State<FileManager> {
             );
           }
         } else
-
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-              SizedBox(
-                height: 10,
-              ),
-              Text("Loading files")
-            ],
-          ),
-        );
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Loading files")
+              ],
+            ),
+          );
       },
     );
   }
@@ -230,6 +240,8 @@ class _FileManagerState extends State<FileManager> {
       _createNewFolder(currentDirectory);
     else if (choice == FileManagerPopupMenu.NewFile)
       _createNewFile(currentDirectory);
+    else if (choice == FileManagerPopupMenu.Upload)
+      _uploadFile(currentDirectory);
   }
 
   void _createNewFolder(String directory) {
@@ -243,20 +255,23 @@ class _FileManagerState extends State<FileManager> {
             onSubmitted: () async {
               setState(() => isCreatingNewFile = true);
 
-              bool result = await fileActions.createDirectory(FileData(
-                  name: _createTextController.text, directory: directory));
-
-              if (result == true) {
-                downloadedDirectories[directory].folders.add(FileData(
-                      directory: directory,
-                      name: _createTextController.text,
-                      date: ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
-                      type: FileType.Folder,
-                    ));
-              } else {
-                fileManagerScaffoldKey.currentState
-                    .showSnackBar(ErrorSnackbar());
-              }
+              await fileActions
+                  .createDirectory(FileData(
+                      name: _createTextController.text, directory: directory))
+                  .then((result) {
+                if (result == true) {
+                  downloadedDirectories[directory].folders.add(FileData(
+                        directory: directory,
+                        name: _createTextController.text,
+                        timeStamp:
+                            ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
+                        type: FileType.Folder,
+                      ));
+                } else {
+                  fileManagerScaffoldKey.currentState
+                      .showSnackBar(ErrorSnackbar());
+                }
+              });
 
               _createTextController.text = "";
               setState(() => isCreatingNewFile = false);
@@ -275,31 +290,44 @@ class _FileManagerState extends State<FileManager> {
             title: "Create new file",
             onSubmitted: () async {
               setState(() => isCreatingNewFile = true);
-              bool result = await fileActions.writeFile(
-                  FileData(
-                      name: _createTextController.text, directory: directory),
-                  "");
-              if (result == true) {
-                FileData fileData = FileData(
-                  directory: directory,
-                  name: _createTextController.text,
-                  date: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
-                  type: FileType.Text,
-                );
-                downloadedDirectories[directory].files.add(fileData);
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => TextEditorPage(
-                          fileActions: fileActions,
-                          fileData: fileData,
-                        )));
-              } else {
-                fileManagerScaffoldKey.currentState
-                    .showSnackBar(ErrorSnackbar());
-              }
+
+              FileData fileData = FileData(
+                directory: directory,
+                name: _createTextController.text,
+                timeStamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+                type: FileType.Text,
+              );
+              await fileActions
+                  .writeFile(fileData, "test")
+                  .then((result) {
+                if (result == true) {
+                  downloadedDirectories[directory].files.add(fileData);
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (BuildContext context) => TextEditorPage(
+                  //           fileActions: fileActions,
+                  //           fileData: fileData,
+                  //         ))); //TODO
+                } else {
+                  fileManagerScaffoldKey.currentState
+                      .showSnackBar(ErrorSnackbar());
+                }
+              });
 
               _createTextController.text = "";
               setState(() => isCreatingNewFile = false);
             },
+          );
+        });
+  }
+
+  void _uploadFile(String directory) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return ReusableDialog(
+            "Coming soon",
+            "This feature is not available yet.",
           );
         });
   }
@@ -329,6 +357,8 @@ class _FileManagerState extends State<FileManager> {
         return FontAwesomeIcons.html5;
       case FileType.JavaScript:
         return FontAwesomeIcons.jsSquare;
+      case FileType.JSON:
+        return FontAwesomeIcons.fileCode;
       case FileType.Other:
         return FontAwesomeIcons.file;
 
@@ -341,6 +371,20 @@ class _FileManagerState extends State<FileManager> {
     return ListTile(
       leading: Icon(dataTypeIcon(fileData.type)),
       title: Text(fileData.name),
+      subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: Text(fileData.size ?? " "),
+          ),
+          Container(
+            child: Text(readTimestamp(
+              fileData.timeStamp,
+              intoThousand: true,
+            )),
+          ),
+        ],
+      ),
       trailing: _showProgressIndicator(index),
       onTap: () => _handleFileListTileOnTap(fileData, index),
       onLongPress: () {
@@ -373,7 +417,8 @@ class _FileManagerState extends State<FileManager> {
       case FileType.Folder:
         setState(() {
           directoryTree.add(currentDirectory);
-          currentDirectory = fileData.directory + fileData.name;
+          currentDirectory =
+              (fileData.directory + "/" + fileData.name).replaceAll("//", "/");
         });
         return;
       case FileType.Python:
@@ -503,7 +548,7 @@ class FileData {
   final FileType type;
   final String name;
   final String directory;
-  final int date;
+  final int timeStamp;
   final String mime;
   final String size;
   final String extension;
@@ -511,7 +556,7 @@ class FileData {
     @required this.name,
     @required this.directory,
     this.type,
-    this.date,
+    this.timeStamp,
     this.mime,
     this.size,
     this.extension,
@@ -521,10 +566,12 @@ class FileData {
 class FileManagerPopupMenu {
   static const String NewFolder = "New folder";
   static const String NewFile = "New file";
+  static const String Upload = "Upload";
 
   static const List<String> choices = [
     NewFolder,
     NewFile,
+    Upload,
   ];
 }
 
@@ -536,6 +583,7 @@ enum FileType {
   Java,
   Python,
   HTML,
+  JSON,
   JavaScript,
   Other,
   JSON,

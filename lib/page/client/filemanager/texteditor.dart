@@ -123,6 +123,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
             if (_stableFile == null) {
               return Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(
