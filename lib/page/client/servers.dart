@@ -13,15 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/models/server.dart';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:pterodactyl_app/globals.dart' as globals;
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/models/server.dart';
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+
 import 'actionserver.dart';
 
 class ServerListPage extends StatefulWidget {
@@ -53,9 +54,9 @@ class _ServerListPageState extends State<ServerListPage> {
     data = json.decode(response.body);
     setState(() {
       userData = [];
-      if(search.isNotEmpty) {
+      if (search.isNotEmpty) {
         data['data'].forEach((v) {
-          if(v['attributes']['name'].toString().contains(search)) {
+          if (v['attributes']['name'].toString().contains(search)) {
             userData.add(v);
           }
         });
@@ -82,34 +83,44 @@ class _ServerListPageState extends State<ServerListPage> {
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
-        title: (this.appBarTitle != null ? this.appBarTitle : new Text(DemoLocalizations.of(context).trans('server_list'))),
+        title: (this.appBarTitle != null
+            ? this.appBarTitle
+            : new Text(DemoLocalizations.of(context).trans('server_list'))),
         actions: <Widget>[
-          new IconButton(icon: this.icon, onPressed: () {
-            setState(() {
-              if (this.icon.icon == Icons.search) {
-                this.icon = Icon(Icons.close);
-                appBarTitle = new TextField(
-                  controller: _searchForm,
-                  onChanged: (s) {
-                    getData(search: s);
-                  },
-                  style: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black),
-                  decoration: new InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: globals.useDarkTheme ? Colors.white : Colors.black),
-                      hintText: "Search...",
-                      hintStyle: new TextStyle(color: globals.useDarkTheme ? Colors.white : Colors.black)
-                  ),
-                );
-              } else {
-                getData();
-                this.icon = Icon(Icons.search);
-                appBarTitle = new Text(DemoLocalizations
-                    .of(context)
-                    .trans('server_list'));
-              }
-            });
-          })
-
+          new IconButton(
+              icon: this.icon,
+              onPressed: () {
+                setState(() {
+                  if (this.icon.icon == Icons.search) {
+                    this.icon = Icon(Icons.close);
+                    appBarTitle = new TextField(
+                      controller: _searchForm,
+                      onChanged: (s) {
+                        getData(search: s);
+                      },
+                      style: new TextStyle(
+                          color: globals.useDarkTheme
+                              ? Colors.white
+                              : Colors.black),
+                      decoration: new InputDecoration(
+                          prefixIcon: Icon(Icons.search,
+                              color: globals.useDarkTheme
+                                  ? Colors.white
+                                  : Colors.black),
+                          hintText: "Rechercher...",
+                          hintStyle: new TextStyle(
+                              color: globals.useDarkTheme
+                                  ? Colors.white
+                                  : Colors.black)),
+                    );
+                  } else {
+                    getData();
+                    this.icon = Icon(Icons.search);
+                    appBarTitle = new Text(
+                        DemoLocalizations.of(context).trans('server_list'));
+                  }
+                });
+              })
         ],
       ),
       body: ListView.builder(
@@ -123,16 +134,17 @@ class _ServerListPageState extends State<ServerListPage> {
                 /// Item card
                 Align(
                   alignment: Alignment.topCenter,
-                  child: SizedBox.fromSize(
-                      size: Size.fromHeight(140.0),
+                  child: SizedBox(
+                      width: 400,
+                      height: 250,
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.only(top: 24.0),
                             child: Material(
-                              elevation: 14.0,
-                              borderRadius: BorderRadius.circular(12.0),
+                              elevation: 5.0,
+                              borderRadius: BorderRadius.circular(24.0),
                               shadowColor: globals.useDarkTheme
                                   ? Colors.blueGrey
                                   : Color(0x802196F3),
@@ -152,7 +164,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                 },
                                 child: Container(
                                   child: Padding(
-                                    padding: EdgeInsets.all(24.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -181,71 +193,142 @@ class _ServerListPageState extends State<ServerListPage> {
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w700,
-                                                        fontSize: 18.0)),
+                                                        fontSize: 24.0)),
                                               ],
                                             ),
                                           ],
                                         ),
-
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.0),
+                                                child: Material(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  color: Color(0Xffe6f6ec),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child:
+                                                        Row(children: <Widget>[
+                                                      Icon(Icons.power,
+                                                          color: Color(
+                                                              0Xff10C254)),
+                                                      Text('   CPU 100%',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color: Color(
+                                                                  0Xff10C254))),
+                                                    ]),
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.0),
+                                                child: Material(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  color: Color(0Xffe6f6ec),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: Row(
+                                                        children: <Widget>[
+                                                          Icon(Icons.memory,
+                                                              color: Color(
+                                                                  0Xff10C254)),
+                                                          Text(
+                                                              '   ' +
+                                                                  DemoLocalizations.of(
+                                                                          context)
+                                                                      .trans(
+                                                                          'total_ram') +
+                                                                  ' ${userData[index]["attributes"]["limits"]["memory"] == 0 ? "1024 MB / ∞" : "1024 MB / ${userData[index]["attributes"]["limits"]["memory"]}"} MB',
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: Color(
+                                                                      0Xff10C254))),
+                                                        ]),
+                                                  ),
+                                                ),
+                                              ),
+                                            ]),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: <Widget>[
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_ram'),
-                                                style: TextStyle(
-                                                  color: globals.useDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
                                             Padding(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 4.0),
                                               child: Material(
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
-                                                color: Colors.green,
+                                                color: Color(0Xffe6f6ec),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["limits"]["memory"]} MB',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                                DemoLocalizations.of(context)
-                                                    .trans('total_disk'),
-                                                style: TextStyle(
-                                                  color: globals.useDarkTheme
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                )),
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.0),
-                                              child: Material(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                color: Colors.green,
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                      '${userData[index]["attributes"]["limits"]["disk"]} MB',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Colors.white)),
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Row(children: <Widget>[
+                                                    Icon(Icons.sim_card,
+                                                        color:
+                                                            Color(0Xff10C254)),
+                                                    Text(
+                                                        '   ' +
+                                                            DemoLocalizations
+                                                                    .of(context)
+                                                                .trans(
+                                                                    'total_disk') +
+                                                            ' ${userData[index]["attributes"]["limits"]["disk"] == 0 ? "1024 MB / ∞" : "1024 MB / ${userData[index]["attributes"]["limits"]["disk"]}"} MB',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            color: Color(
+                                                                0Xff10C254))),
+                                                  ]),
                                                 ),
                                               ),
                                             ),
                                           ],
+                                        ),
+                                        new Container(
+                                          alignment: Alignment.bottomRight,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 4.0),
+                                            child: Material(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              color: Color(0Xffe6f6ec),
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Text('STATE (on, off)',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color:
+                                                            Color(0Xff10C254))),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
