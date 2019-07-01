@@ -48,7 +48,7 @@ dependencies:
   logger: any                       # any is love <3
   photo_view: any                   # any is love <3
   pinput: any                       # any is love <3
-  timeago: any                       # any is love <3
+  timeago: any                      # any is love <3
 
 
   dbutils:
