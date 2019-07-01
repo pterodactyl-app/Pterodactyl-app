@@ -15,6 +15,8 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
 class ReusableDialog extends StatelessWidget {
   final String title;
@@ -37,7 +39,27 @@ class ReusableDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text(title),
+                content: Text(description),
+                actions: <Widget>[
+              if(button1Function != null) FlatButton(
+                child: Text(button1Text ?? "NO"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  button1Function();
+                }
+              ),
+              FlatButton(
+                  child: Text(button2Text ?? "OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    if(button2Function != null) button2Function();
+                  })
+            ],
+              )
+            : new AlertDialog(
             title: Text(
               title,
               ),
@@ -68,6 +90,6 @@ class ReusableDialog extends StatelessWidget {
                     if(button2Function != null) button2Function();
                   })
             ],
-          );
+              );
   }
 }
