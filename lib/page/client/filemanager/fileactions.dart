@@ -47,17 +47,24 @@ class FileActions {
   }
 
   String getApiKey()=> _apiKey;
-  ///for images
-  String getCompleteApiAddress(String directory) => _baseUrl + FileHttpHelper.file + directory;
+  ///Only for files
+  String getCompleteApiAddress(FileData fileData) {
+    String address = 
+    _baseUrl + FileHttpHelper.file + fileData.directory + fileData.name;
+    print(address);
+    return address;
+  }
 
   Future<Directory> getDirectory(String directory) async{
     
       final folders = List<FileData>();
       final files = List<FileData>();
 
+    String address = (_baseUrl + FileHttpHelper.directory + directory);
+
     try {
       http.Response response = await http.get(
-        _baseUrl + FileHttpHelper.directory + directory,
+        address,
         headers: {
           "Accept" : "application/json",
           "Authorization" : "Bearer $_apiKey",
@@ -69,7 +76,7 @@ class FileActions {
           FileData(
             name: object["entry"],
             type: FileType.Folder,
-            date: object["date"],
+            timeStamp: object["date"],
             mime: object["mime"],
             size: object["size"],
             directory: object["directory"],
@@ -81,8 +88,8 @@ class FileActions {
           FileData(
             name: object["entry"],
             type: checkType(object["extension"]),
-            date: object["date"],
-            directory: object["entry"],
+            timeStamp: object["date"],
+            directory: object["directory"],
             extension: object["extension"],
             mime: object["mime"],
             size: object["size"],
@@ -102,16 +109,21 @@ class FileActions {
     }
   }
 
-  Future<dynamic> getFile(FileData fileData) async {
+  Future<String> getFile(FileData fileData) async {
+
+    String address = (_baseUrl + FileHttpHelper.file + "${fileData.directory}/${fileData.name}");
 
     try {
       http.Response response = await http.get(
-        _baseUrl + FileHttpHelper.file + "${fileData.directory +"/"+ fileData.name}" ,
+         address,
         headers: {
+          "Accept" : fileData.mime,
           "Authorization" : "Bearer $_apiKey",
         }
         );
-      return response.body.toString();
+      print("Status Code: ${response.statusCode}");
+      print(address);
+      return response.body ?? "[null]";
 
     } on SocketException catch (e) {
       print('Error occured: ' + e.message);
@@ -143,36 +155,48 @@ class FileActions {
   }
 
   Future<bool> writeFile(FileData fileData, String data) async {
+
+    String address = 
+        (_baseUrl + FileHttpHelper.writeFile + "${fileData.directory +"/"+ fileData.name}").replaceAll("//", "/");
         
-    try {
-      await http.post(
-        _baseUrl + FileHttpHelper.writeFile + "${fileData.directory +"/"+ fileData.name}" ,
+    // try {
+      final response = await http.post(
+        address,
         headers: {
           "Authorization" : "Bearer $_apiKey",
         },
         body: data,
         );
+      print("filemanager : " + address);
+      print(response.statusCode);
       return true;
 
-    } on SocketException catch (e) {
-      print('Error occured: ' + e.message);
-      print(_panelUrl);
-      print(_https);
-      print('End debug');
-      return false;
-    }
+    // }
+    
+    //  on SocketException catch (e) {
+    //   print('Error occured: ' + e.message);
+    //   print(_panelUrl);
+    //   print(_https);
+    //   print('End debug');
+    //   return false; //TODO
+    // }
 
   }
 
   Future<bool> createDirectory(FileData fileData) async{
+
+    String address = 
+        (_baseUrl + FileHttpHelper.createDirectory + "?name=${fileData.name}&directory=${fileData.directory}");
         
     try {
-      await http.post(
-        _baseUrl + FileHttpHelper.createDirectory + "?name=${fileData.name}&directory=${fileData.directory}" ,
+      final response = await http.post(
+        address,
         headers: {
           "Authorization" : "Bearer $_apiKey",
         },
         );
+      print(address);
+      print(response.statusCode);
       return true;
 
     } on SocketException catch (e) {
@@ -195,6 +219,7 @@ class FileActions {
       case "c":
       case "css":
       case "json":
+      case "js":
         return FileType.Text;
       case "ico":
       case "gif":

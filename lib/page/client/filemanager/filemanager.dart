@@ -255,21 +255,23 @@ class _FileManagerState extends State<FileManager> {
             onSubmitted: () async {
               setState(() => isCreatingNewFile = true);
 
-              bool result = await fileActions.createDirectory(FileData(
-                  name: _createTextController.text, directory: directory));
-
-              if (result == true) {
-                downloadedDirectories[directory].folders.add(FileData(
-                      directory: directory,
-                      name: _createTextController.text,
-                      timeStamp:
-                          ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
-                      type: FileType.Folder,
-                    ));
-              } else {
-                fileManagerScaffoldKey.currentState
-                    .showSnackBar(ErrorSnackbar());
-              }
+              await fileActions
+                  .createDirectory(FileData(
+                      name: _createTextController.text, directory: directory))
+                  .then((result) {
+                if (result == true) {
+                  downloadedDirectories[directory].folders.add(FileData(
+                        directory: directory,
+                        name: _createTextController.text,
+                        timeStamp:
+                            ((DateTime.now().millisecondsSinceEpoch) ~/ 1000),
+                        type: FileType.Folder,
+                      ));
+                } else {
+                  fileManagerScaffoldKey.currentState
+                      .showSnackBar(ErrorSnackbar());
+                }
+              });
 
               _createTextController.text = "";
               setState(() => isCreatingNewFile = false);
@@ -288,27 +290,28 @@ class _FileManagerState extends State<FileManager> {
             title: "Create new file",
             onSubmitted: () async {
               setState(() => isCreatingNewFile = true);
-              bool result = await fileActions.writeFile(
-                  FileData(
-                      name: _createTextController.text, directory: directory),
-                  "");
-              if (result == true) {
-                FileData fileData = FileData(
-                  directory: directory,
-                  name: _createTextController.text,
-                  timeStamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
-                  type: FileType.Text,
-                );
-                downloadedDirectories[directory].files.add(fileData);
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => TextEditorPage(
-                          fileActions: fileActions,
-                          fileData: fileData,
-                        )));
-              } else {
-                fileManagerScaffoldKey.currentState
-                    .showSnackBar(ErrorSnackbar());
-              }
+
+              FileData fileData = FileData(
+                directory: directory,
+                name: _createTextController.text,
+                timeStamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000),
+                type: FileType.Text,
+              );
+              await fileActions
+                  .writeFile(fileData, "test")
+                  .then((result) {
+                if (result == true) {
+                  downloadedDirectories[directory].files.add(fileData);
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (BuildContext context) => TextEditorPage(
+                  //           fileActions: fileActions,
+                  //           fileData: fileData,
+                  //         )));
+                } else {
+                  fileManagerScaffoldKey.currentState
+                      .showSnackBar(ErrorSnackbar());
+                }
+              });
 
               _createTextController.text = "";
               setState(() => isCreatingNewFile = false);
@@ -414,7 +417,8 @@ class _FileManagerState extends State<FileManager> {
       case FileType.Folder:
         setState(() {
           directoryTree.add(currentDirectory);
-          currentDirectory = fileData.directory + "/" + fileData.name;
+          currentDirectory =
+              (fileData.directory + "/" + fileData.name).replaceAll("//", "/");
         });
         return;
       case FileType.Python:

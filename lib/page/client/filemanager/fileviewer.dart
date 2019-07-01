@@ -47,10 +47,13 @@ class _FileViewerState extends State<FileViewer> {
       key: fileViewerScaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
-          widget.fileData.name,
-          style: TextStyle(
-            color: Colors.black,
+        title: CustomTooltip(
+          message: widget.fileData.name,
+          child: Text(
+            widget.fileData.name,
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
         actions: <Widget>[
@@ -103,10 +106,11 @@ class _FileViewerState extends State<FileViewer> {
         backgroundDecoration: BoxDecoration(color: Colors.grey),
         maxScale: 2.00,
         minScale: 0.3,
-        imageProvider: NetworkImage(
+        imageProvider: NetworkImage( //TODO
             widget.fileActions
-                .getCompleteApiAddress(widget.fileData.directory),
+                .getCompleteApiAddress(widget.fileData),
             headers: {
+              "Accept" : widget.fileData.mime,
               "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
             }),
         enableRotation: false,
@@ -118,7 +122,7 @@ class _FileViewerState extends State<FileViewer> {
     return FutureBuilder(
         future: widget.fileActions.getFile(widget.fileData),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.data == null) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -154,8 +158,7 @@ class _FileViewerState extends State<FileViewer> {
             child: Container(
               padding: EdgeInsets.all(10),
               child: Text(
-                text +
-                    "\n\n\n\n\n\n\n\n\n\n", //"\n" are here to give a little padding at the bottom
+                text,
                 style: TextStyle(
                   color: Colors.black,
                 ),

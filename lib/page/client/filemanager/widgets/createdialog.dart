@@ -17,6 +17,7 @@ class CreateDialog extends StatelessWidget {
       title: Text(title),
       content: Container(
         child: TextField(
+          controller: controller,
           autofocus: true,
           maxLines: 1,
           autocorrect: false,
