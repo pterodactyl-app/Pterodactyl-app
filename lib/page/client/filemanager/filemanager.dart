@@ -327,10 +327,14 @@ class _FileManagerState extends State<FileManager> {
         return FontAwesomeIcons.python;
       case FileType.HTML:
         return FontAwesomeIcons.html5;
+      case FileType.CSS:
+        return FontAwesomeIcons.css3;
       case FileType.JavaScript:
         return FontAwesomeIcons.jsSquare;
       case FileType.JSON:
         return FontAwesomeIcons.fileCode;
+      case FileType.PHP:
+        return FontAwesomeIcons.php;
       case FileType.Other:
         return FontAwesomeIcons.file;
 
@@ -380,8 +384,10 @@ class _FileManagerState extends State<FileManager> {
         return;
       case FileType.Python:
       case FileType.HTML:
+      case FileType.CSS:
       case FileType.JavaScript:
       case FileType.JSON:
+      case FileType.PHP:
       case FileType.Text:
       case FileType.Image:
         Navigator.of(context)
@@ -538,7 +544,9 @@ enum FileType {
   Java,
   Python,
   HTML,
+  CSS,
   JSON,
+  PHP,
   JavaScript,
   Other,
 }
