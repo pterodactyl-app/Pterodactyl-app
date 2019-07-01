@@ -13,33 +13,42 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'dart:io';
 
-showComingSoonDialog(BuildContext context){
-    return showDialog(
+showComingSoonDialog(BuildContext context) {
+  return showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Column(
-            children: <Widget>[
-              Flexible(
-                child: Text(
-                  "COMING SOON",
-                  ),
+        return Platform.isIOS
+            ? new CupertinoAlertDialog(
+                title: Text("COMING SOON"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
               )
-            ],
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("OK"),
-              onPressed: () => Navigator.of(context).pop(),
-            )
-          ],
-        );
-      }
-      
-    );
-  }
+            : new AlertDialog(
+                title: Text("COMING SOON"),
+                content: Container(
+                  child: TextField(
+                    autofocus: true,
+                    maxLines: 1,
+                    autocorrect: false,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ],
+              );
+      });
+}
