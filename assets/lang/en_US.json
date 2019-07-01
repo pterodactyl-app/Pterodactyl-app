@@ -49,11 +49,9 @@
     "utilization_cpu": "CPU",
     "utilization_performance_disk": "PERFORMANCE REPORT",
     "utilization_disk": "Disk",
-
     "action_stop_warning": "Are you sure you want to stop this server?",
     "action_restart_warning": "Are you sure you want to restart your server?",
     "action_kill_warning": "Are you sure you want to kill your server? Nothing will be saved!",
-    
     "admin_login": "ADMIN LOGIN",
     "admin_noadminaccount": "Dont have an Admin account? Tap here then",
     "admin_homepanel": "Admin Panel",
@@ -90,7 +88,6 @@
     "admin_server_list":"Admin server list",
     "admin_user_list_list": "Admin user list",
     "admin_user_list_user": "USER",
-
     "admin_view_server": "View Server",
     "admin_view_server_identifier": "Identifier:", 
     "admin_view_server_installed": "Installed:", 
@@ -134,7 +131,6 @@
     "admin_create_server": "Create server", 
     "submit": "Submit",
     "admin_edit_user": "Edit Server",
-    
     "login_error_400": "400 Bad Request -- Your request is invalid.",
     "login_error_401": "401 Unauthorized -- You didn't pass an auth header or it was missing the bearer.",
     "login_error_403": "403 Forbidden -- Your key is invalid or it doesn't have access to said endpoint.",
@@ -144,5 +140,19 @@
     "login_username_api_not_supported": "Not yet supported",
     "login_username_api_not_supported_error": "Logging in with username is not yet supported at your host.",
     "login_username_api_no_api_key": "No api key available",
-    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key..."
+    "login_username_api_no_api_key_error": "Cannot log you in, key not available.\nTrying to create key...",
+
+    "info": "Info",
+    "project_version_failed": "Failed to get project version.",
+    "settings_ows": "Owns",
+    "settings_sub_user": "Sub-user",
+    "settings_schedules": "Schedules",
+    "settings_donators": "Donators",
+    "settings_partners": "Partners",
+    "settings_website": "Website",
+    "client_login": "CLIENT LOGIN",
+    "update_title": "New Update Available",
+    "update_message": "There is a newer version of app available please update it now.",
+    "update_btnLabel": "Update Now",
+    "search": "Search..."
 }

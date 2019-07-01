@@ -536,6 +536,7 @@ enum FileType {
   Java,
   Python,
   HTML,
+  JSON,
   JavaScript,
   Other,
 }
