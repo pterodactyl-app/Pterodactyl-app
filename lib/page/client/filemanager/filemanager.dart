@@ -329,6 +329,8 @@ class _FileManagerState extends State<FileManager> {
         return FontAwesomeIcons.html5;
       case FileType.JavaScript:
         return FontAwesomeIcons.jsSquare;
+      case FileType.JSON:
+        return FontAwesomeIcons.fileCode;
       case FileType.Other:
         return FontAwesomeIcons.file;
 
