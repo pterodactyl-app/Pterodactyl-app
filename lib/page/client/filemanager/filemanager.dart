@@ -306,7 +306,7 @@ class _FileManagerState extends State<FileManager> {
                   //     builder: (BuildContext context) => TextEditorPage(
                   //           fileActions: fileActions,
                   //           fileData: fileData,
-                  //         )));
+                  //         ))); //TODO
                 } else {
                   fileManagerScaffoldKey.currentState
                       .showSnackBar(ErrorSnackbar());
