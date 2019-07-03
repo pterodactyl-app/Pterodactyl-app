@@ -22,20 +22,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pterodactyl_app/main.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
-
-class User {
-  final String api, url;
-  const User({
-    this.api,
-    this.url,
-  });
-}
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 
 class LoginWithUsernamePage extends StatefulWidget {
   @override
-  _LoginWithUsernamePageState createState() =>
-      new _LoginWithUsernamePageState();
+  _LoginWithUsernamePageState createState() => new _LoginWithUsernamePageState();
 }
 
 String dropdownValue = 'https://';
@@ -180,10 +171,8 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
                     String token = await _getApiToken(
                         _userController.text, _passController.text);
                     await SharedPreferencesHelper.setString("apiKey", token);
-                    await SharedPreferencesHelper.setString(
-                        "panelUrl", _urlController.text);
-                    await SharedPreferencesHelper.setString(
-                        "https", dropdownValue);
+                    await SharedPreferencesHelper.setString("panelUrl", _urlController.text);
+                    await SharedPreferencesHelper.setString("https", dropdownValue);
                     _navigator();
                   },
                 ),
@@ -246,10 +235,8 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context)
-            .trans('login_username_api_not_supported');
-        String message = DemoLocalizations.of(context)
-            .trans('login_username_api_not_supported_error');
+        String title = DemoLocalizations.of(context).trans('login_username_api_not_supported');
+        String message = DemoLocalizations.of(context).trans('login_username_api_not_supported_error');
         String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
@@ -285,10 +272,8 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        String title = DemoLocalizations.of(context)
-            .trans('login_username_api_no_api_key');
-        String message = DemoLocalizations.of(context)
-            .trans('login_username_api_no_api_key_error');
+        String title = DemoLocalizations.of(context).trans('login_username_api_no_api_key');
+        String message = DemoLocalizations.of(context).trans('login_username_api_no_api_key_error');
         String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
         return Platform.isIOS
             ? new CupertinoAlertDialog(
@@ -459,10 +444,8 @@ class _LoginWithUsernamePageState extends State<LoginWithUsernamePage> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             String title = "403";
-            String message =
-                DemoLocalizations.of(context).trans('login_error_403');
-            String btnLabel =
-                DemoLocalizations.of(context).trans('login_error_ok');
+            String message = DemoLocalizations.of(context).trans('login_error_403');
+            String btnLabel = DemoLocalizations.of(context).trans('login_error_ok');
             return Platform.isIOS
                 ? new CupertinoAlertDialog(
                     title: Text(title),

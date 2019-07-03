@@ -20,7 +20,7 @@ import 'package:pterodactyl_app/models/stats.dart';
 import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
@@ -49,7 +49,7 @@ class _SendPageState extends State<SendPage> {
 
   final _sendController = TextEditingController();
 
-  Future postSend() async {
+  Future sendCommand() async {
     String _send = await SharedPreferencesHelper.getString("send");
     String _api = await SharedPreferencesHelper.getString("apiKey");
     String _url = await SharedPreferencesHelper.getString("panelUrl");
@@ -210,7 +210,7 @@ class _SendPageState extends State<SendPage> {
                 onSubmitted: (text) async {
                   await SharedPreferencesHelper.setString(
                       "send", _sendController.text);
-                  postSend();
+                  sendCommand();
                   _sendController.clear();
                 },
                 style: TextStyle(color: Colors.white),

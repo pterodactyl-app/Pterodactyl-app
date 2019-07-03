@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:pterodactyl_app/page/auth/sponsorlist.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -21,7 +21,7 @@ import 'package:pterodactyl_app/page/client/login_with_username.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'page/company/companies.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import 'package:logger/logger.dart';

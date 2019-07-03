@@ -24,7 +24,7 @@ import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/filemanager/widgets/readTimestamp.dart';
 
 ///[FileManager] with the help of [FileViewer] and  [TextEditor] is responsible for letting the users view an image, edit, save and delete a file.

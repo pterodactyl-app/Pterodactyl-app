@@ -18,7 +18,7 @@ import 'dart:async';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:pterodactyl_app/globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/client/login_with_username.dart';
 import 'package:pterodactyl_app/page/company/accuratenode/client/login.dart';

@@ -13,21 +13,19 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:pterodactyl_app/models/settings.dart';
-import 'package:http/http.dart' as http;
-import 'package:pterodactyl_app/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/models/settings.dart';
+import 'package:pterodactyl_app/models/globals.dart' as globals;
+import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/page/auth/check_update.dart';
 import 'package:pterodactyl_app/page/client/servers.dart';
 import 'package:pterodactyl_app/page/client/settings.dart';
-
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
