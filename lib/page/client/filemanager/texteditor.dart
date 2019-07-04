@@ -20,8 +20,8 @@ import 'package:pterodactyl_app/page/client/filemanager/widgets/ErrorSnackbar.da
 import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:flutter/services.dart';
 
-import 'fileactions.dart';
-import 'filemanager.dart';
+import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
+import 'package:pterodactyl_app/page/client/filemanager/filemanager.dart';
 
 class TextEditorPage extends StatefulWidget {
   final FileData fileData;
