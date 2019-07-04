@@ -107,16 +107,23 @@ class DartSyntaxHighlighter extends SyntaxHighlighter {
       int currentPosition = 0;
 
       for (_HighlightSpan span in _spans) {
-        if (currentPosition != span.start)
-          formattedText.add(TextSpan(text: _src.substring(currentPosition, span.start)));
 
-        formattedText.add(TextSpan(style: span.textStyle(_style), text: span.textForSpan(_src)));
+        try {
+          if (currentPosition <= span.end)
+            formattedText.add(TextSpan(
+                text: _src.substring(currentPosition, span.end)
+            ));
+        } on RangeError catch (e) {
+          print('--');
+          print(span.end);
+          print(currentPosition);
+          print('--');
+        }
 
         currentPosition = span.end;
       }
 
-      if (currentPosition != _src.length)
-        formattedText.add(TextSpan(text: _src.substring(currentPosition, _src.length)));
+      currentPosition = 0;
 
       return TextSpan(style: _style.baseStyle, children: formattedText);
     } else {

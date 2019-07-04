@@ -15,15 +15,12 @@
 */
 
 import 'package:flutter/material.dart';
-import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
-
-import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
-import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
-
 import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/filemanager.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/CustomTooltip.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.dart';
 import 'package:pterodactyl_app/page/client/filemanager/widgets/SyntaxHighlighter.dart';
 
 ///FileViewer is used by FileManager to show files before editing.
@@ -142,7 +139,29 @@ class _FileViewerState extends State<FileViewer> {
         });
   }
 
+  Widget RichTextForConsole(List<TextSpan> list) {
+    List<Widget> richies = [];
+    list.forEach((t) {
+      richies.add(Row(
+          children: <Widget>[
+            RichText(text: t)
+          ])
+      );
+    });
+    return Row(
+      children: richies,
+    );
+  }
+
   Widget _textContainer(String text) {
+    List<String> t = text.split("\n");
+    List<TextSpan> res = [];
+    SyntaxHighlighter dart = new DartSyntaxHighlighter();
+    t.forEach((d) {
+      if(d != null) {
+        res.add(dart.format(d));
+      }
+    });
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -157,13 +176,11 @@ class _FileViewerState extends State<FileViewer> {
         child: Scrollbar(
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
+                padding: EdgeInsets.all(10),
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: RichTextForConsole(res)
+                )
             ),
           ),
         ),
