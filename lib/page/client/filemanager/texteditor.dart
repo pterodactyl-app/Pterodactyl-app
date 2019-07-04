@@ -58,7 +58,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
 
   textEditorListener() {
     setState(
-        () => (_uncommitedChanges = (textEditorController.text != _stableFile));
+        () => (_uncommitedChanges = (textEditorController.text != _stableFile))
     );
   }
 
