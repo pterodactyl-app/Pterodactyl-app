@@ -260,7 +260,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                                           context)
                                                                       .trans(
                                                                           'total_ram') +
-                                                                  ' ${userData[index]["attributes"]["limits"]["memory"]} == 0 ? "1024 MB / ∞" : "1024 / ${userData[index]["attributes"]["limits"]["memory"]}" MB',
+                                                                  " ${userData[index]['attributes']['limits']['memory'] == 0 ? '∞' : '${userData[index]['attributes']['limits']['memory']} MB'}",
                                                               style: TextStyle(
                                                                   fontWeight:
                                                                       FontWeight
@@ -297,7 +297,7 @@ class _ServerListPageState extends State<ServerListPage> {
                                                                     .of(context)
                                                                 .trans(
                                                                     'total_disk') +
-                                                            ' ${userData[index]["attributes"]["limits"]["disk"]} == 0 ? "1024 MB / ∞" : "1024 MB / ${userData[index]["attributes"]["limits"]["disk"]}" MB',
+                                                            " ${userData[index]['attributes']['limits']['disk'] == 0 ? '∞' : '${userData[index]['attributes']['limits']['disk']} MB'}",
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w700,
