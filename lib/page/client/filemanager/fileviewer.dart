@@ -21,9 +21,10 @@ import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.d
 import 'package:flutter/services.dart';
 import 'package:photo_view/photo_view.dart';
 
-import 'fileactions.dart';
-import 'filemanager.dart';
-import 'texteditor.dart';
+import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
+import 'package:pterodactyl_app/page/client/filemanager/filemanager.dart';
+import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/SyntaxHighlighter.dart';
 
 ///FileViewer is used by FileManager to show files before editing.
 class FileViewer extends StatefulWidget {
