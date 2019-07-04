@@ -17,7 +17,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import '../auth/shared_preferences_helper.dart';
 import 'dart:async';
 import 'dart:convert';

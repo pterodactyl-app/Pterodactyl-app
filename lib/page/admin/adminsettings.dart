@@ -18,7 +18,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:flutter/services.dart';
 import 'package:get_version/get_version.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';

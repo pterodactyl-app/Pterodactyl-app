@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import '../../../globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import '../../../main.dart';
 import 'admincreateserveregg.dart';
 import 'admincreateserverlocations.dart';

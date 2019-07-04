@@ -16,7 +16,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../auth/shared_preferences_helper.dart';
-import '../../globals.dart' as globals;
+import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'dart:async';
 import 'dart:convert';
 import '../../main.dart';
