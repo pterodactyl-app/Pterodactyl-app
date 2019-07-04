@@ -27,6 +27,7 @@ import 'package:pterodactyl_app/page/client/filemanager/widgets/SyntaxHighlighte
 class FileViewer extends StatefulWidget {
   final FileData fileData;
   final FileActions fileActions;
+
   const FileViewer({
     @required this.fileData,
     @required this.fileActions,
@@ -104,11 +105,11 @@ class _FileViewerState extends State<FileViewer> {
         backgroundDecoration: BoxDecoration(color: Colors.grey),
         maxScale: 2.00,
         minScale: 0.3,
-        imageProvider: NetworkImage( //TODO
-            widget.fileActions
-                .getCompleteApiAddress(widget.fileData),
+        imageProvider: NetworkImage(
+            //TODO
+            widget.fileActions.getCompleteApiAddress(widget.fileData),
             headers: {
-              "Accept" : widget.fileData.mime,
+              "Accept": widget.fileData.mime,
               "Authorization": "Bearer ${widget.fileActions.getApiKey()}",
             }),
         enableRotation: false,
@@ -133,20 +134,15 @@ class _FileViewerState extends State<FileViewer> {
                 ],
               ),
             );
-          } else {
-            return _textContainer(snapshot.data);
           }
+          return _textContainer(snapshot.data);
         });
   }
 
   Widget RichTextForConsole(List<TextSpan> list) {
     List<Widget> richies = [];
     list.forEach((t) {
-      richies.add(Row(
-          children: <Widget>[
-            RichText(text: t)
-          ])
-      );
+      richies.add(Row(children: <Widget>[Container(child: RichText(text: t))]));
     });
     return Row(
       children: richies,
@@ -158,7 +154,7 @@ class _FileViewerState extends State<FileViewer> {
     List<TextSpan> res = [];
     SyntaxHighlighter dart = new DartSyntaxHighlighter();
     t.forEach((d) {
-      if(d != null) {
+      if (d != null) {
         res.add(dart.format(d));
       }
     });
@@ -175,14 +171,8 @@ class _FileViewerState extends State<FileViewer> {
         ),
         child: Scrollbar(
           child: SingleChildScrollView(
-            child: Container(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: RichTextForConsole(res)
-                )
-            ),
-          ),
+              child: Container(
+                  padding: EdgeInsets.all(10), child: RichTextForConsole(res))),
         ),
       ),
     );
