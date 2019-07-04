@@ -53,12 +53,13 @@ class _TextEditorPageState extends State<TextEditorPage> {
   void initState() {
     super.initState();
     textEditorController = TextEditingController();
-    textEditorController.addListener(textEditorListener());
+    textEditorController.addListener(textEditorListener);
   }
 
   textEditorListener() {
     setState(
-        () => _uncommitedChanges = textEditorController.text != _stableFile); //TODO
+        () => (_uncommitedChanges = (textEditorController.text != _stableFile));
+    );
   }
 
   @override
@@ -184,7 +185,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
     await widget.fileActions.writeFile(widget.fileData, newData).then((result) {
       if (result == true) {
         _stableFile = newData;
-        _uncommitedChanges = _stableFile != textEditorController.text;
+        _uncommitedChanges = (_stableFile != textEditorController.text);
         textEditorScaffoldKey.currentState.showSnackBar(
           SnackBar(
               content: Row(
