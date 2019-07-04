@@ -155,8 +155,8 @@ class FileActions {
 
   Future<bool> writeFile(FileData fileData, String data) async {
 
-    String address = 
-        (_baseUrl + FileHttpHelper.writeFile + "${fileData.directory +"/"+ fileData.name}").replaceAll("//", "/");
+    String address =
+        _baseUrl + (FileHttpHelper.writeFile + "${fileData.directory +"/"+ fileData.name}").replaceAll("//", "/");
         
     // try {
       final response = await http.post(
