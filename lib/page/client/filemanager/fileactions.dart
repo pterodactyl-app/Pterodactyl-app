@@ -121,8 +121,7 @@ class FileActions {
           "Authorization" : "Bearer $_apiKey",
         }
         );
-      print("Status Code: ${response.statusCode}");
-      print(address);
+
       return response.body ?? "[null]";
 
     } on SocketException catch (e) {
