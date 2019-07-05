@@ -346,6 +346,12 @@ class Settings extends StatelessWidget {
               DemoLocalizations.of(context).trans('notifications_sub'),
               onTap: () {}),
           _buildSettingsItem(
+              FontAwesomeIcons.fingerprint,
+              '#BFACAA',
+              'bio login',
+              'on/off (make a function)', 
+              onTap: () {}),            
+          _buildSettingsItem(
               FontAwesomeIcons.adjust,
               '#BFACAA',
               DemoLocalizations.of(context).trans('dark_mode'),
