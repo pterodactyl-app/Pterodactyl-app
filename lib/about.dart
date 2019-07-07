@@ -29,7 +29,7 @@ class _AboutPageState extends State<AboutPage> {
         backgroundColor: Colors.blue[300],
       ),
       body: new Center(
-        child: new Text("About Page", style: new TextStyle(fontSize: 35.0)),
+        child: new Text("There will be more", style: new TextStyle(fontSize: 35.0)),
       ),
     );
   }
