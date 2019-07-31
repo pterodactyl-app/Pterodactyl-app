@@ -143,16 +143,16 @@
     "login_username_api_no_api_key_error": "No podemos iniciar sesion, clave no disponible.\nIntentando crear clave...",
     
     "info": "Info",
-    "project_version_failed": "Failed to get project version.",
+    "project_version_failed": "Error al obtener la version.",
     "settings_ows": "Owns",
-    "settings_sub_user": "Sub-user",
-    "settings_schedules": "Schedules",
-    "settings_donators": "Donators",
+    "settings_sub_user": "Sub-usuario",
+    "settings_schedules": "Horario",
+    "settings_donators": "Donadores",
     "settings_partners": "Partners",
-    "settings_website": "Website",
-    "client_login": "CLIENT LOGIN",
-    "update_title": "New Update Available",
-    "update_message": "There is a newer version of app available please update it now.",
-    "update_btnLabel": "Update Now",
-    "search": "Search..."
+    "settings_website": "Pagina web",
+    "client_login": "Logueo de cliente",
+    "update_title": "Nueva actualizacion",
+    "update_message": "Hay una nueva version de la app, por favor actualize.",
+    "update_btnLabel": "Actualizar ahora",
+    "search": "Buscar..."
 }
