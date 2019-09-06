@@ -143,7 +143,7 @@ class MyApp extends StatelessWidget {
               const Locale('dk', 'DK'),
               const Locale('no', 'NO'),
               const Locale('nl', 'NL'),
-              const Locale('se', 'SE'),
+              const Locale('sv', 'SE'),
               const Locale('it', 'IT'),
               const Locale('pl', 'PL'),
               const Locale.fromSubtags(
