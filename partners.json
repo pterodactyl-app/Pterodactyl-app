@@ -1,45 +1,44 @@
 {
   "partners": [
-      {
-        "name": "Deploys.io",
-        "url": "https://deploys.io",
-        "logo": {
-          "dark": "https://deploys.io/img/deploys.io/logo/text/light.png",
-          "light": "https://deploys.io/img/deploys.io/logo/text/dark.png"
-        }
-      },
-      {
-        "name": "CodersLight LLC",
-        "url": "https://coderslight.com/",
-        "logo": {
-          "dark": "https://avatars2.githubusercontent.com/u/35084758?s=280&v=4",
-          "light": "https://pbs.twimg.com/profile_images/1041472632984616961/uIjCN238.jpg"
-        }
-      },
-      {
-        "name": "MiniCenter",
-        "url": "https://minicenter.net/",
-        "logo": {
-          "dark": "",
-          "light": ""
-        }
-      },
-      {
-        "name": "PlanetNode",
-        "url": "https://planetnode.net/",
-        "logo": {
-          "dark": "https://planetnode.net/templates/planetnode/img/header/logo-b.png",
-          "light": "https://planetnode.net/templates/planetnode/img/header/logo-b.png"
-        }
-      },
-      {
-        "name": "Revivenode Hosting",
-        "url": "https://revivenode.com/",
-        "logo": {
-          "dark": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png",
-          "light": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png"
-        }
+    {
+      "name": "Deploys.io",
+      "url": "https://deploys.io",
+      "logo": {
+        "dark": "https://deploys.io/img/deploys.io/logo/text/light.png",
+        "light": "https://deploys.io/img/deploys.io/logo/text/dark.png"
       }
+    },
+    {
+      "name": "CodersLight LLC",
+      "url": "https://coderslight.com/",
+      "logo": {
+        "dark": "https://avatars2.githubusercontent.com/u/35084758?s=280&v=4",
+        "light": "https://pbs.twimg.com/profile_images/1041472632984616961/uIjCN238.jpg"
+      }
+    },
+    {
+      "name": "MiniCenter",
+      "url": "https://minicenter.net/",
+      "logo": {
+        "dark": "",
+        "light": ""
+      }
+    },
+    {
+      "name": "PlanetNode",
+      "url": "https://planetnode.net/",
+      "logo": {
+        "dark": "https://planetnode.net/templates/planetnode/img/header/logo-b.png",
+        "light": "https://planetnode.net/templates/planetnode/img/header/logo-b.png"
+      }
+    },
+    {
+      "name": "Revivenode Hosting",
+      "url": "https://revivenode.com/",
+      "logo": {
+        "dark": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png",
+        "light": "https://cdn.discordapp.com/attachments/582365380798971934/589519836997222420/RLogo.png"
+      }
+    }
   ]
 }
-
