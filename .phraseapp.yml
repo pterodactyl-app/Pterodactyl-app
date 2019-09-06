@@ -43,4 +43,4 @@ phraseapp:
       params: {locale_id: zh-TW}      
   push:
     sources:
-    - file: assets\lang
+    - file: assets\lang\<locale_name>.json
