@@ -3,11 +3,11 @@ phraseapp:
   project_id: 537f5e1123508656dd1ab7d4ab83940e
   push:
     sources:
-    - file: ./<locale_name>.json
+    - file: ./assets/lang/<locale_name>.json
       params:
         file_format: react_simple_json
   pull:
     targets:
-    - file: ./<locale_name>.json
+    - file: ./assets/lang/<locale_name>.json
       params:
         file_format: react_simple_json
