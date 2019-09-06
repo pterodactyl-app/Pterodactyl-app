@@ -137,7 +137,7 @@ class MyApp extends StatelessWidget {
             navigatorKey: key,
             supportedLocales: [
               const Locale('en', 'US'),
-              const Locale('en', 'UK'),
+              const Locale('en', 'GB'),
               const Locale('fr', 'FR'),
               const Locale('de', 'DE'),
               const Locale('dk', 'DK'),

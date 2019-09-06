@@ -66,7 +66,7 @@ flutter:
   assets:
    - assets/images/pterodactyl_icon.png
    - assets/lang/en-US.json
-   - assets/lang/en-UK.json
+   - assets/lang/en-GB.json
    - assets/lang/de-DE.json
    - assets/lang/fr-FR.json
    - assets/lang/nl-BE.json
