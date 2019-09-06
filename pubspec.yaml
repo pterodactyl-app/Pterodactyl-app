@@ -65,23 +65,23 @@ flutter:
 
   assets:
    - assets/images/pterodactyl_icon.png
-   - assets/lang/en_US.json
-   - assets/lang/en_UK.json
-   - assets/lang/de_DE.json
-   - assets/lang/fr_FR.json
-   - assets/lang/nl_NL.json
-   - assets/lang/dk_DK.json
-   - assets/lang/no_NO.json
+   - assets/lang/en-US.json
+   - assets/lang/en-UK.json
+   - assets/lang/de-DE.json
+   - assets/lang/fr-FR.json
+   - assets/lang/nl-NL.json
+   - assets/lang/dk-DK.json
+   - assets/lang/nn-NO.json
    - assets/lang/pl_PL.json
-   - assets/lang/it_IT.json
-   - assets/lang/se_SE.json
-   - assets/lang/zh_CN.json
-   - assets/lang/zh_TW.json
-   - assets/lang/si_SI.json
-   - assets/lang/es_ES.json
-   - assets/lang/id_ID.json
-   - assets/lang/ar_AE.json
-   - assets/lang/he_IL.json
+   - assets/lang/it-IT.json
+   - assets/lang/se-SE.json
+   - assets/lang/zh-CN.json
+   - assets/lang/zh-TW.json
+   - assets/lang/si-SI.json
+   - assets/lang/es-ES.json
+   - assets/lang/id-ID.json
+   - assets/lang/ar-AE.json
+   - assets/lang/he-IL.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
