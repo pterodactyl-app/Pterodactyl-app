@@ -5,42 +5,42 @@ phraseapp:
   pull:
     params: {format_options: { convert_placeholder : true } }
     targets:
-    - file: assets\lang\ar-AE.json
+    - file: .\assets\lang\ar-AE.json
       params: {locale_id: ar-AE}
-    - file: assets\lang\da-DK.json
+    - file: .\assets\lang\da-DK.json
       params: {locale_id: da-DK}
-    - file: assets\lang\de-DE.json
+    - file: .\assets\lang\de-DE.json
       params: {locale_id: de-DE}
-    - file: assets\lang\en-UK.json
+    - file: .\assets\lang\en-UK.json
       params: {locale_id: en-UK}
-    - file: assets\lang\en-US.json
+    - file: .\assets\lang\en-US.json
       params: {locale_id: en-US}
-    - file: assets\lang\es-ES.json
+    - file: .\assets\lang\es-ES.json
       params: {locale_id: es-ES}
-    - file: assets\lang\fr-FR.json
+    - file: .\assets\lang\fr-FR.json
       params: {locale_id: fr-FR}
-    - file: assets\lang\he-ILjson
+    - file: .\assets\lang\he-ILjson
       params: {locale_id: he-IL}
-    - file: assets\lang\id-ID.json
+    - file: .\assets\lang\id-ID.json
       params: {locale_id: id-ID}
-    - file: assets\lang\it-IT.json
+    - file: .\assets\lang\it-IT.json
       params: {locale_id: it-IT}
-    - file: assets\lang\nl-NL.json
+    - file: .\assets\lang\nl-NL.json
       params: {locale_id: nl-NL}
-    - file: assets\lang\nl-BE.json
+    - file: .\assets\lang\nl-BE.json
       params: {locale_id: nl-BE}
-    - file: assets\lang\nn-NO.json
+    - file: .\assets\lang\nn-NO.json
       params: {locale_id: nn-NO}
-    - file: assets\lang\nn-NO.json
+    - file: .\assets\lang\nn-NO.json
       params: {locale_id: nn-NO}
-    - file: assets\lang\pl-PL.json
+    - file: .\assets\lang\pl-PL.json
       params: {locale_id: pl-PL}
-    - file: assets\lang\sl-SI.json
+    - file: .\assets\lang\sl-SI.json
       params: {locale_id: sl-SI}
-    - file: assets\lang\zh-CN.json
+    - file: .\assets\lang\zh-CN.json
       params: {locale_id: zh-CN}
-    - file: assets\lang\zh-TW.json
+    - file: .\assets\lang\zh-TW.json
       params: {locale_id: zh-TW}      
   push:
     sources:
-    - file: assets\lang\<locale_name>.json
+    - file: .\assets\lang\<locale_id>.json
