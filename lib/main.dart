@@ -57,7 +57,7 @@ class DemoLocalizations {
 
   Future<bool> load() async {
     String data = await rootBundle.loadString(
-        'assets/lang/${this.locale.languageCode}_${this.locale.countryCode}.json');
+        'assets/lang/${this.locale.languageCode}-${this.locale.countryCode}.json');
     Map<String, dynamic> _result = json.decode(data);
 
     this._sentences = new Map();
@@ -108,7 +108,7 @@ class DemoLocalizationsDelegate
     DemoLocalizations localizations = new DemoLocalizations(locale);
     await localizations.load();
 
-    print("Load ${locale.languageCode}_${locale.countryCode}");
+    print("Load ${locale.languageCode}-${locale.countryCode}");
 
     return localizations;
   }
