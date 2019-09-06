@@ -1,4 +1,4 @@
-# Request a costum version of the app
+# Request a custom version of the app
 
 there are a few options where you can choose from or if you have your own suggestions thats also always welcome :heart:.
 
