@@ -33,8 +33,8 @@ phraseapp:
       params: {locale_id: nn-NO}
     - file: assets\lang\pl-PL.json
       params: {locale_id: pl-PL}
-    - file: assets\lang\se-SE.json
-      params: {locale_id: si-SI}
+    - file: assets\lang\sl-SI.json
+      params: {locale_id: sl-SI}
     - file: assets\lang\zh-CN.json
       params: {locale_id: zh-CN}
     - file: assets\lang\zh-TW.json
