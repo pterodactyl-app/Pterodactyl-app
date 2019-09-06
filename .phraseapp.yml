@@ -1,46 +1,17 @@
 phraseapp:
   access_token: d7eacb7eed6dbd196eb7e97c1e28297215ad4decd4e07ea5cb97da3a6482dbf9
   project_id: 537f5e1123508656dd1ab7d4ab83940e
-  file_format: json
+  file_format: react_simple_json
   pull:
     params: {format_options: { convert_placeholder : true } }
     targets:
-    - file: .\assets\lang\ar-AE.json
-      params: {locale_id: ar-AE}
-    - file: .\assets\lang\da-DK.json
-      params: {locale_id: da-DK}
-    - file: .\assets\lang\de-DE.json
-      params: {locale_id: de-DE}
-    - file: .\assets\lang\en-UK.json
-      params: {locale_id: en-UK}
-    - file: .\assets\lang\en-US.json
-      params: {locale_id: en-US}
-    - file: .\assets\lang\es-ES.json
-      params: {locale_id: es-ES}
-    - file: .\assets\lang\fr-FR.json
-      params: {locale_id: fr-FR}
-    - file: .\assets\lang\he-ILjson
-      params: {locale_id: he-IL}
-    - file: .\assets\lang\id-ID.json
-      params: {locale_id: id-ID}
-    - file: .\assets\lang\it-IT.json
-      params: {locale_id: it-IT}
-    - file: .\assets\lang\nl-NL.json
-      params: {locale_id: nl-NL}
-    - file: .\assets\lang\nl-BE.json
-      params: {locale_id: nl-BE}
-    - file: .\assets\lang\nn-NO.json
-      params: {locale_id: nn-NO}
-    - file: .\assets\lang\nn-NO.json
-      params: {locale_id: nn-NO}
-    - file: .\assets\lang\pl-PL.json
-      params: {locale_id: pl-PL}
-    - file: .\assets\lang\sl-SI.json
-      params: {locale_id: sl-SI}
-    - file: .\assets\lang\zh-CN.json
-      params: {locale_id: zh-CN}
-    - file: .\assets\lang\zh-TW.json
-      params: {locale_id: zh-TW}      
+    - file: .\assets\lang\<locale_name>.json
+      params: 
+        locale_id: <locale_id>
+        file_format: react_simple_json   
   push:
     sources:
-    - file: .\assets\lang\<locale_id>.json
+    - file: .\assets\lang\<locale_name>.json
+      params: 
+        locale_id: <locale_id>
+        file_format: react_simple_json
