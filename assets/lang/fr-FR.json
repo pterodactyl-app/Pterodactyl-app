@@ -94,7 +94,7 @@
   "language": "Langue :",
   "lastname": "Nom de famille :",
   "license": "Licences",
-  "license_sub": "Obtenir des informations sur les licences",
+  "license_sub": "Obtenir des informations sur les licences.",
   "login_admin_account": "Vous avez un compte administrateur ? Cliquez ici !",
   "login_error": "Le nom d'utilisateur ou le mot de passe ne peut pas être vide",
   "login_error_400": "400 Requête incorrect -- Votre requête est invalide.",
