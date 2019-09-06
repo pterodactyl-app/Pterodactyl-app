@@ -1,9 +1,9 @@
 # Pterodactyl Mobile App 🚀
 
 [![Build status](https://img.shields.io/travis/pterodactyl-app/Pterodactyl-app/develop.svg?style=flat-square)](https://travis-ci.org/pterodactyl-app/Pterodactyl-app)
-[![Open Source Love](https://img.shields.io/badge/opensource-we--love--open--source-red)](https://opensource.org/licenses/gpl-3.0)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/RDTalstra)
-<span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-green.svg" alt="Patreon donate button" /></a></span>
+[![Open Source Love](https://img.shields.io/badge/opensource-we--love--open--source-34495e)](https://opensource.org/licenses/gpl-3.0)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-009cde.svg)](https://www.paypal.me/RDTalstra)
+<span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-f96854.svg" alt="Patreon donate button" /></a></span>
 
 A unofficial mobile app for the Pterodactyl Panel
 <img align="right" src="https://raw.githubusercontent.com/rubentalstra/Pterodactyl-app/master/assets/images/pterodactylapp_BG.png" height="170">
