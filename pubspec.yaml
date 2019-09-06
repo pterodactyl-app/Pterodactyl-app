@@ -69,6 +69,7 @@ flutter:
    - assets/lang/en-UK.json
    - assets/lang/de-DE.json
    - assets/lang/fr-FR.json
+   - assets/lang/nl-BE.json
    - assets/lang/nl-NL.json
    - assets/lang/da-DK.json
    - assets/lang/nn-NO.json
