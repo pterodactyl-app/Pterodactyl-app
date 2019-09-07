@@ -1,13 +1,12 @@
 phraseapp:
   project_id: 537f5e1123508656dd1ab7d4ab83940e
-  file_format: simple_json
   push:
     sources:
-    - file: Pterodactyl-app/assets/lang/en-US.json
+    - file: ./assets/lang/<locale_name>.json
       params:
-        file_format: simple_json
+        file_format: react_simple_json
   pull:
     targets:
-    - file: Pterodactyl-app/assets/lang/en-US.json
+    - file: ./assets/lang/<locale_name>.json
       params:
-        file_format: simple_json
+        file_format: react_simple_json
