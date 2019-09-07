@@ -1,12 +1,9 @@
 phraseapp:
   project_id: 537f5e1123508656dd1ab7d4ab83940e
+  file_format: simple_json
   push:
     sources:
     - file: ./assets/lang/en-US.json
-      params:
-        file_format: react_simple_json
   pull:
     targets:
     - file: ./assets/lang/en-US.json
-      params:
-        file_format: react_simple_json
