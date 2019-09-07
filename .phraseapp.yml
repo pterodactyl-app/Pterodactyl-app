@@ -4,11 +4,9 @@ phraseapp:
   file_format: simple_json
   push:
     sources:
-    - file: ./assets/lang/<locale_name>.json
+    - file: ./assets/lang/<locale_code>.json
       params:
-        locale_id: <locale_id>
         update_translations: true
-
   pull:
     targets:
-    - file: ./assets/lang/<locale_name>.json
+    - file: ./assets/lang/<locale_code>.json
