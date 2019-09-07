@@ -252,7 +252,7 @@ class _StatePageState extends State<StatePage> {
           leading: IconButton(
             color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil('/servers', (Route<dynamic> route) => false);
               timer.cancel();
             },
             icon: Icon(
