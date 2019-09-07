@@ -192,17 +192,13 @@ class _SendPageState extends State<SendPage> {
         body: SafeArea(
           child: ListView(
             children: <Widget>[
-              ResponsiveContainer(
-                heightPercent: 77.0, //value percent of screen total height
-                widthPercent: 100.0, //value percent of screen total width
-                child: Container(
-                  color: Colors.black,
-                  child: SingleChildScrollView(
-                      child: new Wrap(
-                    direction: Axis.vertical,
-                    children: <Widget>[getTextWidgets()],
-                  )),
-                ),
+              Container(
+                color: Colors.black,
+                child: SingleChildScrollView(
+                    child: new Wrap(
+                  direction: Axis.vertical,
+                  children: <Widget>[getTextWidgets()],
+                )),
               ),
               SizedBox(height: 1.0),
               TextField(
