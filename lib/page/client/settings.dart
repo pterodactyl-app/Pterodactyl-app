@@ -144,15 +144,15 @@ class UserCard extends StatelessWidget {
     );
   }
 
-  Widget _buildUserStats() {
+  Widget _buildUserStats(BuildContext context) {
     return Division(
       style: userStatsStyle,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildUserStatsItem(this.settings.servers, 'Owns'),
-          _buildUserStatsItem(this.settings.subServer, 'Sub-user'),
-          _buildUserStatsItem(this.settings.schedules, 'Schedules'),
+          _buildUserStatsItem(this.settings.servers, DemoLocalizations.of(context).trans('settings_ows')),
+          _buildUserStatsItem(this.settings.subServer, DemoLocalizations.of(context).trans('settings_sub_user')),
+          _buildUserStatsItem(this.settings.schedules, DemoLocalizations.of(context).trans('settings_schedules')),
         ],
       ),
     );
@@ -182,7 +182,7 @@ class UserCard extends StatelessWidget {
       style: userCardStyle,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[_buildUserRow(), _buildUserStats()],
+        children: <Widget>[_buildUserRow(), _buildUserStats(context)],
       ),
     );
   }
@@ -244,13 +244,13 @@ class ActionsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        _buildActionsItem('Sponsors', FontAwesomeIcons.handHoldingUsd,
+        _buildActionsItem(DemoLocalizations.of(context).trans('settings_donators'), FontAwesomeIcons.handHoldingUsd,
             onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new SponsorPage()))),
-        _buildActionsItem('Partners', FontAwesomeIcons.handshake,
+        _buildActionsItem(DemoLocalizations.of(context).trans('settings_partners'), FontAwesomeIcons.handshake,
             onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new PartnerPage()))),
-        _buildActionsItem('Website', FontAwesomeIcons.link,
+        _buildActionsItem(DemoLocalizations.of(context).trans('settings_website'), FontAwesomeIcons.link,
             onTap: () => _launchURL('https://pterodactyl-app.com/')),
         _buildActionsItem(DemoLocalizations.of(context).trans('license'),
             FontAwesomeIcons.certificate,
@@ -345,12 +345,9 @@ class Settings extends StatelessWidget {
               DemoLocalizations.of(context).trans('notifications'),
               DemoLocalizations.of(context).trans('notifications_sub'),
               onTap: () {}),
-          _buildSettingsItem(
-              FontAwesomeIcons.fingerprint,
-              '#BFACAA',
-              'bio login',
-              'on/off (make a function)', 
-              onTap: () {}),            
+          _buildSettingsItem(FontAwesomeIcons.fingerprint, '#BFACAA',
+              'bio login', 'on/off (make a function)',
+              onTap: () {}),
           _buildSettingsItem(
               FontAwesomeIcons.adjust,
               '#BFACAA',
