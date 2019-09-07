@@ -1,5 +1,4 @@
 phraseapp:
-  access_token: d7eacb7eed6dbd196eb7e97c1e28297215ad4decd4e07ea5cb97da3a6482dbf9
   project_id: 537f5e1123508656dd1ab7d4ab83940e
   file_format: react_simple_json
   push:
