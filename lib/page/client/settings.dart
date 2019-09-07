@@ -251,10 +251,10 @@ class ActionsRow extends StatelessWidget {
             onTap: () => Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new PartnerPage()))),
         _buildActionsItem('Website', FontAwesomeIcons.link,
-            onTap: () => launch('https://pterodactyl-app.com/')),
+            onTap: () => _launchURL('https://pterodactyl-app.com/')),
         _buildActionsItem(DemoLocalizations.of(context).trans('license'),
             FontAwesomeIcons.certificate,
-            onTap: () => launch(
+            onTap: () => _launchURL(
                 'https://github.com/rubentalstra/Pterodactyl-app/blob/master/LICENSE')),
       ],
     );
@@ -422,4 +422,12 @@ class Settings extends StatelessWidget {
       color: globals.useDarkTheme ? Colors.white30 : Colors.black26,
       fontWeight: FontWeight.bold,
       fontSize: 12);
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
