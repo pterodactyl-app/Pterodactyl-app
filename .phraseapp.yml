@@ -3,7 +3,7 @@ phraseapp:
   file_format: react_simple_json
   push:
     sources:
-    - file: ./<locale_name>.json
+    - file: ./assets/lang/<locale_name>.json
   pull:
     targets:
     - file: ./assets/lang/<locale_name>.json
