@@ -4,12 +4,12 @@ phraseapp:
   file_format: simple_json
   push:
     sources:
-    - file: ./assets/lang/en-US.json
+    - file: ./assets/lang/<locale_code>.json
       params:
-        locale_id: en
+        locale_id: <locale_code>
         file_format: simple_json
   pull:
     targets:
-    - file: ./assets/lang/locales/;.yml
+    - file: ./assets/lang/locales/<locale_code>.json
       params:
         file_format: simple_json
