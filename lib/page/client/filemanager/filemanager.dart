@@ -22,8 +22,9 @@ import 'package:pterodactyl_app/page/client/filemanager/widgets/ReusableDialog.d
 import 'package:pterodactyl_app/models/server.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileactions.dart';
 import 'package:pterodactyl_app/page/client/filemanager/fileviewer.dart';
+import 'package:pterodactyl_app/page/client/actionserver.dart';
 import 'package:pterodactyl_app/page/client/filemanager/texteditor.dart';
-import 'package:pterodactyl_app/page/client/filemanager/widgets/CreateDialog.dart';
+import 'package:pterodactyl_app/page/client/filemanager/widgets/createdialog.dart';
 import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:pterodactyl_app/page/client/filemanager/widgets/readTimestamp.dart';
 
@@ -79,8 +80,14 @@ class _FileManagerState extends State<FileManager> {
         leading: IconButton(
           color: globals.useDarkTheme ? Colors.white : Colors.black,
           onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                '/home', (Route<dynamic> route) => false);
+            var route = new MaterialPageRoute(
+              builder: (BuildContext context) =>
+              new ActionServerPage(
+                  server: Server(
+                      id: widget.server.id,
+                      name: widget.server.name)),
+            );
+            Navigator.of(context).push(route);
           },
           icon: Icon(Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black),
