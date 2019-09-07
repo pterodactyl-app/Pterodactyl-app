@@ -78,7 +78,7 @@ class _SponsorPageState extends State<SponsorPage> {
                 ],
               ),
               onTap: () {
-                launch(_model.link);
+                _launchURL(_model.link);
               },
             );
           },
