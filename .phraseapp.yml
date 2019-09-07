@@ -5,6 +5,7 @@ phraseapp:
   pull:
     targets:
     - file: ..\assets\lang\<locale_name>.json
+      params: {locale_id: <locale_name>}
   push:
     sources:
     - file: ..\assets\lang\<locale_name>.json
