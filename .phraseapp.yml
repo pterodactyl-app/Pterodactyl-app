@@ -3,7 +3,11 @@ phraseapp:
   file_format: simple_json
   push:
     sources:
-    - file: ./assets/lang/en-US.json
+    - file: Pterodactyl-app/assets/lang/en-US.json
+      params:
+        file_format: simple_json
   pull:
     targets:
-    - file: ./assets/lang/en-US.json
+    - file: Pterodactyl-app/assets/lang/en-US.json
+      params:
+        file_format: simple_json
