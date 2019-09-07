@@ -35,7 +35,6 @@ import 'filemanager/filemanager.dart';
 import 'servers.dart';
 import 'utilization.dart';
 
-
 class ActionServerPage extends StatefulWidget {
   ActionServerPage({Key key, this.server}) : super(key: key);
   final Server server;
@@ -159,7 +158,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             postStart();
           },
           label: DemoLocalizations.of(context).trans('action_start'),
-          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelStyle:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
           labelBackgroundColor: Color(0xFF2dce89),
         ),
         SpeedDialChild(
@@ -169,7 +169,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _stop();
           },
           label: DemoLocalizations.of(context).trans('action_stop'),
-          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelStyle:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
           labelBackgroundColor: Color(0xFFf5365c),
         ),
         SpeedDialChild(
@@ -179,7 +180,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _restart();
           },
           label: DemoLocalizations.of(context).trans('action_restart'),
-          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelStyle:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
           labelBackgroundColor: Color(0xFF5e72e4),
         ),
         SpeedDialChild(
@@ -189,7 +191,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
             _kill();
           },
           label: DemoLocalizations.of(context).trans('action_kill'),
-          labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+          labelStyle:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
           labelBackgroundColor: Color(0xFFf5365c),
         ),
       ],
@@ -206,7 +209,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
           leading: IconButton(
             color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/servers', (Route<dynamic> route) => false),
+                '/servers', (Route<dynamic> route) => false),
             icon: Icon(
               Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black,
@@ -218,47 +221,122 @@ class _ActionServerPageState extends State<ActionServerPage> {
                   fontWeight: FontWeight.w700)),
         ),
         body: StaggeredGridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 12.0,
-      mainAxisSpacing: 12.0,
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      children: <Widget>[
-        _buildTile(
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Material(
-                      color: Colors.green,
-                      shape: CircleBorder(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Icon(Icons.folder_open,
-                            color: Colors.white, size: 30.0),
-                      )),
-                  Padding(padding: EdgeInsets.only(bottom: 12.0)),
-                  Text(DemoLocalizations.of(context).trans('action_file'),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 23.0)),
-                ]),
-          ),
-          onTap: () {
-            var route = MaterialPageRoute(
-              builder: (BuildContext context) => FileManager(
-                server: widget.server
-              )
-            );
-            Navigator.of(context).push(route);
-          },
+          crossAxisCount: 2,
+          crossAxisSpacing: 12.0,
+          mainAxisSpacing: 12.0,
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          children: <Widget>[
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.green,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.folder_open,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text(DemoLocalizations.of(context).trans('action_file'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                    ]),
+              ),
+              onTap: () {
+                var route = MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        FileManager(server: widget.server));
+                Navigator.of(context).push(route);
+              },
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.blue,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.watch_later,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text('Schedules',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                    ]),
+              ),
+              onTap: () {
+                _comingSoon();
+              },
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.red,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.people,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text('Sub-users',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                    ]),
+              ),
+              onTap: () {
+                _comingSoon();
+              },
+            ),
+            _buildTile(
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          color: Colors.purple,
+                          shape: CircleBorder(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Icon(Icons.developer_board,
+                                color: Colors.white, size: 30.0),
+                          )),
+                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
+                      Text('Databases',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 23.0)),
+                    ]),
+              ),
+              onTap: () {
+                _comingSoon();
+              },
+            ),
+          ],
+          staggeredTiles: [
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+            StaggeredTile.extent(1, 161.0),
+          ],
         ),
-      ],
-      staggeredTiles: [
-        StaggeredTile.extent(1, 161.0),
-        StaggeredTile.extent(1, 161.0),
-      ],
-    ),
         floatingActionButton: buildSpeedDial(),
         bottomNavigationBar: TitledBottomNavigationBar(
             initialIndex: 0,
@@ -266,17 +344,16 @@ class _ActionServerPageState extends State<ActionServerPage> {
             onTap: _navigate,
             items: [
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
-                  title:
-                      "Info",
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  title: "Info",
                   icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
                       DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
-                backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
+                  backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
             ]));
@@ -298,19 +375,21 @@ class _ActionServerPageState extends State<ActionServerPage> {
   }
 
   Future _navigate(int index) async {
-    if(index == 1) {
+    if (index == 1) {
       Navigator.of(this.context).pushAndRemoveUntil(
-          new MaterialPageRoute(builder: (BuildContext context) =>
-          new StatePage(
-              server: Stats(id: widget.server.id, name: widget.server.name))
-          ), (Route<dynamic> route) => false);
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new StatePage(
+                  server:
+                      Stats(id: widget.server.id, name: widget.server.name))),
+          (Route<dynamic> route) => false);
     }
-    if(index == 2) {
+    if (index == 2) {
       Navigator.of(this.context).pushAndRemoveUntil(
-          new MaterialPageRoute(builder: (BuildContext context) =>
-          new SendPage(
-              server: Server(id: widget.server.id, name: widget.server.name))
-          ), (Route<dynamic> route) => false);
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new SendPage(
+                  server:
+                      Server(id: widget.server.id, name: widget.server.name))),
+          (Route<dynamic> route) => false);
     }
   }
 
@@ -320,7 +399,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_restart');
-        String message = DemoLocalizations.of(context).trans('action_restart_warning');
+        String message =
+            DemoLocalizations.of(context).trans('action_restart_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
@@ -372,7 +452,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_stop');
-        String message = DemoLocalizations.of(context).trans('action_stop_warning');
+        String message =
+            DemoLocalizations.of(context).trans('action_stop_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
@@ -424,7 +505,8 @@ class _ActionServerPageState extends State<ActionServerPage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         String title = DemoLocalizations.of(context).trans('action_kill');
-        String message = DemoLocalizations.of(context).trans('action_kill_warning');
+        String message =
+            DemoLocalizations.of(context).trans('action_kill_warning');
         String btnLabelNo = DemoLocalizations.of(context).trans('no');
         String btnLabelYes = DemoLocalizations.of(context).trans('yes');
         return Platform.isIOS
@@ -466,6 +548,29 @@ class _ActionServerPageState extends State<ActionServerPage> {
                   ),
                 ],
               );
+      },
+    );
+  }
+
+  _comingSoon() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Coming Soon"),
+          content: new Text("This is coming soon :)"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
     );
   }
