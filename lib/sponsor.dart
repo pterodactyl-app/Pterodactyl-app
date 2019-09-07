@@ -78,7 +78,11 @@ class _SponsorPageState extends State<SponsorPage> {
                 ],
               ),
               onTap: () {
-                launch(_model.link);
+                if (await canLaunch(_model.link)) {
+                  await launch(_model.link);
+                } else {
+                  throw 'Could not launch $_model.link';
+                }
               },
             );
           },
