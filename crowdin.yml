@@ -1,3 +1,3 @@
 files:
-  - source: /assets/lang/*.json
+  - source: /assets/lang/%locale%.json
     translation: /assets/lang/%locale%.json
