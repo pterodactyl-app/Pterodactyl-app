@@ -108,7 +108,7 @@ class _SendPageState extends State<SendPage> {
 
     setState(() => isProbablyConnected = true);
     socket = await manager.createInstance(
-      //Socket IO server URI
+        //Socket IO server URI
         socketUrl,
         //Query params - can be used for authentication
         query: {
@@ -139,14 +139,14 @@ class _SendPageState extends State<SendPage> {
       if (data['line'] != null) {
         setState(() {
           data['line'].toString().split('\\n\\g').forEach((data) => {
-            if (data.length > 52)
-              {
-                logRows.add(data.substring(0, 51)),
-                logRows.add(data.substring(52))
-              }
-            else
-              {logRows.add(data)}
-          });
+                if (data.length > 52)
+                  {
+                    logRows.add(data.substring(0, 51)),
+                    logRows.add(data.substring(52))
+                  }
+                else
+                  {logRows.add(data)}
+              });
         });
       }
     });
@@ -178,7 +178,8 @@ class _SendPageState extends State<SendPage> {
             color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () {
               disconnect();
-              Navigator.of(context).pushNamedAndRemoveUntil('/servers', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/servers', (Route<dynamic> route) => false);
             },
             icon: Icon(Icons.arrow_back,
                 color: globals.useDarkTheme ? Colors.white : Colors.black),
@@ -193,15 +194,14 @@ class _SendPageState extends State<SendPage> {
             children: <Widget>[
               ResponsiveContainer(
                 heightPercent: 77.0, //value percent of screen total height
-                widthPercent: 100.0,  //value percent of screen total width
-                child:
-                Container(
+                widthPercent: 100.0, //value percent of screen total width
+                child: Container(
                   color: Colors.black,
                   child: SingleChildScrollView(
                       child: new Wrap(
-                        direction: Axis.vertical,
-                        children: <Widget>[getTextWidgets()],
-                      )),
+                    direction: Axis.vertical,
+                    children: <Widget>[getTextWidgets()],
+                  )),
                 ),
               ),
               SizedBox(height: 1.0),
@@ -215,18 +215,17 @@ class _SendPageState extends State<SendPage> {
                 },
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  border:InputBorder.none,
-                  filled:true,
+                  border: InputBorder.none,
+                  filled: true,
                   fillColor: Colors.black,
                   hintStyle: TextStyle(color: Colors.white),
                   prefixStyle: TextStyle(color: Colors.white),
-                  hintText: DemoLocalizations.of(context)
-                      .trans('type_command_here'),
-                  prefixText:'container:~/\$ ',
+                  hintText:
+                      DemoLocalizations.of(context).trans('type_command_here'),
+                  prefixText: 'container:~/\$ ',
                 ),
                 controller: _sendController,
               ),
-
             ],
           ),
         ),
@@ -237,35 +236,37 @@ class _SendPageState extends State<SendPage> {
             items: [
               TitledNavigationBarItem(
                   backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
-                  title: "Info", icon: FontAwesomeIcons.info),
+                  title: "Info",
+                  icon: FontAwesomeIcons.info),
               TitledNavigationBarItem(
                   backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
-                  DemoLocalizations.of(context).trans('utilization_stats'),
+                      DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
                   backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
             ]),
-      resizeToAvoidBottomPadding: true);
+        resizeToAvoidBottomPadding: true);
   }
 
-
   Future _navigate(int index) async {
-    if(index == 0) {
+    if (index == 0) {
       Navigator.of(this.context).pushAndRemoveUntil(
-          new MaterialPageRoute(builder: (BuildContext context) =>
-          new ActionServerPage(
-              server: Server(id: widget.server.id, name: widget.server.name))
-          ), (Route<dynamic> route) => false);
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new ActionServerPage(
+                  server:
+                      Server(id: widget.server.id, name: widget.server.name))),
+          (Route<dynamic> route) => false);
     }
-    if(index == 1) {
+    if (index == 1) {
       Navigator.of(this.context).pushAndRemoveUntil(
-          new MaterialPageRoute(builder: (BuildContext context) =>
-          new StatePage(
-              server: Stats(id: widget.server.id, name: widget.server.name))
-          ), (Route<dynamic> route) => false);
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new StatePage(
+                  server:
+                      Stats(id: widget.server.id, name: widget.server.name))),
+          (Route<dynamic> route) => false);
     }
   }
 }
@@ -275,9 +276,9 @@ Widget getTextWidgets() {
     return new Row(
         children: logRows
             .map((item) => new Text(
-          item,
-          style: TextStyle(color: Colors.white),
-        ))
+                  item,
+                  style: TextStyle(color: Colors.white),
+                ))
             .toList());
   }
   return new Row(children: []);
