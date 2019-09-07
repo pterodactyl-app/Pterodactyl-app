@@ -6,7 +6,9 @@ phraseapp:
     sources:
     - file: ./assets/lang/<locale_name>.json
       params:
-        locale_id: <locale_name>
+        locale_id: <locale_id>
+        update_translations: true
+
   pull:
     targets:
     - file: ./assets/lang/<locale_name>.json
