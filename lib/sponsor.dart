@@ -78,27 +78,27 @@ class _SponsorPageState extends State<SponsorPage> {
                 ],
               ),
               onTap: () {
-                if (await canLaunch(_model.link)) {
-                  await launch(_model.link);
-                } else {
-                  throw 'Could not launch $_model.link';
-                }
+                launch(_model.link);
               },
             );
           },
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          if (await canLaunch('https://www.paypal.me/RDTalstra')) {
-            await launch('https://www.paypal.me/RDTalstra');
-          } else {
-            throw 'Could not launch https://www.paypal.me/RDTalstra';
-          }
+        onPressed: () {
+          _launchURL('https://www.paypal.me/RDTalstra');
         },
         icon: Icon(Icons.add),
         label: Text('Donate'),
       ),
     );
+  }
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
