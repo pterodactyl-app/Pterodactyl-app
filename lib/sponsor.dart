@@ -85,8 +85,12 @@ class _SponsorPageState extends State<SponsorPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          launch('https://www.paypal.me/RDTalstra');
+        onPressed: () async {
+          if (await canLaunch('https://www.paypal.me/RDTalstra')) {
+            await launch('https://www.paypal.me/RDTalstra');
+          } else {
+            throw 'Could not launch https://www.paypal.me/RDTalstra';
+          }
         },
         icon: Icon(Icons.add),
         label: Text('Donate'),
