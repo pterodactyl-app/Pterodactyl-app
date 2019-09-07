@@ -57,9 +57,8 @@ class _TextEditorPageState extends State<TextEditorPage> {
   }
 
   textEditorListener() {
-    setState(
-        () => (_uncommitedChanges = (textEditorController.text != _stableFile))
-    );
+    setState(() =>
+        (_uncommitedChanges = (textEditorController.text != _stableFile)));
   }
 
   @override
@@ -87,7 +86,7 @@ class _TextEditorPageState extends State<TextEditorPage> {
           title: CustomTooltip(
             message: widget.fileData.name,
             child: Text(
-              "Editor",
+              "Editor - ${widget.fileData.name}",
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -117,14 +116,16 @@ class _TextEditorPageState extends State<TextEditorPage> {
         ),
         body: FutureBuilder(
           future: _stableFile == null
-              ? 
-          widget.fileActions.getFile(widget.fileData).then((data) => _stableFile = data).then((data) => textEditorController.text = data)
-          : null,
+              ? widget.fileActions
+                  .getFile(widget.fileData)
+                  .then((data) => _stableFile = data)
+                  .then((data) => textEditorController.text = data)
+              : null,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (_stableFile == null) {
               return Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(
@@ -186,24 +187,21 @@ class _TextEditorPageState extends State<TextEditorPage> {
       if (result == true) {
         _stableFile = newData;
         _uncommitedChanges = (_stableFile != textEditorController.text);
-        textEditorScaffoldKey.currentState.showSnackBar(
-          SnackBar(
-              content: Row(
-                children: [
-                  Icon(Icons.cloud_done),
-                  SizedBox(width: 10),
-                  Text("File updated!"),
-                ],
-              ),
-              duration: Duration(seconds: 1),
-            )
-        );
+        textEditorScaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.cloud_done),
+              SizedBox(width: 10),
+              Text("File updated!"),
+            ],
+          ),
+          duration: Duration(seconds: 1),
+        ));
       } else {
-      textEditorScaffoldKey.currentState.showSnackBar(ErrorSnackbar());
+        textEditorScaffoldKey.currentState.showSnackBar(ErrorSnackbar());
       }
 
       setState(() => _isUpdating = false);
-
     });
   }
 }
