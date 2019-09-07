@@ -1,12 +1,15 @@
+ 
 phraseapp:
-  access_token: 575340f3e69f1062be9326c581dc160cade0289c9d0b858c3b4b6a85d156bb73
   project_id: 537f5e1123508656dd1ab7d4ab83940e
   file_format: simple_json
   push:
     sources:
-    - file: ./assets/lang/<locale_code>.json
+    - file: ./assets/lang/en-US.json
       params:
-        update_translations: true
+        locale_id: en
+        file_format: simple_json
   pull:
     targets:
-    - file: ./assets/lang/<locale_code>.json
+    - file: ./assets/lang/locales/;.yml
+      params:
+        file_format: simple_json
