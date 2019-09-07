@@ -14,12 +14,14 @@
 * limitations under the License.
 */
 import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:pterodactyl_app/main.dart';
+import 'package:pterodactyl_app/page/admin/adminhome.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pterodactyl_app/page/admin/adminhome.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -127,7 +129,8 @@ class SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Center(
-        child: new Text('Loading...'),
+        child: new Text(DemoLocalizations.of(context).trans('loading'),
+            style: TextStyle(fontSize: 50)),
       ),
     );
   }
