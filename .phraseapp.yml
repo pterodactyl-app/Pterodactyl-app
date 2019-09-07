@@ -4,9 +4,8 @@ phraseapp:
   file_format: react_simple_json
   pull:
     targets:
-    - file: .\assets\lang\<locale_name>.json
-      params: {locale_id: <locale_name>}
+    - file: .\assets\lang\<locale_id>.json
+      params: {locale_id: <locale_id>}
   push:
     sources:
-    - file: .\assets\lang\<locale_name>.json
-      params: {locale_id: <locale_name>}
+    - file: .\assets\lang\<locale_id>.json
