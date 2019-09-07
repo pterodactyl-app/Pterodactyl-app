@@ -108,7 +108,7 @@ class _SendPageState extends State<SendPage> {
 
     setState(() => isProbablyConnected = true);
     socket = await manager.createInstance(
-        //Socket IO server URI
+      //Socket IO server URI
         socketUrl,
         //Query params - can be used for authentication
         query: {
@@ -139,14 +139,14 @@ class _SendPageState extends State<SendPage> {
       if (data['line'] != null) {
         setState(() {
           data['line'].toString().split('\\n\\g').forEach((data) => {
-                if (data.length > 52)
-                  {
-                    logRows.add(data.substring(0, 51)),
-                    logRows.add(data.substring(52))
-                  }
-                else
-                  {logRows.add(data)}
-              });
+            if (data.length > 52)
+              {
+                logRows.add(data.substring(0, 51)),
+                logRows.add(data.substring(52))
+              }
+            else
+              {logRows.add(data)}
+          });
         });
       }
     });
@@ -191,19 +191,19 @@ class _SendPageState extends State<SendPage> {
         body: SafeArea(
           child: ListView(
             children: <Widget>[
-          ResponsiveContainer(
-            heightPercent: 73.0, //value percent of screen total height
-            widthPercent: 100.0,  //value percent of screen total width
-            child:
-            Container(
-                color: Colors.black,
-                child: SingleChildScrollView(
-                    child: new Wrap(
-                  direction: Axis.vertical,
-                  children: <Widget>[getTextWidgets()],
-                )),
+              ResponsiveContainer(
+                heightPercent: 77.0, //value percent of screen total height
+                widthPercent: 100.0,  //value percent of screen total width
+                child:
+                Container(
+                  color: Colors.black,
+                  child: SingleChildScrollView(
+                      child: new Wrap(
+                        direction: Axis.vertical,
+                        children: <Widget>[getTextWidgets()],
+                      )),
+                ),
               ),
-        ),
               SizedBox(height: 1.0),
               TextField(
                 autofocus: true,
@@ -226,7 +226,7 @@ class _SendPageState extends State<SendPage> {
                 ),
                 controller: _sendController,
               ),
-              
+
             ],
           ),
         ),
@@ -241,13 +241,14 @@ class _SendPageState extends State<SendPage> {
               TitledNavigationBarItem(
                   backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title:
-                      DemoLocalizations.of(context).trans('utilization_stats'),
+                  DemoLocalizations.of(context).trans('utilization_stats'),
                   icon: FontAwesomeIcons.chartBar),
               TitledNavigationBarItem(
                   backgroundColor: globals.useDarkTheme ? Colors.black87 : null,
                   title: DemoLocalizations.of(context).trans('console'),
                   icon: FontAwesomeIcons.terminal),
-            ]));
+            ]),
+      resizeToAvoidBottomPadding: true);
   }
 
 
@@ -274,9 +275,9 @@ Widget getTextWidgets() {
     return new Row(
         children: logRows
             .map((item) => new Text(
-                  item,
-                  style: TextStyle(color: Colors.white),
-                ))
+          item,
+          style: TextStyle(color: Colors.white),
+        ))
             .toList());
   }
   return new Row(children: []);
