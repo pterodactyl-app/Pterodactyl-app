@@ -87,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Color(0xFFC5032B),
               child: TextField(
                 obscureText: true,
+                enableInteractiveSelection: true,
                 controller: _apiController,
                 decoration: InputDecoration(
                   labelText:
