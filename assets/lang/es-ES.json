@@ -95,6 +95,7 @@
   "lastname": "Apellido:",
   "license": "Licencias",
   "license_sub": "Mira informacion sobre las licencias",
+  "loading": "Cargando...",
   "login_admin_account": "Tienes una cuenta de Admin? Haz click aqui",
   "login_error": "usuario/contraseña \nno puede estar vacio",
   "login_error_400": "400 Bad Request -- Tu respuesta es invalida.",
