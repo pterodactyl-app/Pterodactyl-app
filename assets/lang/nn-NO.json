@@ -95,6 +95,7 @@
   "lastname": "Last name:",
   "license": "Linsenser",
   "license_sub": "Få mer informasjon om lisensen",
+  "loading": "Laster...",
   "login_admin_account": "Do you have a Admin account? Tap then Here",
   "login_error": "Brukernavnet eller passordet \nkan ikke være tomt",
   "login_error_400": "400 Bad Request -- Your request is invalid.",

@@ -95,6 +95,7 @@
   "lastname": "Nazwisko:",
   "license": "Licencje",
   "license_sub": "Otrzymuj informacje o licencjach",
+  "loading": "Ładuję...",
   "login_admin_account": "Czy masz konto administratora? Dotknij tutaj",
   "login_error": "nazwa użytkownika lub hasło \nnie mogą być puste",
   "login_error_400": "400 Złe żądanie -- Twoje żądanie jest nieprawidłowe.",

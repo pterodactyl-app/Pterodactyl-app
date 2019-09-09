@@ -95,6 +95,7 @@
   "lastname": "Efternamn:",
   "license": "Licenser",
   "license_sub": "Få information om licenserna",
+  "loading": "Läser in...",
   "login_admin_account": "Do you have a Admin account? Tap then Here",
   "login_error": "användarnamn och lösenord \nkan ej lämnas tomma",
   "login_error_400": "400 Bad Request -- Your request is invalid.",

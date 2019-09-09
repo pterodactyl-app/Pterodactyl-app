@@ -95,6 +95,7 @@
   "lastname": "Achternaam:",
   "license": "Licenties",
   "license_sub": "Krijg meer informatie over de licenties",
+  "loading": "Bezig met laden...",
   "login_admin_account": "Heb je een admin account? Klik dan hier",
   "login_error": "Het veld gebruikersnaam en/of wachtwoord mag niet leeg zijn.",
   "login_error_400": "400 Bad Request -- Je aanvraag is ongeldig.",
