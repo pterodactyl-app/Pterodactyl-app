@@ -95,6 +95,7 @@
   "lastname": "Last name:",
   "license": "許可",
   "license_sub": "獲取與許可相關的資訊",
+  "loading": "載入中...",
   "login_admin_account": "有管理員帳號?點擊這裡",
   "login_error": "用戶名或者密碼不能為空",
   "login_error_400": "400 Bad Request -- Your request is invalid.",

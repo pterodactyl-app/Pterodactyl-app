@@ -95,6 +95,7 @@
   "lastname": "Last name:",
   "license": "Lizenzen",
   "license_sub": "Informationen über Lizenzen anzeigen",
+  "loading": "Wird geladen...",
   "login_admin_account": "Do you have a Admin account? Tap then Here",
   "login_error": "username or password \ncan't be empty",
   "login_error_400": "400 Bad Request -- Your request is invalid.",

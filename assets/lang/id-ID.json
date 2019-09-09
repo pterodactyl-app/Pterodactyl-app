@@ -95,6 +95,7 @@
   "lastname": "Nama terakhir:",
   "license": "Lisensi",
   "license_sub": "Dapatkan informasi terkait lisensi",
+  "loading": "Pemuatan...",
   "login_admin_account": "Apakah anda memiliki akun Admin? Sentuh disini",
   "login_error": "Nama pengguna atau kata sandi \ntidak dapat dikosongkan",
   "login_error_400": "400 Bad Request -- Permintaan anda tidak valid.",
