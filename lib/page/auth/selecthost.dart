@@ -81,7 +81,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                                 globals.useDarkTheme
                                     ? 'https://deploys.io/img/deploys.io/logo/text/light.png'
                                     : 'https://deploys.io/img/deploys.io/logo/text/dark.png',
-                                width: 130),
+                                width: 110),
                           ],
                         ),
                       ]),
@@ -157,7 +157,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
                                 globals.useDarkTheme
                                     ? 'https://accuratenode.com/assets/img/icon.png'
                                     : 'https://cdn.discordapp.com/attachments/579475423977668638/590143718703759360/logo_big.png',
-                              width: 135,
+                              width: 110,
 
                             ),
                           ],
@@ -309,7 +309,7 @@ class _SelectHostPageState extends State<SelectHostPage> {
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
             StaggeredTile.extent(1, 110.0),
-            StaggeredTile.extent(1, 110.0),
+            StaggeredTile.extent(2, 110.0),
           ],
         ));
   }
