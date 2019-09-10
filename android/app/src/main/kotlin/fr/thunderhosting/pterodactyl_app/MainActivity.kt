@@ -1,4 +1,4 @@
-package fr.thunderhosting.pterodactyl_app
+package nl.rubentalstra.pterodactylapp
 
 import io.flutter.app.FlutterActivity
 import io.flutter.plugins.GeneratedPluginRegistrant
