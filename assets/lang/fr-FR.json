@@ -97,7 +97,7 @@
   "license_sub": "Obtenir des informations sur les licences",
   "loading": "Chargement...",
   "login_admin_account": "Vous avez un compte administrateur ? Cliquez ici !",
-  "login_error": "Le nom d'utilisateur ou le mot de passe ne peut pas être vide",
+  "login_error": "Le nom d'utilisateur ou le mot de passe\nne peut pas être vide",
   "login_error_400": "400 Requête incorrect -- Votre requête est invalide.",
   "login_error_401": "401 Utilisateur non authentifié -- Vous n'avez pas passé un en-tête d'auteur ou il manquait le porteur.",
   "login_error_403": "403 Accès refusé -- Votre clé n'est pas valide ou elle n'a pas accès à ce terminal.",
