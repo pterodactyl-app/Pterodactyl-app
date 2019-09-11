@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/pterodactyl-app/Pterodactyl-app?style=flat-square)
 [![Build status](https://img.shields.io/travis/pterodactyl-app/Pterodactyl-app/develop.svg?style=flat-square)](https://travis-ci.org/pterodactyl-app/Pterodactyl-app)
 ![GitHub](https://img.shields.io/github/license/pterodactyl-app/Pterodactyl-app?style=flat-square)
-[![Open Source Love](https://img.shields.io/badge/opensource-we--love--open--source-34495e)](https://opensource.org/licenses/gpl-3.0)
+[![Open Source Love](https://img.shields.io/badge/opensource-we--love--open--source-34495e?style=flat-square)](https://opensource.org/licenses/gpl-3.0)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-009cde.svg?style=flat-square)](https://www.paypal.me/RDTalstra)
 <span class="badge-patreon"><a href="https://www.patreon.com/Pterodactyl_app" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/Donate-Patreon-f96854.svg?style=flat-square" alt="Patreon donate button" /></a></span>
 [![PhraseApp](https://img.shields.io/badge/PhraseApp-Using-blue?style=flat-square)](https://phrase.com/)
