@@ -82,6 +82,8 @@ Website: [Pterodactyl app website](https://pterodactyl-app.com/)
 
 Trello Board: [Pterodactyl app Trello Board](https://trello.com/b/YqCe05Vl/pterodactyl-app)
 
+PhraseApp: [PhraseApp helps us by providing an opensource package](https://phrase.com/)
+
 
 ```
 flutter build appbundle --release --target-platform=android-arm
