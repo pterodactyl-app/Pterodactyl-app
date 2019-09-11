@@ -1,5 +1,6 @@
 # Pterodactyl Mobile App 🚀
 
+![GitHub repo size](https://img.shields.io/github/repo-size/pterodactyl-app/Pterodactyl-app)
 [![Build status](https://img.shields.io/travis/pterodactyl-app/Pterodactyl-app/develop.svg)](https://travis-ci.org/pterodactyl-app/Pterodactyl-app)
 [![Open Source Love](https://img.shields.io/badge/opensource-we--love--open--source-34495e)](https://opensource.org/licenses/gpl-3.0)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-009cde.svg)](https://www.paypal.me/RDTalstra)
