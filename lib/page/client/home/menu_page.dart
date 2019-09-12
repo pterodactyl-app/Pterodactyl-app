@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 import 'package:pterodactyl_app/models/settings.dart';
+import 'package:pterodactyl_app/page/admin/adminservers.dart';
 import 'package:pterodactyl_app/page/client/home/circular_image.dart';
 import 'package:pterodactyl_app/page/client/settings.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class MenuScreen extends StatelessWidget {
@@ -38,9 +40,11 @@ class MenuScreen extends StatelessWidget {
     );
   }
 
+//can you make it that this works. if its an admin then the first menu will show otherwise not.
 
   @override
   Widget build(BuildContext context) {
+    if ('isAdmin' == true) {
     return Container(
         decoration: BoxDecoration(
     gradient: LinearGradient(
@@ -73,19 +77,58 @@ class MenuScreen extends StatelessWidget {
                 ),
               )
             ],
-          ),
+          ),      
           Spacer(),
           ListTile(
             onTap: () {},
             leading: Icon(
-              Icons.home,
+              FontAwesomeIcons.server,
               color: Colors.white,
               size: 20,
             ),
-            title: Text('Home',
+            title: Text('Servers',
                 style: TextStyle(fontSize: 14, color: Colors.white)),
           ),
-
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.database,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Databases',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.globeAmericas,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Locations',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.networkWired,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Nodes',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.users,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Users',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
           Spacer(),
           ListTile(
             onTap: () {
@@ -101,7 +144,7 @@ class MenuScreen extends StatelessWidget {
                 Navigator.of(context).push(route);
               },
             leading: Icon(
-              Icons.settings,
+              FontAwesomeIcons.cog,
               color: Colors.white,
               size: 20,
             ),
@@ -110,6 +153,92 @@ class MenuScreen extends StatelessWidget {
           ),
         ],
       ),
+
+      
+    );          
+        } else {
+    return Container(
+        decoration: BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
+      colors: [const Color(0xFF5E72E4), const Color(0xFF825EE4)], // whitish to gray
+    ),
+  ),
+      padding: EdgeInsets.only(
+          top: 62,
+          left: 32,
+          bottom: 8,
+          right: MediaQuery.of(context).size.width / 2.9),
+      
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: CircularImage(
+            NetworkImage(getGravatarUrl()),
+          ),
+              ),
+              Text(
+                'name',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              )
+            ],
+          ),      
+          Spacer(),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.server,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Servers',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(
+              FontAwesomeIcons.bell,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Logs',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          Spacer(),
+          ListTile(
+            onTap: () {
+                var route = new MaterialPageRoute(
+                  builder: (BuildContext context) => new SettingsList(
+                      settings: SettingsInfo(
+                          servers: 1,
+                          subServer: 4,
+                          schedules: 2,
+                          name: 'name',
+                          email: 'rubentalstra1211@outlook.com')),
+                );
+                Navigator.of(context).push(route);
+              },
+            leading: Icon(
+              FontAwesomeIcons.cog,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Settings',
+                style: TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+        ],
+      ),
+
+      
     );
+        }
   }
+
 }
