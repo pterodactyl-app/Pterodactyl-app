@@ -27,12 +27,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:pterodactyl_app/models/globals.dart' as globals;
 import 'package:pterodactyl_app/page/auth/shared_preferences_helper.dart';
+import 'package:pterodactyl_app/page/client/home/zoom_scaffold.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:pterodactyl_app/main.dart';
 import 'console.dart';
 import 'filemanager/filemanager.dart';
-import 'servers.dart';
 import 'utilization.dart';
 
 class ActionServerPage extends StatefulWidget {
@@ -209,7 +209,7 @@ class _ActionServerPageState extends State<ActionServerPage> {
           leading: IconButton(
             color: globals.useDarkTheme ? Colors.white : Colors.black,
             onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                '/servers', (Route<dynamic> route) => false),
+                '/home', (Route<dynamic> route) => false),
             icon: Icon(
               Icons.arrow_back,
               color: globals.useDarkTheme ? Colors.white : Colors.black,

@@ -14,25 +14,23 @@
 * limitations under the License.
 */
 import 'package:flutter/material.dart';
-import 'package:pterodactyl_app/page/client/home/menu_page.dart';
-import 'package:pterodactyl_app/page/client/home/zoom_scaffold.dart';
 
+class CircularImage extends StatelessWidget {
+  final double _width, _height;
+  final ImageProvider image;
 
-class MyHomePage extends StatefulWidget {
-
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-
+  CircularImage(this.image, {double width = 40, double height = 40})
+      : _width = width,
+        _height = height;
 
   @override
   Widget build(BuildContext context) {
-    return new ZoomScaffold(
-      menuScreen: MenuScreen(),             
+    return Container(
+      width: _width,
+      height: _height,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(image: image)),
     );
   }
 }

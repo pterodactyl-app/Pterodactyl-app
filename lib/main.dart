@@ -30,7 +30,7 @@ import 'package:pterodactyl_app/page/auth/selecthost.dart';
 
 import 'package:pterodactyl_app/page/client/login.dart';
 import 'package:pterodactyl_app/page/client/home.dart';
-import 'package:pterodactyl_app/page/client/servers.dart';
+
 
 import 'package:pterodactyl_app/page/client/settings.dart';
 import 'package:pterodactyl_app/about.dart';
@@ -194,7 +194,6 @@ Map<String, WidgetBuilder> getRoutes(Map<String, Map> companies) {
     '/home': (BuildContext context) => new MyHomePage(),
     '/login': (BuildContext context) => new LoginPage(),
     '/login_user': (BuildContext context) => new LoginWithUsernamePage(),
-    '/servers': (BuildContext context) => new ServerListPage(),
     '/about': (BuildContext context) => new AboutPage(),
     '/settings': (BuildContext context) => new SettingsList(),
     '/adminhome': (BuildContext context) => new AdminHomePage(),
