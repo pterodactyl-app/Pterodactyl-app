@@ -1,4 +1,4 @@
-# Pterodactyl Mobile App 🚀
+# Pterodactyl Mobile App 🚀 
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/pterodactyl-app/Pterodactyl-app?style=flat-square)
 [![Build status](https://img.shields.io/travis/pterodactyl-app/Pterodactyl-app/develop.svg?style=flat-square)](https://travis-ci.org/pterodactyl-app/Pterodactyl-app)
