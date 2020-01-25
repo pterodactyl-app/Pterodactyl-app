@@ -46,7 +46,7 @@ dependencies:
   division: any                     # any is love <3
   responsive_container: any         # any is love <3
   logger: any                       # any is love <3
-  photo_view: 0.5.0                   # any is love <3
+  photo_view: 0.5.0                 # any is love <3
   pinput: any                       # any is love <3
   timeago: any                      # any is love <3
 
